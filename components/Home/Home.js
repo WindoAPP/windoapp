@@ -1,6 +1,10 @@
+import { useRouter } from 'next/router';
 import styles from './Home.module.css'
 
 const Home = () => {
+
+    const router = useRouter();
+
     return (
         <div className='d-flex flex-column'>
             <div className='d-flex flex-row justify-content-between'>
@@ -11,7 +15,7 @@ const Home = () => {
                         TALKING ABOUT YOU?</h1>
                     <h5>Get between 100 and 400 Google
                         reviews per month by giving gifts to your customers!</h5>
-                    <button className={`btn btn-success ${styles.reviewBtn}`}>
+                    <button className={`btn btn-success ${styles.reviewBtn}`} onClick={()=>router.push("/login")}>
                         Want to Boost  Google Reviews
                     </button>
                 </div>
@@ -80,7 +84,7 @@ const Home = () => {
                     <li>Personalized monthly follow-up every month</li>
                     <li>Technical support</li>
                 </ul>
-                <button className={`btn btn-success btn-lg ${styles.reviewBtn}`}>
+                <button className={`btn btn-success btn-lg ${styles.reviewBtn}`} onClick={()=>router.push("/login")}>
                     I Want Windo
                 </button>
             </div>

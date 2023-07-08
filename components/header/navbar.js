@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Navbar.module.css'
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-light shadow">
       <div className="container">
-      <Image
+      <Image    onClick={()=>router.push("/")}
                 src="/logo.png"
                 alt="Vercel Logo"
                 className={styles.logoImage}
@@ -43,7 +45,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item mx-4">
-              <button className='btn btn-success'>Book Demo</button>
+              <button onClick={()=>router.push("/login")} className='btn btn-success'>Book Demo</button>
             </li>
           </ul>
         </div>
