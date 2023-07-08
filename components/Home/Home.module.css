@@ -1,0 +1,129 @@
+/* .homeContainer{
+    display: flex;
+    flex-direction: column;
+}
+.homeSection{
+    height: fit-content;
+} */
+
+.reviewBtn {
+    width: 12rem;
+    font-weight: 600;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.firstSectionLargeText {
+    font-size: 55px;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.firstSectionLeftRow {
+    width: 60%;
+}
+
+.listTextWrapper {
+    margin-bottom: 1rem;
+}
+
+.listTextWrapper p {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    margin-left: 0.5rem;
+}
+
+.listTextWrapper i {
+    font-size: 30px;
+}
+
+.secondSectionWrapper {
+    padding: 2rem;
+    background-color: #DDDDDD;
+}
+
+.secondSectionWrapper p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.secondSectionWrapper ul {
+    font-size: 20px;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-top: 1rem;
+}
+
+.secondSectionWrapper h1 {
+    font-size: 60px;
+    font-weight: 800;
+}
+
+.secondSectionWrapper h2 {
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.thirdSectionWrapper {
+    gap: 60px;
+    margin-top: 2rem;
+}
+
+.thirdSectionWrapper p,
+.thirdSectionWrapper ul {
+    font-size: 20px;
+    width: 60%;
+    font-weight: 600;
+}
+
+.thirdSectionWrapper ul {
+    margin-bottom: 2rem;
+}
+
+.thirdSectionWrapper span {
+    font-size: 55px;
+    font-weight: bolder;
+}
+
+.thirdSectionWrapper h1 {
+    font-size: 35px;
+    font-weight: bolder;
+    font-style: italic;
+    margin-bottom: 13px;
+
+}
+.forthSectionWrapper h1{
+    font-size: 55px;
+    font-weight: 800;
+    margin-top: 2rem;
+}
+
+.forthSectionWrapper ul{
+    font-size: 20px;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-top: 1rem;
+}
+.forthSectionWrapper form{
+    width: 40%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.forthSectionWrapper form label{
+   margin-top: 1rem;
+   margin-bottom: .5rem;
+}
+
+.forthSectionWrapper form input{
+    margin-bottom: 1rem;
+    margin-bottom: .5rem;
+ }
+
+.forthSectionWrapper form span{
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+ }
