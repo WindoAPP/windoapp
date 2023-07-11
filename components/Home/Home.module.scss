@@ -5,6 +5,7 @@
 .homeSection{
     height: fit-content;
 } */
+$mobile-breakpoint: 940px;
 
 .reviewBtn {
     width: 12rem;
@@ -18,10 +19,22 @@
     font-size: 55px;
     font-weight: 800;
     margin-bottom: 2rem;
+    @media (max-width: $mobile-breakpoint) {
+       font-size: 30px;
+    }
+}
+.felxMobile{
+    flex-direction: row;
+    @media (max-width: $mobile-breakpoint) {
+        flex-direction: column;
+    }
 }
 
 .firstSectionLeftRow {
     width: 60%;
+    @media (max-width: $mobile-breakpoint) {
+        width: 100%;
+    }
 }
 
 .listTextWrapper {
@@ -30,14 +43,20 @@
 
 .listTextWrapper p {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     margin-left: 0.5rem;
+    @media (max-width: $mobile-breakpoint) {
+        flex-direction: column;
+    }
 }
 
 .listTextWrapper i {
-    font-size: 30px;
+    font-size: 25px;
+    @media (max-width: $mobile-breakpoint) {
+        flex-direction: column;
+    }
 }
 
 .secondSectionWrapper {
@@ -60,11 +79,18 @@
 .secondSectionWrapper h1 {
     font-size: 60px;
     font-weight: 800;
+    text-align: center;
+    @media (max-width: $mobile-breakpoint) {
+        font-size: 38px;
+    }
 }
 
 .secondSectionWrapper h2 {
     font-size: 30px;
     font-weight: bolder;
+    @media (max-width: $mobile-breakpoint) {
+        font-size: 15px;
+    }
 }
 
 .thirdSectionWrapper {
@@ -77,6 +103,10 @@
     font-size: 20px;
     width: 60%;
     font-weight: 600;
+    @media (max-width: $mobile-breakpoint) {
+        width: 100%;
+        font-size: 15px;
+    }
 }
 
 .thirdSectionWrapper ul {
@@ -86,6 +116,9 @@
 .thirdSectionWrapper span {
     font-size: 55px;
     font-weight: bolder;
+    @media (max-width: $mobile-breakpoint) {
+        font-size: 38px;
+    }
 }
 
 .thirdSectionWrapper h1 {
@@ -93,37 +126,51 @@
     font-weight: bolder;
     font-style: italic;
     margin-bottom: 13px;
+    @media (max-width: $mobile-breakpoint) {
+        font-size: 15px;
+    }
 
 }
-.forthSectionWrapper h1{
+
+.forthSectionWrapper h1 {
     font-size: 55px;
     font-weight: 800;
     margin-top: 2rem;
+    @media (max-width: $mobile-breakpoint) {
+        font-size: 28px;
+    }
 }
 
-.forthSectionWrapper ul{
+.forthSectionWrapper ul {
     font-size: 20px;
     font-weight: 600;
     align-self: flex-start;
     margin-top: 1rem;
+    @media (max-width: $mobile-breakpoint) {
+        font-size: 15px;
+    }
 }
-.forthSectionWrapper form{
+
+.forthSectionWrapper form {
     width: 40%;
     margin: auto;
     margin-bottom: 2rem;
+    @media (max-width: $mobile-breakpoint) {
+        width: 80%;
+    }
 }
 
-.forthSectionWrapper form label{
-   margin-top: 1rem;
-   margin-bottom: .5rem;
+.forthSectionWrapper form label {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
 }
 
-.forthSectionWrapper form input{
+.forthSectionWrapper form input {
     margin-bottom: 1rem;
     margin-bottom: .5rem;
- }
+}
 
-.forthSectionWrapper form span{
+.forthSectionWrapper form span {
     margin-left: 1rem;
     margin-bottom: 2rem;
- }
+}

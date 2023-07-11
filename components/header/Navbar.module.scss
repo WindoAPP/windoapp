@@ -1,0 +1,51 @@
+$mobile-breakpoint: 940px;
+
+.navTextItem{
+    margin: 1rem ;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: black;
+	font-family: 'Tilt Warp', cursive;
+}
+.logoImage{
+    margin-right: 2rem;
+    cursor: pointer;
+}
+.navMobile{
+    @media (max-width: $mobile-breakpoint) {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+       
+        position: absolute;
+        top:70px;
+        right: 0;
+    }
+}
+.navWeb{
+    @media (max-width: $mobile-breakpoint) {
+        display: none;
+    }
+
+}
+
+.sidebarIcon{
+    display: none;
+    @media (max-width: $mobile-breakpoint) {
+        background-color: black;
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-left: 1rem;
+    &:hover{
+        background-color: rgb(68, 67, 67);
+    }
+    }
+    
+}

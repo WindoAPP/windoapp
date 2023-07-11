@@ -1,3 +1,4 @@
+$mobile-breakpoint: 940px;
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -39,7 +40,7 @@
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
 }
-
+$mobile-breakpoint: 480px;
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -110,4 +111,29 @@ a {
 }
 .iconWrapper:hover{
   background-color: gray;
+}
+
+.vertical-nav {
+  min-width: 17rem;
+  width: 17rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+.page-content {
+  width: calc(100% - 17rem);
+  margin-left: 17rem;
+  transition: all 0.4s;
+}
+.bg-greeen{
+  background-color: #42AD59;
+  border-radius: 0 0 20px 20px;
+}
+.marginZeroMobile{
+  @media (max-width: $mobile-breakpoint) {
+    margin-left: 0 !important;
+}
 }
