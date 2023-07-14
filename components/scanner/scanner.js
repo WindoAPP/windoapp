@@ -1,28 +1,41 @@
-import React, { useState } from 'react';
-import { QrReader } from '@memenashi/react-qr-reader';
+import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
-
+const DynamicQrScanner = dynamic(
+  () => import('react-qr-scanner'),
+  { ssr: false }
+);
 
 const BarcodeScanner = () => {
-    const [error, setError] = useState('');
-    const [data, setData] = useState('');
+    const [result, setResult] = useState('');
+
+    const handleScan = (data) => {
+      if (data) {
+        setResult(data);
+      }
+    };
+  
+    const handleError = (err) => {
+      console.error(err);
+    };
+  
+    useEffect(() => {
+      // Run any necessary setup code here
+      return () => {
+        // Clean up any resources here
+      };
+    }, []);
   
     return (
-      <div >
-        <QrReader
-         
-          onResult={(result, error) => {
-            if (result) {
-              setData(result.getText());
-            }
-  
-            if (error) {
-              setError(error.message);
-            }
-          }}
-        />
-        <p>The value is: {JSON.stringify(data, null, 2)}</p>
-        <p>The error is: {error}</p>
+      <div>
+        {typeof window !== 'undefined' && (
+          <DynamicQrScanner
+            onScan={handleScan}
+            onError={handleError}
+            style={{ width: '100%' }}
+          />
+        )}
+        <p>{result}</p>
       </div>
     );
 }
