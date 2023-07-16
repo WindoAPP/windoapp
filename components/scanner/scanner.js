@@ -30,7 +30,12 @@ const QRScanner = () => {
         idealResolution={{ width: 640, height: 480 }}
         imageType={IMAGE_TYPES.PNG}
       />
-      {qrCode && <QRCode value={qrCode} />}
+      {qrCode && (
+        <div>
+          <h2>Scanned QR Code:</h2>
+          <h1>{qrCode}</h1>
+        </div>
+      )}
     </div>
   );
 };
