@@ -32,8 +32,8 @@ $mobile-breakpoint: 940px;
  @media (max-width: $mobile-breakpoint) {
   bottom :0;
  margin: auto;
- right: 0;
- top: 20vh
+ right: -10px;
+ top: 5vh
 }
  
 }
