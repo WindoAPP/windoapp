@@ -4,15 +4,23 @@ import QRScanner from "react-qr-scanner";
 const QRCodeReader = () => {
   const [data, setData] = useState("");
   const [cameras, setCameras] = useState([]);
-  const [selectedCamera, setSelectedCamera] = useState(0);
+  const [selectedCameraType, setSelectedCameraType] = useState("environment");
   const scannerRef = useRef(null);
 
   useEffect(() => {
     const fetchCameras = async () => {
       try {
         const devices = await navigator.mediaDevices.enumerateDevices();
-        const cameras = devices.filter(device => device.kind === 'videoinput');
-        setCameras(cameras);
+        const cameras = devices.filter(
+          (device) => device.kind === "videoinput"
+        );
+
+        const updatedCameras = cameras.map((camera) => ({
+          deviceId: camera.deviceId,
+          label: camera.label,
+        }));
+
+        setCameras(updatedCameras);
       } catch (error) {
         console.error("Error fetching cameras:", error);
       }
@@ -32,13 +40,15 @@ const QRCodeReader = () => {
   };
 
   const switchCamera = () => {
-    setSelectedCamera(prevCamera => (prevCamera + 1) % cameras.length);
+    setSelectedCameraType((prevType) =>
+      prevType === "environment" ? "user" : "environment"
+    );
   };
 
   return (
     <div>
       <button onClick={switchCamera}>
-        Switch Camera
+        Switch Camera ({selectedCameraType === "environment" ? "Back" : "Front"})
       </button>
       <QRScanner
         onScan={handleScan}
@@ -47,7 +57,11 @@ const QRCodeReader = () => {
           width: 200,
           height: 200,
         }}
-        cameraId={cameras[selectedCamera]?.deviceId || ""}
+        cameraId={
+          cameras.find((camera) =>
+            camera.label.includes(selectedCameraType)
+          )?.deviceId || ""
+        }
         ref={scannerRef}
       />
       <p>The decoded data is: {data}</p>
