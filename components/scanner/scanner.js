@@ -4,7 +4,7 @@ import 'react-html5-camera-photo/build/css/index.css';
 import QRCode from 'qrcode.react';
 
 const QRScanner = () => {
-  const [qrCode, setQRCode] = useState('');
+  const [qrCode, setQRCode] = useState('not yet');
 
   const handleTakePhoto = (dataUri) => {
     // Process the dataUri to extract the QR code information
@@ -22,7 +22,7 @@ const QRScanner = () => {
 
   return (
     <div>
-      <h1>QR Code Scanner</h1>
+      <h1>QR Code Scanner updated</h1>
       <Camera
         onTakePhoto={(dataUri) => handleTakePhoto(dataUri)}
         isImageMirror={false}
