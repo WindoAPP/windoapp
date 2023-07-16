@@ -1,55 +1,51 @@
-import React, { useState, useEffect, useRef } from "react";
-import QRScanner from "react-qr-scanner";
+// file = Html5QrcodePlugin.jsx
+import { Html5QrcodeScanner } from 'html5-qrcode';
+import { useEffect } from 'react';
 
-const QRCodeReader = () => {
-  const [data, setData] = useState("");
-  const [cameras, setCameras] = useState([]);
-  const [selectedCamera, setSelectedCamera] = useState(0);
-  const scannerRef = useRef(null);
+const qrcodeRegionId = "html5qr-code-full-region";
 
-  useEffect(() => {
-    const fetchCameras = async () => {
-      try {
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const cameras = devices.filter(device => device.kind === "videoinput");
-        setCameras(cameras);
-      } catch (error) {
-        console.error("Error fetching cameras:", error);
-      }
-    };
-
-    fetchCameras();
-  }, []);
-
-
-
-  const handleScan = (result) => {
-    if (result) {
-      setData(result);
+// Creates the configuration object for Html5QrcodeScanner.
+const createConfig = (props) => {
+    let config = {};
+    if (props.fps) {
+        config.fps = props.fps;
     }
-  };
-
-  const switchCamera = () => {
-    setSelectedCamera(prevCamera => (prevCamera + 1) % cameras.length);
-  };
-
-  const handleError = (error) => {
-    console.error("QR scanner error:", error);
-  };
-
-  return (
-    <div>
-      <button onClick={switchCamera}>Switch Camera</button>
-      <QRScanner
-        onScan={handleScan}
-        onError={handleError}
-        style={{ width: 200, height: 200 }}
-        cameraId={cameras[selectedCamera]?.deviceId}
-        ref={scannerRef}
-      />
-      <p>The decoded data is: {data}</p>
-    </div>
-  );
+    if (props.qrbox) {
+        config.qrbox = props.qrbox;
+    }
+    if (props.aspectRatio) {
+        config.aspectRatio = props.aspectRatio;
+    }
+    if (props.disableFlip !== undefined) {
+        config.disableFlip = props.disableFlip;
+    }
+    return config;
 };
 
-export default QRCodeReader;
+const Html5QrcodePlugin = (props) => {
+
+    useEffect(() => {
+        // when component mounts
+        const config = createConfig(props);
+        const verbose = props.verbose === true;
+        // Suceess callback is required.
+        if (!(props.qrCodeSuccessCallback)) {
+            throw "qrCodeSuccessCallback is required callback.";
+        }
+        const html5QrcodeScanner = new Html5QrcodeScanner(qrcodeRegionId, config, verbose);
+        html5QrcodeScanner.render(props.qrCodeSuccessCallback, props.qrCodeErrorCallback);
+
+        // cleanup function when component will unmount
+        return () => {
+            html5QrcodeScanner.clear().catch(error => {
+                console.error("Failed to clear html5QrcodeScanner. ", error);
+            });
+        };
+    }, []);
+
+    return (
+        <div id={qrcodeRegionId} />
+    );
+};
+
+export default Html5QrcodePlugin;
