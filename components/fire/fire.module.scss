@@ -1,0 +1,45 @@
+.firecracker {
+    width: 100px;
+    height: 200px;
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .spark {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    animation: spark-rise 2s linear infinite;
+  }
+  
+  .explode {
+    animation: spark-explode 0.5s linear infinite;
+  }
+  
+  @keyframes spark-rise {
+    0% {
+      bottom: 0;
+      opacity: 1;
+    }
+    100% {
+      bottom: 100%;
+      opacity: 0;
+    }
+  }
+  
+  @keyframes spark-explode {
+    0% {
+      transform: translateX(-50%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-50%) scale(2);
+      opacity: 0;
+    }
+  }

@@ -29,7 +29,7 @@ const DashboardPage = () => {
             contrastColor="white"
             buttonText="Spin"
             isOnlyOnce={false}
-            size={190}
+            size={130}
           upDuration={50}
           downDuration={2000}
           />
