@@ -2,7 +2,13 @@
 import homeStyles from './scan.module.scss';
 import React from 'react';
 
-import QRScanner from '../../../components/scanner/scanner';
+//import QRScanner from '../../../components/scanner/scanner';
+import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const QRScanner = dynamic(() => import('../../../components/scanner/scanner'), {
+  ssr: false, // Ensure the component is not server-side rendered
+});
 
 const ScanPage = () => {
 

@@ -1,49 +1,32 @@
-import React, { useState } from 'react';
-import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
-import 'react-html5-camera-photo/build/css/index.css';
-import QRCode from 'qrcode.react';
+import React, { useState } from "react";
+import QRScanner from "react-qr-scanner";
 
-const QRScanner = () => {
-  const [qrCode, setQRCode] = useState('');
+const QRCodeReader = () => {
+  const [data, setData] = useState("");
 
-  const handleTakePhoto = (dataUri) => {
-    // Process the dataUri to extract the QR code information
-    const qrCodeData = extractQRCodeData(dataUri);
-    setQRCode(qrCodeData);
+  const handleScan = (event) => {
+    const decodedData = event.detail.data;
+    setData(decodedData);
   };
 
-  const extractQRCodeData = (dataUri) => {
-    // Use a QR code library to extract the data from the image
-    // For example, you can use a library like `jsqr` or `qrcode-reader`
-    // Here, we'll assume you have a function called `extractDataFromQRCode` that takes a data URI and returns the extracted data
-    const qrCodeData = extractDataFromQRCode(dataUri);
-    return qrCodeData;
+  const handleScanError = (error) => {
+    // Handle the error here
+    console.error('QR Scanner Error:', error);
   };
 
   return (
     <div>
-      <h1>QR Code Scanner</h1>
-      <Camera
-        onTakePhoto={(dataUri) => handleTakePhoto(dataUri)}
-        isImageMirror={false}
-        idealFacingMode={FACING_MODES.ENVIRONMENT}
-        idealResolution={{ width: 640, height: 480 }}
-        imageType={IMAGE_TYPES.PNG}
+      <QRScanner
+        onScan={handleScan}
+        onError={handleScanError}
+        style={{
+          width: 200,
+          height: 200,
+        }}
       />
-      {qrCode && (
-        <div>
-          <h2>Scanned QR Code:</h2>
-          <h1>{qrCode}</h1>
-        </div>
-      )}
-      {!qrCode && (
-        <div>
-          <h2>Preview:</h2>
-          <QRCode value="Hello, World!" />
-        </div>
-      )}
+      <p>The decoded data is: {data}</p>
     </div>
   );
 };
 
-export default QRScanner;
+export default QRCodeReader;
