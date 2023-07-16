@@ -1,7 +1,8 @@
 
 import homeStyles from './scan.module.scss';
 import React from 'react';
-import BarcodeScanner from '../../../components/scanner/scanner';
+
+import QRScanner from '../../../components/scanner/scanner';
 
 const ScanPage = () => {
 
@@ -10,9 +11,7 @@ const ScanPage = () => {
       <div className={homeStyles.app}>
       <h2>Next.js Barcode Scanner</h2>
       <div className={homeStyles.barcodeScanner}>
-        <BarcodeScanner
-          
-        />
+      <QRScanner />
       </div>
     </div>
     );

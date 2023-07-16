@@ -1,43 +1,38 @@
-import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
+import React, { useState } from 'react';
+import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
+import QRCode from 'qrcode.react';
 
-const DynamicQrScanner = dynamic(
-  () => import('react-qr-scanner'),
-  { ssr: false }
-);
+const QRScanner = () => {
+  const [qrCode, setQRCode] = useState('');
 
-const BarcodeScanner = () => {
-    const [result, setResult] = useState('');
+  const handleTakePhoto = (dataUri) => {
+    // Process the dataUri to extract the QR code information
+    const qrCodeData = extractQRCodeData(dataUri);
+    setQRCode(qrCodeData);
+  };
 
-    const handleScan = (data) => {
-      if (data) {
-        setResult(data);
-      }
-    };
-  
-    const handleError = (err) => {
-      console.error(err);
-    };
-  
-    useEffect(() => {
-      // Run any necessary setup code here
-      return () => {
-        // Clean up any resources here
-      };
-    }, []);
-  
-    return (
-      <div>
-        {typeof window !== 'undefined' && (
-          <DynamicQrScanner
-            onScan={handleScan}
-            onError={handleError}
-            style={{ width: '100%' }}
-          />
-        )}
-        <p>{result}</p>
-      </div>
-    );
-}
+  const extractQRCodeData = (dataUri) => {
+    // Use a QR code library to extract the data from the image
+    // For example, you can use a library like `jsqr` or `qrcode-reader`
+    // Here, we'll assume you have a function called `extractDataFromQRCode` that takes a data URI and returns the extracted data
+    const qrCodeData = extractDataFromQRCode(dataUri);
+    return qrCodeData;
+  };
 
-export default BarcodeScanner;
+  return (
+    <div>
+      <h1>QR Code Scanner</h1>
+      <Camera
+        onTakePhoto={(dataUri) => handleTakePhoto(dataUri)}
+        isImageMirror={false}
+        idealFacingMode={FACING_MODES.ENVIRONMENT}
+        idealResolution={{ width: 640, height: 480 }}
+        imageType={IMAGE_TYPES.PNG}
+      />
+      {qrCode && <QRCode value={qrCode} />}
+    </div>
+  );
+};
+
+export default QRScanner;
