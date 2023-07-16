@@ -1,26 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import QRScanner from "react-qr-scanner";
 
 const QRCodeReader = () => {
   const [data, setData] = useState("");
   const [cameras, setCameras] = useState([]);
-  const [selectedCameraType, setSelectedCameraType] = useState("environment");
+  const [selectedCamera, setSelectedCamera] = useState(0);
   const scannerRef = useRef(null);
 
   useEffect(() => {
     const fetchCameras = async () => {
       try {
         const devices = await navigator.mediaDevices.enumerateDevices();
-        const cameras = devices.filter(
-          (device) => device.kind === "videoinput"
-        );
-
-        const updatedCameras = cameras.map((camera) => ({
-          deviceId: camera.deviceId,
-          label: camera.label,
-        }));
-
-        setCameras(updatedCameras);
+        const cameras = devices.filter(device => device.kind === "videoinput");
+        setCameras(cameras);
       } catch (error) {
         console.error("Error fetching cameras:", error);
       }
@@ -29,39 +21,30 @@ const QRCodeReader = () => {
     fetchCameras();
   }, []);
 
-  const handleScanError = (error) => {
-    // Handle the error here
-    console.error('QR Scanner Error:', error);
-  };
 
-  const handleScan = (event) => {
-    const decodedData = event.detail.data;
-    setData(decodedData);
+
+  const handleScan = (result) => {
+    if (result) {
+      setData(result);
+    }
   };
 
   const switchCamera = () => {
-    setSelectedCameraType((prevType) =>
-      prevType === "environment" ? "user" : "environment"
-    );
+    setSelectedCamera(prevCamera => (prevCamera + 1) % cameras.length);
+  };
+
+  const handleError = (error) => {
+    console.error("QR scanner error:", error);
   };
 
   return (
     <div>
-      <button onClick={switchCamera}>
-        Switch Camera ({selectedCameraType === "environment" ? "Back" : "Front"})
-      </button>
+      <button onClick={switchCamera}>Switch Camera</button>
       <QRScanner
         onScan={handleScan}
-        onError={handleScanError}
-        style={{
-          width: 200,
-          height: 200,
-        }}
-        cameraId={
-          cameras.find((camera) =>
-            camera.label.includes(selectedCameraType)
-          )?.deviceId || ""
-        }
+        onError={handleError}
+        style={{ width: 200, height: 200 }}
+        cameraId={cameras[selectedCamera]?.deviceId}
         ref={scannerRef}
       />
       <p>The decoded data is: {data}</p>
