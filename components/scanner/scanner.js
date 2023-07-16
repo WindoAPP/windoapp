@@ -47,7 +47,7 @@ const QRCodeReader = () => {
           width: 200,
           height: 200,
         }}
-        cameraId={cameras[selectedCamera]?.deviceId}
+        cameraId={cameras[selectedCamera]?.deviceId || ""}
         ref={scannerRef}
       />
       <p>The decoded data is: {data}</p>
