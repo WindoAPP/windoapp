@@ -3,8 +3,29 @@ import { useState } from 'react';
 import styles from './scan.module.scss';
 import React from 'react';
 import WheelComponent from '../wheel/spinWheel';
+import { useEffect } from 'react';
 
 const Scan = () => {
+
+       // Open a new window when the button is clicked
+       const openNewWindow = () => {
+        const url = 'https://search.google.com/local/writereview?placeid=ChIJqdd1GdKggiERZTLkuAP6k8Q'; // Replace with your desired URL
+        const width = "80%";
+        const height = "auto";
+        const windowFeatures = `width=${width},height=${height}`;
+      
+        const newWindow = window.open(url, '_blank', windowFeatures);
+        
+        newWindow.addEventListener('beforeunload', handleWindowClose);
+        setStep(1);
+        
+      };
+
+      const handleWindowClose = () => {
+        // Perform any actions when the newly opened window is closed
+        console.log('Newly opened window closed');
+      };
+
 
     const [step, setStep] = useState(0);
     const [price, setPrice] = useState();
@@ -52,7 +73,7 @@ const Scan = () => {
                         <img src='/trophy.png' className={styles.cardImage}></img>
                         <h1>Congratulations !!</h1>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a</p>
-                        <button onClick={() => setStep(1)} className='btn btn-warning'>Review product</button>
+                        <button onClick={openNewWindow} className='btn btn-warning'>Review product</button>
                     </div>
                 }
                 {
