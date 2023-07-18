@@ -1,7 +1,7 @@
 $mobile-breakpoint: 940px;
 
 .backgroundContainer {
-//  / background-image: url('/back.png');
+  background-image: url('/backimage.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -27,13 +27,13 @@ $mobile-breakpoint: 940px;
 }
 .wheelWrapper{
  position: fixed;
- left: 46%;
-  top: 76%;
+ left: 44%;
+  top: 46%;
   transform: translate(-46%,-67%);
 
  @media (max-width: $mobile-breakpoint) {
-  left: 37%;
-  top: 69%;
+  left: 38%;
+  top: 44%;
   transform: translate(-50%,-50%);
 }
  
@@ -47,5 +47,13 @@ $mobile-breakpoint: 940px;
 }
 
 .addMarginBottom{
-  margin-bottom: 300px;
+  margin-bottom: 660px;
+  @media (max-width: $mobile-breakpoint) {
+    margin-bottom: 480px;
+  }
+  
+}
+
+.spinLogo{
+  width: 12rem;
 }

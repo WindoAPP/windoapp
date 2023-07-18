@@ -7,24 +7,24 @@ import { useEffect } from 'react';
 
 const Scan = () => {
 
-       // Open a new window when the button is clicked
-       const openNewWindow = () => {
+    // Open a new window when the button is clicked
+    const openNewWindow = () => {
         const url = 'https://search.google.com/local/writereview?placeid=ChIJqdd1GdKggiERZTLkuAP6k8Q'; // Replace with your desired URL
         const width = "80%";
         const height = "auto";
         const windowFeatures = `width=${width},height=${height}`;
-      
+
         const newWindow = window.open(url, '_blank', windowFeatures);
-        
+
         newWindow.addEventListener('beforeunload', handleWindowClose);
         setStep(1);
-        
-      };
 
-      const handleWindowClose = () => {
+    };
+
+    const handleWindowClose = () => {
         // Perform any actions when the newly opened window is closed
         console.log('Newly opened window closed');
-      };
+    };
 
 
     const [step, setStep] = useState(0);
@@ -65,7 +65,7 @@ const Scan = () => {
 
         <div className={` d-flex ${styles.backgroundContainer}`} >
             { }
-            <div className={`card shadow  p-4 ${styles.card} ${step==1?styles.addMarginBottom:''}`}>
+            <div className={`card shadow  p-4 ${styles.card} ${step==2?styles.addMarginBottom:''}`}>
                 {
                     step === 0 &&
 
@@ -100,42 +100,31 @@ const Scan = () => {
                             </div>
                             <button onClick={formSubmit} class="btn btn-warning">Submit & Spin</button>
                         </form>
-                        <div className={`${styles.wheelWrapper}` }>
-                        <WheelComponent
-                            segments={segments}
-                            segColors={segColors}
-                            winningSegment=""
-                            onFinished={(winner) => onFinished(winner)}
-                            primaryColor="black"
-                            primaryColoraround="#ffffffb4"
-                            contrastColor="white"
-                            buttonText="Spin"
-                            isOnlyOnce={false}
-                            size={150}
-                            upDuration={50}
-                            downDuration={2000}
-                        />
-                    </div>
+
                     </div>
 
                 }
                 {
                     step === 2 &&
-                    <div className={styles.wheelWrapper}>
-                        <WheelComponent
-                            segments={segments}
-                            segColors={segColors}
-                            winningSegment=""
-                            onFinished={(winner) => onFinished(winner)}
-                            primaryColor="black"
-                            primaryColoraround="#ffffffb4"
-                            contrastColor="white"
-                            buttonText="Spin"
-                            isOnlyOnce={false}
-                            size={150}
-                            upDuration={50}
-                            downDuration={2000}
-                        />
+                    <div className='d-flex '>
+                        <img src="/logo.png" className={styles.spinLogo}></img>
+                        <div className={styles.wheelWrapper}>
+
+                            <WheelComponent
+                                segments={segments}
+                                segColors={segColors}
+                                winningSegment=""
+                                onFinished={(winner) => onFinished(winner)}
+                                primaryColor="black"
+                                primaryColoraround="#ffffffb4"
+                                contrastColor="white"
+                                buttonText="Spin"
+                                isOnlyOnce={false}
+                                size={150}
+                                upDuration={50}
+                                downDuration={2000}
+                            />
+                        </div>
                     </div>
 
 
