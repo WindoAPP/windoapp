@@ -27,13 +27,14 @@ $mobile-breakpoint: 940px;
 }
 .wheelWrapper{
  position: fixed;
- top:19vh;
+ left: 46%;
+  top: 76%;
+  transform: translate(-46%,-67%);
 
  @media (max-width: $mobile-breakpoint) {
-  bottom :0;
- margin: auto;
- right: -10px;
- top: 5vh
+  left: 37%;
+  top: 69%;
+  transform: translate(-50%,-50%);
 }
  
 }
@@ -43,4 +44,8 @@ $mobile-breakpoint: 940px;
 }
 .fireImage{
   width: 18rem;
+}
+
+.addMarginBottom{
+  margin-bottom: 300px;
 }

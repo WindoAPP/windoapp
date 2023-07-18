@@ -9,12 +9,13 @@ export default function App({ Component, pageProps }) {
 
   // Check if the current URL ends with "/dashboard"
   const isDashboardPage = router.asPath.endsWith('/dashboard');
+  const isScanPage = router.asPath.endsWith('/scan');
 
   return (
     <>
-    {!isDashboardPage && <Navbar/>}
+    {!isDashboardPage && !isScanPage && <Navbar/>}
     <Component {...pageProps} />
-    {!isDashboardPage && <Footer/>}
+    {!isDashboardPage && !isScanPage && <Footer/>}
     </>
  )
 }

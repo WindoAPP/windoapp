@@ -65,7 +65,7 @@ const Scan = () => {
 
         <div className={` d-flex ${styles.backgroundContainer}`} >
             { }
-            <div className={`card shadow  p-4 ${styles.card}`}>
+            <div className={`card shadow  p-4 ${styles.card} ${step==1?styles.addMarginBottom:''}`}>
                 {
                     step === 0 &&
 
@@ -100,6 +100,22 @@ const Scan = () => {
                             </div>
                             <button onClick={formSubmit} class="btn btn-warning">Submit & Spin</button>
                         </form>
+                        <div className={`${styles.wheelWrapper}` }>
+                        <WheelComponent
+                            segments={segments}
+                            segColors={segColors}
+                            winningSegment=""
+                            onFinished={(winner) => onFinished(winner)}
+                            primaryColor="black"
+                            primaryColoraround="#ffffffb4"
+                            contrastColor="white"
+                            buttonText="Spin"
+                            isOnlyOnce={false}
+                            size={150}
+                            upDuration={50}
+                            downDuration={2000}
+                        />
+                    </div>
                     </div>
 
                 }
