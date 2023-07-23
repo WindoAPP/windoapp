@@ -17,6 +17,14 @@ const CustomerSchema = new Schema({
         type: String,
         required: true,
     },
+    facebook: {
+        type: String,
+        required: true,
+    },
+    instagram: {
+        type: String,
+        required: true,
+    },
     cretedAt: {
         type: Date,
         required: true

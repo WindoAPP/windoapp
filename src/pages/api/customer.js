@@ -9,12 +9,14 @@ const handler = async (req, res) => {
 
         if (!req.body) return res.status(400).json({ error: "Data is missing" })
 
-        const { name, user, phoneNumber,email } = req.body
+        const { name, user, phoneNumber,email,instagram,facebook } = req.body
         const gust = new Customer({
             name: name,
             user: user,
             phoneNumber: phoneNumber,
             email:email,
+            instagram: instagram,
+            facebook:facebook,
             cretedAt: new Date()
         });
         gust

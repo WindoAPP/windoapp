@@ -7,7 +7,7 @@ import { createUser } from '../../services/service';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({ email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '' });
-    const [loading, setLoading] =useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,19 +15,19 @@ const SignUp = () => {
 
     const registerFromSubmit = (e) => {
         e.preventDefault();
-        var isValid =validateForm();
-        
-        if(isValid){
+        var isValid = validateForm();
+
+        if (isValid) {
             setLoading(true);
             createUser(formData).then(res => {
-                if(res){
+                if (res) {
                     setLoading(false);
                 }
             }).catch(err => {
                 console.log(err);
                 setLoading(false);
             })
-        }else{
+        } else {
             return
         }
 
@@ -105,14 +105,18 @@ const SignUp = () => {
                         <input type="text" name="phoneNumber" placeholder="Mobile Number" className="form-control" onChange={handleChange} value={formData.phoneNumber}></input>
                     </div>
                     <div className="d-flex flex-column">
-                        <label><strong>shop ID</strong></label>
+                        <div className='d-flex flex-row'>
+                            <label><strong>shop ID</strong></label>
+                            <label className='mx-2'><a target="_blank" href='https://ultimateelementor.com/docs/find-google-place-id/'>click here</a> to get your shop ID </label>
+                        </div>
+
                         <input type="text" name="shopId" placeholder="shop ID" className="form-control" onChange={handleChange} value={formData.shopId}></input>
                     </div>
                     <button className={`btn btn-success mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>Register</button>
                     <span className='align-self-center'>Already have an account? <a href="/login">Login</a></span>
                 </div>
             </form>
-            {loading && <Loader/>}
+            {loading && <Loader />}
         </div>
     );
 };

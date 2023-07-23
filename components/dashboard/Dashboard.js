@@ -12,6 +12,7 @@ import { useRef } from 'react';
 import { getCustomers, updateUser } from '../../services/service';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { HexColorPicker } from 'react-colorful';
 
 Chart.register(CategoryScale);
 
@@ -24,6 +25,7 @@ const Dashboard = () => {
     const [showAddProfile, setShowAddProfile] = useState(false);
     const [wheelItemsSaved, setWheelItemsSaved] = useState(false);
     const [customerArr, setCustomerArr] = useState([]);
+    const [color, setColor] = useState("#aabbcc");
     const router = useRouter();
  
     function countOccurrences(arr) {
@@ -89,14 +91,14 @@ const Dashboard = () => {
                 featchCustomers(session.user._id);
 
             }
-        }else{
-            router.push('/login')
         }
     }, [session])
 
 
     const addItem = () => {
-        setWheelItems([...wheelItems, item]);
+        var w_item ={item:item,color:color}
+        setWheelItems([...wheelItems, w_item]);
+        console.log(">",wheelItems);
         setItem("");
         setWheelItemsSaved(false);
     }
@@ -241,6 +243,8 @@ const Dashboard = () => {
                         {
                             profileCreateStep === 1 && <div>
                                 <h2>Add Spin wheel items</h2>
+                                <p className='my-2'>Pick color :</p>
+                                <HexColorPicker color={color} onChange={setColor} />
                                 <div className={`d-flex flex-row mt-4 ${styles.addWheelItemsWrapper}`}>
                                     <input className="form-control" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add wheel item' maxLength={15}></input>
                                     <button className='btn btn-primary mx-2' onClick={addItem}>Add <i className=" fa fa-plus"></i></button>
@@ -248,14 +252,14 @@ const Dashboard = () => {
                                 <div className='d-flex flex-wrap m-4'>
                                     {wheelItems.map((item, index) => {
                                         return (
-                                            <span key={index} className={`${styles.wheelItem} m-2`}>{item} <i className='fa fa-times-circle pointer' onClick={() => removeItem(index)}></i></span>
+                                            <span key={index} style={{ borderColor: item.color }}  className={`${styles.wheelItem} m-2`}>{item.item} <i className='fa fa-times-circle pointer' onClick={() => removeItem(index)}></i></span>
                                         )
 
                                     })}
 
                                 </div>
-                                {!wheelItemsSaved && <button className='btn btn-success' onClick={saveWheelItems}>Save wheel items  <i className="fa fa-save mx-2"></i></button>}
-                                {wheelItemsSaved && <button className='btn btn-warning' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>}
+                                <button className='btn btn-success mx-1' onClick={saveWheelItems}>Save wheel items  <i className="fa fa-save mx-2"></i></button>
+                                 <button className='btn btn-warning mx-1' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>
                                 <QRCode
                                     size={290}
                                     level={"H"}

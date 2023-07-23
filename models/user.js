@@ -43,8 +43,14 @@ const UserSchema = new Schema({
         required: true,
     },
     wheelItems: [{
-        type: String,
-        required: false
+        item: {
+            type: String,
+            required: true,
+        },
+        color: {
+            type: String,
+            required: true,
+        },
     }],
     cretaedAt: {
         type: Date,

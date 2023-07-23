@@ -15,7 +15,7 @@ const Scan = () => {
     const [loading, setLoading] = useState(true);
     const [segments, setSegments] = useState([]);
     const [segmentColors, setSegmentColors] = useState([]);
-    const [formData, setFormData] = useState({ email: '', phoneNumber: '', name:'',user:'',termsCheck:false});
+    const [formData, setFormData] = useState({ email: '', phoneNumber: '', name:'',user:'',facebook:'',instagram:'', termsCheck:false});
     const { id } = router.query;
 
 
@@ -25,8 +25,12 @@ const Scan = () => {
                 if(res){
                     setLoading(false)
                     setUser(res.user);
-                    setSegments(res.user.wheelItems);
-                    setSegmentColors(pushColorsWithDynamicItems(segColors,res.user.wheelItems.length));
+
+                    var segmentsTemp=res.user.wheelItems.map(obj=>{return obj.item});
+                    var segmentsColorTemp=res.user.wheelItems.map(obj=>{return obj.color});
+
+                    setSegments(segmentsTemp);
+                    setSegmentColors(segmentsColorTemp);
                 }
                 
             }).catch(err => {
@@ -117,37 +121,7 @@ const Scan = () => {
     const [step, setStep] = useState(0);
     const [price, setPrice] = useState();
 
-    
-    const segColors = [
-        "#EE4040",
-        "#F0CF50",
-        "#815CD1",
-        "#3DA5E0",
-        "#FF9000",
-        "#3DA5E0",
-    ];
-
-    function pushColorsWithDynamicItems(colorsArray, numItems) {
-        const colorsLength = colorsArray.length;
-        if (numItems <= colorsLength) {
-          // If the number of items is less than or equal to the existing colors, no need to push more.
-          return colorsArray;
-        }
-      
-        const newColorsArray = [...colorsArray];
-        const colorsToAdd = numItems - colorsLength;
-        const startIndex = colorsLength % colorsLength; // To ensure the index wraps around if numItems is greater than colorsLength
-      
-        for (let i = 0; i < colorsToAdd; i++) {
-          const nextColorIndex = (startIndex + i) % colorsLength;
-          newColorsArray.push(colorsArray[nextColorIndex]);
-        }
-      
-        return newColorsArray;
-      }
-
     const onFinished = (winner) => {
-        console.log(winner);
         setTimeout(() => {
             if (winner === "Try again") {
                 alert("try again")
@@ -159,13 +133,6 @@ const Scan = () => {
 
 
     };
-
-    const formSubmit = () => {
-        setStep(2)
-    }
-
-
-
 
     return (
 
@@ -196,6 +163,12 @@ const Scan = () => {
                             </div>
                             <div className="form-group my-2">
                                 <input type="email" className="form-control" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange}></input>
+                            </div>
+                            <div className="form-group my-2">
+                                <input type="text" className="form-control" name="facebook" placeholder="Enter your facebook ID" value={formData.facebook} onChange={handleChange}></input>
+                            </div>
+                            <div className="form-group my-2">
+                                <input type="text" className="form-control" name="instagram" placeholder="Enter your instagram ID" value={formData.instagram} onChange={handleChange}></input>
                             </div>
                             <div className="form-group my-2">
                                 <input type="tel" className="form-control" name="phoneNumber" placeholder="Enter your mobile number" value={formData.phoneNumber} onChange={handleChange}></input>
