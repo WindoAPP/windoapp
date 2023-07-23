@@ -4,12 +4,99 @@ import styles from './scan.module.scss';
 import React from 'react';
 import WheelComponent from '../wheel/spinWheel';
 import { useEffect } from 'react';
+import { createCustomer, getUser } from '../../services/service';
+import { useRouter } from 'next/router';
+import Loader from '../Loader/loader';
+import showNotifications from '../showNotifications/showNotifications';
 
 const Scan = () => {
+    const router = useRouter();
+    const [user,setUser]=useState({});
+    const [loading, setLoading] = useState(true);
+    const [segments, setSegments] = useState([]);
+    const [segmentColors, setSegmentColors] = useState([]);
+    const [formData, setFormData] = useState({ email: '', phoneNumber: '', name:'',user:'',termsCheck:false});
+    const { id } = router.query;
+
+
+    useEffect(() => {
+        if (id) {   
+            getUser(id).then(res=>{
+                if(res){
+                    setLoading(false)
+                    setUser(res.user);
+                    setSegments(res.user.wheelItems);
+                    setSegmentColors(pushColorsWithDynamicItems(segColors,res.user.wheelItems.length));
+                }
+                
+            }).catch(err => {
+                console.log(err);
+                setLoading(false);
+            });
+        }
+        }, [id]);
+
+        
+
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const registerFromSubmit = (e) => {
+        e.preventDefault();
+        var isValid =validateForm();
+        
+        if(isValid){
+            setLoading(true);
+            formData.user=user._id;
+            createCustomer(formData).then(res => {
+                if(res){
+                    setLoading(false);
+                    setStep(2)
+                }
+            }).catch(err => {
+                console.log(err);
+                setLoading(false);
+            })
+        }else{
+            return
+        }
+    }
+
+    const validateForm = () => {
+
+        if (formData.email == "") {
+            showNotifications(true, "email required")
+            return false;
+        }
+        if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            showNotifications(true, "Invalid email address")
+            return false;
+        }
+        if (formData.name == "") {
+            showNotifications(true, "Name required")
+            return false;
+        }
+        if (formData.phoneNumber == "") {
+            showNotifications(true, "Mobile Number required")
+            return false;
+        }
+        if (formData.phoneNumber == "") {
+            showNotifications(true, "Mobile Number")
+            return false;
+        }
+        if (!formData.termsCheck) {
+            showNotifications(true, "Please check terms and conditions")
+            return false;
+        }
+
+        return true;
+    };
 
     // Open a new window when the button is clicked
     const openNewWindow = () => {
-        const url = 'https://search.google.com/local/writereview?placeid=ChIJqdd1GdKggiERZTLkuAP6k8Q'; // Replace with your desired URL
+        const url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
         const width = "80%";
         const height = "auto";
         const windowFeatures = `width=${width},height=${height}`;
@@ -30,7 +117,7 @@ const Scan = () => {
     const [step, setStep] = useState(0);
     const [price, setPrice] = useState();
 
-    const segments = ["100$", "50$", "10$", "1$", "Try again", "20$"];
+    
     const segColors = [
         "#EE4040",
         "#F0CF50",
@@ -39,6 +126,25 @@ const Scan = () => {
         "#FF9000",
         "#3DA5E0",
     ];
+
+    function pushColorsWithDynamicItems(colorsArray, numItems) {
+        const colorsLength = colorsArray.length;
+        if (numItems <= colorsLength) {
+          // If the number of items is less than or equal to the existing colors, no need to push more.
+          return colorsArray;
+        }
+      
+        const newColorsArray = [...colorsArray];
+        const colorsToAdd = numItems - colorsLength;
+        const startIndex = colorsLength % colorsLength; // To ensure the index wraps around if numItems is greater than colorsLength
+      
+        for (let i = 0; i < colorsToAdd; i++) {
+          const nextColorIndex = (startIndex + i) % colorsLength;
+          newColorsArray.push(colorsArray[nextColorIndex]);
+        }
+      
+        return newColorsArray;
+      }
 
     const onFinished = (winner) => {
         console.log(winner);
@@ -64,14 +170,14 @@ const Scan = () => {
     return (
 
         <div className={` d-flex ${styles.backgroundContainer}`} >
-            { }
-            <div className={`card shadow  p-4 ${styles.card} ${step==2?styles.addMarginBottom:''}`}>
+            {!loading?
+            <div className={`card shadow  p-4 ${styles.card} ${step == 2 ? styles.addMarginBottom : ''}`}>
                 {
                     step === 0 &&
 
                     <div>
                         <img src='/trophy.png' className={styles.cardImage}></img>
-                        <h1>Congratulations !!</h1>
+                        <h1>Congratulations !! </h1>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a</p>
                         <button onClick={openNewWindow} className='btn btn-warning'>Review product</button>
                     </div>
@@ -85,20 +191,20 @@ const Scan = () => {
                             Lorem Ipsum is simply dummy text of the printing and typesetting <i className='fa fa-hand-o-down text-warning'> </i>
                         </p>
                         <form>
-                            <div class="form-group my-2">
-                                <input type="text" class="form-control" id="name" placeholder="Enter your name"></input>
+                            <div className="form-group my-2">
+                                <input type="text" className="form-control" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange}></input>
                             </div>
-                            <div class="form-group my-2">
-                                <input type="email" class="form-control" id="email" placeholder="Enter your email"></input>
+                            <div className="form-group my-2">
+                                <input type="email" className="form-control" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange}></input>
                             </div>
-                            <div class="form-group my-2">
-                                <input type="tel" class="form-control" id="mobile" placeholder="Enter your mobile number"></input>
+                            <div className="form-group my-2">
+                                <input type="tel" className="form-control" name="phoneNumber" placeholder="Enter your mobile number" value={formData.phoneNumber} onChange={handleChange}></input>
                             </div>
-                            <div class="form-check my-3">
-                                <input type="checkbox" class="form-check-input" id="termsCheck"></input>
-                                <label class="form-check-label" for="termsCheck">I agree to the terms and conditions</label>
+                            <div className="form-check my-3">
+                                <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
+                                <label className="form-check-label" for="termsCheck">I agree to the terms and conditions</label>
                             </div>
-                            <button onClick={formSubmit} class="btn btn-warning">Submit & Spin</button>
+                            <button onClick={registerFromSubmit} className="btn btn-warning">Submit & Spin</button>
                         </form>
 
                     </div>
@@ -112,7 +218,7 @@ const Scan = () => {
 
                             <WheelComponent
                                 segments={segments}
-                                segColors={segColors}
+                                segColors={segmentColors}
                                 winningSegment=""
                                 onFinished={(winner) => onFinished(winner)}
                                 primaryColor="black"
@@ -138,7 +244,9 @@ const Scan = () => {
                         <p className='text-info'>Lorem Ipsum is simply dummy text of the printing</p>
                     </div>
                 }
-            </div>
+            </div>:
+             <Loader />
+            }
         </div>
     );
 };

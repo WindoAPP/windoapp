@@ -85,7 +85,7 @@ const Home = () => {
           <li>Personalized monthly follow-up every month</li>
           <li>Technical support</li>
         </ul>
-        <button className={`btn btn-warning btn-lg ${styles.reviewBtn}`} onClick={() => playAudio()}>
+        <button className={`btn btn-warning btn-lg ${styles.reviewBtn}`} onClick={() => router.push("/login")}>
           I Want Windo
         </button>
       </div>
