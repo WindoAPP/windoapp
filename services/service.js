@@ -56,6 +56,21 @@ export async function createCustomer(userData) {
 
 }
 
+export async function profileImageUpload(userData) {
+    try {
+        const response = await axios.post(`/api/upload`, userData);
+        if (response) {
+            console.log(response);
+            showNotification(false, "Registered Successfull")
+        }
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
 export async function getCustomers(uid) {
     try {
         

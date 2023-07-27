@@ -42,6 +42,10 @@ const UserSchema = new Schema({
         type: Boolean,
         required: true,
     },
+    profileImage:{
+        type: String,
+        required: false,
+    },
     wheelItems: [{
         item: {
             type: String,
