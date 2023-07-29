@@ -28,7 +28,21 @@ const CustomerSchema = new Schema({
     cretedAt: {
         type: Date,
         required: true
-    }
+    },
+    spins: [{
+        isWin: {
+            type: Boolean,
+            required: false,
+        },
+        price: {
+            type: String,
+            required: false,
+        },
+        created_at: {
+            type: String,
+            required: false,
+        },
+    }]
 })
 
 const Customer = models.Customer || model("Customer", CustomerSchema)

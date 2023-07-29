@@ -25,7 +25,8 @@ const handler = async (req, res) => {
                 if(result){
                     User.updateOne({_id:user},{ $push: { custermers: gust._id }}).then(()=>{
                         return res.status(201).json({
-                            success: true
+                            success: true,
+                            gust:gust
                         })
                     }).catch(error => {
                         return res.status(409).json({ message: error.message })
@@ -49,8 +50,19 @@ const handler = async (req, res) => {
         }).catch(error => {
             return res.status(409).json({ message: error.message })
         });
-    } 
-    else {
+    } else if (req.method === "PUT") {
+        const customer  =req.body;
+
+        Customer.updateOne({_id:customer._id},customer).then(result=>{
+            if(result){
+                return res.status(201).json({
+                    success: true,
+                })
+            }           
+        }).catch(error => {
+            res.status(400).json({ message: error.message })
+        });
+    }else {
         res.status(405).json({ error: "Method Not Allowed" })
     }
 }

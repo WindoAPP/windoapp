@@ -206,7 +206,7 @@ const WheelComponent = ({
   const drawNeedle = () => {
     const ctx = canvasContext.current;
     ctx.lineWidth = 1;
-    ctx.strokeStyle = contrastColor || "white";
+    ctx.strokeStyle = contrastColor || "#C2DBFE";
     ctx.fileStyle = contrastColor || "white";
     ctx.beginPath();
     ctx.moveTo(centerX + 10, centerY - 40);

@@ -12,7 +12,7 @@ $mobile-breakpoint: 940px;
 }
 
 .card {
-  max-width: 60%;
+  max-width: 85%;
   background-color: #fff;
 
   display: flex;
@@ -23,11 +23,12 @@ $mobile-breakpoint: 940px;
 
   @media (max-width: $mobile-breakpoint) {
     max-width: 85%;
+    margin-left: 1.5rem;
   }
 }
 .wheelWrapper{
  position: fixed;
- left: 44%;
+ left: 46%;
   top: 46%;
   transform: translate(-46%,-67%);
 
@@ -54,6 +55,29 @@ $mobile-breakpoint: 940px;
   
 }
 
-.spinLogo{
-  width: 12rem;
+.wheelWrapperc{
+  flex-direction: row;
+  @media (max-width: $mobile-breakpoint) {
+    flex-direction: column;
+  }
+}
+.spinTopWrapper{
+  border-radius: 20px;
+  background-color: rgba(100, 173, 5, 0.5);
+  margin-bottom: 44rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  .spinLogo{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    border: 8px solid rgb(250, 184, 4);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    margin-bottom: 38rem !important;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    text-align: start !important;
+  }
 }
