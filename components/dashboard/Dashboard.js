@@ -8,12 +8,14 @@ import { Line } from 'react-chartjs-2';
 import { useSession, signOut } from 'next-auth/react';
 import Loader from '../Loader/loader';
 import QRCode from 'qrcode.react';
-import { useRef } from 'react';
-import { getCustomers, profileImageUpload, updateUser } from '../../services/service';
+
+import { getCustomers, getUser, profileImageUpload, updateUser } from '../../services/service';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { HexColorPicker } from 'react-colorful';
-import Image from 'next/image';
+
+import { ScaleLoader } from 'react-spinners';
+
 
 Chart.register(CategoryScale);
 
@@ -27,6 +29,11 @@ const Dashboard = () => {
     const [wheelItemsSaved, setWheelItemsSaved] = useState(false);
     const [customerArr, setCustomerArr] = useState([]);
     const [color, setColor] = useState("#aabbcc");
+    const [selectedImage, setSelectedImage] = useState('/shop.png');
+    const [file, setFile] = useState(null);
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [imageUploading, setImageUploading] = useState(false);
+    const [user, setUser] = useState({});
     const router = useRouter();
 
     function countOccurrences(arr) {
@@ -87,11 +94,13 @@ const Dashboard = () => {
                 if (session.user.wheelItems.length > 0) {
                     setWheelItemsSaved(true);
                 } else {
-                    setShowAddProfile(true);
+                    setShowAddProfile(false);
                 }
+
                 featchCustomers(session.user._id);
 
             }
+            fetchUser(session.user.uid);
         }
     }, [session])
 
@@ -99,7 +108,6 @@ const Dashboard = () => {
     const addItem = () => {
         var w_item = { item: item, color: color }
         setWheelItems([...wheelItems, w_item]);
-        console.log(">", wheelItems);
         setItem("");
         setWheelItemsSaved(false);
     }
@@ -121,14 +129,14 @@ const Dashboard = () => {
     };
 
     const saveWheelItems = () => {
-        var userData = session.user;
+        var userData = user;
         userData['wheelItems'] = wheelItems;
         setLoading(true);
         updateUser(userData).then(res => {
             if (res) {
                 setWheelItemsSaved(true)
                 setLoading(false);
-                session.user = userData;
+                setUser(userData);
             }
         }).catch(err => {
             console.log(err);
@@ -163,87 +171,50 @@ const Dashboard = () => {
         });
     }
 
-    // State to store the file
-    const [file, setFile] = useState  (null);
-
-    // State to store the base64
-    const [base64, setBase64] = useState  (null);
-
-    // When the file is selected, set the file state
-    const onFileChange = (e) => {
-        if (!e.target.files) {
-            return;
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setFile(file);
+        if (file) {
+            setSelectedImage(URL.createObjectURL(file));
         }
-
-        setFile(e.target.files[0]);
     };
 
-    const onClick = (e) => {
-        e.currentTarget.value = "";
-      };
+    const uploadFile = () => {
+        if(!file){
+            return alert("Please select an Image")
+        }
+        setImageUploading(true)
+        profileImageUpload({ onProgress: setUploadProgress, file: file, userData: session.user }).then(imageurl => {
+            if (imageurl) {
+                var userData = user;
+                userData.profileImage = imageurl;
 
-    const toBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-
-            fileReader.readAsDataURL(file);
-
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
-
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        });
-    };
-
-     // On submit, upload the file
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!file) {
-      return;
-    }
-
-    // Convert the file to base64
-    const base64 = await toBase64(file);
-
-    setBase64(base64);
-
-    // You can upload the base64 to your server here
-    await fetch("/api/upload", {
-      method: "POST",
-      body: JSON.stringify({ base64,user:session.user._id }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    // Clear the states after upload
-    setFile(null);
-    setBase64(null);
-  };
-
-    const uploadToServer = async (event) => {
-        const body = new FormData();
-        body.append("file", image);
-        profileImageUpload(body).then(res => {
-            if (res) {
-                setLoading(false);
+                setImageUploading(false);
+                setProfileCreateStep(2)
+                updateUser(userData).then(res => {
+                    if (res) {
+                        setUser(userData);
+                    }
+                }).catch(err => {
+                    console.log(err);
+                });
             }
         }).catch(err => {
             console.log(err);
-            setLoading(false);
-        })
-        // const body = new FormData();
-        // // console.log("file", image)
-        // body.append("file", image);    
-        // const response = await fetch("/api/upload", {
-        //   method: "POST",
-        //   body
-        // });
-    };
+        });
+    }
+
+    const fetchUser = (id) => {
+        getUser(id).then(res => {
+            if (res) {
+                setUser(res.user);
+                setSelectedImage(res.user.profileImage)
+            }
+        }).catch(err => {
+            console.log(err);
+
+        });
+    }
 
     return (
         <>
@@ -254,10 +225,10 @@ const Dashboard = () => {
                 <div className={`vertical-nav bg-white ${styles.sideBar}`} id="sidebar">
                     <div className="py-4 px-3 mb-4 bg-warning shadow">
                         <div className="media d-flex align-items-center">
-                            <img decoding="async" onClick={mapChartData} loading="lazy" src={session.user.profileImage} alt="..." width="80" height="80" className="mr-3  img-thumbnail shadow-sm"></img>
+                            <img src={user.profileImage ? user.profileImage : '/shop.png'} alt="..." width="80" height="80" className={`mr-3 ${styles.sideBarImage} `}></img>
                             <div className="media-body m-2">
-                                <h4 className="m-0">{session.user.shopName}</h4>
-                                <p className="font-weight-normal text-light mb-0">@{session.user.userName}</p>
+                                <h4 className="m-0">{user.shopName}</h4>
+                                <p className="font-weight-normal text-light mb-0">@{user.userName}</p>
                             </div>
                         </div>
                     </div>
@@ -266,7 +237,7 @@ const Dashboard = () => {
 
                     <ul className="nav flex-column bg-white mb-0">
                         <li className="nav-item">
-                            <span className="nav-link text-dark bg-light cursor-pointer" onClick={() => session.user.wheelItems.length == 0 ? setShowAddProfile(true) : setShowAddProfile(false)}>
+                            <span className="nav-link text-dark bg-light cursor-pointer" onClick={() => user.wheelItems.length == 0 ? setShowAddProfile(true) : setShowAddProfile(false)}>
                                 <i className="fa fa-th-large m-2 text-warning fa-fw"></i>
                                 home
                             </span>
@@ -296,12 +267,18 @@ const Dashboard = () => {
                     <ul className="nav flex-column bg-white mb-0">
                         <li className="nav-item">
                             <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { setShowAddProfile(true); setProfileCreateStep(1); }}>
+                                <i className="fa fa-file-image-o m-2 text-warning fa-fw"></i>
+                                Change Profile Picture
+                            </span>
+                        </li>
+                        <li className="nav-item">
+                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { setShowAddProfile(true); setProfileCreateStep(2); }}>
                                 <i className="fa fa-pie-chart m-2 text-warning fa-fw"></i>
                                 Add Wheel items
                             </span>
                         </li>
                         <li className="nav-item ">
-                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { setShowAddProfile(true); setProfileCreateStep(1); }}>
+                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { setShowAddProfile(true); setProfileCreateStep(2); }}>
                                 <i className="fa fa-download m-2 text-warning fa-fw"></i>
                                 Download QR
                             </span>
@@ -318,30 +295,33 @@ const Dashboard = () => {
                     <div className={styles.profileCreateWrapper}>
                         {profileCreateStep === 0 &&
                             <>
-                                <p>click here for create profile for your shop and craete a QR code {session.user.custermers.length}</p>
+                                <p>click here for create profile for your shop and craete a QR code </p>
                                 <button className='btn btn-warning mt-4' onClick={() => setProfileCreateStep(1)}> Create</button>
                             </>
 
                         }
                         {profileCreateStep === 1 &&
-                            <div>
-                                <div>
-                                    <h1>Upload Image</h1>
-                                    <form method="POST" encType="multipart/form-data" onSubmit={handleSubmit}>
-                                        <input
-                                            type="file"
-                                            name="avatar"
-                                            accept="image/*"
-                                            onChange={onFileChange}
-                                            onClick={onClick}
-                                        />
-                                        <button type="submit">Upload</button>
-                                    </form>
-                                    {base64 && (
-                                        <Image src={base64} width={300} height={400} alt="Uploaded Image" />
-                                    )}
+
+                            <div className='d-flex flex-column align-items-center'>
+                                <h3><center>Upload Shop Profile Image</center></h3>
+                                <div className='mt-3'>
+                                    <img src={selectedImage} className={`rounded-circle shadow-4-stron ${styles.imagePreview}`} />
+                                    {imageUploading &&
+                                        <div className={`d-flex flex-column align-items-center ${styles.imageUploadLoader}`}>
+                                            <ScaleLoader color="#36d7b7" />
+                                            <h1 className='text-white'><storng>{uploadProgress} %</storng></h1>
+                                        </div>
+                                    }
+
                                 </div>
+
+                                <div className='d-flex flex-column rounded bg-light p-2 mt-3'>
+                                    <input type="file" onChange={handleFileChange} className="form-control border-0 "></input>
+
+                                </div>
+                                <button className="btn btn-success w-100 mt-3" onClick={uploadFile}>Upload</button>
                             </div>
+
 
                         }
                         {
@@ -375,7 +355,7 @@ const Dashboard = () => {
                                     name='shop_QR_code'
                                     className={styles.qrCode}
                                     id='qrcode'
-                                    value={`https://wind-project.vercel.app/scan?id=${session.user.uid}`}
+                                    value={`https://wind-project.vercel.app/scan?id=${user.uid}`}
                                 />
 
                             </div>
