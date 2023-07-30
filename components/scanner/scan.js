@@ -120,7 +120,7 @@ const Scan = () => {
     };
 
 
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(1);
     const [price, setPrice] = useState();
 
     const onFinished = (winner) => {
