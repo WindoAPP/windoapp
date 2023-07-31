@@ -33,6 +33,7 @@ const Dashboard = () => {
     const [file, setFile] = useState(null);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [imageUploading, setImageUploading] = useState(false);
+    const [sideBarOpened, setSideBarOpened] = useState(false);
     const [user, setUser] = useState({});
     const router = useRouter();
 
@@ -161,7 +162,7 @@ const Dashboard = () => {
         getCustomers(id).then(res => {
             if (res) {
                 setCustomerArr(res.customers);
-                setLoading(false)
+                setLoading(false);
 
             }
 
@@ -169,6 +170,38 @@ const Dashboard = () => {
             console.log(err);
             setLoading(false);
         });
+    }
+
+    const getNoOfWinners = (type) => {
+        var n_of_winners = 0;
+        var n_of_plays = 0;
+        var n_of_reap = 0;
+
+        if (type === "win") {
+            for (let i = 0; i < customerArr.length; i++) {
+                for (let j = 0; j < customerArr[i].spins.length; j++) {
+                    if (customerArr[i].spins[j].isWin) {
+                        n_of_winners++
+                    }
+                }
+            }
+            return n_of_winners;
+        } else if (type === "play") {
+            for (let i = 0; i < customerArr.length; i++) {
+                for (let j = 0; j < customerArr[i].spins.length; j++) {
+                    n_of_plays++;
+                }
+            }
+            return n_of_plays;
+        } else if (type === "reap") {
+            for (let i = 0; i < customerArr.length; i++) {
+                if (customerArr[i].spins.length > 1) {
+                    n_of_reap++
+                }
+
+            }
+            return n_of_reap;
+        }
     }
 
     const handleFileChange = (e) => {
@@ -180,7 +213,7 @@ const Dashboard = () => {
     };
 
     const uploadFile = () => {
-        if(!file){
+        if (!file) {
             return alert("Please select an Image")
         }
         setImageUploading(true)
@@ -208,7 +241,9 @@ const Dashboard = () => {
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
-                setSelectedImage(res.user.profileImage)
+                setSelectedImage(res.user.profileImage);
+                setWheelItems(res.user.wheelItems);
+
             }
         }).catch(err => {
             console.log(err);
@@ -217,12 +252,12 @@ const Dashboard = () => {
     }
 
     return (
-        <>
+        <div>
             {session ? <div>
-                <div className={styles.sidebarIcon}>
+                <div className={styles.sidebarIcon} onClick={() => setSideBarOpened(!sideBarOpened)}>
                     <i className="fa fa-bars"></i>
                 </div>
-                <div className={`vertical-nav bg-white ${styles.sideBar}`} id="sidebar">
+                <div className={`vertical-nav bg-white ${styles.sideBar} ${sideBarOpened ? styles.sideBarDispaly : ''}`} id="sidebar">
                     <div className="py-4 px-3 mb-4 bg-warning shadow">
                         <div className="media d-flex align-items-center">
                             <img src={user.profileImage ? user.profileImage : '/shop.png'} alt="..." width="80" height="80" className={`mr-3 ${styles.sideBarImage} `}></img>
@@ -248,21 +283,7 @@ const Dashboard = () => {
                                 about
                             </a>
                         </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link text-dark">
-                                <i className="fa fa-cubes m-2 text-warning fa-fw"></i>
-                                services
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link text-dark">
-                                <i className="fa fa-picture-o m-2 text-warning fa-fw"></i>
-                                Gallery
-                            </a>
-                        </li>
                     </ul>
-
-                    <p className="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
 
                     <ul className="nav flex-column bg-white mb-0">
                         <li className="nav-item">
@@ -398,7 +419,7 @@ const Dashboard = () => {
                                 <i className=" display-4 fa  fa-trophy m-2 text-warning fa-fw"></i>
                                 <div className='m-2'>
                                     <h4 className="card-title text-warning">Number of Winners</h4>
-                                    <p className={styles.cardNumber}>10,45</p>
+                                    <p className={styles.cardNumber}>{getNoOfWinners("win")}</p>
                                 </div>
                             </div>
                         </div>
@@ -406,8 +427,8 @@ const Dashboard = () => {
                             <div className='d-flex flex-row'>
                                 <i className=" display-4 fa fa-line-chart m-2 text-warning fa-fw"></i>
                                 <div className='m-2'>
-                                    <h4 className="card-title text-warning">Revenue</h4>
-                                    <p className={styles.cardNumber}>$10,345</p>
+                                    <h4 className="card-title text-warning">Number of Play</h4>
+                                    <p className={styles.cardNumber}>{getNoOfWinners("play")}</p>
                                 </div>
                             </div>
                         </div>
@@ -415,8 +436,8 @@ const Dashboard = () => {
                             <div className='d-flex flex-row'>
                                 <i className=" display-4 fa fa-line-chart m-2 text-warning fa-fw"></i>
                                 <div className='m-2'>
-                                    <h4 className="card-title text-warning">Revenue</h4>
-                                    <p className={styles.cardNumber}>$10,345</p>
+                                    <h4 className="card-title text-warning">Repeaters </h4>
+                                    <p className={styles.cardNumber}>{getNoOfWinners("reap")}</p>
                                 </div>
                             </div>
                         </div>
@@ -424,8 +445,8 @@ const Dashboard = () => {
                             <div className='d-flex flex-row'>
                                 <i className=" display-4 fa fa-line-chart m-2 text-warning fa-fw"></i>
                                 <div className='m-2'>
-                                    <h4 className="card-title text-warning">Revenue</h4>
-                                    <p className={styles.cardNumber}>$10,345</p>
+                                    <h4 className="card-title text-warning">Gift Given</h4>
+                                    <p className={styles.cardNumber}>{getNoOfWinners("win")}</p>
                                 </div>
                             </div>
                         </div>
@@ -433,8 +454,8 @@ const Dashboard = () => {
                             <div className='d-flex flex-row'>
                                 <i className=" display-4 fa fa-line-chart m-2 text-warning fa-fw"></i>
                                 <div className='m-2'>
-                                    <h4 className="card-title text-warning">Revenue</h4>
-                                    <p className={styles.cardNumber}>$10,345</p>
+                                    <h4 className="card-title text-warning">Checked for personal info</h4>
+                                    <p className={styles.cardNumber}>{customerArr.length}</p>
                                 </div>
                             </div>
                         </div>
@@ -484,7 +505,7 @@ const Dashboard = () => {
 
             </div> : <Loader />}
             {loading && <Loader />}
-        </>
+        </div>
 
     );
 };

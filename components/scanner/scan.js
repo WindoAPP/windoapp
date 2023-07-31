@@ -8,6 +8,7 @@ import { createCustomer, getUser, updateCustomer } from '../../services/service'
 import { useRouter } from 'next/router';
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
+import { useRef } from 'react';
 
 const Scan = () => {
     const router = useRouter();
@@ -17,10 +18,16 @@ const Scan = () => {
     const [segments, setSegments] = useState([]);
     const [segmentColors, setSegmentColors] = useState([]);
     const [formData, setFormData] = useState({ email: '', phoneNumber: '', name: '', user: '', facebook: '', instagram: '', termsCheck: false, spins: [] });
+    const [step, setStep] = useState(0);
+    const [price, setPrice] = useState();
+    const [screenHeight, setScreenHeight] = useState();
+
     const { id } = router.query;
 
 
     useEffect(() => {
+        setScreenHeight(window.innerHeight);
+        console.log(screenHeight);
         if (id) {
             getUser(id).then(res => {
                 if (res) {
@@ -119,10 +126,6 @@ const Scan = () => {
         console.log('Newly opened window closed');
     };
 
-
-    const [step, setStep] = useState(0);
-    const [price, setPrice] = useState();
-
     const onFinished = (winner) => {
         setTimeout(() => {
             if (winner === "Try again") {
@@ -136,14 +139,14 @@ const Scan = () => {
 
             if (customer.spins) {
                 custimerData.spins.push({
-                    isWin: false,
+                    isWin: winner !== "Try again",
                     price: winner,
                     created_at: new Date()
                 })
             } else {
                 custimerData['spins'] = [];
                 custimerData.spins.push({
-                    isWin: true,
+                    isWin: winner !== "Try again",
                     price: winner,
                     created_at: new Date()
                 })
@@ -164,9 +167,17 @@ const Scan = () => {
         });
     }
 
+    const childRef = useRef(null);
+
+  const handleCallChildFunction = () => {
+    if (childRef.current) {
+      childRef.current.spin(); // Call the child function using the ref
+    }
+  };
+
     return (
 
-        <div className={` d-flex ${styles.backgroundContainer}`} >
+        <div className={` d-flex ${styles.backgroundContainer} ${step !== 2 && "align-items-center justify-content-center"}`} >
             {!loading ?
             <div>{step !== 2 &&
                 <div className={`card shadow  p-4 ${styles.card} ${step == 2 ? styles.addMarginBottom : ''}`}>
@@ -228,28 +239,30 @@ const Scan = () => {
                 {
                         step === 2 &&
                         <div className={`d-flex ${styles.wheelWrapperc}`} >
-                            <div className={`d-flex flex-row p-3 align-items-center ${styles.spinTopWrapper}`}>
-                                <img src={user.profileImage ? user.profileImage : "/shop.png"} className={styles.spinLogo}></img>
-                                <div className='d-flex flex-column ms-4'>
-                                    <h4 className='align-self-start'>{user.shopName}</h4>
-                                    <p className='align-self-start text-left'>Lorem Ipsum is simply dummy</p>
-                                </div>
+                            <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
+                                <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
+                                <p className='align-self-center text-center '>Lorem Ipsum is simply dummy </p>
+                                <button onClick={handleCallChildFunction} type="button" class="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
                             </div>
 
                             <div className={styles.wheelWrapper}>
                                 <WheelComponent
                                     segments={segments}
                                     segColors={segmentColors}
-                                    winningSegment=""
+                                    winningSegment="red"
                                     onFinished={(winner) => onFinished(winner)}
                                     primaryColor="black"
-                                    primaryColoraround="#ffffffb4"
+                                    primaryColoraround="#0E4502"
                                     contrastColor="white"
-                                    buttonText="Spin"
+                                    buttonText=""
                                     isOnlyOnce={false}
-                                    size={150}
+                                    size={screenHeight>782?250:200}
+                                    width={200}
+                                    height={2000}
                                     upDuration={50}
                                     downDuration={2000}
+                                   
+                                    ref={childRef}
                                 />
                             </div>
                         </div>
