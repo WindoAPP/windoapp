@@ -66,7 +66,7 @@ const SignUp = () => {
             setLoading(true);
             createUser(formData).then(res => {
                 if (res) {
-                    subscribe({ priceId: priceId, userId:res.user._id,total:"59.99",currency:"USD" }).then(res => {
+                    subscribe({ priceId: priceId, userId:res.user._id,total:"59.99",currency:"EUR" }).then(res => {
 
                         if (res) {
                             setLoading(false);
@@ -131,7 +131,6 @@ const SignUp = () => {
             showNotifications(true, "Password mismathed")
             return false;
         }
-        console.log(!formData.termsCheck);
         if (!formData.termsCheck) {
             showNotifications(true, "You must agree to terms and conditions")
             return false;
