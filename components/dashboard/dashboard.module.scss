@@ -2,6 +2,7 @@ $mobile-breakpoint: 940px;
 
 .mainContent {
     margin-left: 18rem;
+    justify-content: center;
 
     @media (max-width: $mobile-breakpoint) {
         margin-left: 0 !important;
@@ -115,7 +116,7 @@ $mobile-breakpoint: 940px;
 }
 
 .profileCreateWrapper {
-    margin-left: 20rem;
+   // margin-left: 0;
     margin-right: 2rem;
     margin-top: 15%;
     border: 4px solid orange;

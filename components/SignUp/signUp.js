@@ -1,13 +1,58 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './signUp.module.scss'
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
-import { createUser } from '../../services/service';
+import { createPayment, createUser, pricingTableGet, subscribe } from '../../services/service';
+import { useRouter } from 'next/router';
+import { env_data } from '../../config/config';
 
 
 const SignUp = () => {
-    const [formData, setFormData] = useState({ email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '' });
+    const [formData, setFormData] = useState({ email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '', termsCheck: false });
     const [loading, setLoading] = useState(false);
+    const [priceId, setPriceId] = useState("");
+
+    const router = useRouter();
+    const { query } = router;
+
+    useEffect(() => {
+
+        if (query) {
+            if (query.payment == 'success') {
+
+                showNotifications(false, "Payment Successfull !");
+
+                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency ,success:true }
+
+                createPayment(paymentData).then(() => {
+                    router.push("login");
+                }).catch(err => {
+                    console.log(err);
+                });
+            }else if(query.payment == "failed"){
+                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency,success:false }
+
+                createPayment(paymentData).then(() => {
+                    router.push("login");
+                }).catch(err => {
+                    console.log(err);
+                });
+            } 
+        }
+
+        pricingTableGet().then(res => {
+            if (res) {
+                setLoading(false);
+                setPriceId(res[0].id)
+            }
+        }).catch(err => {
+            console.log(err);
+            setLoading(false)
+
+        });
+
+
+    }, [query]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,17 +66,32 @@ const SignUp = () => {
             setLoading(true);
             createUser(formData).then(res => {
                 if (res) {
-                    setLoading(false);
+                    subscribe({ priceId: priceId, userId:res.user._id,total:"59.99",currency:"USD" }).then(res => {
+
+                        if (res) {
+                            setLoading(false);
+                            redirectToExternalURL(res.url);
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        setLoading(false);
+                    })
                 }
             }).catch(err => {
                 console.log(err);
                 setLoading(false);
             })
+
+
         } else {
             return
         }
 
     }
+
+    const redirectToExternalURL = (url) => {
+        window.location.href = url;
+    };
 
     const validateForm = () => {
 
@@ -69,6 +129,11 @@ const SignUp = () => {
         }
         if (formData.password !== formData.c_password) {
             showNotifications(true, "Password mismathed")
+            return false;
+        }
+        console.log(!formData.termsCheck);
+        if (!formData.termsCheck) {
+            showNotifications(true, "You must agree to terms and conditions")
             return false;
         }
 
@@ -112,7 +177,11 @@ const SignUp = () => {
 
                         <input type="text" name="shopId" placeholder="shop ID" className="form-control" onChange={handleChange} value={formData.shopId}></input>
                     </div>
-                    <button className={`btn btn-success mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>Register</button>
+                    <div className="form-check my-3">
+                        <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
+                        <label className="form-check-label" >I agree to the terms and conditions</label>
+                    </div>
+                    <button className={`btn btn-success mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>Register & Pay</button>
                     <span className='align-self-center'>Already have an account? <a href="/login">Login</a></span>
                 </div>
             </form>

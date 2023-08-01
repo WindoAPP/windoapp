@@ -131,3 +131,54 @@ export async function loginUser(userData) {
     }
 
 }
+
+
+export async function pricingTableGet() {
+    try {
+        const response = await axios.get('/api/payment');
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
+export async function subscribe(data) {
+    try {
+        const response = await axios.post('/api/payment',data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
+export async function createPayment(data) {
+    try {
+        const response = await axios.post(`/api/paysum`, data);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
+export async function getPayments(uid) {
+    try {
+        
+        const response = await axios.get(`/api/paysum?id=${uid}`);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}

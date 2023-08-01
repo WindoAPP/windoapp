@@ -9,12 +9,14 @@ import { useSession, signOut } from 'next-auth/react';
 import Loader from '../Loader/loader';
 import QRCode from 'qrcode.react';
 
-import { getCustomers, getUser, profileImageUpload, updateUser } from '../../services/service';
+import { getCustomers, getPayments, getUser, profileImageUpload, updateUser } from '../../services/service';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { HexColorPicker } from 'react-colorful';
 
 import { ScaleLoader } from 'react-spinners';
+import { env_data } from '../../config/config';
+import dayjs from 'dayjs';
 
 
 Chart.register(CategoryScale);
@@ -22,6 +24,7 @@ Chart.register(CategoryScale);
 const Dashboard = () => {
     const { data: session } = useSession();
     const [profileCreateStep, setProfileCreateStep] = useState(0);
+    const [pageToggle, setPageToggle] = useState(1);
     const [wheelItems, setWheelItems] = useState([]);
     const [item, setItem] = useState("");
     const [loading, setLoading] = useState(false);
@@ -35,6 +38,7 @@ const Dashboard = () => {
     const [imageUploading, setImageUploading] = useState(false);
     const [sideBarOpened, setSideBarOpened] = useState(false);
     const [user, setUser] = useState({});
+    const [paymentsArr, setPaymentsArr] = useState([]);
     const router = useRouter();
 
     function countOccurrences(arr) {
@@ -94,11 +98,10 @@ const Dashboard = () => {
                 setWheelItems(session.user.wheelItems);
                 if (session.user.wheelItems.length > 0) {
                     setWheelItemsSaved(true);
-                } else {
-                    setShowAddProfile(false);
-                }
 
+                }
                 featchCustomers(session.user._id);
+                fetchPayments(session.user._id);
 
             }
             fetchUser(session.user.uid);
@@ -241,14 +244,39 @@ const Dashboard = () => {
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
-                setSelectedImage(res.user.profileImage);
+                if (res.user.profileImage) {
+                    setSelectedImage(res.user.profileImage);
+                }
                 setWheelItems(res.user.wheelItems);
+                if (res.user.wheelItems) {
+                    if (res.user.wheelItems.length > 0) {
+                        setPageToggle(1);
+
+                    } else {
+                        setPageToggle(0);
+                    }
+                }
 
             }
         }).catch(err => {
             console.log(err);
 
         });
+    }
+
+    const fetchPayments = (id) => {
+        getPayments(id).then(res => {
+            if (res) {
+                setPaymentsArr(res.payments);
+            }
+        }).catch(err => {
+            console.log(err);
+
+        });
+    }
+    const dateFormater = (date) => {
+        const f_date = dayjs(date);
+        return f_date.format('YYYY-MM-DD HH:mm:ss');
     }
 
     return (
@@ -272,34 +300,34 @@ const Dashboard = () => {
 
                     <ul className="nav flex-column bg-white mb-0">
                         <li className="nav-item">
-                            <span className="nav-link text-dark bg-light cursor-pointer" onClick={() => user.wheelItems.length == 0 ? setShowAddProfile(true) : setShowAddProfile(false)}>
+                            <span className="nav-link text-dark bg-light cursor-pointer" onClick={() => user.wheelItems.length == 0 ? setPageToggle(0) : setPageToggle(1)}>
                                 <i className="fa fa-th-large m-2 text-warning fa-fw"></i>
                                 home
                             </span>
                         </li>
                         <li className="nav-item">
-                            <a href="#" className="nav-link text-dark">
-                                <i className="fa fa-address-card m-2 text-warning fa-fw"></i>
-                                about
-                            </a>
+                            <span onClick={() => setPageToggle(2)} className="nav-link text-dark cursor-pointer">
+                                <i className="fa fa-credit-card m-2 text-warning fa-fw"></i>
+                                Payments
+                            </span>
                         </li>
                     </ul>
 
                     <ul className="nav flex-column bg-white mb-0">
                         <li className="nav-item">
-                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { setShowAddProfile(true); setProfileCreateStep(1); }}>
+                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { if (user.wheelItems.length == 0) { setPageToggle(0); setProfileCreateStep(0); } else { setPageToggle(0); setProfileCreateStep(1); } }}>
                                 <i className="fa fa-file-image-o m-2 text-warning fa-fw"></i>
                                 Change Profile Picture
                             </span>
                         </li>
                         <li className="nav-item">
-                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { setShowAddProfile(true); setProfileCreateStep(2); }}>
+                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { if (user.wheelItems.length == 0) { setPageToggle(0); setProfileCreateStep(0); } else { setPageToggle(0); setProfileCreateStep(2); } }}>
                                 <i className="fa fa-pie-chart m-2 text-warning fa-fw"></i>
                                 Add Wheel items
                             </span>
                         </li>
                         <li className="nav-item ">
-                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { setShowAddProfile(true); setProfileCreateStep(2); }}>
+                            <span href="#" className="nav-link text-dark cursor-pointer" onClick={() => { if (user.wheelItems.length == 0) { setPageToggle(0); setProfileCreateStep(0); } else { setPageToggle(0); setProfileCreateStep(2); } }}>
                                 <i className="fa fa-download m-2 text-warning fa-fw"></i>
                                 Download QR
                             </span>
@@ -312,80 +340,83 @@ const Dashboard = () => {
                         </li>
                     </ul>
                 </div>
-                {showAddProfile &&
-                    <div className={styles.profileCreateWrapper}>
-                        {profileCreateStep === 0 &&
-                            <>
-                                <p>click here for create profile for your shop and craete a QR code </p>
-                                <button className='btn btn-warning mt-4' onClick={() => setProfileCreateStep(1)}> Create</button>
-                            </>
+                {pageToggle == 0 &&
+                    <div className={`main-content d-flex flex-wrap p-4 ${styles.mainContent}`}>
+                        <div className={styles.profileCreateWrapper}>
+                            {profileCreateStep === 0 &&
+                                <>
+                                    <p>click here for create profile for your shop and craete a QR code </p>
+                                    <button className='btn btn-warning mt-4' onClick={() => setProfileCreateStep(1)}> Create</button>
+                                </>
 
-                        }
-                        {profileCreateStep === 1 &&
+                            }
+                            {profileCreateStep === 1 &&
 
-                            <div className='d-flex flex-column align-items-center'>
-                                <h3><center>Upload Shop Profile Image</center></h3>
-                                <div className='mt-3'>
-                                    <img src={selectedImage} className={`rounded-circle shadow-4-stron ${styles.imagePreview}`} />
-                                    {imageUploading &&
-                                        <div className={`d-flex flex-column align-items-center ${styles.imageUploadLoader}`}>
-                                            <ScaleLoader color="#36d7b7" />
-                                            <h1 className='text-white'><storng>{uploadProgress} %</storng></h1>
-                                        </div>
-                                    }
+                                <div className='d-flex flex-column align-items-center'>
+                                    <h3><center>Upload Shop Profile Image</center></h3>
+                                    <div className='mt-3'>
+                                        <img src={selectedImage} className={`rounded-circle shadow-4-stron ${styles.imagePreview}`} />
+                                        {imageUploading &&
+                                            <div className={`d-flex flex-column align-items-center ${styles.imageUploadLoader}`}>
+                                                <ScaleLoader color="#36d7b7" />
+                                                <h1 className='text-white'><storng>{uploadProgress} %</storng></h1>
+                                            </div>
+                                        }
 
+                                    </div>
+
+                                    <div className='d-flex flex-column rounded bg-light p-2 mt-3'>
+                                        <input type="file" onChange={handleFileChange} className="form-control border-0 "></input>
+
+                                    </div>
+                                    <button className="btn btn-success w-100 mt-3" onClick={uploadFile}>Upload</button>
                                 </div>
 
-                                <div className='d-flex flex-column rounded bg-light p-2 mt-3'>
-                                    <input type="file" onChange={handleFileChange} className="form-control border-0 "></input>
+
+                            }
+                            {
+                                profileCreateStep === 2 &&
+                                <div className='d-flex flex-column align-items-center'>
+                                    <h2>Add Spin wheel items</h2>
+                                    <div className='d-flex flex-row align-items-center'>
+                                        <p className='my-2'>Winning probability :</p>
+                                        <input className="form-control w-25 mx-2" maxLength={2} type='number'></input><p>%</p>
+                                    </div>
+                                    <p className='my-2'>Pick color :</p>
+                                    <HexColorPicker color={color} onChange={setColor} />
+                                    <div className={`d-flex flex-row mt-4 ${styles.addWheelItemsWrapper}`}>
+                                        <input className="form-control" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add wheel item' maxLength={15}></input>
+                                        <button className='btn btn-primary mx-2' onClick={addItem}>Add <i className=" fa fa-plus"></i></button>
+                                    </div>
+                                    <div className='d-flex flex-wrap m-4'>
+                                        {wheelItems.map((item, index) => {
+                                            return (
+                                                <span key={index} style={{ borderColor: item.color }} className={`${styles.wheelItem} m-2`}>{item.item} <i className='fa fa-times-circle pointer' onClick={() => removeItem(index)}></i></span>
+                                            )
+
+                                        })}
+
+                                    </div>
+                                    <button className='btn btn-success mx-1' onClick={saveWheelItems}>Save wheel items  <i className="fa fa-save mx-2"></i></button>
+                                    <button className='btn btn-warning mx-1 my-2' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>
+                                    <QRCode
+                                        size={290}
+                                        level={"H"}
+                                        includeMargin={true}
+                                        name='shop_QR_code'
+                                        className={styles.qrCode}
+                                        id='qrcode'
+                                        value={`${env_data.base_url}scan?id=${user.uid}`}
+                                    />
 
                                 </div>
-                                <button className="btn btn-success w-100 mt-3" onClick={uploadFile}>Upload</button>
-                            </div>
+                            }
 
 
-                        }
-                        {
-                            profileCreateStep === 2 && <div>
-                                <h2>Add Spin wheel items</h2>
-                                <div className='d-flex flex-row align-items-center'>
-                                    <p className='my-2'>Winning probability :</p>
-                                    <input className="form-control w-25 mx-2" maxLength={2} type='number'></input><p>%</p>
-                                </div>
-                                <p className='my-2'>Pick color :</p>
-                                <HexColorPicker color={color} onChange={setColor} />
-                                <div className={`d-flex flex-row mt-4 ${styles.addWheelItemsWrapper}`}>
-                                    <input className="form-control" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add wheel item' maxLength={15}></input>
-                                    <button className='btn btn-primary mx-2' onClick={addItem}>Add <i className=" fa fa-plus"></i></button>
-                                </div>
-                                <div className='d-flex flex-wrap m-4'>
-                                    {wheelItems.map((item, index) => {
-                                        return (
-                                            <span key={index} style={{ borderColor: item.color }} className={`${styles.wheelItem} m-2`}>{item.item} <i className='fa fa-times-circle pointer' onClick={() => removeItem(index)}></i></span>
-                                        )
-
-                                    })}
-
-                                </div>
-                                <button className='btn btn-success mx-1' onClick={saveWheelItems}>Save wheel items  <i className="fa fa-save mx-2"></i></button>
-                                <button className='btn btn-warning mx-1' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>
-                                <QRCode
-                                    size={290}
-                                    level={"H"}
-                                    includeMargin={true}
-                                    name='shop_QR_code'
-                                    className={styles.qrCode}
-                                    id='qrcode'
-                                    value={`https://wind-project.vercel.app/scan?id=${user.uid}`}
-                                />
-
-                            </div>
-                        }
-
-
+                        </div>
                     </div>
                 }
-                {!showAddProfile &&
+                {pageToggle == 1 &&
                     <div className={`p-4 d-flex shadow ${styles.mainTopContent}`}>
                         <h4>Lorem ipsum dolor sit amet</h4>
                         <h5>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
@@ -403,7 +434,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 }
-                {!showAddProfile &&
+                {pageToggle == 1 &&
                     <div className={`main-content d-flex flex-wrap p-4 ${styles.mainContent}`}>
                         <div className={`card rounded  m-3 d-flex justify-content-center ${styles.dataCard}`} style={{ flexBasis: '30%' }}>
                             <div className='d-flex flex-row'>
@@ -462,7 +493,53 @@ const Dashboard = () => {
 
                     </div>
                 }
-                {!showAddProfile &&
+                {pageToggle == 2 &&
+                    <div className={`main-content d-flex flex-wrap p-4 ${styles.mainContent}`}>
+                        <h1 className='my-4'>Payments</h1>
+                        <div className="container">
+                            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+                                {paymentsArr.map((obj, index) => {
+                                    return (
+                                        <div className="col" key={index}>
+                                            {obj.success ?
+                                                <div className="card radius-10 border-start border-0 border-3 border-success">
+                                                    <div className="card-body">
+                                                        <div className="d-flex align-items-center">
+                                                            <div>
+                                                                <p className="mb-0 text-secondary">Payment Success</p>
+                                                                <h4 className="my-1 text-success">{obj.amount_total}<h4>{obj.currency}</h4></h4>
+                                                                <p className="mb-0 font-13">Payment Created : <p>{dateFormater(obj.cretedAt)}</p></p>
+                                                            </div>
+                                                            <div className="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i className="fa fa-check-square-o"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> :
+                                                <div className="card radius-10 border-start border-0 border-3 border-danger">
+                                                    <div className="card-body">
+                                                        <div className="d-flex align-items-center">
+                                                            <div>
+                                                                <p className="mb-0 text-secondary">Payment Failed</p>
+                                                                <h4 className="my-1 text-danger">{obj.amount_total}<h4>{obj.currency}</h4></h4>
+                                                                <p className="mb-0 font-13">Payment Created : <p>{dateFormater(obj.cretedAt)}</p></p>
+                                                            </div>
+                                                            <div className="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i className="fa fa-times"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    )
+                                })
+                                }
+                            </div>
+                        </div>
+
+
+                    </div>
+                }
+                {pageToggle == 1 &&
                     <div className={`d-flex ${styles.bottomWrapper} ${styles.flexResponsive}`} >
                         <div className={`d-flex ${styles.chartContent}`}>
                             <h3>Lorem Ipsum has been the industry</h3>
