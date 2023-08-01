@@ -16,30 +16,31 @@ const Home = () => {
             TALKING ABOUT YOU?</h1>
           <h5>Get between 100 and 400 Google
             reviews per month by giving gifts to your customers!</h5>
-          <button className={`btn btn-warning ${styles.reviewBtn}`} onClick={() => router.push("/login")}>
-            Want to Boost  Google Reviews
+          <button className={`btn btn-success shadow  ${styles.reviewBtn}`} onClick={() => router.push("/register")}>
+            Vous voulez booster
+            les avis Google
           </button>
         </div>
         <div className='d-flex flex-column' >
           <div className={`d-flex flex-row align-items-center ${styles.listTextWrapper}`}>
             <i className='fa fa-star'></i>
-            <p>Increase your Google reviews</p>
+            <p>Augmentez vos avis Google</p>
           </div>
           <div className={`d-flex flex-row align-items-center ${styles.listTextWrapper}`}>
             <i className='fa fa-heart'></i>
-            <p>Boost your social media followers</p>
+            <p>Boostez vos followers sur les réseaux sociaux</p>
           </div>
           <div className={`d-flex flex-row align-items-center ${styles.listTextWrapper}`}>
             <i className='fa fa-inbox'></i>
-            <p>Create a customer database</p>
+            <p>Créer une base de données clients</p>
           </div>
           <div className={`d-flex flex-row align-items-center ${styles.listTextWrapper}`}>
             <i className='fa fa-user'></i>
-            <p>Build customer loyalty</p>
+            <p>Fidéliser la clientèle</p>
           </div>
           <div className={`d-flex flex-row align-items-center ${styles.listTextWrapper}`}>
             <i className='fa fa-eur'></i>
-            <p>Increase your turnover</p>
+            <p>Augmentez votre chiffre d'affaires</p>
           </div>
 
         </div>
@@ -85,7 +86,7 @@ const Home = () => {
           <li>Personalized monthly follow-up every month</li>
           <li>Technical support</li>
         </ul>
-        <button className={`btn btn-warning btn-lg ${styles.reviewBtn}`} onClick={() => router.push("/login")}>
+        <button className={`btn btn-warning btn-lg ${styles.reviewBtn1}`} onClick={() => router.push("/login")}>
           I Want Windo
         </button>
       </div>
