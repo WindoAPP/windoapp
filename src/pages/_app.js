@@ -1,4 +1,5 @@
 import '@/styles/globals.scss'
+//import '@/styles/fonts.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../../components/header/navbar'
@@ -13,10 +14,12 @@ export default function App({ Component, pageProps }) {
   // Check if the current URL ends with "/dashboard"
   const isDashboardPage = router.asPath.endsWith('/dashboard');
   const isScanPage = router.asPath.includes('/scan');
+  const isLoginPage = router.asPath.includes('/login');
+  const isRegiterPage = router.asPath.includes('/register');
 
   return (
     <SessionProvider session={pageProps.session}>
-    {!isDashboardPage && !isScanPage && <Navbar/>}
+    {!isDashboardPage && !isScanPage && !isLoginPage  && !isRegiterPage && <Navbar/>}
     <Component {...pageProps} />
     <ToastContainer
         position="top-center"
@@ -30,7 +33,7 @@ export default function App({ Component, pageProps }) {
         pauseOnHover
         theme="colored"
       />
-    {!isDashboardPage && !isScanPage && <Footer/>}
+    {!isDashboardPage && !isScanPage && !isLoginPage && !isRegiterPage && <Footer/>}
     </SessionProvider>
  )
 }
