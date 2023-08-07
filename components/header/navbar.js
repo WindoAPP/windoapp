@@ -26,8 +26,8 @@ const Navbar = () => {
         <div className={styles.sidebarIcon} onClick={() => onClickOpenSideBar()}>
           <i className="fa fa-bars"></i>
         </div>
-        <div className={`collapse navbar-collapse ${styles.navWeb}`} id="navbarNav">
-          <ul className="navbar-nav ml-auto">
+        <div className={`collapse navbar-collapse justify-content-between ${styles.navWeb}`} id="navbarNav">
+          <ul className="navbar-nav align-items-center ml-auto">
             <li className="nav-item ml-3">
               <Link href="/" className={styles.navTextItem}>
                 How it Works
@@ -43,10 +43,8 @@ const Navbar = () => {
                 Contact
               </Link>
             </li>
-            <li className="nav-item mx-4">
-              <button onClick={() => router.push("/login")} className='btn btn-warning'>Book Demo</button>
-            </li>
           </ul>
+          <button onClick={() => router.push("/login")} className={styles.bookDemoBtn}>Un projet ?</button>
         </div>
         {sideBarShow &&
           <div className={`shadow ${styles.navMobile}`} id="navbarNav">
@@ -68,7 +66,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item my-3 mx-3">
-                <button onClick={() => router.push("/login")} className='btn btn-warning'>Book Demo</button>
+                <button onClick={() => router.push("/login")} className={styles.bookDemoBtn}>Un projet ?</button>
               </li>
             </ul>
           </div>}

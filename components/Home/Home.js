@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import styles from './Home.module.scss';
-import WheelComponent from '../wheel/spinWheel';
 
 const Home = () => {
 
@@ -8,8 +7,44 @@ const Home = () => {
 
   return (
     <div className='d-flex flex-column'>
-      <div className={`d-flex justify-content-between ${styles.felxMobile}`}>
-        <div className={`d-flex flex-column ${styles.firstSectionLeftRow}`} >
+      <div className={`d-flex mb-5 ${styles.felxMobile}`}>
+        <div className='d-flex flex-column '>
+          <button className={`mb-2 ${styles.purplrBtn}`}>Et si on jouer un peu 🤭</button>
+          <h1 className='mb5'>Boostez Votre Visibilité avec des avis sur Google</h1>
+          <p className='text-secondary'>Un QR code magique ouvre la porte à une expérience unique : faites jouer vos clients et obtenez des avis positifs tous les mois.</p>
+          <div className={`d-flex flex-column justify-content-center mb-5`}>
+            <div className='d-flex flex-row align-items-center my-2'>
+              <div className={`d-flex align-items-center justify-content-center ${styles.topMenu}`}>
+                 <i className="fa fa-check"></i>
+              </div>
+              <h5 className='mb-0 mx-2 font-weight-bold'>Augmentez vos avis Google</h5>
+            </div>
+            <div className='d-flex flex-row align-items-center my-2'>
+              <div className={`d-flex align-items-center justify-content-center ${styles.topMenu}`}>
+                 <i className="fa fa-check"></i>
+              </div>
+              <h5 className='mb-0 mx-2 font-weight-bold'>Créez une base de donnée client</h5>
+            </div>
+            <div className='d-flex flex-row align-items-center my-2'>
+              <div className={`d-flex align-items-center justify-content-center ${styles.topMenu}`}>
+                 <i className="fa fa-check"></i>
+              </div>
+              <h5 className='mb-0 mx-2 font-weight-bold'>Fidélisez vos clients</h5>
+            </div>
+            <div className='d-flex flex-row align-items-center my-2'>
+              <div className={`d-flex align-items-center justify-content-center ${styles.topMenu}`}>
+                 <i className="fa fa-check"></i>
+              </div>
+              <h5 className='mb-0 mx-2 font-weight-bold'>Augmentez votre chiffre d'affaires</h5>
+            </div>
+          </div>
+          <button className={`mb-4 ${styles.topBtn}`}>jours d'essai gratuit</button>
+        </div>
+        <div className='d-flex flex-column align-items-end  overflow-hidden mx-4'>
+          <img src='homeimage1.png' className={styles.topImage1}></img>
+          <img src='homeimage2.png' className={`shadow  ${styles.topImage2}`}></img>
+        </div>
+        {/* <div className={`d-flex flex-column ${styles.firstSectionLeftRow}`} >
           <h1 className={styles.firstSectionLargeText}>What IF ALL
             YOUR
             CUSTOMERS WERE
@@ -43,7 +78,7 @@ const Home = () => {
             <p>Augmentez votre chiffre d'affaires</p>
           </div>
 
-        </div>
+        </div> */}
       </div>
       <div className={`d-flex flex-column align-items-center justify-content-center ${styles.secondSectionWrapper}`}>
         <h1>How it works ?</h1>

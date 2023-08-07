@@ -232,3 +232,18 @@ a {
 45deg
 , #ffdf40, #ff8359)!important;
 }
+
+.regi-input{
+  height: 3rem;
+  padding-left: 2rem;
+  margin-bottom: 5px;
+}
+
+.dashboard-component{
+  margin-left: 16.5rem;
+
+  @media (max-width: $mobile-breakpoint) {
+    margin-left: 0 !important;
+  }
+}
+

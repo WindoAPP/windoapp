@@ -1,0 +1,73 @@
+$mobile-breakpoint: 940px;
+
+.sideBar {
+    z-index: 10;
+    background-color: #fff;
+    min-width: 16rem;
+    width: 16rem;
+
+    h4{
+        color: #74788d;
+        font-weight: 900;
+    }
+
+    .sideBarImage {
+       width: auto;
+       height: 2.5rem;
+    }
+    p{
+        color: #74788d;
+    }
+
+    .navLink {
+        // &:hover {
+        //     color: #fff;
+        // }
+    }
+
+    ul {
+        li {
+            span {
+                color: #74788d;
+                font-family: 'Inter', sans-serif;
+                font-size: 1rem;
+                font-weight: 400;
+               
+            }
+        }
+    }
+
+
+    @media (max-width: $mobile-breakpoint) {
+        display: none;
+    }
+}
+
+.sideBarDispaly{
+    display: block !important;
+}
+
+.sidebarIcon {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 5px;
+    z-index: 15;
+
+    &:hover {
+        background-color: rgb(68, 67, 67);
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+        visibility: visible;
+    }
+}

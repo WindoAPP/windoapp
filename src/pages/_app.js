@@ -1,5 +1,5 @@
 import '@/styles/globals.scss'
-//import '@/styles/fonts.scss'
+import '@/styles/fonts.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../../components/header/navbar'
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <SessionProvider session={pageProps.session}>
-    {!isDashboardPage && !isScanPage && !isLoginPage  && !isRegiterPage && <Navbar/>}
+    {!isDashboardPage && !isScanPage && <Navbar/>}
     <Component {...pageProps} />
     <ToastContainer
         position="top-center"
@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }) {
         pauseOnHover
         theme="colored"
       />
-    {!isDashboardPage && !isScanPage && !isLoginPage && !isRegiterPage && <Footer/>}
+    {!isDashboardPage && !isScanPage && <Footer/>}
     </SessionProvider>
  )
 }

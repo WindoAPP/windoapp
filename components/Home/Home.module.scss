@@ -18,6 +18,55 @@ $mobile-breakpoint: 940px;
     color: #000;
 }
 
+.purplrBtn{
+    color: #b479d9;
+    background-color: rgba(180, 121, 217, 0.15);
+    display: inline-block;
+    position: relative;
+    font-size: 18px;
+    padding: 8px 18px;
+    border-radius: 40px;
+    border: none;
+    width: 40%;
+}
+
+.topMenu{
+    font-family: 'phosphor';
+    font-weight: 700;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #e2f5f2;
+    color: #11b196;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    min-width: 32px;
+    text-align: center;
+}
+
+.topBtn{
+    border-radius: 12px;
+    background-color: #2ebb77;
+    height: 56px;
+    line-height: 56px;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    width: 30%;
+}
+
+.topImage1{
+    border-radius: 20px;
+    width: 100%;
+   
+}
+.topImage2{
+    border-radius: 20px;
+    width: 40%;
+    margin-top: -8rem;
+}
+
 .reviewBtn1{
     width: 12rem;
     font-weight: 600;
