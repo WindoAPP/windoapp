@@ -6,8 +6,7 @@ $mobile-breakpoint: 940px;
     
     height: 100vh;
 	@media (max-width: $mobile-breakpoint) {
-		justify-content: center;
-		padding-bottom: 3rem;
+		justify-content: center;;
 	}
 }
 .RightImageWrapper{
@@ -24,13 +23,16 @@ $mobile-breakpoint: 940px;
 }
 
 .loginBox{
+	//box-shadow: 0px 2px 5px lightgrey;
+	height: 400px;
 	width: 400px;
+	//border: 1px solid lightgrey;
+	//border-radius: 10px;
 	margin-top: 50px;
 	margin: 5rem;
 
 	@media (max-width: $mobile-breakpoint) {
 		margin: 0;
-		margin-top: 50px;
 		margin-top: 50px;
 	}
 
@@ -41,7 +43,10 @@ $mobile-breakpoint: 940px;
 		color: #5664D2;
 	}
 	
-		
+		input{
+			height: 3rem;
+			padding-left: 2rem;
+		}
 	
 	
 }

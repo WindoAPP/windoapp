@@ -22,22 +22,22 @@ const SignUp = () => {
 
                 showNotifications(false, "Payment Successfull !");
 
-                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency ,success:true }
+                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency, success: true }
 
                 createPayment(paymentData).then(() => {
                     router.push("login");
                 }).catch(err => {
                     console.log(err);
                 });
-            }else if(query.payment == "failed"){
-                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency,success:false }
+            } else if (query.payment == "failed") {
+                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency, success: false }
 
                 createPayment(paymentData).then(() => {
                     router.push("login");
                 }).catch(err => {
                     console.log(err);
                 });
-            } 
+            }
         }
 
         pricingTableGet().then(res => {
@@ -66,7 +66,7 @@ const SignUp = () => {
             setLoading(true);
             createUser(formData).then(res => {
                 if (res) {
-                    subscribe({ priceId: priceId, userId:res.user._id,total:"59.99",currency:"EUR" }).then(res => {
+                    subscribe({ priceId: priceId, userId: res.user._id, total: "59.99", currency: "EUR" }).then(res => {
 
                         if (res) {
                             setLoading(false);
@@ -143,30 +143,31 @@ const SignUp = () => {
         <div className={styles.loginWrapper}>
             <form>
                 <div className={`d-flex flex-column p-4  ${styles.loginBox}`}>
-                    <h2 className={styles.headingLogin}>Register</h2>
+                    <img className='w-50 align-self-center mb-3' src='logo.png'></img>
+                    <span className='align-self-center mb-3'>Sign up to continue to Windo</span>
                     <div className="d-flex flex-column">
                         <label><strong>User Name</strong></label>
-                        <input type="text" name="userName" placeholder="User Name" className="form-control" onChange={handleChange} value={formData.userName}></input>
+                        <input type="text" name="userName" placeholder="User Name" className="form-control regi-input" onChange={handleChange} value={formData.userName}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <label><strong>Email</strong></label>
-                        <input required type="email" name="email" placeholder="Email" className="form-control" onChange={handleChange} value={formData.email}></input>
+                        <input required type="email" name="email" placeholder="Email" className="form-control regi-input" onChange={handleChange} value={formData.email}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <label><strong>Password</strong></label>
-                        <input required type="password" name="password" placeholder="Password" className="form-control" onChange={handleChange} value={formData.password}></input>
+                        <input required type="password" name="password" placeholder="Password" className="form-control regi-input" onChange={handleChange} value={formData.password}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <label><strong>Confirm Password</strong></label>
-                        <input type="password" name="c_password" placeholder="Confirm Password" className="form-control" onChange={handleChange} value={formData.c_password}></input>
+                        <input type="password" name="c_password" placeholder="Confirm Password" className="form-control regi-input" onChange={handleChange} value={formData.c_password}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <label><strong>Shop Name</strong></label>
-                        <input type="text" name="shopName" placeholder="Shop Name" className="form-control" onChange={handleChange} value={formData.shopName}></input>
+                        <input type="text" name="shopName" placeholder="Shop Name" className="form-control regi-input" onChange={handleChange} value={formData.shopName}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <label><strong>Mobile Number</strong></label>
-                        <input type="text" name="phoneNumber" placeholder="Mobile Number" className="form-control" onChange={handleChange} value={formData.phoneNumber}></input>
+                        <input type="text" name="phoneNumber" placeholder="Mobile Number" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <div className='d-flex flex-row'>
@@ -174,16 +175,19 @@ const SignUp = () => {
                             <label className='mx-2'><a target="_blank" href='https://ultimateelementor.com/docs/find-google-place-id/'>click here</a> to get your shop ID </label>
                         </div>
 
-                        <input type="text" name="shopId" placeholder="shop ID" className="form-control" onChange={handleChange} value={formData.shopId}></input>
+                        <input type="text" name="shopId" placeholder="shop ID" className="form-control regi-input " onChange={handleChange} value={formData.shopId}></input>
                     </div>
                     <div className="form-check my-3">
                         <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
-                        <label className="form-check-label" >I agree to the terms and conditions</label>
+                        <label className="form-check-label" >I agree to the terms and conditions <a href="/login">Click here</a></label>
                     </div>
                     <button className={`btn btn-success mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>Register & Pay</button>
                     <span className='align-self-center'>Already have an account? <a href="/login">Login</a></span>
                 </div>
             </form>
+            <div className={styles.RightImageWrapper}>
+                <img src='loginImage.jpg' className={styles.RightImage}></img>
+            </div>
             {loading && <Loader />}
         </div>
     );

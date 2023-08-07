@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import styles from './Login.module.css'
+import styles from './Login.module.scss'
 import { loginUser } from '../../services/service';
 import Loader from '../Loader/loader';
-import { useSession } from 'next-auth/react';
+import showNotifications from '../showNotifications/showNotifications';
 import { useRouter } from 'next/router';
 
 const Login = () => {
@@ -61,20 +61,32 @@ const Login = () => {
         <div className={styles.loginWrapper}>
             <form>
                 <div className={`d-flex flex-column p-4  ${styles.loginBox}`}>
-                    <h2 className={styles.headingLogin}>Login</h2>
-                    <div className="d-flex flex-column">
+                    <img className='w-50 align-self-center mb-5' src='logo.png'></img>
+                    <h2 className={styles.headingLogin}>Welcome Back !</h2>
+                    <span className='align-self-center mb-5'>Sign in to continue to Windo</span>
+                    <div className="d-flex flex-column mb-3">
                         <label><strong>Email</strong></label>
-                        <input type="email" name="email" placeholder="Email" className="form-control" value={formData.email} onChange={handleChange}></input>
+                        <div>
+                            <i className={`fa fa-envelope-o ${styles.inputIcon}`} aria-hidden="true"></i>
+                            <input type="email" name="email" placeholder="Email" className="form-control" value={formData.email} onChange={handleChange}></input>
+                        </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div className="d-flex flex-column mb-3">
                         <label><strong>Password</strong></label>
-                        <input type="password" name="password" placeholder="Password" className="form-control" value={formData.password} onChange={handleChange}></input>
+                        <div>
+                            <i className={`fa fa-key ${styles.inputIcon}`} aria-hidden="true"></i>
+                            <input type="password" name="password" placeholder="Password" className="form-control" value={formData.password} onChange={handleChange}></input>
+                        </div>
                     </div>
-                    <small><a href="#">Forget Password</a></small>
-                    <button className={`btn btn-success ${styles.loginBTN}`} onClick={fromSubmit}>Login</button>
-                    <span className='align-self-center'>Don't have an account? <a href="/register">Register</a></span>
+                    <a className='mb-3'  href="#">Forget Password</a>
+                    <button className={`btn btn-primary w-50 mb-3 ${styles.loginBTN}`} onClick={fromSubmit}>Sign in</button>
+                    <span className='align-self-center'>Don't have an account? <a href="/register">Sign up</a></span>
+                     <a className='align-self-center' href="/">Back to home</a>
                 </div>
             </form>
+            <div className={styles.RightImageWrapper}>
+                <img src='loginImage.jpg' className={styles.RightImage}></img>
+            </div>
             {loading && <Loader />}
         </div>
     );
