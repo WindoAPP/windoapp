@@ -1,11 +1,13 @@
+import Layout from "../../../../components/dashboardLayout/dashboardLayout";
+import ProfilePage from "../../../../components/dashboardPages/profilePage";
 
 
-const ProfilePage = () => {
+const Profile = () => {
     return (
-        <div>
-            MAin
-        </div>
+        <Layout>
+            <ProfilePage/>
+        </Layout>
     );
   };
   
-  export default ProfilePage;
+  export default Profile;

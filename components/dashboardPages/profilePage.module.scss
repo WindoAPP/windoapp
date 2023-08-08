@@ -1,0 +1,103 @@
+$mobile-breakpoint: 940px;
+
+.mainContent{
+    height: 100vh;
+}
+
+.imagePreview {
+    width: 200px;
+    height: 200px;
+    border: 10px solid #C2DBFE;
+}
+
+.imageUploadLoader {
+    position: absolute;
+    top: 44%;
+    left: 61.5%;
+    transform: translate(-50%, -50%);
+}
+
+.addWheelItemsWrapper {
+    height: 40px;
+
+    button {
+        width: 100px;
+    }
+}
+
+.wheelItem {
+    background-color: beige;
+    border: 3px solid;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 3rem;
+    
+    .dot{
+        width: 10px;
+        margin-right: 5px;
+        height: 10px;
+        border-radius: 50%;
+    }
+}
+.imageUploadWrapper{
+    width: 40%;
+    @media (max-width: $mobile-breakpoint) {
+        width: 95%;
+    }
+
+}
+.qrCodeWrapper{
+    padding: 2rem;
+    border-radius: 20px; 
+    background-color: #11b196;  
+    .qrCode {
+        border-radius: 20px;    
+    }
+}
+
+.flexResponsive{
+    flex-direction: row;
+    @media (max-width: $mobile-breakpoint) {
+        flex-direction: column;
+    }
+}
+.wheelwrp{
+    position: relative;
+    @media (max-width: $mobile-breakpoint) {
+        margin-top: 20rem
+    }
+   
+}
+.wheelWrapper{
+    position: relative;
+    width: 550px;
+    height: 400px;
+    margin-left: 120px;
+   
+    @media (max-width: $mobile-breakpoint) {
+    position: absolute;
+     left: -128px;
+     bottom: -250px;
+     transform: translate(-50%,-50%);
+   }
+}
+.colorPlateItem{
+    width: 15px;
+    height: 15px;
+    background-color: #11b196;
+}
+
+.colorPlateItemSeleted{
+    border: 2px solid gray;
+    width: 20px;
+    height: 20px;
+}
+
+.colorPicker{
+    position: absolute;
+    margin-left: 101px;
+    margin-top: -239px;
+}

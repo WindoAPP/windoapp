@@ -40,22 +40,26 @@ const SideBar = () => {
             </span>
           </li>
 
-          <p className="font-weight-bold  px-3 small pb-1 mb-0">ACTIONS</p>
+          <p className="font-weight-bold mt-2  px-3 small pb-1 mb-0">ACTIONS</p>
 
           <li className="nav-item">
+            <a href="/dashboard/profile">
             <span className={`nav-link  cursor-pointer ${styles.navLink}`}>
               <i className="fa fa-pie-chart m-2  fa-fw"></i>
               Wheel
             </span>
+            </a>
           </li>
         </ul>
 
         <ul className="nav flex-column  mb-0">
           <li className="nav-item">
+          <a href="/dashboard/qrcode">
             <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >
               <i className="fa fa-qrcode m-2  fa-fw"></i>
               My QR code
             </span>
+            </a>
           </li>
           
           <li className="nav-item ">

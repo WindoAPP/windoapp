@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   // Check if the current URL ends with "/dashboard"
-  const isDashboardPage = router.asPath.endsWith('/dashboard');
+  const isDashboardPage = router.asPath.includes('/dashboard');
   const isScanPage = router.asPath.includes('/scan');
   const isLoginPage = router.asPath.includes('/login');
   const isRegiterPage = router.asPath.includes('/register');
