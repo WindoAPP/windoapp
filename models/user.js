@@ -56,6 +56,10 @@ const UserSchema = new Schema({
             required: true,
         },
     }],
+    shopSlogan:{
+        type: String,
+        required: false,
+    },
     cretaedAt: {
         type: Date,
         required: false
