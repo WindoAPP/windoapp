@@ -240,7 +240,7 @@ a {
 }
 
 .dashboard-component{
-  margin-left: 16.5rem;
+  margin-left: 16.1rem;
 
   @media (max-width: $mobile-breakpoint) {
     margin-left: 0 !important;
@@ -248,5 +248,9 @@ a {
 }
 a{
   text-decoration: none;
+}
+
+.card-width-dash{
+  width: 20rem;
 }
 

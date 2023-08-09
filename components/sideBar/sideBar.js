@@ -38,10 +38,12 @@ const SideBar = () => {
 
         <ul className="nav flex-column  mb-0">
           <li className="nav-item">
+            <a href="/dashboard">
             <span className={`nav-link  cursor-pointer ${styles.navLink}`}>
               <i className="fa fa-th-large m-2  fa-fw"></i>
               Dashboard
             </span>
+            </a>
           </li>
           <li className="nav-item">
             <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >

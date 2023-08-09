@@ -1,10 +1,10 @@
-import Dashboard from "../../../components/dashboard/Dashboard";
 import Layout from "../../../components/dashboardLayout/dashboardLayout";
+import DashboardHomePage from "../../../components/dashboardPages/dashboardHomePage";
 
 const DashboardPage = () => {
     return (
         <Layout>
-            <h1>main page</h1>
+            <DashboardHomePage/>
         </Layout>
     );
   };
