@@ -42,7 +42,7 @@ const ProfilePage = () => {
     const [colorPallate02Opend, setColorPallate02Opend] = useState(false);
     const [wheelItemsTouched, setWheelItemsTouched] = useState(false);
     const [slogan, setSlogan] = useState("Add your text");
-     
+
 
     useEffect(() => {
         setScreenHeight(window.innerHeight);
@@ -157,7 +157,7 @@ const ProfilePage = () => {
                 setSegmentColors(segmentsColorTemp);
                 setWheelUpdated(true);
                 setLoading(false);
-                if(res.user.shopSlogan){
+                if (res.user.shopSlogan) {
                     setSlogan(res.user.shopSlogan);
                 }
 
@@ -168,7 +168,7 @@ const ProfilePage = () => {
         });
     }
 
-    const onSloganChange=(e)=>{
+    const onSloganChange = (e) => {
         setSlogan(e.target.value);
         setWheelItemsTouched(true);
     }
@@ -225,6 +225,10 @@ const ProfilePage = () => {
                         <div className={`d-flex justify-content-between  ${styles.flexResponsive}`}>
 
                             <div className='d-flex flex-column'>
+                                <div className='d-flex flex-row align-items-center'>
+                                    <p className='my-2'>Slogan text :</p>
+                                    <textarea type='textarea' className="form-control  mx-2" value={slogan} onChange={onSloganChange}  ></textarea>
+                                </div>
                                 <div className='d-flex flex-column mb-4'>
                                     <p className='my-2'>Base color 01 :</p>
                                     <div className='d-flex flex-row align-items-center'>
@@ -267,15 +271,11 @@ const ProfilePage = () => {
                                     <div className='d-flex flex-row mb-4'>
                                         <input className="form-control" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add wheel item' maxLength={15}></input>
                                         <button className='btn btn-primary mx-2 w-50' onClick={addItem}>Add <i className=" fa fa-plus"></i></button>
-                                        
+
                                     </div>
                                     <div className='d-flex flex-row align-items-center'>
                                         <p className='my-2'>Winning probability :</p>
                                         <input className="form-control  mx-2" maxLength={2} type='number'></input><p>%</p>
-                                    </div>
-                                    <div className='d-flex flex-row align-items-center'>
-                                        <p className='my-2'>Slogan text :</p>
-                                        <input className="form-control  mx-2" value={slogan} onChange={onSloganChange}  ></input>
                                     </div>
                                     <table class="table">
                                         <thead class="thead-dark">

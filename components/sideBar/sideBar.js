@@ -1,12 +1,28 @@
 import React from "react";
 import styles from './sidebar.module.scss'
 import { useState } from "react";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 
 
 const SideBar = () => {
 
   const [sideBarOpened, setSideBarOpened] = useState(false);
+  const router = useRouter();
+
+
+  const logout = (e) => {
+    e.preventDefault();
+    signOut().then(res => {
+      console.log(res);
+        if (res) {
+            router.push("/login");
+            
+        }
+    });
+
+}
 
   return (
     <div>
@@ -34,10 +50,12 @@ const SideBar = () => {
             </span>
           </li>
           <li className="nav-item ">
-            <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >
+            <a href="/dashboard/payments">
+            <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
               <i className="fa fa-credit-card m-2  fa-fw"></i>
               Subscribes
             </span>
+            </a>
           </li>
 
           <p className="font-weight-bold mt-2  px-3 small pb-1 mb-0">ACTIONS</p>
@@ -76,7 +94,7 @@ const SideBar = () => {
           </li>
           
           <li className="nav-item">
-            <span className={`nav-link  cursor-pointer ${styles.navLink}`}>
+            <span className={`nav-link  cursor-pointer ${styles.navLink}`} onClick={logout}>
               <i className="fa fa-sign-out m-2  fa-fw"></i>
               Log Out
             </span>
