@@ -1,12 +1,13 @@
 import { connectToMongoDB } from "../../../../lib/mongodb"
 import User from "../../../../models/user"
+import Customer from "../../../../models/customer"
 
 
 const handler = async (req, res) => {
     connectToMongoDB().catch(err => res.json(err))
 
     if (req.method === "GET") {
-        User.find({uid:req.query.id}).then((result)=>{
+        User.find({uid:req.query.id}).populate({ path: 'custermers', model: Customer }).then((result)=>{
             if(result){
                 return res.status(201).json({
                     success: true,

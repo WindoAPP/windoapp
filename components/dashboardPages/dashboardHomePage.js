@@ -3,23 +3,11 @@ import styles from './dashboardHomePage.module.scss'
 import { useSession } from 'next-auth/react';
 import { getUser } from '../../services/service';
 import Loader from '../Loader/loader';
-// import ReactApexChart from 'react-apexcharts';
 
 import dynamic from 'next/dynamic';
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-
-
-var series = [{
-    name: '2020',
-    type: 'column',
-    data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
-}, {
-    name: '2019',
-    type: 'line',
-    data: [23, 32, 27, 38, 27, 32, 27, 38, 22, 31, 21, 16]
-}]
 var options = {
     chart: {
         toolbar: {
@@ -50,7 +38,7 @@ var options = {
 const DashboardHomePage = () => {
     const { data: session } = useSession();
     const [user, setUser] = useState({});
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         if (session) {
@@ -58,10 +46,48 @@ const DashboardHomePage = () => {
         }
     }, [session]);
 
+    function countOccurrences(arr) {
+        return arr.reduce((acc, curr) => {
+            acc[curr] = (acc[curr] || 0) + 1;
+            return acc;
+        }, {});
+    }
+
+    const mapChartData = () => {
+        if (user.custermers) {
+            const mappedArray = user.custermers.map(obj => {
+                let date = new Date(obj.cretedAt);
+                return date.getMonth() + 1;
+            });
+            const frequencyMap = countOccurrences(mappedArray);
+            var countArray = [];
+
+            for (let month = 1; month <= 12; month++) {
+                const count = frequencyMap[month] || 0;
+                countArray.push(count);
+            }
+            return countArray;
+        } else {
+            return [];
+        }
+    }
+
+    var series = [{
+        name: '2020',
+        type: 'column',
+        data: mapChartData()
+    }, {
+        name: '2019',
+        type: 'line',
+        data: [23, 32, 27, 38, 27, 32, 27, 38, 22, 31, 21, 16]
+    }]
+
+
     const fetchUser = (id) => {
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
+                console.log(res.user.custermers);
                 setIsLoading(false)
             }
         }).catch(err => {
@@ -108,8 +134,8 @@ const DashboardHomePage = () => {
                 <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
 
                     <div className='d-flex flex-wrap align-items-center justify-content-center'>
-                        <div class="card card-margin m-4 card-width-dash">
-                            <div class="card-body p-4">
+                        <div className="card card-margin m-4 card-width-dash">
+                            <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row'>
                                         <div className='d-flex flex-column'>
@@ -130,8 +156,8 @@ const DashboardHomePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-margin m-4 card-width-dash">
-                            <div class="card-body p-4">
+                        <div className="card card-margin m-4 card-width-dash">
+                            <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row'>
                                         <div className='d-flex flex-column'>
@@ -152,8 +178,8 @@ const DashboardHomePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-margin m-4 card-width-dash">
-                            <div class="card-body p-4">
+                        <div className="card card-margin m-4 card-width-dash">
+                            <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row'>
                                         <div className='d-flex flex-column'>
@@ -174,8 +200,8 @@ const DashboardHomePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-margin m-4 card-width-dash">
-                            <div class="card-body p-4">
+                        <div className="card card-margin m-4 card-width-dash">
+                            <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row'>
                                         <div className='d-flex flex-column'>
@@ -196,8 +222,8 @@ const DashboardHomePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-margin m-4 card-width-dash">
-                            <div class="card-body p-4">
+                        <div className="card card-margin m-4 card-width-dash">
+                            <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row'>
                                         <div className='d-flex flex-column'>
@@ -218,8 +244,8 @@ const DashboardHomePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-margin m-4 card-width-dash">
-                            <div class="card-body p-4">
+                        <div className="card card-margin m-4 card-width-dash">
+                            <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row'>
                                         <div className='d-flex flex-column'>
@@ -241,16 +267,16 @@ const DashboardHomePage = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="card card-margin m-4 card-width-dash w-100">
-                        <div class="card-body p-4">
-                            <div className="float-end d-none d-md-inline-block">
+                    <div className="card card-margin m-4 card-width-dash w-100">
+                        <div className="card-body p-4">
+                            {/* <div className="float-end d-none d-md-inline-block">
                                 <div className="btn-group">
                                     <button type="button" className='btn btn-secondary'>Today</button>
                                     <button type="button" className='btn btn-secondary'>Weekly</button>
                                     <button type="button" className='btn btn-secondary'>Monthly</button>
                                 </div>
-                            </div>
-                            <h4 className="card-title mb-4">Revenue Analytics</h4>
+                            </div> */}
+                            <h4 className="card-title mb-4">Usage Analytics</h4>
                             <div>
                                 <div id="line-column-chart" className="apex-charts" dir="ltr">
                                     <ReactApexChart options={options} series={series} type="line" height="280" />
@@ -258,7 +284,7 @@ const DashboardHomePage = () => {
                             </div>
                         </div>
 
-                        {/* <div class="card-body p-4">
+                        {/* <div className="card-body p-4">
                             <div className='d-flex flex-row'>
                                 <div className='d-flex flex-column'>
                                     <div className="d-inline-flex">
