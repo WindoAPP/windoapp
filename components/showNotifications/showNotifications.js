@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 
 export default function showNotification(isError,message){
-    console.log("dsdsds");
     if(isError){
         toast.error(`😣 ${message}!`, {
             position: 'top-center',

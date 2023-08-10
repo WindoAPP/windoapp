@@ -21,13 +21,17 @@ const Scan = () => {
     const [step, setStep] = useState(0);
     const [price, setPrice] = useState();
     const [screenHeight, setScreenHeight] = useState();
+    const [spinCount, setSpinCount] = useState(0);
 
     const { id } = router.query;
 
 
     useEffect(() => {
         setScreenHeight(window.innerHeight);
-        console.log(screenHeight);
+        const savedValue = localStorage.getItem('spin_count');
+        if(savedValue){
+            setSpinCount(savedValue);
+        }
         if (id) {
             getUser(id).then(res => {
                 if (res) {
@@ -108,8 +112,17 @@ const Scan = () => {
     };
 
     // Open a new window when the button is clicked
-    const openNewWindow = () => {
-        const url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
+    const openNewWindow = (e) => {
+        e.preventDefault();
+        var url;
+        if(spinCount==0){
+            url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
+        }else if(spinCount==1){
+            url=user.facebook
+        }else{
+            url=user.instagram
+        }
+         
         const width = "80%";
         const height = "auto";
         const windowFeatures = `width=${width},height=${height}`;
@@ -118,6 +131,10 @@ const Scan = () => {
 
         newWindow.addEventListener('beforeunload', handleWindowClose);
         setStep(1);
+        localStorage.setItem('spin_count', spinCount+1);
+
+        // Retrieve the value from local storage
+        
 
     };
 
@@ -241,7 +258,7 @@ const Scan = () => {
                         <div className={`d-flex ${styles.wheelWrapperc}`} >
                             <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
                                 <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
-                                <p className='align-self-center text-center '>Lorem Ipsum is simply dummy </p>
+                                <p className='align-self-center text-center '>{user.shopSlogan && user.shopSlogan } </p>
                                 <button onClick={handleCallChildFunction} type="button" class="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
                             </div>
 

@@ -42,6 +42,7 @@ const ProfilePage = () => {
     const [colorPallate02Opend, setColorPallate02Opend] = useState(false);
     const [wheelItemsTouched, setWheelItemsTouched] = useState(false);
     const [slogan, setSlogan] = useState("Add your text");
+    const [winningProbability, setWinningProbability] = useState(0);
 
 
     useEffect(() => {
@@ -128,6 +129,7 @@ const ProfilePage = () => {
         var userData = user;
         userData['wheelItems'] = wheelItems;
         userData['shopSlogan'] = slogan;
+        userData['winningProbability'] = winningProbability;
         setLoading(true);
         updateUser(userData).then(res => {
             if (res) {
@@ -157,6 +159,9 @@ const ProfilePage = () => {
                 setSegmentColors(segmentsColorTemp);
                 setWheelUpdated(true);
                 setLoading(false);
+                if(res.user.winningProbability){
+                    setWinningProbability(res.user.winningProbability)
+                }
                 if (res.user.shopSlogan) {
                     setSlogan(res.user.shopSlogan);
                 }
@@ -170,6 +175,11 @@ const ProfilePage = () => {
 
     const onSloganChange = (e) => {
         setSlogan(e.target.value);
+        setWheelItemsTouched(true);
+    }
+
+    const onWinningProbabilityChange = (e) => {
+        setWinningProbability(e.target.value)
         setWheelItemsTouched(true);
     }
 
@@ -275,7 +285,7 @@ const ProfilePage = () => {
                                     </div>
                                     <div className='d-flex flex-row align-items-center'>
                                         <p className='my-2'>Winning probability :</p>
-                                        <input className="form-control  mx-2" maxLength={2} type='number'></input><p>%</p>
+                                        <input className="form-control  mx-2" value={winningProbability} onChange={onWinningProbabilityChange}  type='number'></input><p>%</p>
                                     </div>
                                     <table className="table">
                                         <thead className="thead-dark">

@@ -247,10 +247,12 @@ a {
   }
 }
 a{
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .card-width-dash{
-  width: 20rem;
+  width: 21rem;
 }
-
+.base-text-color{
+  color: #41AE56;
+}

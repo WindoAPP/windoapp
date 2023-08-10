@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import styles from './winnersPage.module.scss'
 import { useSession } from 'next-auth/react';
-import { getUser } from '../../services/service';
+import { getUser, updateCustomer } from '../../services/service';
 import Loader from '../Loader/loader';
 
 const WinnersPage = () => {
     const { data: session } = useSession();
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [customers, setCustomers] = useState([])
 
     useEffect(() => {
         if (session) {
@@ -19,7 +20,9 @@ const WinnersPage = () => {
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
+                setCustomers(res.user.custermers);
                 setIsLoading(false);
+                
             }
         }).catch(err => {
             console.log(err);
@@ -58,6 +61,28 @@ const WinnersPage = () => {
     }
 
 
+    const onClickGiftGiven = (e, customer) => {
+        const updatedCustomers = customers.map((c) => {
+            if (c === customer) {
+                return { ...c, giftGiven: e.target.checked };
+            }
+            return c;
+        });
+        setCustomers(updatedCustomers);
+        
+        customer['giftsGiven']=e.target.checked;
+            updateCustomer(customer).then(res => {
+            if (res) {
+                fetchUser(session.user.uid);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+
+        
+    };
+
+
     return (
         <>
             {!isLoading ?
@@ -73,10 +98,11 @@ const WinnersPage = () => {
                                         <th scope="col">Spin Count</th>
                                         <th scope="col">Win Count</th>
                                         <th scope="col">Prizes</th>
+                                        <th scope="col">Prizes Given</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {user.custermers.map((obj, index) => {
+                                    {customers.map((obj, index) => {
                                         return (
                                             <tr key={index}>
                                                 <th scope="row">{index + 1}</th>
@@ -85,6 +111,7 @@ const WinnersPage = () => {
                                                 <td>{obj.spins ? obj.spins.length : "-"}</td>
                                                 <td>{obj.spins ? getWinCount(obj.spins) : "-"}</td>
                                                 <td>{obj.spins ? getPrizes(obj.spins) : "-"}</td>
+                                                <td><input checked={obj.giftsGiven || false}   onChange={(e) => onClickGiftGiven(e, obj)} type="checkbox" className="form-check-input" ></input></td>
                                             </tr>
                                         )
                                     })}

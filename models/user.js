@@ -72,6 +72,10 @@ const UserSchema = new Schema({
         type: String,
         required: false,
     },
+    winningProbability:{
+        type: Number,
+        required: false,
+    }
 })
 
 const User = models.User || model("User", UserSchema)
