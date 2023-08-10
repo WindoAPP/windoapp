@@ -63,7 +63,15 @@ const UserSchema = new Schema({
     cretaedAt: {
         type: Date,
         required: false
-    }
+    },
+    facebook: {
+        type: String,
+        required: false,
+    },
+    instagram: {
+        type: String,
+        required: false,
+    },
 })
 
 const User = models.User || model("User", UserSchema)

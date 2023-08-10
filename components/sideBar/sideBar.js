@@ -15,7 +15,6 @@ const SideBar = () => {
   const logout = (e) => {
     e.preventDefault();
     signOut().then(res => {
-      console.log(res);
         if (res) {
             router.push("/login");
             
@@ -85,10 +84,12 @@ const SideBar = () => {
           </li>
           
           <li className="nav-item ">
-            <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >
+            <a href="/dashboard/formdata">
+            <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
               <i className="fa fa-address-card-o m-2  fa-fw"></i>
               Form data
             </span>
+            </a>
           </li>
           <li className="nav-item ">
             <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >
@@ -98,10 +99,12 @@ const SideBar = () => {
           </li>
           
           <li className="nav-item">
+            <a href="/login">
             <span className={`nav-link  cursor-pointer ${styles.navLink}`} onClick={logout}>
               <i className="fa fa-sign-out m-2  fa-fw"></i>
               Log Out
             </span>
+            </a>
           </li>
         </ul>
       </div>

@@ -277,8 +277,8 @@ const ProfilePage = () => {
                                         <p className='my-2'>Winning probability :</p>
                                         <input className="form-control  mx-2" maxLength={2} type='number'></input><p>%</p>
                                     </div>
-                                    <table class="table">
-                                        <thead class="thead-dark">
+                                    <table className="table">
+                                        <thead className="thead-dark">
                                             <tr>
                                                 <th scope="col">Colour</th>
                                                 <th scope="col">Gift name</th>
@@ -306,7 +306,7 @@ const ProfilePage = () => {
                                 <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
                                     <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
                                     <p className='align-self-center text-center '>{slogan}</p>
-                                    <button onClick={handleCallChildFunction} type="button" class="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
+                                    <button onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
                                 </div>
                                 <div className={styles.wheelWrapper}>
                                     {wheelUpdated &&
