@@ -4,10 +4,12 @@ import { useSession } from 'next-auth/react';
 import { getUser } from '../../services/service';
 import { env_data } from '../../config/config';
 import QRCode from 'qrcode.react';
+import Loader from '../Loader/loader';
 
 const QRCodePage = () => {
     const { data: session } = useSession();
     const [user, setUser] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         if (session) {
@@ -19,6 +21,7 @@ const QRCodePage = () => {
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
+                setIsLoading(false);
             }
         }).catch(err => {
             console.log(err);
@@ -38,20 +41,25 @@ const QRCodePage = () => {
     };
 
     return (
-        <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
-            <div className={styles.qrCodeWrapper}>
-                <QRCode
-                    size={290}
-                    level={"H"}
-                    includeMargin={true}
-                    name='shop_QR_code'
-                    className={styles.qrCode}
-                    id='qrcode'
-                    value={`${env_data.base_url}scan?id=${user.uid}`}
-                />
-            </div>
-            <button className='btn btn-warning mx-1 my-2' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>
-        </div>
+        <>
+            {
+                !isLoading ? <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
+                    <div className={styles.qrCodeWrapper}>
+                        <QRCode
+                            size={290}
+                            level={"H"}
+                            includeMargin={true}
+                            name='shop_QR_code'
+                            className={styles.qrCode}
+                            id='qrcode'
+                            value={`${env_data.base_url}scan?id=${user.uid}`}
+                        />
+                    </div>
+                    <button className='btn btn-warning mx-1 my-2' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>
+                </div> : <Loader />
+            }
+        </>
+
     );
 };
 

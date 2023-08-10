@@ -46,10 +46,12 @@ const SideBar = () => {
             </a>
           </li>
           <li className="nav-item">
-            <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >
+            <a href="/dashboard/winners">
+            <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
               <i className="fa fa-trophy m-2  fa-fw"></i>
               Winners
             </span>
+            </a>
           </li>
           <li className="nav-item ">
             <a href="/dashboard/payments">

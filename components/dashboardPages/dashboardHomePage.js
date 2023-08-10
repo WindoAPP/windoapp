@@ -231,7 +231,7 @@ const DashboardHomePage = () => {
                                             <h1>{getNoOfWinners("win")}</h1>
                                         </div>
                                         <div>
-                                            <i className="display-4 fa fa-users m-2 text-info fa-fw"></i>
+                                            <i className="display-4 fa fa-gift m-2 text-info fa-fw"></i>
                                         </div>
                                     </div>
                                     <hr className={styles.hr}></hr>
@@ -253,7 +253,7 @@ const DashboardHomePage = () => {
                                             <h1>{user.custermers.length}</h1>
                                         </div>
                                         <div>
-                                            <i className="display-4 fa fa-users m-2 text-info fa-fw"></i>
+                                            <i className="display-4 fa fa-blind m-2 text-info fa-fw"></i>
                                         </div>
                                     </div>
                                     <hr className={styles.hr}></hr>
