@@ -239,6 +239,10 @@ const ProfilePage = () => {
                                     <p className='my-2'>Slogan text :</p>
                                     <textarea type='textarea' className="form-control  mx-2" value={slogan} onChange={onSloganChange}  ></textarea>
                                 </div>
+                                <div className='d-flex flex-row align-items-center'>
+                                        <p className='my-2'>Winning probability :</p>
+                                        <input className="form-control  mx-2" value={winningProbability} onChange={onWinningProbabilityChange}  type='number'></input><p>%</p>
+                                    </div>
                                 <div className='d-flex flex-column mb-4'>
                                     <p className='my-2'>Base color 01 :</p>
                                     <div className='d-flex flex-row align-items-center'>
@@ -282,10 +286,6 @@ const ProfilePage = () => {
                                         <input className="form-control" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add wheel item' maxLength={15}></input>
                                         <button className='btn btn-primary mx-2 w-50' onClick={addItem}>Add <i className=" fa fa-plus"></i></button>
 
-                                    </div>
-                                    <div className='d-flex flex-row align-items-center'>
-                                        <p className='my-2'>Winning probability :</p>
-                                        <input className="form-control  mx-2" value={winningProbability} onChange={onWinningProbabilityChange}  type='number'></input><p>%</p>
                                     </div>
                                     <table className="table">
                                         <thead className="thead-dark">

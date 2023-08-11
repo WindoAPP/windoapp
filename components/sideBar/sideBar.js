@@ -93,10 +93,12 @@ const SideBar = () => {
             </a>
           </li>
           <li className="nav-item ">
+          <a href="/dashboard/optin">
             <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >
               <i className="fa fa-download m-2  fa-fw"></i>
               Opt-in
             </span>
+            </a>
           </li>
           
           <li className="nav-item">

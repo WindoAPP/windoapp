@@ -100,6 +100,7 @@ const DashboardHomePage = () => {
         var n_of_winners = 0;
         var n_of_plays = 0;
         var n_of_reap = 0;
+        var n_of_gift_given = 0;
 
         if (type === "win") {
             for (let i = 0; i < user.custermers.length; i++) {
@@ -125,6 +126,14 @@ const DashboardHomePage = () => {
 
             }
             return n_of_reap;
+        } else if(type === "gift"){
+            for (let i = 0; i < user.custermers.length; i++) {
+                if (user.custermers[i].giftsGiven) {
+                    n_of_gift_given++
+                }
+
+            }
+            return n_of_gift_given;
         }
     }
 
@@ -228,7 +237,7 @@ const DashboardHomePage = () => {
                                     <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
                                             <h6>Gift Given</h6>
-                                            <h1>{getNoOfWinners("win")}</h1>
+                                            <h1>{getNoOfWinners("gift")}</h1>
                                         </div>
                                         <div>
                                             <i className="display-4 fa fa-gift m-2 base-text-color fa-fw"></i>

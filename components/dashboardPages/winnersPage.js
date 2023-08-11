@@ -20,7 +20,12 @@ const WinnersPage = () => {
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
-                setCustomers(res.user.custermers);
+                var tempCusArr=res.user.custermers.filter(obj=>{
+                    if(checkWinners(obj)){
+                        return obj
+                    }
+                })
+                setCustomers(tempCusArr);
                 setIsLoading(false);
                 
             }
@@ -30,6 +35,16 @@ const WinnersPage = () => {
         });
     }
 
+    const checkWinners = (cus)=>{
+        var checker=false;
+        for (let i = 0; i < cus.spins.length; i++) {
+            if(cus.spins[i].isWin){
+                checker=true;
+            }
+        }
+        return checker;
+    }
+ 
     const getWinCount =(spins)=>{
         var count=0;
         for (let i = 0; i < spins.length; i++) {
