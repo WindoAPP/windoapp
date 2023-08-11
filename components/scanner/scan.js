@@ -145,8 +145,8 @@ const Scan = () => {
 
     const onFinished = (winner) => {
         setTimeout(() => {
-            if (winner === "Try again") {
-                alert("try again")
+            if (winner === "perdu") {
+                alert("perdu")
             } else {
                 setStep(3);
                 setPrice(winner)
@@ -156,14 +156,14 @@ const Scan = () => {
 
             if (customer.spins) {
                 custimerData.spins.push({
-                    isWin: winner !== "Try again",
+                    isWin: winner !== "perdu",
                     price: winner,
                     created_at: new Date()
                 })
             } else {
                 custimerData['spins'] = [];
                 custimerData.spins.push({
-                    isWin: winner !== "Try again",
+                    isWin: winner !== "perdu",
                     price: winner,
                     created_at: new Date()
                 })
