@@ -1,0 +1,61 @@
+.leftRow{
+    margin-left: 18rem;
+    i{
+        font-size: 22px;
+    }
+    input{
+        padding-left: 36px;
+        border-radius: 20px;
+    }
+    .searchIcon{
+        font-size: 18px;
+        position: absolute;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    .navImage{
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+    }
+    .adminText{
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        i{
+            font-size: 14px;
+        }
+
+    }
+}
+.dropdownMenu{
+    visibility: hidden;
+    position: absolute;
+    width: 9rem;
+    top: 49px;
+    right: 18px;
+    border-radius:0 0 10px 10px ;
+    .dropdownMenuItem{
+        span{
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            &:hover{
+                color: rgb(69, 163, 252) !important;
+            }
+        }
+        i{
+            &:hover{
+                color: rgb(69, 163, 252) !important;
+            } 
+        }          
+    }  
+}
+.dropdownMenuShow{
+    visibility:visible;
+}
+.hr{
+    border-top-width: 2px;
+    border-color: gray;
+    margin: 0;
+}
