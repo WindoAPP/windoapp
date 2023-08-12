@@ -69,7 +69,7 @@ const NavbarDashboard = () => {
                 </div>
                 <div className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>
                     <i className="fa fa-credit-card text-secondary mx-2 " aria-hidden="true"></i>
-                    <span className="text-secondary">Fctures</span>
+                    <span className="text-secondary">Factures</span>
                 </div>
                 <div onClick={()=>router.push("/dashboard/formdata")} className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>
                     <i className="fa fa-cogs text-secondary mx-2 " aria-hidden="true"></i>
