@@ -1,6 +1,7 @@
 import { connectToMongoDB } from "../../../../lib/mongodb"
 import User from "../../../../models/user"
 import Customer from "../../../../models/customer"
+import { hash } from "bcryptjs"
 
 
 const handler = async (req, res) => {
@@ -20,6 +21,13 @@ const handler = async (req, res) => {
     }
     else if(req.method === "PUT"){
         const user  =req.body;
+
+        if(user.password){
+            const hashedPassword = await hash(user.password, 12);
+            if(hashedPassword){
+                user.password=hashedPassword;
+            }
+        }
 
         User.updateOne({_id:user._id},user).then(result=>{
             if(result){
