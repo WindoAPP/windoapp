@@ -47,7 +47,7 @@ const FormDataPage = () => {
                 return showNotification(true, "password not matched")
             }
         }
-        
+
         userData.email=formData.email;
         userData.userName=formData.userName
         userData.phoneNumber=formData.phoneNumber
@@ -84,11 +84,11 @@ const FormDataPage = () => {
                             </div>
                             <div className="d-flex flex-column">
                                 <label><strong>Password</strong></label>
-                                <input required type="password" name="password" placeholder="Password" className="form-control regi-input" onChange={handleChange} value={formData.password}></input>
+                                <input required type="password" name="password" placeholder="••••••••••" className="form-control regi-input" onChange={handleChange} value={formData.password}></input>
                             </div>
                             <div className="d-flex flex-column">
                                 <label><strong>Confirm Password</strong></label>
-                                <input type="password" name="c_password" placeholder="Confirm Password" className="form-control regi-input" onChange={handleChange} value={formData.c_password}></input>
+                                <input type="password" name="c_password" placeholder="••••••••••" className="form-control regi-input" onChange={handleChange} value={formData.c_password}></input>
                             </div>
                             <div className="d-flex flex-column">
                                 <label><strong>Shop Name</strong></label>
