@@ -44,7 +44,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <button onClick={() => router.push("/login")} className={styles.bookDemoBtn}>Un projet ?</button>
+          <button onClick={() => router.push("/login")} className={styles.bookDemoBtn}>s'abonner</button>
         </div>
         {sideBarShow &&
           <div className={`shadow ${styles.navMobile}`} id="navbarNav">
@@ -66,7 +66,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item my-3 mx-3">
-                <button onClick={() => router.push("/login")} className={styles.bookDemoBtn}>Un projet ?</button>
+                <button onClick={() => router.push("/login")} className={styles.bookDemoBtn}>s'abonner</button>
               </li>
             </ul>
           </div>}

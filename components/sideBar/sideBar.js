@@ -45,6 +45,14 @@ const SideBar = () => {
             </span>
             </a>
           </li>
+          <li className="nav-item ">
+            <a href="/dashboard/formdata">
+            <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
+              <i className="fa fa-address-card-o m-2  fa-fw"></i>
+              Profile
+            </span>
+            </a>
+          </li>
           <li className="nav-item">
             <a href="/dashboard/winners">
             <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
@@ -84,14 +92,7 @@ const SideBar = () => {
             </a>
           </li>
           
-          <li className="nav-item ">
-            <a href="/dashboard/formdata">
-            <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
-              <i className="fa fa-address-card-o m-2  fa-fw"></i>
-              Form data
-            </span>
-            </a>
-          </li>
+          
           <li className="nav-item ">
           <a href="/dashboard/optin">
             <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >

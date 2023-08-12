@@ -31,10 +31,11 @@
 .dropdownMenu{
     visibility: hidden;
     position: absolute;
-    width: 9rem;
+    width: 10rem;
     top: 49px;
     right: 18px;
     border-radius:0 0 10px 10px ;
+    z-index: 10;
     .dropdownMenuItem{
         span{
             cursor: pointer;

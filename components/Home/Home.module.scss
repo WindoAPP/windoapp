@@ -47,6 +47,7 @@ $mobile-breakpoint: 940px;
 
 .topBtn {
     border-radius: 12px;
+    color: #fff;
     background-color: #2ebb77;
     height: 56px;
     line-height: 56px;
@@ -191,6 +192,12 @@ $mobile-breakpoint: 940px;
 
         @media (max-width: $mobile-breakpoint) {
             display: none !important;
+        }
+        .stepBtn{
+            font-weight: 700;
+            &:hover{
+                background-color: #2ebb77 !important;
+            }
         }
     }
 

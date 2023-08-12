@@ -38,7 +38,7 @@ const Home = () => {
               <h5 className='mb-0 mx-2 font-weight-bold'>Augmentez votre chiffre d'affaires</h5>
             </div>
           </div>
-          <button className={`mb-4 ${styles.topBtn}`}>jours d'essai gratuit</button>
+          <button className={`mb-4 ${styles.topBtn}`}>15* jours d'essai gratuit</button>
         </div>
         <div className='d-flex flex-column align-items-end  overflow-hidden mx-4'>
           <img src='homeimage1.png' className={styles.topImage1}></img>
@@ -87,23 +87,23 @@ const Home = () => {
       <div className={`d-flex flex-column align-items-center justify-content-center mb-4 ${styles.thirdSectionWrapper}`}>
         <div className={`${styles.stepper} d-flex flex-column mt-5 ml-2`}>
           <div className="d-flex mb-1">
-            <img src="/step4.png" className={`${styles.stepImg}`}></img>
+            <img src="/step4.png" className={`shadow-sm ${styles.stepImg}`}></img>
             <div className={`d-flex flex-column pr-4 align-items-center mx-4 ${styles.lineWrapper}`}>
-              <div className="rounded-circle py-2 px-3 bg-success text-white mb-1">1</div>
+              <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>1</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
             <div className={`d-flex flex-column justify-content-center ${styles.stepperTextWrapper}`}>
-              <h5 className="text-dark">Vos clients scannent le QR Code</h5>
+              <h3 className="text-dark">Vos clients scannent le QR Code</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Utilisez des supports physiques tels que des stickers, des chevalets de table, ou même en ajoutant le QR Code sur vos cartes.</p>
             </div>
           </div>
           <div className="d-flex mb-1">
             <div className={`d-flex flex-column justify-content-center ${styles.stepperTextWrapper}`}>
-              <h5 className="text-dark">Vos clients vous laissent un avis google</h5>
+              <h3 className="text-dark">Vos clients vous laissent un avis google</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Chaque interaction offre une opportunité différente : encouragez vos clients à laisser un avis sur Google ou à s'abonner à vos réseaux sociaux comme Instagram ou Facebook.</p>
             </div>
             <div className={`d-flex flex-column pr-4 align-items-center mx-4 ${styles.lineWrapper}`}>
-              <div className="rounded-circle py-2 px-3 bg-success text-white mb-1">2</div>
+              <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>2</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
             <img src="/step1.png" className={`${styles.stepImg}`}></img>
@@ -111,21 +111,21 @@ const Home = () => {
           <div className="d-flex mb-1">
             <img src="/step3.png" className={`${styles.stepImg}`}></img>
             <div className={`d-flex flex-column pr-4 align-items-center mx-4 ${styles.lineWrapper}`}>
-              <div className="rounded-circle py-2 px-3 bg-success text-white mb-1">3</div>
+              <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>3</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
             <div className={`d-flex flex-column justify-content-center ${styles.stepperTextWrapper}`}>
-              <h5 className="text-dark">L'aventure commence, la roue est en mouvement !</h5>
+              <h3 className="text-dark">L'aventure commence, la roue est en mouvement !</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Un avis sur Google devient ainsi une double opportunité : renforce la fidélité de vos clients tout en les récompensant avec des cadeaux attractifs.</p>
             </div>
           </div>
           <div className="d-flex mb-1">
             <div className={`d-flex flex-column justify-content-center ${styles.stepperTextWrapper}`}>
-              <h5 className="text-dark">Personnalisation Totale : Votre Jeu, Votre Style !</h5>
+              <h3 className="text-dark">Personnalisation Totale : Votre Jeu, Votre Style !</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Vous pouvez personnaliser la roue à votre image, choisir les cadeaux et les couleurs, télécharger le QR code en 1 clic et suivez vos performances en toute simplicité.</p>
             </div>
             <div className={`d-flex flex-column pr-4 align-items-center mx-4 ${styles.lineWrapper}`}>
-              <div className="rounded-circle py-2 px-3 bg-success text-white mb-1">4</div>
+              <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>4</div>
               <div className={`${styles.line} h-100 d-none`} ></div>
             </div>
             <img src="/step4.png" className={`${styles.stepImg}`}></img>
@@ -134,41 +134,41 @@ const Home = () => {
         <div className={`${styles.stepperMobile}  d-flex flex-column mt-5 ml-2`}>
           <div className="d-flex mb-1">
             <div className="d-flex flex-column pr-4 align-items-center mx-2">
-              <div className="rounded-circle py-2 px-3 bg-success text-white mb-1">1</div>
+              <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>1</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
             <div>
-              <h5 className="text-dark">Vos clients scannent le QR Code</h5>
+              <h3 className="text-dark">Vos clients scannent le QR Code</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Utilisez des supports physiques tels que des stickers, des chevalets de table, ou même en ajoutant le QR Code sur vos cartes.</p>
             </div>
           </div>
           <div className="d-flex mb-1">
             <div className="d-flex flex-column pr-4 align-items-center mx-2">
-              <div className="rounded-circle py-2 px-3 bg-success text-white mb-1">2</div>
+              <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>2</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
             <div>
-              <h5 className="text-dark">Vos clients vous laissent un avis google</h5>
+              <h3 className="text-dark">Vos clients vous laissent un avis google</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Chaque interaction offre une opportunité différente : encouragez vos clients à laisser un avis sur Google ou à s'abonner à vos réseaux sociaux comme Instagram ou Facebook.</p>
             </div>
           </div>
           <div className="d-flex mb-1">
             <div className="d-flex flex-column pr-4 align-items-center mx-2">
-              <div className="rounded-circle py-2 px-3 bg-success text-white mb-1">3</div>
+              <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>3</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
             <div>
-              <h5 className="text-dark">L'aventure commence, la roue est en mouvement !</h5>
+              <h3 className="text-dark">L'aventure commence, la roue est en mouvement !</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Un avis sur Google devient ainsi une double opportunité : renforce la fidélité de vos clients tout en les récompensant avec des cadeaux attractifs.</p>
             </div>
           </div>
           <div className="d-flex mb-1">
             <div className="d-flex flex-column pr-4 align-items-center mx-2">
-              <div className="rounded-circle py-2 px-3 bg-success text-white mb-1">4</div>
+              <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>4</div>
               <div className={`${styles.line} h-100d-none`}></div>
             </div>
             <div>
-              <h5 className="text-dark">Personnalisation Totale : Votre Jeu, Votre Style !</h5>
+              <h3 className="text-dark">Personnalisation Totale : Votre Jeu, Votre Style !</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Vous pouvez personnaliser la roue à votre image, choisir les cadeaux et les couleurs, télécharger le QR code en 1 clic et suivez vos performances en toute simplicité.</p>
             </div>
           </div>
