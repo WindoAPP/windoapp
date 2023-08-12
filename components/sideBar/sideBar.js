@@ -65,7 +65,7 @@ const SideBar = () => {
             <a href="/dashboard/payments">
             <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
               <i className="fa fa-credit-card m-2  fa-fw"></i>
-              Subscribes
+              Fctures
             </span>
             </a>
           </li>
