@@ -5,16 +5,18 @@ import { useRouter } from "next/router";
 import styles from './navbarDashboard.module.scss';
 import { getUser } from "../../services/service";
 import { useEffect } from "react";
+import SideBar from "../sideBar/sideBar";
 
 
 
-const NavbarDashboard = () => {
+const NavbarDashboard = ({ onDataUpdate }) => {
 
     const { data: session } = useSession();
 
     const [user, setUser] = useState({});
     const [userImage, setUserImage] = useState("/shop.png");
     const [menu, setMenu] = useState(false);
+    const [sideBarOpen, setSideBarOpen] = useState(false);
 
 
     useEffect(() => {
@@ -49,12 +51,17 @@ const NavbarDashboard = () => {
             }
         });
 
+    }
 
+    const onClickSideBarBtn = ()=>{
+        setSideBarOpen(!sideBarOpen);
+        onDataUpdate(!sideBarOpen);
     }
 
     return (
+        <>
         <div className={`navbar bg-light shadow-sm d-flex flex-row justify-content-between`}>
-            <div className={`d-flex flex-row align-items-center ${styles.leftRow}`}>
+            <div className={`d-flex flex-row align-items-center ${styles.leftRow} ${sideBarOpen?styles.leftRow1:''}`} onClick={onClickSideBarBtn}>
                 <i className="fa fa-bars text-secondary" aria-hidden="true"></i>
             </div>
             <div className={`d-flex flex-row align-items-center mx-4  ${styles.leftRow}`}>
@@ -79,10 +86,10 @@ const NavbarDashboard = () => {
                     <i className="fa fa-power-off text-danger mx-2 " aria-hidden="true"></i>
                     <span className="text-danger">Logout</span>
                 </div>
-                
-
             </div>
         </div>
+        <SideBar sideBarOpen={sideBarOpen}/>
+        </>
     );
 };
 

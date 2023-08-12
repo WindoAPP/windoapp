@@ -246,6 +246,12 @@ a {
     margin-left: 0 !important;
   }
 }
+.dashboard-component-close{
+  margin-left: 6.2rem;
+  @media (max-width: $mobile-breakpoint) {
+    margin-left: 0 !important;
+  }
+}
 a{
   text-decoration: none !important;
 }

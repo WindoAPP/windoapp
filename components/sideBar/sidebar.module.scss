@@ -1,5 +1,14 @@
 $mobile-breakpoint: 940px;
 
+.sideBarcollaps {
+    min-width: 6rem !important;
+    width: 6rem !important;
+}
+
+.companyLogoSixe{
+    height: 1.5rem !important;
+}
+
 .sideBar {
     z-index: 10;
     background-color: #fff;
@@ -70,4 +79,7 @@ $mobile-breakpoint: 940px;
     @media (max-width: $mobile-breakpoint) {
         visibility: visible;
     }
+}
+.sideBarOpen{
+    font-size: 30px;
 }
