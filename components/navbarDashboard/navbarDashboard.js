@@ -6,6 +6,7 @@ import styles from './navbarDashboard.module.scss';
 import { getUser } from "../../services/service";
 import { useEffect } from "react";
 import SideBar from "../sideBar/sideBar";
+import NotificationPanel from "../notificationPanel/notificationPanel";
 
 
 
@@ -17,6 +18,8 @@ const NavbarDashboard = ({ onDataUpdate }) => {
     const [userImage, setUserImage] = useState("/shop.png");
     const [menu, setMenu] = useState(false);
     const [sideBarOpen, setSideBarOpen] = useState(false);
+    const [hasNewNotifi, setHasNewNotifi] = useState(true);
+    const [notifiBarOpen, setNotifiBarOpen] = useState(false);
 
 
     useEffect(() => {
@@ -58,14 +61,19 @@ const NavbarDashboard = ({ onDataUpdate }) => {
         onDataUpdate(!sideBarOpen);
     }
 
+    const onClickNotifiBtn = ()=>{
+        setNotifiBarOpen(!notifiBarOpen);
+    }
+
     return (
         <>
         <div className={`navbar bg-light shadow-sm d-flex flex-row justify-content-between`}>
             <div className={`d-flex flex-row align-items-center ${styles.leftRow} ${sideBarOpen?styles.leftRow1:''}`} onClick={onClickSideBarBtn}>
-                <i className="fa fa-bars text-secondary" aria-hidden="true"></i>
+                <i className="fa fa-bars text-secondary cursor-pointer" aria-hidden="true"></i>
             </div>
             <div className={`d-flex flex-row align-items-center mx-4  ${styles.leftRow}`}>
-                <i className="fa fa-bell-o text-secondary mx-4" aria-hidden="true"></i>
+                <i className="fa fa-bell-o text-secondary mx-4 cursor-pointer" aria-hidden="true" onClick={onClickNotifiBtn}></i>
+                {hasNewNotifi && <div className={styles.notificationDot}></div>}
                 <img className={`shadow-sm ${styles.navImage} mx-2`} src={userImage}></img>
                 <p onClick={()=>setMenu(!menu)} className={`d-flex flex-row align-items-center m-0 mx-2 text-secondary ${styles.adminText}`}>Admin <i class="fa fa-chevron-down mx-2" aria-hidden="true"></i></p>
             </div>
@@ -89,6 +97,7 @@ const NavbarDashboard = ({ onDataUpdate }) => {
             </div>
         </div>
         <SideBar sideBarOpen={sideBarOpen}/>
+        {notifiBarOpen && <NotificationPanel />}
         </>
     );
 };

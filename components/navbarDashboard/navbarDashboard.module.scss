@@ -63,3 +63,13 @@
     border-color: gray;
     margin: 0;
 }
+
+.notificationDot{
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 11px;
+    margin-left: 43px;
+}

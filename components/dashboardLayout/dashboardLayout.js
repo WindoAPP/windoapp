@@ -3,7 +3,7 @@ import NavbarDashboard from "../navbarDashboard/navbarDashboard";
 import SideBar from "../sideBar/sideBar";
 
 const Layout = ({ children }) => {
-  const [parentState, setParentState] = useState(true);
+  const [parentState, setParentState] = useState(false);
 
   const handleDataUpdate = (newValue) => {
     setParentState(newValue); // Update the parent's state with data from the child
