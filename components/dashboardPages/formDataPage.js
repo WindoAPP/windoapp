@@ -106,6 +106,7 @@ const FormDataPage = () => {
 
                             <div className='card p-3 mt-5'>
                                 <h5 className={styles.socialLinkTitle}>CHANGEMENT DE MOT DE PASSE</h5>
+                                <hr className={`${styles.hr} mb-3`}></hr>
                                 <div className="d-flex flex-column mt-3">
                                     <div className='d-flex flex-row'>
                                         <label><strong>shop ID</strong></label>
