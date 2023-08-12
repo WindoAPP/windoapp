@@ -52,7 +52,7 @@ const PaymentsPage = () => {
         <div className={`p-4 d-flex flex-column align-items-center  ${styles.mainContent}`}>
             {!isLoading ?
                 <>
-                    <h1 className='my-4'>FCTURES</h1>
+                    <h1 className='my-4'>FACTURES</h1>
                     <div className="container">
                         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                             {paymentsArr.map((obj, index) => {
