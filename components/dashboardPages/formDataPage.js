@@ -71,8 +71,9 @@ const FormDataPage = () => {
             {
                 !isLoading ? <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
                     <div className={`${styles.formWrapper}`}>
-                        {/* <h1 >Add your social network links</h1>
-                        <p className='text-muted'>By including this you can increase your number of followers </p> */}
+                         <h1 >Profil</h1>
+                         <hr className={styles.hr}></hr>
+                        {/* <p className='text-muted'>By including this you can increase your number of followers </p>  */}
                         <form className='d-flex flex-column'>
                             <div className="d-flex flex-column">
                                 <label><strong>User Name</strong></label>
