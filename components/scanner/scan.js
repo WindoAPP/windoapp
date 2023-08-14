@@ -22,6 +22,8 @@ const Scan = () => {
     const [price, setPrice] = useState();
     const [screenHeight, setScreenHeight] = useState();
     const [spinCount, setSpinCount] = useState(0);
+    const [wheelItemsArr,setWheelItemsArr] = useState([]);
+    const [isWin,setIsWin] = useState(false);
 
     const { id } = router.query;
 
@@ -43,6 +45,7 @@ const Scan = () => {
 
                     setSegments(segmentsTemp);
                     setSegmentColors(segmentsColorTemp);
+                    setWheelItemsArr(res.user.wheelItems);
                 }
 
             }).catch(err => {
@@ -145,35 +148,45 @@ const Scan = () => {
 
     const onFinished = (winner) => {
         setTimeout(() => {
-            if (winner === "perdu") {
-                alert("perdu")
-            } else {
-                setStep(3);
-                setPrice(winner)
-            }
+            
+
+            var index = segments.indexOf(winner);
+            var selectedItm=wheelItemsArr[index];
+
 
             var custimerData = customer;
 
+            if(custimerData){
+                if (selectedItm.isWinningItem) {
+                    setIsWin(true);
+                    setStep(3);
+                    setPrice(winner);
+                } else {
+                    setStep(3);
+                    setIsWin(false);     
+                }
+            }
+
             if (customer.spins) {
                 custimerData.spins.push({
-                    isWin: winner !== "perdu",
+                    isWin: selectedItm.isWinningItem,
                     price: winner,
                     created_at: new Date()
                 })
             } else {
                 custimerData['spins'] = [];
                 custimerData.spins.push({
-                    isWin: winner !== "perdu",
+                    isWin: selectedItm.isWinningItem,
                     price: winner,
                     created_at: new Date()
                 })
             }
             updateCustomerFn(custimerData);
             var notificationData ={
-                backColor: winner == "perdu"? "alert-secondary":"alert-success",
+                backColor: !selectedItm.isWinningItem? "alert-secondary":"alert-success",
                 user: user._id,
-                body: winner == "perdu"? "perdu le jeu tourner la roue": "a gagné le prix en jouant à faire tourner la roue",
-                icon: winner == "perdu"? "fa-certificate" : "fa-trophy",
+                body: !selectedItm.isWinningItem? "perdu le jeu tourner la roue": "a gagné le prix en jouant à faire tourner la roue",
+                icon: !selectedItm.isWinningItem? "fa-certificate" : "fa-trophy",
                 customer: customer._id
         
             }
@@ -264,9 +277,9 @@ const Scan = () => {
                     {
                         step === 3 &&
                         <div>
-                            <img className={styles.fireImage} src="fire.gif"></img>
-                            <h2 className='text-warning'>Congratulations !!</h2>
-                            <h1 className='text-success'>You won {price}</h1>
+                            {isWin?<img className={styles.fireImage} src="fire.gif"></img>:<img className={styles.fireImage} src="sadimage.gif"></img>}
+                            <h2 className='text-warning'>{isWin?"Congratulations !!":"Sorry !!"}</h2>
+                            <h1 className='text-success'>{isWin?`You won ${price}`:"Try Again with next time"}</h1>
                             <p className='text-info'>Lorem Ipsum is simply dummy text of the printing</p>
                         </div>
                     }
@@ -278,7 +291,7 @@ const Scan = () => {
                             <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
                                 <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
                                 <p className='align-self-center text-center '>{user.shopSlogan && user.shopSlogan } </p>
-                                <button onClick={handleCallChildFunction} type="button" class="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
+                                <button onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
                             </div>
 
                             <div className={styles.wheelWrapper}>

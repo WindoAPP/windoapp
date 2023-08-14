@@ -83,7 +83,7 @@ const NavbarDashboard = ({ onDataUpdate }) => {
                 <i className="fa fa-bell-o text-secondary mx-4 cursor-pointer" aria-hidden="true" onClick={onClickNotifiBtn}></i>
                 {hasNewNotifi && <div className={styles.notificationDot}>{notifiCount}</div>}
                 <img className={`shadow-sm ${styles.navImage} mx-2`} src={userImage}></img>
-                <p onClick={()=>setMenu(!menu)} className={`d-flex flex-row align-items-center m-0 mx-2 text-secondary ${styles.adminText}`}>Admin <i class="fa fa-chevron-down mx-2" aria-hidden="true"></i></p>
+                <p onClick={()=>setMenu(!menu)} className={`d-flex flex-row align-items-center m-0 mx-2 text-secondary ${styles.adminText}`}>Admin <i className="fa fa-chevron-down mx-2" aria-hidden="true"></i></p>
             </div>
             <div className={`d-flex flex-column bg-light shadow-sm align-items-start p-2 ${styles.dropdownMenu} ${menu?styles.dropdownMenuShow:""}`}>
                 <div onClick={()=>router.push("/dashboard/formdata")} className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>

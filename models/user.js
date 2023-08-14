@@ -49,12 +49,16 @@ const UserSchema = new Schema({
     wheelItems: [{
         item: {
             type: String,
-            required: true,
+            required: false,
         },
         color: {
             type: String,
-            required: true,
+            required: false,
         },
+        isWinningItem:{
+            type: Boolean,
+            required: false,
+        }
     }],
     shopSlogan:{
         type: String,
