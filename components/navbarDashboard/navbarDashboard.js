@@ -3,7 +3,7 @@ import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import styles from './navbarDashboard.module.scss';
-import { getUser } from "../../services/service";
+import { getAllNotifications, getUser } from "../../services/service";
 import { useEffect } from "react";
 import SideBar from "../sideBar/sideBar";
 import NotificationPanel from "../notificationPanel/notificationPanel";
@@ -18,8 +18,9 @@ const NavbarDashboard = ({ onDataUpdate }) => {
     const [userImage, setUserImage] = useState("/shop.png");
     const [menu, setMenu] = useState(false);
     const [sideBarOpen, setSideBarOpen] = useState(false);
-    const [hasNewNotifi, setHasNewNotifi] = useState(true);
+    const [hasNewNotifi, setHasNewNotifi] = useState(false);
     const [notifiBarOpen, setNotifiBarOpen] = useState(false);
+    const [notifiCount, setNotifiCount] = useState(0);
 
 
     useEffect(() => {
@@ -32,6 +33,12 @@ const NavbarDashboard = ({ onDataUpdate }) => {
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
+                if(res.notificationCount==0){
+                    setHasNewNotifi(false);
+                }else{
+                    setHasNewNotifi(true);
+                    setNotifiCount(res.notificationCount);
+                }
                 if (res.user.profileImage) {
                     setUserImage(res.user.profileImage);
                 }
@@ -62,6 +69,7 @@ const NavbarDashboard = ({ onDataUpdate }) => {
     }
 
     const onClickNotifiBtn = ()=>{
+        setHasNewNotifi(false);
         setNotifiBarOpen(!notifiBarOpen);
     }
 
@@ -73,7 +81,7 @@ const NavbarDashboard = ({ onDataUpdate }) => {
             </div>
             <div className={`d-flex flex-row align-items-center mx-4  ${styles.leftRow}`}>
                 <i className="fa fa-bell-o text-secondary mx-4 cursor-pointer" aria-hidden="true" onClick={onClickNotifiBtn}></i>
-                {hasNewNotifi && <div className={styles.notificationDot}></div>}
+                {hasNewNotifi && <div className={styles.notificationDot}>{notifiCount}</div>}
                 <img className={`shadow-sm ${styles.navImage} mx-2`} src={userImage}></img>
                 <p onClick={()=>setMenu(!menu)} className={`d-flex flex-row align-items-center m-0 mx-2 text-secondary ${styles.adminText}`}>Admin <i class="fa fa-chevron-down mx-2" aria-hidden="true"></i></p>
             </div>
