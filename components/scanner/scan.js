@@ -4,7 +4,7 @@ import styles from './scan.module.scss';
 import React from 'react';
 import WheelComponent from '../wheel/spinWheel';
 import { useEffect } from 'react';
-import { createCustomer, getUser, updateCustomer } from '../../services/service';
+import { createCustomer, createNotification, getUser, updateCustomer } from '../../services/service';
 import { useRouter } from 'next/router';
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
@@ -169,6 +169,15 @@ const Scan = () => {
                 })
             }
             updateCustomerFn(custimerData);
+            var notificationData ={
+                backColor: winner == "perdu"? "alert-secondary":"alert-success",
+                user: user._id,
+                body: winner == "perdu"? "perdu le jeu tourner la roue": "a gagné le prix en jouant à faire tourner la roue",
+                icon: winner == "perdu"? "fa-certificate" : "fa-trophy",
+                customer: customer._id
+        
+            }
+            createNotifi(notificationData);
         }, 3000)
 
 
@@ -178,6 +187,16 @@ const Scan = () => {
         updateCustomer(data).then(res => {
             if (res) {
                 setCustomer(data);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    const createNotifi=(data)=>{
+        createNotification(data).then(res => {
+            if (res) {
+                console.log("notfifi created!",res);
             }
         }).catch(err => {
             console.log(err);

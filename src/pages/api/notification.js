@@ -40,7 +40,7 @@ const handler = async (req, res) => {
 
         const { id } = req.query;
 
-        Notification.find({ user: id }).populate({ path: 'customer', model: Customer }).then((results) => {
+        Notification.find({ user: id }).populate({ path: 'customer', model: Customer }).sort({ cretedAt: -1 }).then((results) => {
             if (results) {
                 return res.status(201).json({
                     success: true,
