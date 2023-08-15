@@ -20,7 +20,6 @@ const PaymentsPage = () => {
             fetchUser(session.user.uid);
         }
     }, [session]);
-
     const fetchUser = (id) => {
         getUser(id).then(res => {
             if (res) {
