@@ -18,7 +18,7 @@ $mobile-breakpoint: 940px;
     color: #000;
 }
 
-.purplrBtn{
+.purplrBtn {
     color: #b479d9;
     background-color: rgba(180, 121, 217, 0.15);
     display: inline-block;
@@ -30,7 +30,7 @@ $mobile-breakpoint: 940px;
     width: 40%;
 }
 
-.topMenu{
+.topMenu {
     font-family: 'phosphor';
     font-weight: 700;
     display: inline-block;
@@ -45,8 +45,9 @@ $mobile-breakpoint: 940px;
     text-align: center;
 }
 
-.topBtn{
+.topBtn {
     border-radius: 12px;
+    color: #fff;
     background-color: #2ebb77;
     height: 56px;
     line-height: 56px;
@@ -56,18 +57,19 @@ $mobile-breakpoint: 940px;
     width: 30%;
 }
 
-.topImage1{
+.topImage1 {
     border-radius: 20px;
     width: 100%;
-   
+
 }
-.topImage2{
+
+.topImage2 {
     border-radius: 20px;
     width: 40%;
     margin-top: -8rem;
 }
 
-.reviewBtn1{
+.reviewBtn1 {
     width: 12rem;
     font-weight: 600;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -79,12 +81,15 @@ $mobile-breakpoint: 940px;
     font-size: 55px;
     font-weight: 800;
     margin-bottom: 2rem;
+
     @media (max-width: $mobile-breakpoint) {
-       font-size: 30px;
+        font-size: 30px;
     }
 }
-.felxMobile{
+
+.felxMobile {
     flex-direction: row;
+
     @media (max-width: $mobile-breakpoint) {
         flex-direction: column;
     }
@@ -92,6 +97,7 @@ $mobile-breakpoint: 940px;
 
 .firstSectionLeftRow {
     width: 60%;
+
     @media (max-width: $mobile-breakpoint) {
         width: 100%;
     }
@@ -107,6 +113,7 @@ $mobile-breakpoint: 940px;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     margin-left: 0.5rem;
+
     @media (max-width: $mobile-breakpoint) {
         flex-direction: column;
     }
@@ -114,6 +121,7 @@ $mobile-breakpoint: 940px;
 
 .listTextWrapper i {
     font-size: 25px;
+
     @media (max-width: $mobile-breakpoint) {
         flex-direction: column;
     }
@@ -141,6 +149,7 @@ $mobile-breakpoint: 940px;
     font-size: 60px;
     font-weight: 800;
     text-align: center;
+
     @media (max-width: $mobile-breakpoint) {
         font-size: 38px;
     }
@@ -149,54 +158,75 @@ $mobile-breakpoint: 940px;
 .secondSectionWrapper h2 {
     font-size: 30px;
     font-weight: bolder;
+
     @media (max-width: $mobile-breakpoint) {
         font-size: 15px;
     }
 }
 
 .thirdSectionWrapper {
-    gap: 60px;
-    margin-top: 2rem;
-}
+    .stepper {
+        .line {
+            width: 2px;
+            opacity: 0.5;
+            background-color: lightgrey !important;
+        }
 
-.thirdSectionWrapper p,
-.thirdSectionWrapper ul {
-    font-size: 20px;
-    width: 60%;
-    font-weight: 600;
-    @media (max-width: $mobile-breakpoint) {
-        width: 100%;
-        font-size: 15px;
+        .lead {
+            font-size: 1.1rem;
+        }
+
+        .stepImg {
+            border-radius: 12px;
+            max-width: 400px;
+        }
+
+        .stepperTextWrapper {
+            width: 400px;
+        }
+
+        .lineWrapper {
+            margin-top: 140px;
+            margin-bottom: -140px;
+        }
+
+        @media (max-width: $mobile-breakpoint) {
+            display: none !important;
+        }
+        .stepBtn{
+            font-weight: 700;
+            &:hover{
+                background-color: #2ebb77 !important;
+            }
+        }
     }
-}
 
-.thirdSectionWrapper ul {
-    margin-bottom: 2rem;
-}
 
-.thirdSectionWrapper span {
-    font-size: 55px;
-    font-weight: bolder;
-    @media (max-width: $mobile-breakpoint) {
-        font-size: 38px;
+    .stepperMobile {
+        display: none !important;
+
+        @media (max-width: $mobile-breakpoint) {
+            display: flex !important;
+
+
+            .line {
+                width: 2px;
+                background-color: lightgrey !important;
+            }
+
+            .lead {
+                font-size: 1.1rem;
+            }
+        }
+
     }
-}
-
-.thirdSectionWrapper h1 {
-    font-size: 35px;
-    font-weight: bolder;
-    font-style: italic;
-    margin-bottom: 13px;
-    @media (max-width: $mobile-breakpoint) {
-        font-size: 15px;
-    }
-
 }
 
 .forthSectionWrapper h1 {
     font-size: 55px;
     font-weight: 800;
     margin-top: 2rem;
+
     @media (max-width: $mobile-breakpoint) {
         font-size: 28px;
     }
@@ -207,6 +237,7 @@ $mobile-breakpoint: 940px;
     font-weight: 600;
     align-self: flex-start;
     margin-top: 1rem;
+
     @media (max-width: $mobile-breakpoint) {
         font-size: 15px;
     }
@@ -216,6 +247,7 @@ $mobile-breakpoint: 940px;
     width: 40%;
     margin: auto;
     margin-bottom: 2rem;
+
     @media (max-width: $mobile-breakpoint) {
         width: 80%;
     }

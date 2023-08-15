@@ -79,7 +79,7 @@ const DashboardHomePage = () => {
     }, {
         name: '2019',
         type: 'line',
-        data: [23, 32, 27, 38, 27, 32, 27, 38, 22, 31, 21, 16]
+        data: mapChartData()
     }]
 
 
@@ -100,13 +100,13 @@ const DashboardHomePage = () => {
         var n_of_winners = 0;
         var n_of_plays = 0;
         var n_of_reap = 0;
+        var n_of_gift_given = 0;
 
         if (type === "win") {
             for (let i = 0; i < user.custermers.length; i++) {
-                for (let j = 0; j < user.custermers[i].spins.length; j++) {
-                    if (user.custermers[i].spins[j].isWin) {
-                        n_of_winners++
-                    }
+                // console.log(user.custermers[i].spins);
+                if (checkWinners(user.custermers[i])) {
+                    n_of_winners++;
                 }
             }
             return n_of_winners;
@@ -125,7 +125,25 @@ const DashboardHomePage = () => {
 
             }
             return n_of_reap;
+        } else if (type === "gift") {
+            for (let i = 0; i < user.custermers.length; i++) {
+                if (user.custermers[i].giftsGiven) {
+                    n_of_gift_given++
+                }
+
+            }
+            return n_of_gift_given;
         }
+    }
+
+    const checkWinners = (cus) => {
+        var checker = false;
+        for (let i = 0; i < cus.spins.length; i++) {
+            if (cus.spins[i].isWin) {
+                checker = true;
+            }
+        }
+        return checker;
     }
 
     return (
@@ -137,13 +155,13 @@ const DashboardHomePage = () => {
                         <div className="card card-margin m-4 card-width-dash">
                             <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
-                                    <div className='d-flex flex-row'>
+                                    <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
                                             <h6>Number of Customers</h6>
                                             <h1>{user.custermers.length}</h1>
                                         </div>
                                         <div>
-                                            <i className="display-4 fa fa-users m-2 text-info fa-fw"></i>
+                                            <i className="display-4 fa fa-users m-2 base-text-color fa-fw"></i>
                                         </div>
                                     </div>
                                     <hr className={styles.hr}></hr>
@@ -159,13 +177,13 @@ const DashboardHomePage = () => {
                         <div className="card card-margin m-4 card-width-dash">
                             <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
-                                    <div className='d-flex flex-row'>
+                                    <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
                                             <h6>Number of Winners</h6>
                                             <h1>{getNoOfWinners("win")}</h1>
                                         </div>
                                         <div>
-                                            <i className="display-4 fa  fa-trophy m-2 text-info fa-fw"></i>
+                                            <i className="display-4 fa  fa-trophy m-2 base-text-color fa-fw"></i>
                                         </div>
                                     </div>
                                     <hr className={styles.hr}></hr>
@@ -181,13 +199,13 @@ const DashboardHomePage = () => {
                         <div className="card card-margin m-4 card-width-dash">
                             <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
-                                    <div className='d-flex flex-row'>
+                                    <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
                                             <h6>Number of Play</h6>
                                             <h1>{getNoOfWinners("play")}</h1>
                                         </div>
                                         <div>
-                                            <i className="display-4 fa fa-line-chart m-2 text-info fa-fw"></i>
+                                            <i className="display-4 fa fa-line-chart m-2 base-text-color fa-fw"></i>
                                         </div>
                                     </div>
                                     <hr className={styles.hr}></hr>
@@ -203,13 +221,13 @@ const DashboardHomePage = () => {
                         <div className="card card-margin m-4 card-width-dash">
                             <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
-                                    <div className='d-flex flex-row'>
+                                    <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
                                             <h6>Repeaters</h6>
                                             <h1>{getNoOfWinners("reap")}</h1>
                                         </div>
                                         <div>
-                                            <i className="display-4 fa fa-users m-2 text-info fa-fw"></i>
+                                            <i className="display-4 fa fa-users m-2 base-text-color fa-fw"></i>
                                         </div>
                                     </div>
                                     <hr className={styles.hr}></hr>
@@ -225,13 +243,13 @@ const DashboardHomePage = () => {
                         <div className="card card-margin m-4 card-width-dash">
                             <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
-                                    <div className='d-flex flex-row'>
+                                    <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
                                             <h6>Gift Given</h6>
-                                            <h1>{getNoOfWinners("win")}</h1>
+                                            <h1>{getNoOfWinners("gift")}</h1>
                                         </div>
                                         <div>
-                                            <i className="display-4 fa fa-gift m-2 text-info fa-fw"></i>
+                                            <i className="display-4 fa fa-gift m-2 base-text-color fa-fw"></i>
                                         </div>
                                     </div>
                                     <hr className={styles.hr}></hr>
@@ -247,13 +265,13 @@ const DashboardHomePage = () => {
                         <div className="card card-margin m-4 card-width-dash">
                             <div className="card-body p-4">
                                 <div className='d-flex flex-column'>
-                                    <div className='d-flex flex-row'>
+                                    <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
                                             <h6>Checked for personal info</h6>
                                             <h1>{user.custermers.length}</h1>
                                         </div>
                                         <div>
-                                            <i className="display-4 fa fa-blind m-2 text-info fa-fw"></i>
+                                            <i className="display-4 fa fa-blind m-2 base-text-color fa-fw"></i>
                                         </div>
                                     </div>
                                     <hr className={styles.hr}></hr>

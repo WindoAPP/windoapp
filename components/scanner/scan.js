@@ -4,7 +4,7 @@ import styles from './scan.module.scss';
 import React from 'react';
 import WheelComponent from '../wheel/spinWheel';
 import { useEffect } from 'react';
-import { createCustomer, getUser, updateCustomer } from '../../services/service';
+import { createCustomer, createNotification, getUser, updateCustomer } from '../../services/service';
 import { useRouter } from 'next/router';
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
@@ -21,13 +21,19 @@ const Scan = () => {
     const [step, setStep] = useState(0);
     const [price, setPrice] = useState();
     const [screenHeight, setScreenHeight] = useState();
+    const [spinCount, setSpinCount] = useState(0);
+    const [wheelItemsArr,setWheelItemsArr] = useState([]);
+    const [isWin,setIsWin] = useState(false);
 
     const { id } = router.query;
 
 
     useEffect(() => {
         setScreenHeight(window.innerHeight);
-        console.log(screenHeight);
+        const savedValue = localStorage.getItem('spin_count');
+        if(savedValue){
+            setSpinCount(savedValue);
+        }
         if (id) {
             getUser(id).then(res => {
                 if (res) {
@@ -39,6 +45,7 @@ const Scan = () => {
 
                     setSegments(segmentsTemp);
                     setSegmentColors(segmentsColorTemp);
+                    setWheelItemsArr(res.user.wheelItems);
                 }
 
             }).catch(err => {
@@ -108,8 +115,19 @@ const Scan = () => {
     };
 
     // Open a new window when the button is clicked
-    const openNewWindow = () => {
-        const url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
+    const openNewWindow = (e) => {
+        e.preventDefault();
+        var url;
+        if(spinCount==0){
+            url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
+        }else if(spinCount==1){
+            url=user.facebook
+        }else if(spinCount==2){
+            url=user.instagram
+        }else{
+            url=user.tiktok
+        }
+         
         const width = "80%";
         const height = "auto";
         const windowFeatures = `width=${width},height=${height}`;
@@ -118,6 +136,10 @@ const Scan = () => {
 
         newWindow.addEventListener('beforeunload', handleWindowClose);
         setStep(1);
+        localStorage.setItem('spin_count', spinCount+1);
+
+        // Retrieve the value from local storage
+        
 
     };
 
@@ -128,30 +150,49 @@ const Scan = () => {
 
     const onFinished = (winner) => {
         setTimeout(() => {
-            if (winner === "Try again") {
-                alert("try again")
-            } else {
-                setStep(3);
-                setPrice(winner)
-            }
+            
+
+            var index = segments.indexOf(winner);
+            var selectedItm=wheelItemsArr[index];
+
 
             var custimerData = customer;
 
+            if(custimerData){
+                if (selectedItm.isWinningItem) {
+                    setIsWin(true);
+                    setStep(3);
+                    setPrice(winner);
+                } else {
+                    setStep(3);
+                    setIsWin(false);     
+                }
+            }
+
             if (customer.spins) {
                 custimerData.spins.push({
-                    isWin: winner !== "Try again",
+                    isWin: selectedItm.isWinningItem,
                     price: winner,
                     created_at: new Date()
                 })
             } else {
                 custimerData['spins'] = [];
                 custimerData.spins.push({
-                    isWin: winner !== "Try again",
+                    isWin: selectedItm.isWinningItem,
                     price: winner,
                     created_at: new Date()
                 })
             }
             updateCustomerFn(custimerData);
+            var notificationData ={
+                backColor: !selectedItm.isWinningItem? "alert-secondary":"alert-success",
+                user: user._id,
+                body: !selectedItm.isWinningItem? "perdu le jeu tourner la roue": "a gagné le prix en jouant à faire tourner la roue",
+                icon: !selectedItm.isWinningItem? "fa-certificate" : "fa-trophy",
+                customer: customer._id
+        
+            }
+            createNotifi(notificationData);
         }, 3000)
 
 
@@ -161,6 +202,16 @@ const Scan = () => {
         updateCustomer(data).then(res => {
             if (res) {
                 setCustomer(data);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    const createNotifi=(data)=>{
+        createNotification(data).then(res => {
+            if (res) {
+                console.log("notfifi created!",res);
             }
         }).catch(err => {
             console.log(err);
@@ -228,9 +279,9 @@ const Scan = () => {
                     {
                         step === 3 &&
                         <div>
-                            <img className={styles.fireImage} src="fire.gif"></img>
-                            <h2 className='text-warning'>Congratulations !!</h2>
-                            <h1 className='text-success'>You won {price}</h1>
+                            {isWin?<img className={styles.fireImage} src="fire.gif"></img>:<img className={styles.fireImage} src="sadimage.gif"></img>}
+                            <h2 className='text-warning'>{isWin?"Congratulations !!":"Sorry !!"}</h2>
+                            <h1 className='text-success'>{isWin?`You won ${price}`:"Try Again with next time"}</h1>
                             <p className='text-info'>Lorem Ipsum is simply dummy text of the printing</p>
                         </div>
                     }
@@ -241,8 +292,8 @@ const Scan = () => {
                         <div className={`d-flex ${styles.wheelWrapperc}`} >
                             <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
                                 <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
-                                <p className='align-self-center text-center '>Lorem Ipsum is simply dummy </p>
-                                <button onClick={handleCallChildFunction} type="button" class="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
+                                <p className='align-self-center text-center '>{user.shopSlogan && user.shopSlogan } </p>
+                                <button onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
                             </div>
 
                             <div className={styles.wheelWrapper}>

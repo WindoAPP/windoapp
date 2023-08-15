@@ -1,0 +1,96 @@
+$mobile-breakpoint: 940px;
+
+.navBarMainWrapper{
+    justify-content: space-between;
+    @media (max-width: $mobile-breakpoint) {
+        justify-content: end;
+      }
+}
+.leftRow{
+    margin-left: 18rem;
+    i{
+        font-size: 22px;
+    }
+    input{
+        padding-left: 36px;
+        border-radius: 20px;
+    }
+    .searchIcon{
+        font-size: 18px;
+        position: absolute;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    .navImage{
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+    }
+    .adminText{
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        i{
+            font-size: 14px;
+        }
+
+    }
+}
+.leftRow1{
+    margin-left: 8rem !important;
+}
+.dropdownMenu{
+    visibility: hidden;
+    position: absolute;
+    width: 10rem;
+    top: 49px;
+    right: 18px;
+    border-radius:0 0 10px 10px ;
+    z-index: 10;
+    .dropdownMenuItem{
+        span{
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            &:hover{
+                color: rgb(69, 163, 252) !important;
+            }
+        }
+        i{
+            &:hover{
+                color: rgb(69, 163, 252) !important;
+            } 
+        }          
+    }  
+}
+.dropdownMenuShow{
+    visibility:visible;
+}
+.hr{
+    border-top-width: 2px;
+    border-color: gray;
+    margin: 0;
+}
+
+.notificationDot{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    width: 15px;
+    height: 15px;
+    font-size: 9px;
+    text-align: center;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 11px;
+    margin-left: 43px;
+}
+
+.barsIcon{
+    @media (max-width: $mobile-breakpoint) {
+        display: none;
+      }
+}

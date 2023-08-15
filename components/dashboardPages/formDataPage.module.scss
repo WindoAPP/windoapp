@@ -4,3 +4,15 @@ $mobile-breakpoint: 940px;
     height: 100vh;
     background-color: #f1f5f7;
 }
+.formWrapper{
+    width: 60%;
+    @media (max-width: $mobile-breakpoint) {
+        width: 100%;
+      }
+}
+.hr{
+    border-top-width: 2px;
+    border-color: gray;
+    margin: 0;
+    margin-bottom: 2rem;
+}

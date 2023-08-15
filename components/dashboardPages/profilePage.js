@@ -31,6 +31,7 @@ const ProfilePage = () => {
     const [color, setColor] = useState("#00df20");
     const [color2, setColor2] = useState("#000");
     const [item, setItem] = useState("");
+    const [itemLost, setItemLost] = useState("");
     const [user, setUser] = useState({});
     const [wheelItems, setWheelItems] = useState([]);
     const [file, setFile] = useState(null);
@@ -42,6 +43,7 @@ const ProfilePage = () => {
     const [colorPallate02Opend, setColorPallate02Opend] = useState(false);
     const [wheelItemsTouched, setWheelItemsTouched] = useState(false);
     const [slogan, setSlogan] = useState("Add your text");
+    const [winningProbability, setWinningProbability] = useState(0);
 
 
     useEffect(() => {
@@ -85,14 +87,22 @@ const ProfilePage = () => {
         });
     }
 
-    const addItem = () => {
-        if (item == "") {
-            return showNotification(true, "Please add the gift name")
+    const addItem = (isWin) => {
+        if(isWin){
+            if (item == "") {
+                return showNotification(true, "Please add the gift name")
+            }
+        }else{
+            if (itemLost == "") {
+                return showNotification(true, "Please add the gift name")
+            }
         }
-        var w_item = { item: item, color: colorPickNo == 1 ? color : color2 }
+        
+        var w_item = { item: isWin?item:itemLost, color: colorPickNo == 1 ? color : color2 ,isWinningItem:isWin}
         setWheelItems([...wheelItems, w_item]);
         setItem("");
-        setSegments([...segments, item]);
+        setItemLost("");
+        setSegments([...segments, isWin?item:itemLost]);
         setSegmentColors([...segmentColors, colorPickNo == 1 ? color : color2]);
         setWheelUpdated(false);
         setWheelItemsTouched(true);
@@ -128,6 +138,7 @@ const ProfilePage = () => {
         var userData = user;
         userData['wheelItems'] = wheelItems;
         userData['shopSlogan'] = slogan;
+        userData['winningProbability'] = winningProbability;
         setLoading(true);
         updateUser(userData).then(res => {
             if (res) {
@@ -157,6 +168,9 @@ const ProfilePage = () => {
                 setSegmentColors(segmentsColorTemp);
                 setWheelUpdated(true);
                 setLoading(false);
+                if(res.user.winningProbability){
+                    setWinningProbability(res.user.winningProbability)
+                }
                 if (res.user.shopSlogan) {
                     setSlogan(res.user.shopSlogan);
                 }
@@ -170,6 +184,11 @@ const ProfilePage = () => {
 
     const onSloganChange = (e) => {
         setSlogan(e.target.value);
+        setWheelItemsTouched(true);
+    }
+
+    const onWinningProbabilityChange = (e) => {
+        setWinningProbability(e.target.value)
         setWheelItemsTouched(true);
     }
 
@@ -229,6 +248,10 @@ const ProfilePage = () => {
                                     <p className='my-2'>Slogan text :</p>
                                     <textarea type='textarea' className="form-control  mx-2" value={slogan} onChange={onSloganChange}  ></textarea>
                                 </div>
+                                <div className='d-flex flex-row align-items-center'>
+                                        <p className='my-2'>Winning probability :</p>
+                                        <input className="form-control  mx-2" value={winningProbability} onChange={onWinningProbabilityChange}  type='number'></input><p>%</p>
+                                    </div>
                                 <div className='d-flex flex-column mb-4'>
                                     <p className='my-2'>Base color 01 :</p>
                                     <div className='d-flex flex-row align-items-center'>
@@ -269,13 +292,12 @@ const ProfilePage = () => {
                                 </div>
                                 <div className={`d-flex flex-column mt-4`}>
                                     <div className='d-flex flex-row mb-4'>
-                                        <input className="form-control" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add wheel item' maxLength={15}></input>
-                                        <button className='btn btn-primary mx-2 w-50' onClick={addItem}>Add <i className=" fa fa-plus"></i></button>
-
+                                        <input className="form-control bg-color-green" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add winning item' maxLength={15}></input>
+                                        <button className='btn btn-success mx-2 w-50' onClick={()=>addItem(true)}>Add <i className=" fa fa-plus"></i></button>
                                     </div>
-                                    <div className='d-flex flex-row align-items-center'>
-                                        <p className='my-2'>Winning probability :</p>
-                                        <input className="form-control  mx-2" maxLength={2} type='number'></input><p>%</p>
+                                    <div className='d-flex flex-row mb-4'>
+                                        <input className="form-control bg-color-orange" value={itemLost} onChange={(e) => setItemLost(e.target.value)} placeholder='Add losing item' maxLength={15}></input>
+                                        <button className='btn btn-warning mx-2 w-50' onClick={()=>addItem(false)}>Add <i className=" fa fa-plus"></i></button>
                                     </div>
                                     <table className="table">
                                         <thead className="thead-dark">
@@ -290,7 +312,7 @@ const ProfilePage = () => {
                                                 return (
                                                     <tr>
                                                         <td style={{ backgroundColor: item.color }}></td>
-                                                        <td><input className="form-control" onChange={(e) => handleInputChange(index, e.target.value)} style={{ backgroundColor: "#fff" }} value={item.item}></input></td>
+                                                        <td><input className={`form-control ${item.isWinningItem?"bg-color-green":"bg-color-orange"}`} onChange={(e) => handleInputChange(index, e.target.value)} style={{ backgroundColor: "#fff" }} value={item.item}></input></td>
                                                         <td><button className='btn btn-danger' style={{ width: "3rem" }} onClick={() => removeItem(index)}><i className="fa fa-trash-o"></i></button></td>
                                                     </tr>
                                                 )

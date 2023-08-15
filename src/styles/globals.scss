@@ -40,7 +40,7 @@ $mobile-breakpoint: 940px;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
 }
-$mobile-breakpoint: 480px;
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -246,11 +246,29 @@ a {
     margin-left: 0 !important;
   }
 }
+.dashboard-component-close{
+  margin-left: 6.2rem;
+  @media (max-width: $mobile-breakpoint) {
+    margin-left: 0 !important;
+  }
+}
 a{
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .card-width-dash{
-  width: 20rem;
+  width: 21rem;
+}
+.base-text-color{
+  color: #41AE56;
+}
+.mr-2{
+  margin-right: 2rem;
 }
 
+.bg-color-green{
+  background-color: rgba(40, 180, 99 , 0.3) !important;
+}
+.bg-color-orange{
+  background-color: rgba(243, 156, 18, 0.3) !important;
+}

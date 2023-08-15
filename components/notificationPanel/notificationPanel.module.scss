@@ -1,0 +1,20 @@
+.mainContent{
+    position: absolute;
+    right: 36px;
+    width: 22rem;
+    height: 50rem;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    z-index: 10;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.notificationItem{
+    width: 20rem;
+    padding: 10px 10px 10px 5px ;
+}
+.notifiIcon{
+    font-size: 30px;
+    margin-right: 10px;
+    margin-left: 0.25rem;
+}

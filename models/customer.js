@@ -29,6 +29,10 @@ const CustomerSchema = new Schema({
         type: Date,
         required: true
     },
+    giftsGiven:{
+        type: Boolean,
+        required: false,
+    },
     spins: [{
         isWin: {
             type: Boolean,

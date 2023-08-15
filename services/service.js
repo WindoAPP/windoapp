@@ -182,3 +182,48 @@ export async function getPayments(uid) {
     }
 
 }
+
+//notification
+
+export async function createNotification(notificationData) {
+    try {
+        const response = await axios.post(`/api/notification`, notificationData);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
+export async function updateNotification(userId) {
+    try {
+        const response = await axios.put(`/api/notification?id=${userId}`);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+}
+
+export async function getAllNotifications(userId) {
+    try {
+        const response = await axios.get(`/api/notification?id=${userId}`);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
+export async function deleteANotification(id) {
+    try {
+        const response = await axios.delete(`/api/notification?id=${id}`);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
