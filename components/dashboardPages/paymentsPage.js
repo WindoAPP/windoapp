@@ -14,7 +14,6 @@ const PaymentsPage = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true)
     const [paymentsArr, setPaymentsArr] = useState([]);
-
     useEffect(() => {
         if (session) {
             fetchUser(session.user.uid);
