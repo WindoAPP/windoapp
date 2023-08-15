@@ -261,7 +261,7 @@ const PaymentsPage = () => {
                                 )
                             })
                             }
-                            {paymentsArr.length == 0 && <h3 className='text-muted' >No any Subscribes</h3>}
+                            {paymentsArr.length === 0 && <h3 className='text-muted' >No any Subscribes</h3>}
                         </div>
                     </div>
                 </> : <Loader />
