@@ -1,3 +1,11 @@
+$mobile-breakpoint: 940px;
+
+.navBarMainWrapper{
+    justify-content: space-between;
+    @media (max-width: $mobile-breakpoint) {
+        justify-content: end;
+      }
+}
 .leftRow{
     margin-left: 18rem;
     i{
@@ -79,4 +87,10 @@
     position: absolute;
     top: 11px;
     margin-left: 43px;
+}
+
+.barsIcon{
+    @media (max-width: $mobile-breakpoint) {
+        display: none;
+      }
 }

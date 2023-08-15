@@ -9,7 +9,7 @@ const FormDataPage = () => {
     const { data: session } = useSession();
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [formData, setFormData] = useState({ facebook: '', instagram: '', email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '' })
+    const [formData, setFormData] = useState({ facebook: '', tiktok: '', instagram: '', email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '' })
 
     useEffect(() => {
         if (session) {
@@ -23,7 +23,7 @@ const FormDataPage = () => {
                 setUser(res.user);
                 setIsLoading(false);
                 setFormData(
-                    { facebook: res.user.facebook || "", instagram: res.user.instagram || "", email: res.user.email, password: '', c_password: '', userName: res.user.userName, phoneNumber: res.user.phoneNumber, shopName: res.user.shopName, shopId: res.user.shopId }
+                    { facebook: res.user.facebook || "", tiktok: res.user.tiktok || "", instagram: res.user.instagram || "", email: res.user.email, password: '', c_password: '', userName: res.user.userName, phoneNumber: res.user.phoneNumber, shopName: res.user.shopName, shopId: res.user.shopId }
                 )
             }
         }).catch(err => {
@@ -53,9 +53,10 @@ const FormDataPage = () => {
         userData.phoneNumber = formData.phoneNumber
         userData.shopName = formData.shopName
         userData.shopId = formData.shopId
-        userData['facebook'] = formData.facebook;
-        userData['instagram'] = formData.instagram;
-
+        userData['facebook'] = urlRemake(formData.facebook)? formData.facebook:`https://${formData.facebook}`;
+        userData['instagram'] = urlRemake(formData.instagram)? formData.instagram:`https://${formData.instagram}`;
+        userData['tiktok'] = urlRemake(formData.tiktok)? formData.tiktok:`https://${formData.tiktok}`;
+  
         updateUser(userData).then(res => {
             if (res) {
                 setUser(userData);
@@ -66,13 +67,24 @@ const FormDataPage = () => {
 
     }
 
+    const urlRemake = (link) => {
+
+        const httpsPattern = /^https:\/\//;
+
+        if (httpsPattern.test(link)) {
+            return true;
+        } else {
+            return false
+        }
+    }
+
     return (
         <>
             {
                 !isLoading ? <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
                     <div className={`${styles.formWrapper}`}>
-                         <h1 >Profil</h1>
-                         <hr className={styles.hr}></hr>
+                        <h1 onClick={()=>urlRemake(formData.facebook)} >Profil</h1>
+                        <hr className={styles.hr}></hr>
                         {/* <p className='text-muted'>By including this you can increase your number of followers </p>  */}
                         <form className='d-flex flex-column'>
                             <div className="d-flex flex-column">
@@ -105,7 +117,7 @@ const FormDataPage = () => {
                             </div>
 
                             <div className='card p-3 mt-5'>
-                                <h5 className={styles.socialLinkTitle}>CHANGEMENT DE MOT DE PASSE</h5>
+                                <h5 className={styles.socialLinkTitle}>Mes liens sociaux</h5>
                                 <hr className={`${styles.hr} mb-3`}></hr>
                                 <div className="d-flex flex-column mt-3">
                                     <div className='d-flex flex-row'>
@@ -122,6 +134,10 @@ const FormDataPage = () => {
                                 <div className="form-group my-2">
                                     <label><strong>Instagram link</strong></label>
                                     <input type="text" className="form-control" name="instagram" placeholder="Enter your instagram link" value={formData.instagram} onChange={handleChange}></input>
+                                </div>
+                                <div className="form-group my-2">
+                                    <label><strong>tiktok link</strong></label>
+                                    <input type="text" className="form-control" name="tiktok" placeholder="Enter your tiktok link" value={formData.tiktok} onChange={handleChange}></input>
                                 </div>
                             </div>
 

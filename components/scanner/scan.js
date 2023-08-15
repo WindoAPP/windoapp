@@ -122,8 +122,10 @@ const Scan = () => {
             url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
         }else if(spinCount==1){
             url=user.facebook
-        }else{
+        }else if(spinCount==2){
             url=user.instagram
+        }else{
+            url=user.tiktok
         }
          
         const width = "80%";

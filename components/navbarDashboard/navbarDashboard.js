@@ -75,9 +75,9 @@ const NavbarDashboard = ({ onDataUpdate }) => {
 
     return (
         <>
-        <div className={`navbar bg-light shadow-sm d-flex flex-row justify-content-between`}>
+        <div className={`navbar bg-light shadow-sm d-flex flex-row  ${styles.navBarMainWrapper}`}>
             <div className={`d-flex flex-row align-items-center ${styles.leftRow} ${sideBarOpen?styles.leftRow1:''}`} onClick={onClickSideBarBtn}>
-                <i className="fa fa-bars text-secondary cursor-pointer" aria-hidden="true"></i>
+                <i className={`fa fa-bars text-secondary cursor-pointer ${styles.barsIcon}`} aria-hidden="true"></i>
             </div>
             <div className={`d-flex flex-row align-items-center mx-4  ${styles.leftRow}`}>
                 <i className="fa fa-bell-o text-secondary mx-4 cursor-pointer" aria-hidden="true" onClick={onClickNotifiBtn}></i>

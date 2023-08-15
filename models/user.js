@@ -76,6 +76,10 @@ const UserSchema = new Schema({
         type: String,
         required: false,
     },
+    tiktok: {
+        type: String,
+        required: false,
+    },
     winningProbability:{
         type: Number,
         required: false,

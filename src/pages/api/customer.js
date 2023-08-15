@@ -10,8 +10,7 @@ const handler = async (req, res) => {
         if (!req.body) return res.status(400).json({ error: "Data is missing" })
 
         const { name, user, phoneNumber,email,instagram,facebook } = req.body
-        Customer.find({email:email}).then((cus)=>{
-            console.log(cus.length);
+        Customer.find({email:email,user:user}).then((cus)=>{
             if(cus.length==0){
                 const gust = new Customer({
                     name: name,

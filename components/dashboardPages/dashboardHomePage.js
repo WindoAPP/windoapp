@@ -104,10 +104,9 @@ const DashboardHomePage = () => {
 
         if (type === "win") {
             for (let i = 0; i < user.custermers.length; i++) {
-                for (let j = 0; j < user.custermers[i].spins.length; j++) {
-                    if (user.custermers[i].spins[j].isWin) {
-                        n_of_winners++
-                    }
+                // console.log(user.custermers[i].spins);
+                if (checkWinners(user.custermers[i])) {
+                    n_of_winners++;
                 }
             }
             return n_of_winners;
@@ -126,7 +125,7 @@ const DashboardHomePage = () => {
 
             }
             return n_of_reap;
-        } else if(type === "gift"){
+        } else if (type === "gift") {
             for (let i = 0; i < user.custermers.length; i++) {
                 if (user.custermers[i].giftsGiven) {
                     n_of_gift_given++
@@ -135,6 +134,16 @@ const DashboardHomePage = () => {
             }
             return n_of_gift_given;
         }
+    }
+
+    const checkWinners = (cus) => {
+        var checker = false;
+        for (let i = 0; i < cus.spins.length; i++) {
+            if (cus.spins[i].isWin) {
+                checker = true;
+            }
+        }
+        return checker;
     }
 
     return (
