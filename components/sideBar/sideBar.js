@@ -20,8 +20,6 @@ const SideBar = ({sideBarOpen}) => {
             
         }
     });
-
-    
 }
 
   return (
