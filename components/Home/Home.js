@@ -9,7 +9,7 @@ const Home = () => {
     <div className='d-flex flex-column'>
       <div className={`d-flex mb-5 ${styles.felxMobile} ${styles.topsection1}`}>
         <div className='d-flex flex-column '>
-          <button className={`mb-2 ${styles.purplrBtn}`}>Et si on jouer un peu <img draggable="false" role="img" class="emoji" alt="🤭" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f92d.svg"></img></button>
+          <button className={`mb-2 ${styles.purplrBtn}`}>Et si on jouer un peu <img draggable="false" role="img" className="emoji" alt="🤭" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f92d.svg"></img></button>
           <h1 className='mb5'>Boostez Votre Visibilité avec des avis sur Google</h1>
           <p className='text-secondary'>Un QR code magique ouvre la porte à une expérience unique : faites jouer vos clients et obtenez des avis positifs tous les mois.</p>
           <div className={`d-flex flex-column justify-content-center mb-5`}>
@@ -80,10 +80,10 @@ const Home = () => {
 
         </div> */}
       </div>
-      
-      <div className={`d-flex flex-column align-items-center justify-content-center mb-4 ${styles.thirdSectionWrapper}`}>
-      <button className={`mb-2 ${styles.purplrBtn}`}>C'est fun et encourageant</button>
-      <h1 className={styles.topThird}>C'est Very Easy <img draggable="false" role="img" class="emoji" alt="😌" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f60c.svg"></img></h1>
+
+      <div id="howitworks" className={`d-flex flex-column align-items-center justify-content-center mb-5 ${styles.thirdSectionWrapper}`}>
+        <button className={`mb-2 ${styles.purplrBtn}`}>C'est fun et encourageant</button>
+        <h1 className={styles.topThird}>C'est Very Easy <img draggable="false" role="img" className="emoji" alt="😌" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f60c.svg"></img></h1>
         <div className={`${styles.stepper} d-flex flex-column mt-5 ml-2`}>
           <div className="d-flex mb-1">
             <img src="/step4.png" className={`shadow-sm ${styles.stepImg}`}></img>
@@ -173,7 +173,21 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className={`d-flex flex-row align-items-center justify-content-center mb-5 ${styles.secondSectionWrapper1}`}>
+      <div id="prix" className={`d-flex flex-column card align-items-center justify-content-center align-self-center p-5 my-5 ${styles.secondSectionWrapper}`}>
+        <h1>Un tarif unique pour tous.</h1>
+        <h2>€39,90 / mois*</h2>
+        <div className={`d-flex flex-column my-4 ${styles.priceSectionWrp}`}>
+          <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Création dune page de jeu à votre image</span>
+          <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Choix de vos actions, cadeaux et conditions de retrait</span>
+          <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Accès au tableau de bord pour suivre votre campagne</span>
+          <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Suivi mensuel personnalisé tous les mois</span>
+          <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Support technique</span>
+        </div>
+        <button className={`btn btn-success btn-lg ${styles.reviewBtn1}`} onClick={() => router.push("/login")}>
+        JE VEUX WINDO
+        </button>
+      </div>
+      <div className={`d-flex ${styles.felxMobile} align-items-center justify-content-center mb-5 mt-5 ${styles.secondSectionWrapper1}`}>
         <div className={`d-flex flex-column ${styles.secondSectionInnerWrapper}`}>
           <h1>Commander vos supports en 1 clic !</h1>
           <h4 className='mt-3'>Une fois que vous avez obtenu votre QR Code, commandez votre support physique en quelques clics via l'imprimerie de Very Easy. Simplifiez le processus et concrétisez votre projet en un rien de temps !</h4>
@@ -181,22 +195,6 @@ const Home = () => {
         </div>
         <img className={styles.image} src='/homepageimage6.png'></img>
       </div>
-      {/* <div className={`d-flex flex-column align-items-center justify-content-center ${styles.secondSectionWrapper}`}>
-        <h1>A price adapted to your needs</h1>
-        <p>A price adapted to your needs installation in less than 24 hours.</p>
-        <h1>€59.99 / month*</h1>
-        <ul>
-          <li>Creation of a game page in your image</li>
-          <li>Design of flyers and table stickers</li>
-          <li>Choice of your shares, gifts and withdrawal conditions</li>
-          <li>Dashboard access to track your campaign</li>
-          <li>Personalized monthly follow-up every month</li>
-          <li>Technical support</li>
-        </ul>
-        <button className={`btn btn-warning btn-lg ${styles.reviewBtn1}`} onClick={() => router.push("/login")}>
-          I Want Windo
-        </button>
-      </div> */}
       {/* <div className={`d-flex flex-column align-items-center justify-content-center ${styles.forthSectionWrapper}`}>
         <h1>No more asking for google reviews</h1>
         <ul>

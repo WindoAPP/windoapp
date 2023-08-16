@@ -30,7 +30,8 @@ $mobile-breakpoint: 940px;
     border: none;
     font-weight: 700;
     max-width: 18rem;
-    img{
+
+    img {
         width: 20px;
     }
 }
@@ -49,20 +50,23 @@ $mobile-breakpoint: 940px;
     min-width: 32px;
     text-align: center;
 }
-.topsection1{
-    h1{
+
+.topsection1 {
+    h1 {
         font-size: 40px;
         line-height: 1.3;
         font-weight: 700;
 
     }
-    p{
+
+    p {
         font-weight: 500;
         line-height: 1.8;
         font-size: 18px;
 
     }
-    h3{
+
+    h3 {
         font-weight: 500;
     }
 }
@@ -153,30 +157,39 @@ $mobile-breakpoint: 940px;
     padding: 2rem;
     color: #fff;
     background-image: url('/boxback.png');
-    background-size: cover; /* Adjust this as needed */
+    background-size: cover;
+    /* Adjust this as needed */
 
-    .abonnezBtn{
+    .abonnezBtn {
         height: 56px;
         border-radius: 12px;
         font-weight: 600;
         padding: 0 45px;
         max-width: 17rem;
-        &:hover{
+
+        &:hover {
             background-color: #2ebb77 !important;
             border: none;
         }
     }
-    .image{
+
+    .image {
         width: 40%;
         border-radius: 10px;
         margin: 1.5rem;
+        @media (max-width: $mobile-breakpoint) {
+            width: 95%;
+        }
     }
-    .secondSectionInnerWrapper{
+
+    .secondSectionInnerWrapper {
         padding-right: 8%;
-        h1{
+
+        h1 {
             font-size: 48px;
         }
-        h5{
+
+        h5 {
             font-size: 20px;
             font-weight: 400;
         }
@@ -184,15 +197,48 @@ $mobile-breakpoint: 940px;
 }
 
 .secondSectionWrapper {
-    padding: 2rem;
-    color: #fff;
-    background-image: url("/boxback.png");
-    background-size: cover; /* Adjust this as needed */
+    border-radius: 50px;
+    width: 60%;
+    background-color: #f1f5f7;
+
+    .priceSectionWrp {
+        font-weight: 500;
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 40px;
+        font-weight: 800;
+
+        @media (max-width: $mobile-breakpoint) {
+            font-size: 35px;
+        }
+    }
+
+    h1 {
+        font-size: 60px;
+        font-weight: 700;
+        text-align: center;
+        border-bottom: 2px solid gray;
+        padding-bottom: 2rem;
+
+        @media (max-width: $mobile-breakpoint) {
+            font-size: 35px;
+        }
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+        width: 95%;
+    }
+
 }
 
 .secondSectionWrapper p {
     font-size: 20px;
     font-weight: 600;
+    @media (max-width: $mobile-breakpoint) {
+        font-size: 16px;
+    }
 }
 
 .secondSectionWrapper ul {
@@ -202,35 +248,20 @@ $mobile-breakpoint: 940px;
     margin-top: 1rem;
 }
 
-.secondSectionWrapper h1 {
-    font-size: 60px;
-    font-weight: 800;
-    text-align: center;
 
-    @media (max-width: $mobile-breakpoint) {
-        font-size: 38px;
-    }
-}
-
-.secondSectionWrapper h2 {
-    font-size: 30px;
-    font-weight: bolder;
-
-    @media (max-width: $mobile-breakpoint) {
-        font-size: 15px;
-    }
-}
 
 .thirdSectionWrapper {
-    .topThird{
+    .topThird {
         font-size: 40px;
-    line-height: 1.3;
-    margin-top: 15px;
-    font-weight: 700;
-    img{
-        width: 36px;
+        line-height: 1.3;
+        margin-top: 15px;
+        font-weight: 700;
+
+        img {
+            width: 36px;
+        }
     }
-    }
+
     .stepper {
         .line {
             width: 2px;
@@ -264,9 +295,11 @@ $mobile-breakpoint: 940px;
         @media (max-width: $mobile-breakpoint) {
             display: none !important;
         }
-        .stepBtn{
+
+        .stepBtn {
             font-weight: 700;
-            &:hover{
+
+            &:hover {
                 background-color: #2ebb77 !important;
             }
         }
