@@ -191,7 +191,7 @@ const Home = () => {
         <div className={`d-flex flex-column ${styles.secondSectionInnerWrapper}`}>
           <h1>Commander vos supports en 1 clic !</h1>
           <h4 className='mt-3'>Une fois que vous avez obtenu votre QR Code, commandez votre support physique en quelques clics via l'imprimerie de Very Easy. Simplifiez le processus et concrétisez votre projet en un rien de temps !</h4>
-          <button type="button" className={`btn btn-light  mt-4 ${styles.abonnezBtn}`}>S'abonnez à Windo 🎡</button>
+          <button type="button" className={`btn btn-light  mt-4 ${styles.abonnezBtn}`}>Commander un support</button>
         </div>
         <img className={styles.image} src='/homepageimage6.png'></img>
       </div>
