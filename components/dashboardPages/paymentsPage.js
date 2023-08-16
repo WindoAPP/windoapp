@@ -18,7 +18,6 @@ const PaymentsPage = () => {
     const [paymentsArr, setPaymentsArr] = useState([]);
     useEffect(() => {
         if (session) {
-            console.log(">>",todayDate);
             fetchUser(session.user.uid);
         }
     }, [session]);
