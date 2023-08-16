@@ -38,7 +38,7 @@ const Home = () => {
               <h5 className='mb-0 mx-2 font-weight-bold'>Augmentez votre chiffre d'affaires</h5>
             </div>
           </div>
-          <button className={`mb-4 ${styles.topBtn}`}>15* jours d'essai gratuit</button>
+          <button className={`mb-4 ${styles.topBtn}`}>15 jours d'essai gratuit</button>
         </div>
         <div className='d-flex flex-column align-items-end  overflow-hidden mx-4'>
           <img src='homeimage1.png' className={styles.topImage1}></img>
@@ -127,7 +127,7 @@ const Home = () => {
               <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>4</div>
               <div className={`${styles.line} h-100 d-none`} ></div>
             </div>
-            <img src="/step4.png" className={`${styles.stepImg}`}></img>
+            <img src="/step2.png" className={`${styles.stepImg}`}></img>
           </div>
         </div>
         <div className={`${styles.stepperMobile}  d-flex flex-column mt-5 ml-2`}>
