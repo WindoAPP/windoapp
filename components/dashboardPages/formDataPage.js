@@ -127,7 +127,7 @@ const FormDataPage = () => {
                                 <div className="d-flex flex-column mt-3">
                                     <div className='d-flex flex-row'>
                                         <label><strong>Shop ID</strong></label>
-                                        <label className='mx-2'><a target="_blank" href='https://ultimateelementor.com/docs/find-google-place-id/'>click here</a> to get your shop ID </label>
+                                        <label className='mx-2'><a target="_blank" href='https://veryeasyagency.com/id-google/'>click here</a> to get your shop ID </label>
                                     </div>
 
                                     <input type="text" name="shopId" placeholder="shop ID" className="form-control regi-input " onChange={handleChange} value={formData.shopId}></input>

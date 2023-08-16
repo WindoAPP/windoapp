@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Navbar.module.scss'
 import { useRouter } from 'next/router';
-import {  useState } from 'react';
+import { useState } from 'react';
 
 const Navbar = () => {
   const router = useRouter();
@@ -34,12 +34,15 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item ml-4">
-              <Link href="#prix"  className={styles.navTextItem}>
+              <Link href="#prix" className={styles.navTextItem}>
                 Prix
               </Link>
             </li>
           </ul>
-          <button onClick={() => router.push("/login")} className={styles.bookDemoBtn}>s'abonner</button>
+          <div>
+            <button onClick={() => router.push("/register")} className={styles.bookDemoBtn}>s'abonner</button>
+            <button onClick={() => router.push("/login")} className={`${styles.bookDemoBtn} mx-4`}>Se connecter</button>
+          </div>
         </div>
         {sideBarShow &&
           <div className={`shadow ${styles.navMobile}`} id="navbarNav">
@@ -55,9 +58,12 @@ const Navbar = () => {
                   Prix
                 </Link>
               </li>
-              
+
               <li className="nav-item my-3 mx-3">
-                <button onClick={() => router.push("/login")} className={styles.bookDemoBtn}>s'abonner</button>
+                <div>
+                  <button onClick={() => router.push("/register")} className={styles.bookDemoBtn}>s'abonner</button>
+                  <button onClick={() => router.push("/login")} className={`${styles.bookDemoBtn} mx-4`}>Se connecter</button>
+                </div>
               </li>
             </ul>
           </div>}

@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="container">
           <div className="d-flex felxMobile align-items-center justify-content-between">
             <div className="">
-              <p className="mb-0">© All rights reserved to Windo | 2023 News</p>
+              <p className="mb-0">2023 © Windo. Tous droits réservés.</p>
             </div>
             
             <div className="">

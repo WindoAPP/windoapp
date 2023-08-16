@@ -47,6 +47,10 @@ $mobile-breakpoint: 940px;
         border: 2px solid #2ebb77;
         color: #fff;
     }
+    @media (max-width: $mobile-breakpoint) {
+        margin-left: 0 !important;
+        margin-top: 2rem;
+    }
 }
 
 .sidebarIcon{
