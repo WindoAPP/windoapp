@@ -217,8 +217,8 @@ const SignUp = () => {
                     </div>
                     <div className="d-flex flex-column">
                         <div className='d-flex flex-row'>
-                            <label><strong>shop ID</strong></label>
-                            <label className='mx-2'><a target="_blank" href='https://veryeasyagency.com/id-google/'>click here</a> to get your shop ID </label>
+                            <label><strong>Shop ID</strong></label>
+                            <label className='mx-1'><a target="_blank" href='https://veryeasyagency.com/id-google/'>click here</a> to get your shop ID </label>
                         </div>
 
                         <input type="text" name="shopId" placeholder="shop ID" className="form-control regi-input " onChange={handleChange} value={formData.shopId}></input>

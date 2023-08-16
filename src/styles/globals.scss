@@ -285,3 +285,12 @@ a{
       flex-direction: column;
   }
 }
+
+.footer-links{
+  cursor: pointer;
+  &:hover{
+    color: #71f822 !important;
+    text-decoration: underline;
+
+  }
+}

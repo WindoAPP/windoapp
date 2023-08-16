@@ -184,7 +184,7 @@ const Home = () => {
         <h1>Un tarif unique pour tous.</h1>
         <h2>€39,90 / mois*</h2>
         <div className={`d-flex flex-column my-4 ${styles.priceSectionWrp}`}>
-          <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Création dune page de jeu à votre image</span>
+          <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Création d'une page de jeu à votre image</span>
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Choix de vos actions, cadeaux et conditions de retrait</span>
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Accès au tableau de bord pour suivre votre campagne</span>
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Suivi mensuel personnalisé tous les mois</span>
