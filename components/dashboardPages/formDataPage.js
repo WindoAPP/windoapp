@@ -88,7 +88,7 @@ const FormDataPage = () => {
                         {/* <p className='text-muted'>By including this you can increase your number of followers </p>  */}
                         <form className='d-flex flex-column'>
                             <div className="d-flex flex-column">
-                                <label><strong>User Name</strong></label>
+                                <label><strong>User name</strong></label>
                                 <input type="text" name="userName" placeholder="User Name" className="form-control regi-input" onChange={handleChange} value={formData.userName}></input>
                             </div>
                             <div className="d-flex flex-column">
@@ -121,7 +121,7 @@ const FormDataPage = () => {
                                 <hr className={`${styles.hr} mb-3`}></hr>
                                 <div className="d-flex flex-column mt-3">
                                     <div className='d-flex flex-row'>
-                                        <label><strong>shop ID</strong></label>
+                                        <label><strong>Shop ID</strong></label>
                                         <label className='mx-2'><a target="_blank" href='https://ultimateelementor.com/docs/find-google-place-id/'>click here</a> to get your shop ID </label>
                                     </div>
 
@@ -136,7 +136,7 @@ const FormDataPage = () => {
                                     <input type="text" className="form-control" name="instagram" placeholder="Enter your instagram link" value={formData.instagram} onChange={handleChange}></input>
                                 </div>
                                 <div className="form-group my-2">
-                                    <label><strong>tiktok link</strong></label>
+                                    <label><strong>Tiktok link</strong></label>
                                     <input type="text" className="form-control" name="tiktok" placeholder="Enter your tiktok link" value={formData.tiktok} onChange={handleChange}></input>
                                 </div>
                             </div>
