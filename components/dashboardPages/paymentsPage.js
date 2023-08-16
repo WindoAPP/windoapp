@@ -9,6 +9,8 @@ import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/render
 import { PDFViewer } from '@react-pdf/renderer';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
+const  todayDate = dayjs(new Date()).format('YYYY-MM-DD');
+
 const PaymentsPage = () => {
     const { data: session } = useSession();
     const [user, setUser] = useState({});
@@ -16,6 +18,7 @@ const PaymentsPage = () => {
     const [paymentsArr, setPaymentsArr] = useState([]);
     useEffect(() => {
         if (session) {
+            console.log(">>",todayDate);
             fetchUser(session.user.uid);
         }
     }, [session]);
@@ -45,7 +48,7 @@ const PaymentsPage = () => {
 
     const dateFormater = (date) => {
         const f_date = dayjs(date);
-        return f_date.format('YYYY-MM-DD HH:mm:ss');
+        return f_date.format('YYYY-MM-DD');
     }
 
     const invoiceStyles = StyleSheet.create({
@@ -119,9 +122,9 @@ const PaymentsPage = () => {
             textAlign: 'center'
         },
         tableData: {
-            fontSize: '12px',
+            fontSize: '10px',
             color: 'gray',
-            width: 70,
+            width: 100,
             textAlign: 'center'
         },
         bottomWrapperm: {
@@ -132,79 +135,77 @@ const PaymentsPage = () => {
             width: 200,
             display: 'flex',
             flexDirection: 'column'
+        },
+        addressText2:{
+            marginBottom:5
         }
 
 
 
     });
 
-    const MyDocument = () => (
+    const MyDocument = ({price,currency}) => (
         <Document>
             <Page size="A4" style={invoiceStyles.page}>
                 <View style={invoiceStyles.section}>
                 </View>
                 <Image style={invoiceStyles.headerIamge} src="/logo.png"></Image>
-                <Text style={invoiceStyles.addressText}> Company Name pvt .Ltd</Text>
-                <Text style={invoiceStyles.addressText}> 12/2,</Text>
-                <Text style={invoiceStyles.addressText}> address line 01,</Text>
-                <Text style={invoiceStyles.addressText}> address line 02,</Text>
-                <Text style={invoiceStyles.addressText}> country</Text>
-                <Text style={invoiceStyles.addressText}> +94 74 51214 8</Text>
-                <Text style={invoiceStyles.title} > INVOICE</Text>
+                <Text style={invoiceStyles.addressText}>Windo - Very easy agency</Text>
+                <Text style={invoiceStyles.addressText}>85220995600030</Text>
+                <Text style={invoiceStyles.title} >FACTURE</Text>
                 <View style={invoiceStyles.middleSection}>
                     <View>
                         <View style={invoiceStyles.middleText1}>
-                            <Text style={invoiceStyles.midddleText}>Issue Date: </Text>
-                            <Text style={invoiceStyles.midddleText}>12 / 41 / 2022</Text>
+                            <Text style={invoiceStyles.midddleText}>Date d'émission: </Text>
+                            <Text style={invoiceStyles.midddleText}>{todayDate}</Text>
                         </View>
                         <View style={invoiceStyles.middleText1}>
-                            <Text style={invoiceStyles.midddleText}>Currency:</Text>
-                            <Text style={invoiceStyles.midddleText}>USD</Text>
+                            <Text style={invoiceStyles.midddleText}>Devise:</Text>
+                            <Text style={invoiceStyles.midddleText}>{currency} €</Text>
                         </View>
                         <View style={invoiceStyles.middleText1}>
-                            <Text style={invoiceStyles.midddleText}>Invioce No: </Text>
+                            <Text style={invoiceStyles.midddleText}>Facture n°: </Text>
                             <Text style={invoiceStyles.midddleText}>#01</Text>
                         </View>
 
                     </View>
                     <View style={invoiceStyles.rightMiddle}>
-                        <Text style={invoiceStyles.addressText}> Bill to:</Text>
-                        <Text style={invoiceStyles.midddleText}> 12/2,</Text>
-                        <Text style={invoiceStyles.midddleText}> address line 01,</Text>
-                        <Text style={invoiceStyles.midddleText}> address line 02,</Text>
-                        <Text style={invoiceStyles.midddleText}> country</Text>
-                        <Text style={invoiceStyles.midddleText}> +94 74 51214 8</Text>
+                        <Text style={[invoiceStyles.addressText,invoiceStyles.addressText2]}>Facturer à:</Text>
+                        <Text style={invoiceStyles.midddleText}>159 rue Fernand Collardeau, </Text>
+                        <Text style={invoiceStyles.midddleText}>97410,</Text>
+                        <Text style={invoiceStyles.midddleText}>Saint-Pierre,</Text>
+                        <Text style={invoiceStyles.midddleText}>{user.phoneNumber}</Text>
                     </View>
                 </View>
                 <View style={invoiceStyles.middleline} />
                 <View style={invoiceStyles.bottomWrapper}>
-                    <Text style={invoiceStyles.tableHeader}> Item </Text>
-                    <Text style={invoiceStyles.tableHeader}> Quantity</Text>
-                    <Text style={invoiceStyles.tableHeader}> Price</Text>
-                    <Text style={invoiceStyles.tableHeader}> Discount</Text>
-                    <Text style={invoiceStyles.tableHeader}> Tax</Text>
+                    <Text style={invoiceStyles.tableHeader}> Article </Text>
+                    <Text style={invoiceStyles.tableHeader}> Quantité</Text>
+                    <Text style={invoiceStyles.tableHeader}> Prix</Text>
+                    <Text style={invoiceStyles.tableHeader}> Rabais</Text>
+                    <Text style={invoiceStyles.tableHeader}> Impôt</Text>
                 </View>
                 <View style={[invoiceStyles.bottomWrapper, invoiceStyles.bottomWrapperm]}>
-                    <Text style={invoiceStyles.tableData}> subscription </Text>
+                    <Text style={invoiceStyles.tableData}> Abonnement windo </Text>
                     <Text style={invoiceStyles.tableData}> 1</Text>
-                    <Text style={invoiceStyles.tableData}> 3USD</Text>
+                    <Text style={invoiceStyles.tableData}> {price} {currency}€</Text>
                     <Text style={invoiceStyles.tableData}> -</Text>
                     <Text style={invoiceStyles.tableData}> -</Text>
                 </View>
                 <View style={invoiceStyles.middleline} />
                 <View style={invoiceStyles.totalWrapper}>
                     <View style={invoiceStyles.middleText1}>
-                        <Text style={invoiceStyles.midddleText2}>Subtotal: </Text>
-                        <Text style={invoiceStyles.midddleText2}>30 USD</Text>
+                        <Text style={invoiceStyles.midddleText2}>Total: </Text>
+                        <Text style={invoiceStyles.midddleText2}>{price} €</Text>
                     </View>
                     <View style={invoiceStyles.middleText1}>
-                        <Text style={invoiceStyles.midddleText2}>Tax:</Text>
+                        <Text style={invoiceStyles.midddleText2}>Impôt:</Text>
                         <Text style={invoiceStyles.midddleText2}>0</Text>
                     </View>
                     <View style={invoiceStyles.middleline} />
                     <View style={invoiceStyles.middleText1}>
-                        <Text style={invoiceStyles.midddleText2}>Total:</Text>
-                        <Text style={invoiceStyles.midddleText2}>30 USD</Text>
+                        <Text style={invoiceStyles.midddleText2}>Totale:</Text>
+                        <Text style={invoiceStyles.midddleText2}>{price} €</Text>
                     </View>
                     <View style={invoiceStyles.middleline} />
                     <View style={invoiceStyles.middleline} />
@@ -232,7 +233,7 @@ const PaymentsPage = () => {
                                                             <p className="mb-0 text-secondary">Payment Success</p>
                                                             <h4 className="my-1 text-success">{obj.amount_total}<h4>{obj.currency}</h4></h4>
                                                             <p className="mb-0 font-13">Payment Created : <p>{dateFormater(obj.cretedAt)}</p></p>
-                                                            <PDFDownloadLink document={<MyDocument />} fileName={"invoice"}>
+                                                            <PDFDownloadLink document={<MyDocument currency={obj.currency} price={obj.amount_total}/>} fileName={"invoice"}>
                                                                 <button className={styles.invoiceDownBtn}> Download Invoice </button>
                                                             </PDFDownloadLink>
                                                         </div>
