@@ -137,6 +137,9 @@ const PaymentsPage = () => {
         },
         addressText2:{
             marginBottom:5
+        },
+        addressText3:{
+            width:180
         }
 
 
@@ -170,9 +173,7 @@ const PaymentsPage = () => {
                     </View>
                     <View style={invoiceStyles.rightMiddle}>
                         <Text style={[invoiceStyles.addressText,invoiceStyles.addressText2]}>Facturer à:</Text>
-                        <Text style={invoiceStyles.midddleText}>159 rue Fernand Collardeau, </Text>
-                        <Text style={invoiceStyles.midddleText}>97410,</Text>
-                        <Text style={invoiceStyles.midddleText}>Saint-Pierre,</Text>
+                        <Text style={[invoiceStyles.midddleText,invoiceStyles.addressText3]}>{user.address} </Text>
                         <Text style={invoiceStyles.midddleText}>{user.phoneNumber}</Text>
                     </View>
                 </View>

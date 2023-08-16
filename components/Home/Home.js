@@ -5,6 +5,13 @@ const Home = () => {
 
   const router = useRouter();
 
+
+  const reDirectToUrl=(url)=>{
+    window.open(url, '_blank');
+  }
+
+
+
   return (
     <div className='d-flex flex-column'>
       <div className={`d-flex mb-5 ${styles.felxMobile} ${styles.topsection1}`}>
@@ -38,7 +45,7 @@ const Home = () => {
               <h5 className='mb-0 mx-2 font-weight-bold'>Augmentez votre chiffre d'affaires</h5>
             </div>
           </div>
-          <button className={`mb-4 ${styles.topBtn}`}>15 jours d'essai gratuit</button>
+          <button onClick={()=>router.push("/register")} className={`mb-4 ${styles.topBtn}`}>15 jours d'essai gratuit</button>
         </div>
         <div className='d-flex flex-column align-items-end  overflow-hidden mx-4'>
           <img src='homeimage1.png' className={styles.topImage1}></img>
@@ -183,7 +190,7 @@ const Home = () => {
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Suivi mensuel personnalisé tous les mois</span>
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Support technique</span>
         </div>
-        <button className={`btn btn-success btn-lg ${styles.reviewBtn1}`} onClick={() => router.push("/login")}>
+        <button className={`btn btn-success btn-lg ${styles.reviewBtn1}`} onClick={()=>router.push("/register")}>
         JE VEUX WINDO
         </button>
       </div>
@@ -191,7 +198,7 @@ const Home = () => {
         <div className={`d-flex flex-column ${styles.secondSectionInnerWrapper}`}>
           <h1>Commander vos supports en 1 clic !</h1>
           <h4 className='mt-3'>Une fois que vous avez obtenu votre QR Code, commandez votre support physique en quelques clics via l'imprimerie de Very Easy. Simplifiez le processus et concrétisez votre projet en un rien de temps !</h4>
-          <button type="button" className={`btn btn-light  mt-4 ${styles.abonnezBtn}`}>Commander un support</button>
+          <button onClick={()=>reDirectToUrl("https://veryeasyagency.com/categorie-produit/imprimerie")} type="button" className={`btn btn-light  mt-4 ${styles.abonnezBtn}`}>Commander un support</button>
         </div>
         <img className={styles.image} src='/homepageimage6.png'></img>
       </div>

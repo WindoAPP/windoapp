@@ -9,7 +9,7 @@ const FormDataPage = () => {
     const { data: session } = useSession();
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [formData, setFormData] = useState({ facebook: '', tiktok: '', instagram: '', email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '' })
+    const [formData, setFormData] = useState({ facebook: '',address:'', tiktok: '', instagram: '', email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '' })
 
     useEffect(() => {
         if (session) {
@@ -23,7 +23,7 @@ const FormDataPage = () => {
                 setUser(res.user);
                 setIsLoading(false);
                 setFormData(
-                    { facebook: res.user.facebook || "", tiktok: res.user.tiktok || "", instagram: res.user.instagram || "", email: res.user.email, password: '', c_password: '', userName: res.user.userName, phoneNumber: res.user.phoneNumber, shopName: res.user.shopName, shopId: res.user.shopId }
+                    { facebook: res.user.facebook || "",address: res.user.address || "", tiktok: res.user.tiktok || "", instagram: res.user.instagram || "", email: res.user.email, password: '', c_password: '', userName: res.user.userName, phoneNumber: res.user.phoneNumber, shopName: res.user.shopName, shopId: res.user.shopId }
                 )
             }
         }).catch(err => {
@@ -56,6 +56,7 @@ const FormDataPage = () => {
         userData['facebook'] = urlRemake(formData.facebook)? formData.facebook:`https://${formData.facebook}`;
         userData['instagram'] = urlRemake(formData.instagram)? formData.instagram:`https://${formData.instagram}`;
         userData['tiktok'] = urlRemake(formData.tiktok)? formData.tiktok:`https://${formData.tiktok}`;
+        userData['address'] = formData.address;
   
         updateUser(userData).then(res => {
             if (res) {
@@ -115,6 +116,10 @@ const FormDataPage = () => {
                                     <input type="text" name="phoneNumber" placeholder="Mobile Number" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
                                 </div>
                             </div>
+                            <div className="d-flex flex-column w-100">
+                                    <label><strong>Billing address</strong></label>
+                                    <input type="text" name="address" placeholder="Billing address" className="form-control regi-input" onChange={handleChange} value={formData.address}></input>
+                                </div>
 
                             <div className='card p-3 mt-5'>
                                 <h5 className={styles.socialLinkTitle}>Mes liens sociaux</h5>
