@@ -40,10 +40,15 @@ const QRCodePage = () => {
         document.body.removeChild(downloadLink);
     };
 
+    const routeToLink = ()=>{
+        const url="https://veryeasyagency.com/categorie-produit/imprimerie/"
+         window.open(url, '_blank');
+    }
+
     return (
         <>
             {
-                !isLoading ? <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
+                !isLoading ? <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContentForQR}`}>
                     <div className={styles.qrCodeWrapper}>
                         <QRCode
                             size={290}
@@ -55,7 +60,8 @@ const QRCodePage = () => {
                             value={`${env_data.base_url}scan?id=${user.uid}`}
                         />
                     </div>
-                    <button className='btn btn-warning mx-1 my-2' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>
+                    <button className='btn btn-warning mx-1 my-2 d-flex felx-row align-items-center justify-content-center' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>
+                    <button className='btn btn-link mx-1 my-2 d-flex felx-row align-items-center justify-content-center' onClick={routeToLink}>Order my support <i className="fa fa-question-circle mx-2"></i></button>
                 </div> : <Loader />
             }
         </>

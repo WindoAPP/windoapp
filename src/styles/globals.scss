@@ -242,6 +242,8 @@ a {
 .dashboard-component{
   margin-left: 16.1rem;
 
+  overflow: hidden;
+
   @media (max-width: $mobile-breakpoint) {
     margin-left: 0 !important;
   }

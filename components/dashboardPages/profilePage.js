@@ -293,11 +293,11 @@ const ProfilePage = () => {
                                 <div className={`d-flex flex-column mt-4`}>
                                     <div className='d-flex flex-row mb-4'>
                                         <input className="form-control bg-color-green" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add winning item' maxLength={15}></input>
-                                        <button className='btn btn-success mx-2 w-50' onClick={()=>addItem(true)}>Add <i className=" fa fa-plus"></i></button>
+                                        <button className='btn btn-success mx-2 w-50 d-flex felx-row align-items-center justify-content-center' onClick={()=>addItem(true)}>Add <i className=" fa fa-plus mx-1"></i></button>
                                     </div>
                                     <div className='d-flex flex-row mb-4'>
                                         <input className="form-control bg-color-orange" value={itemLost} onChange={(e) => setItemLost(e.target.value)} placeholder='Add losing item' maxLength={15}></input>
-                                        <button className='btn btn-warning mx-2 w-50' onClick={()=>addItem(false)}>Add <i className=" fa fa-plus"></i></button>
+                                        <button className='btn btn-warning mx-2 w-50 d-flex felx-row align-items-center justify-content-center' onClick={()=>addItem(false)}>Add <i className=" fa fa-plus mx-1"></i></button>
                                     </div>
                                     <table className="table">
                                         <thead className="thead-dark">
