@@ -7,9 +7,9 @@ const Home = () => {
 
   return (
     <div className='d-flex flex-column'>
-      <div className={`d-flex mb-5 ${styles.felxMobile}`}>
+      <div className={`d-flex mb-5 ${styles.felxMobile} ${styles.topsection1}`}>
         <div className='d-flex flex-column '>
-          <button className={`mb-2 ${styles.purplrBtn}`}>Et si on jouer un peu 🤭</button>
+          <button className={`mb-2 ${styles.purplrBtn}`}>Et si on jouer un peu <img draggable="false" role="img" class="emoji" alt="🤭" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f92d.svg"></img></button>
           <h1 className='mb5'>Boostez Votre Visibilité avec des avis sur Google</h1>
           <p className='text-secondary'>Un QR code magique ouvre la porte à une expérience unique : faites jouer vos clients et obtenez des avis positifs tous les mois.</p>
           <div className={`d-flex flex-column justify-content-center mb-5`}>
@@ -80,15 +80,14 @@ const Home = () => {
 
         </div> */}
       </div>
-      <div className={`d-flex flex-column align-items-center justify-content-center ${styles.secondSectionWrapper}`}>
-        <h1>How it works ?</h1>
-        <h2>I PROMISE IT'S NOT COMPLICATED!</h2>
-      </div>
+      
       <div className={`d-flex flex-column align-items-center justify-content-center mb-4 ${styles.thirdSectionWrapper}`}>
+      <button className={`mb-2 ${styles.purplrBtn}`}>C'est fun et encourageant</button>
+      <h1 className={styles.topThird}>C'est Very Easy <img draggable="false" role="img" class="emoji" alt="😌" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f60c.svg"></img></h1>
         <div className={`${styles.stepper} d-flex flex-column mt-5 ml-2`}>
           <div className="d-flex mb-1">
             <img src="/step4.png" className={`shadow-sm ${styles.stepImg}`}></img>
-            <div className={`d-flex flex-column pr-4 align-items-center mx-4 ${styles.lineWrapper}`}>
+            <div className={`d-flex flex-column pr-4 align-items-center ${styles.lineWrapper}`}>
               <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>1</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
@@ -102,7 +101,7 @@ const Home = () => {
               <h3 className="text-dark">Vos clients vous laissent un avis google</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Chaque interaction offre une opportunité différente : encouragez vos clients à laisser un avis sur Google ou à s'abonner à vos réseaux sociaux comme Instagram ou Facebook.</p>
             </div>
-            <div className={`d-flex flex-column pr-4 align-items-center mx-4 ${styles.lineWrapper}`}>
+            <div className={`d-flex flex-column pr-4 align-items-center ${styles.lineWrapper}`}>
               <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>2</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
@@ -110,7 +109,7 @@ const Home = () => {
           </div>
           <div className="d-flex mb-1">
             <img src="/step3.png" className={`${styles.stepImg}`}></img>
-            <div className={`d-flex flex-column pr-4 align-items-center mx-4 ${styles.lineWrapper}`}>
+            <div className={`d-flex flex-column pr-4 align-items-center ${styles.lineWrapper}`}>
               <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>3</div>
               <div className={`${styles.line} h-100`}></div>
             </div>
@@ -124,7 +123,7 @@ const Home = () => {
               <h3 className="text-dark">Personnalisation Totale : Votre Jeu, Votre Style !</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Vous pouvez personnaliser la roue à votre image, choisir les cadeaux et les couleurs, télécharger le QR code en 1 clic et suivez vos performances en toute simplicité.</p>
             </div>
-            <div className={`d-flex flex-column pr-4 align-items-center mx-4 ${styles.lineWrapper}`}>
+            <div className={`d-flex flex-column pr-4 align-items-center ${styles.lineWrapper}`}>
               <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>4</div>
               <div className={`${styles.line} h-100 d-none`} ></div>
             </div>
@@ -174,7 +173,15 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className={`d-flex flex-column align-items-center justify-content-center ${styles.secondSectionWrapper}`}>
+      <div className={`d-flex flex-row align-items-center justify-content-center mb-5 ${styles.secondSectionWrapper1}`}>
+        <div className={`d-flex flex-column ${styles.secondSectionInnerWrapper}`}>
+          <h1>Commander vos supports en 1 clic !</h1>
+          <h4 className='mt-3'>Une fois que vous avez obtenu votre QR Code, commandez votre support physique en quelques clics via l'imprimerie de Very Easy. Simplifiez le processus et concrétisez votre projet en un rien de temps !</h4>
+          <button type="button" className={`btn btn-light  mt-4 ${styles.abonnezBtn}`}>S'abonnez à Windo 🎡</button>
+        </div>
+        <img className={styles.image} src='/homepageimage6.png'></img>
+      </div>
+      {/* <div className={`d-flex flex-column align-items-center justify-content-center ${styles.secondSectionWrapper}`}>
         <h1>A price adapted to your needs</h1>
         <p>A price adapted to your needs installation in less than 24 hours.</p>
         <h1>€59.99 / month*</h1>
@@ -189,8 +196,8 @@ const Home = () => {
         <button className={`btn btn-warning btn-lg ${styles.reviewBtn1}`} onClick={() => router.push("/login")}>
           I Want Windo
         </button>
-      </div>
-      <div className={`d-flex flex-column align-items-center justify-content-center ${styles.forthSectionWrapper}`}>
+      </div> */}
+      {/* <div className={`d-flex flex-column align-items-center justify-content-center ${styles.forthSectionWrapper}`}>
         <h1>No more asking for google reviews</h1>
         <ul>
           <li>1 month free for any new subscription</li>
@@ -254,7 +261,7 @@ const Home = () => {
         </form>
 
 
-      </div>
+      </div> */}
     </div>
   );
 };
