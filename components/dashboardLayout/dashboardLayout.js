@@ -7,17 +7,14 @@ import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
   const [parentState, setParentState] = useState(false);
-  const { data: session } = useSession();
+  const { data: session,status  } = useSession();
   const router = useRouter();
 
-//   useEffect( () => {
-
-//     if (session) {
-//       router.replace("/dashboard");
-//     } else {
-//       router.replace("/login");
-//     }
-// }, [session]);
+  useEffect(() => {
+    if (status !== 'loading' && !session) {
+      router.push('/login'); 
+    }
+  }, [router, session, status]);
 
   const handleDataUpdate = (newValue) => {
     setParentState(newValue); // Update the parent's state with data from the child
