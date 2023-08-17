@@ -79,7 +79,7 @@ const Login = () => {
                         </div>
                     </div>
                     <a className='mb-3'  href="#">Forget Password</a>
-                    <button className={`btn btn-primary w-50 mb-3 ${styles.loginBTN}`} onClick={fromSubmit}>Sign in</button>
+                    <button className={`commonBtnWindo w-100 mb-3 ${styles.loginBTN}`} onClick={fromSubmit}>Sign in</button>
                     <span className='align-self-center'>Don't have an account? <a href="/register">Sign up</a></span>
                      <a className='align-self-center' href="/">Back to home</a>
                 </div>

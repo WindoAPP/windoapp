@@ -9,8 +9,11 @@ $mobile-breakpoint: 940px;
 	font-family: 'Inter', sans-serif;
 }
 .logoImage{
-    margin-right: 2rem;
+    margin-left: -5rem ;
     cursor: pointer;
+    @media (max-width: $mobile-breakpoint) {
+        margin-left: 0 ;
+    }
 }
 .navMobile{
     @media (max-width: $mobile-breakpoint) {

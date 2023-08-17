@@ -227,7 +227,7 @@ const SignUp = () => {
                         <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
                         <label className="form-check-label" >I agree to the terms and conditions <span className='text-primary cursor-pointer' onClick={openModal}>Click here</span></label>
                     </div>
-                    <button className={`btn btn-success mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>Register & Pay</button>
+                    <button className={`commonBtnWindo mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>Register & Pay</button>
                     <span className='align-self-center'>Already have an account? <a href="/login">Login</a></span>
                 </div>
                  <ContentCard isOpen={isModalOpen} onClose={closeModal} title={"CONDITIONS GÉNÉRALES"} data={t_c}/>

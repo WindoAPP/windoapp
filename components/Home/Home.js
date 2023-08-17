@@ -190,7 +190,7 @@ const Home = () => {
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Suivi mensuel personnalisé tous les mois</span>
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Support technique</span>
         </div>
-        <button className={`btn btn-success btn-lg ${styles.reviewBtn1}`} onClick={()=>router.push("/register")}>
+        <button className={`commonBtnWindo ${styles.reviewBtn1}`} onClick={()=>router.push("/register")}>
         JE VEUX WINDO
         </button>
       </div>

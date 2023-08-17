@@ -19,8 +19,8 @@ const Navbar = () => {
           src="/logo.png"
           alt="Vercel Logo"
           className={styles.logoImage}
-          height={70}
-          width={200}
+          height={80}
+          width={250}
           priority
         />
         <div className={styles.sidebarIcon} onClick={() => onClickOpenSideBar()}>
