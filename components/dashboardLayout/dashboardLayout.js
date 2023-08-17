@@ -3,17 +3,19 @@ import NavbarDashboard from "../navbarDashboard/navbarDashboard";
 import SideBar from "../sideBar/sideBar";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
   const [parentState, setParentState] = useState(false);
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect( () => {
 
-    if(session){
-      console.log(">>>>>>>>");
-    }else{
-      console.log("--------");
+    if (session) {
+      router.replace("/dashboard");
+    } else {
+      router.replace("/login");
     }
 }, [session]);
 
