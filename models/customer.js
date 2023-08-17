@@ -19,11 +19,11 @@ const CustomerSchema = new Schema({
     },
     facebook: {
         type: String,
-        required: true,
+        required: false,
     },
     instagram: {
         type: String,
-        required: true,
+        required: false,
     },
     cretedAt: {
         type: Date,
