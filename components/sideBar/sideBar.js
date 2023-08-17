@@ -11,14 +11,14 @@ const SideBar = ({sideBarOpen}) => {
   const [sideBarOpened, setSideBarOpened] = useState(false);
   const router = useRouter();
 
+  const getRoute = (page) =>{
+    return router.asPath.endsWith(page);
+  }
 
   const logout = (e) => {
     e.preventDefault();
-    signOut().then(res => {
-        if (res) {
-            router.push("/login");
-            
-        }
+    signOut().then(res => {   
+            router.push("/");        
     });
 }
 
@@ -37,7 +37,7 @@ const SideBar = ({sideBarOpen}) => {
         <ul className="nav flex-column  mb-0">
           <li className="nav-item">
             <a href="/dashboard">
-            <span className={`nav-link  cursor-pointer ${styles.navLink}`}>
+            <span className={`nav-link  cursor-pointer ${getRoute("/dashboard")?styles.navLinkItem:""}`}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-th-large m-2  fa-fw`}></i>
               {!sideBarOpen && "Dashboard"}
             </span>
@@ -45,7 +45,7 @@ const SideBar = ({sideBarOpen}) => {
           </li>
           <li className="nav-item ">
             <a href="/dashboard/formdata">
-            <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
+            <span className={`nav-link  cursor-pointer ${getRoute("/formdata")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-address-card-o m-2  fa-fw`}></i>
               {!sideBarOpen && "Profile"}
             </span>
@@ -53,7 +53,7 @@ const SideBar = ({sideBarOpen}) => {
           </li>
           <li className="nav-item">
             <a href="/dashboard/winners">
-            <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
+            <span className={`nav-link  cursor-pointer ${getRoute("/winners")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-trophy m-2  fa-fw`}></i>
               {!sideBarOpen && "Winners"}
             </span>
@@ -61,7 +61,7 @@ const SideBar = ({sideBarOpen}) => {
           </li>
           <li className="nav-item ">
             <a href="/dashboard/payments">
-            <span className={`nav-link  cursor-pointer ${styles.navLink}`} >
+            <span className={`nav-link  cursor-pointer ${getRoute("/payments")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-credit-card m-2  fa-fw`}></i>
               {!sideBarOpen && "Factures"}
             </span>
@@ -72,7 +72,7 @@ const SideBar = ({sideBarOpen}) => {
 
           <li className="nav-item">
             <a href="/dashboard/profile">
-            <span className={`nav-link  cursor-pointer ${styles.navLink}`}>
+            <span className={`nav-link  cursor-pointer ${getRoute("/profile")?styles.navLinkItem:""}`}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-pie-chart m-2  fa-fw`}></i>
               {!sideBarOpen && "Wheel"}
             </span>
@@ -83,7 +83,7 @@ const SideBar = ({sideBarOpen}) => {
         <ul className="nav flex-column  mb-0">
           <li className="nav-item">
           <a href="/dashboard/qrcode">
-            <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >
+            <span href="#" className={`nav-link  cursor-pointer ${getRoute("/qrcode")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-qrcode m-2  fa-fw`}></i>
               {!sideBarOpen && "My QR code"}
             </span>
@@ -93,7 +93,7 @@ const SideBar = ({sideBarOpen}) => {
           
           <li className="nav-item ">
           <a href="/dashboard/optin">
-            <span href="#" className={`nav-link  cursor-pointer ${styles.navLink}`} >
+            <span href="#" className={`nav-link  cursor-pointer ${getRoute("/optin")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-download m-2  fa-fw`}></i>
               {!sideBarOpen && "Opt-in"}
             </span>
@@ -102,7 +102,7 @@ const SideBar = ({sideBarOpen}) => {
           
           <li className="nav-item">
             <a href="/login">
-            <span className={`nav-link  cursor-pointer ${styles.navLink}`} onClick={logout}>
+            <span className={`nav-link  cursor-pointer `} onClick={signOut}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-sign-out m-2  fa-fw`}></i>
               {!sideBarOpen && "Log Out"}
             </span>

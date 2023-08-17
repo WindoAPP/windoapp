@@ -29,18 +29,18 @@ const Navbar = () => {
         <div className={`collapse navbar-collapse justify-content-between ${styles.navWeb}`} id="navbarNav">
           <ul className="navbar-nav align-items-center ml-auto">
             <li className="nav-item ml-3">
-              <Link href="#howitworks" className={styles.navTextItem}>
+              <Link href="/#howitworks" className={styles.navTextItem}>
                 Comment ça marche ?
               </Link>
             </li>
             <li className="nav-item ml-4">
-              <Link href="#prix" className={styles.navTextItem}>
+              <Link href="/#prix" className={styles.navTextItem}>
                 Prix
               </Link>
             </li>
           </ul>
           <div>
-            <button onClick={() => router.push("/register")} className={styles.bookDemoBtn}>s'abonner</button>
+            <button onClick={() => router.push("/register")} className={styles.bookDemoBtn}>S'abonner</button>
             <button onClick={() => router.push("/login")} className={`${styles.bookDemoBtn} mx-4`}>Se connecter</button>
           </div>
         </div>
@@ -49,19 +49,19 @@ const Navbar = () => {
 
             <ul className="navbar-nav ml-auto">
               <li className="nav-item my-3">
-                <Link href="#howitworks" className={styles.navTextItem}>
+                <Link href="/#howitworks" className={styles.navTextItem}>
                   Comment ça marche ?
                 </Link>
               </li>
               <li className="nav-item my-3">
-                <Link href="#prix" className={styles.navTextItem}>
+                <Link href="/#prix" className={styles.navTextItem}>
                   Prix
                 </Link>
               </li>
 
               <li className="nav-item my-3 mx-3">
                 <div>
-                  <button onClick={() => router.push("/register")} className={styles.bookDemoBtn}>s'abonner</button>
+                  <button onClick={() => router.push("/register")} className={styles.bookDemoBtn}>S'abonner</button>
                   <button onClick={() => router.push("/login")} className={`${styles.bookDemoBtn} mx-4`}>Se connecter</button>
                 </div>
               </li>

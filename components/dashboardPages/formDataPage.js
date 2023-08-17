@@ -146,7 +146,7 @@ const FormDataPage = () => {
                                 </div>
                             </div>
 
-                            <button onClick={registerFromSubmit} className="btn btn-success mt-2">Save</button>
+                            <button onClick={registerFromSubmit} className="commonBtnWindo mt-2 align-self-center w-100">Save</button>
                         </form>
 
                     </div>

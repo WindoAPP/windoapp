@@ -98,7 +98,7 @@ const NavbarDashboard = ({ onDataUpdate }) => {
                     <i className="fa fa-cogs text-secondary mx-2 " aria-hidden="true"></i>
                     <span className="text-secondary">Settings</span>
                 </div>
-                <div onClick={logout} className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>
+                <div onClick={signOut} className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>
                     <i className="fa fa-power-off text-danger mx-2 " aria-hidden="true"></i>
                     <span className="text-danger">Logout</span>
                 </div>

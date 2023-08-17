@@ -69,7 +69,7 @@ const OptInPage = () => {
                                     })}
                                 </tbody>
                             </table>
-                            <CSVLink className='btn btn-success' filename='all_players_list' data={csvData}> Download CSV</CSVLink>
+                            <CSVLink className='commonBtnWindo w-75 align-self-center' filename='all_players_list' data={csvData}> Download CSV</CSVLink>
                         </div>
 
                 </div> : <Loader />

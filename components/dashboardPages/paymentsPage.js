@@ -8,14 +8,19 @@ import Loader from '../Loader/loader';
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 import { PDFDownloadLink } from '@react-pdf/renderer';
+import { useRouter } from 'next/router';
+import showNotification from '../showNotifications/showNotifications';
 
-const  todayDate = dayjs(new Date()).format('YYYY-MM-DD');
+const todayDate = dayjs(new Date()).format('YYYY-MM-DD');
 
 const PaymentsPage = () => {
     const { data: session } = useSession();
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true)
     const [paymentsArr, setPaymentsArr] = useState([]);
+
+    const router = useRouter();
+
     useEffect(() => {
         if (session) {
             fetchUser(session.user.uid);
@@ -135,18 +140,18 @@ const PaymentsPage = () => {
             display: 'flex',
             flexDirection: 'column'
         },
-        addressText2:{
-            marginBottom:5
+        addressText2: {
+            marginBottom: 5
         },
-        addressText3:{
-            width:180
+        addressText3: {
+            width: 180
         }
 
 
 
     });
 
-    const MyDocument = ({price,currency}) => (
+    const MyDocument = ({ price, currency }) => (
         <Document>
             <Page size="A4" style={invoiceStyles.page}>
                 <View style={invoiceStyles.section}>
@@ -172,8 +177,9 @@ const PaymentsPage = () => {
 
                     </View>
                     <View style={invoiceStyles.rightMiddle}>
-                        <Text style={[invoiceStyles.addressText,invoiceStyles.addressText2]}>Facturer à:</Text>
-                        <Text style={[invoiceStyles.midddleText,invoiceStyles.addressText3]}>{user.address} </Text>
+                        <Text style={[invoiceStyles.addressText, invoiceStyles.addressText2]}>Facturer à:</Text>
+                        <Text style={[invoiceStyles.midddleText, invoiceStyles.addressText3]}>{user.userName} </Text>
+                        <Text style={[invoiceStyles.midddleText, invoiceStyles.addressText3]}>{user.address} </Text>
                         <Text style={invoiceStyles.midddleText}>{user.phoneNumber}</Text>
                     </View>
                 </View>
@@ -183,7 +189,7 @@ const PaymentsPage = () => {
                     <Text style={invoiceStyles.tableHeader}> Quantité</Text>
                     <Text style={invoiceStyles.tableHeader}> Prix</Text>
                     <Text style={invoiceStyles.tableHeader}> Rabais</Text>
-                    <Text style={invoiceStyles.tableHeader}> Impôt</Text>
+                    <Text style={invoiceStyles.tableHeader}> TVA</Text>
                 </View>
                 <View style={[invoiceStyles.bottomWrapper, invoiceStyles.bottomWrapperm]}>
                     <Text style={invoiceStyles.tableData}> Abonnement windo </Text>
@@ -199,7 +205,7 @@ const PaymentsPage = () => {
                         <Text style={invoiceStyles.midddleText2}>{price} €</Text>
                     </View>
                     <View style={invoiceStyles.middleText1}>
-                        <Text style={invoiceStyles.midddleText2}>Impôt:</Text>
+                        <Text style={invoiceStyles.midddleText2}>TVA:</Text>
                         <Text style={invoiceStyles.midddleText2}>0</Text>
                     </View>
                     <View style={invoiceStyles.middleline} />
@@ -213,6 +219,11 @@ const PaymentsPage = () => {
             </Page>
         </Document>
     );
+
+    const downloadPdf = () =>{
+        showNotification(true,"You have to fill billing address for download invoice")
+        router.push('formdata');
+    }
 
 
     return (
@@ -233,9 +244,13 @@ const PaymentsPage = () => {
                                                             <p className="mb-0 text-secondary">Payment Success</p>
                                                             <h4 className="my-1 text-success">{obj.amount_total}<h4>{obj.currency}</h4></h4>
                                                             <p className="mb-0 font-13">Payment Created : <p>{dateFormater(obj.cretedAt)}</p></p>
-                                                            <PDFDownloadLink document={<MyDocument currency={obj.currency} price={obj.amount_total}/>} fileName={"invoice"}>
-                                                                <button className={styles.invoiceDownBtn}> Download Invoice </button>
-                                                            </PDFDownloadLink>
+                                                            { user.address && user.address !=="" &&
+                                                                <PDFDownloadLink document={<MyDocument currency={obj.currency} price={obj.amount_total} />} fileName={"invoice"}>
+                                                                    <button className={styles.invoiceDownBtn}> Download Invoice </button>
+                                                                </PDFDownloadLink>}
+                                                            { (!user.address || user.address =="") &&
+                                                                <button className={styles.invoiceDownBtn} onClick={downloadPdf}> Download Invoice </button>
+                                                            }
                                                         </div>
                                                         <div className="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i className="fa fa-check-square-o"></i>
                                                         </div>

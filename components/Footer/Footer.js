@@ -589,8 +589,12 @@ const ventes =[
             
             <div className="">
                 <div className="d-flex flex-row">
+                <a href="https://www.facebook.com/Veryeasyagency" className="text-white" target="_blank">
                 <div className=" mx-4 iconWrapper d-flex align-items-center justify-content-center"><i className="fa fa-facebook"></i></div>
+                </a>
+                <a href="https://www.instagram.com/very.easy_agency/?hl=fr"  className="text-white" target="_blank">
                 <div className=" mx-4 iconWrapper d-flex align-items-center justify-content-center"><i className="fa fa-instagram"></i></div>
+                </a>
                 </div>           
             </div>
             <div className=" d-flex flex-column">

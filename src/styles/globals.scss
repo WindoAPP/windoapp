@@ -245,7 +245,7 @@ a {
 .dashboard-component{
   margin-left: 16.1rem;
 
-  overflow: hidden;
+  
 
   @media (max-width: $mobile-breakpoint) {
     margin-left: 0 !important;
@@ -286,11 +286,25 @@ a{
   }
 }
 
+.commonBtnWindo{
+  border-radius: 12px;
+  color: #fff;
+  background-color: #2ebb77;
+  height: 56px;
+  line-height: 56px;
+  font-size: 17px;
+  font-weight: 600;
+  border: none;
+    &:hover{
+        background-color: #28a368 ;
+    }
+}
+
 .footer-links{
   cursor: pointer;
   &:hover{
-    color: #71f822 !important;
-    text-decoration: underline;
+    transform: scale(1.02);
+    text-decoration: underline !important;
 
   }
 }

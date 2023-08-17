@@ -9,6 +9,10 @@ $mobile-breakpoint: 940px;
     height: 1.5rem !important;
 }
 
+.navLinkItem {
+    color: #0a58ca !important;
+ }
+
 .sideBar {
     z-index: 10;
     background-color: #fff;
@@ -28,11 +32,7 @@ $mobile-breakpoint: 940px;
         color: #74788d;
     }
 
-    .navLink {
-        // &:hover {
-        //     color: #fff;
-        // }
-    }
+    
 
     ul {
         li {
