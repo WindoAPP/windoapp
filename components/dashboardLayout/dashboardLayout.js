@@ -10,14 +10,14 @@ const Layout = ({ children }) => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  useEffect( () => {
+//   useEffect( () => {
 
-    if (session) {
-      router.replace("/dashboard");
-    } else {
-      router.replace("/login");
-    }
-}, [session]);
+//     if (session) {
+//       router.replace("/dashboard");
+//     } else {
+//       router.replace("/login");
+//     }
+// }, [session]);
 
   const handleDataUpdate = (newValue) => {
     setParentState(newValue); // Update the parent's state with data from the child
