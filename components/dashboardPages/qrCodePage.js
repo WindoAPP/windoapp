@@ -61,7 +61,7 @@ const QRCodePage = () => {
                         />
                     </div>
                     <button className='commonBtnWindo px-4 mx-1 my-2 d-flex felx-row align-items-center justify-content-center' onClick={downloadQRCode}>Download QR code <i className="fa fa-download mx-2"></i></button>
-                    <button className='btn btn-link mx-1 my-2 d-flex felx-row align-items-center justify-content-center' onClick={routeToLink}>Commander mon support<i className="fa fa-question-circle mx-2"></i></button>
+                    <button className={`commonBtnWindo mx-1 my-2 px-4 d-flex felx-row align-items-center justify-content-center ${styles.qrpageBtn}`} onClick={routeToLink}>Commander mon support<i className="fa fa-question-circle mx-2"></i></button>
                 </div> : <Loader />
             }
         </>

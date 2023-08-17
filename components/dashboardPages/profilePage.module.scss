@@ -63,6 +63,10 @@ $mobile-breakpoint: 940px;
     }
 }
 
+.qrpageBtn{
+    background-color: #11b196 !important; 
+}
+
 .flexResponsive{
     flex-direction: row;
     @media (max-width: $mobile-breakpoint) {
