@@ -1,9 +1,17 @@
+$mobile-breakpoint: 940px;
+
 .closeBtn{
     position: absolute;
     right: 12px;
     top: 11px;
     font-size: 23px;
     cursor: pointer;
+
+    @media (max-width: $mobile-breakpoint) {
+      right: -9px;
+      top: 0px;
+    }
+    
 }
 
 .tcWrapper{
@@ -34,6 +42,7 @@
     padding-right: 12px;
     padding-bottom: 12px;
     color: black;
+    text-align: start;
     
   }
   
@@ -43,9 +52,15 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     i{
         font-size: 25px;
+    }
+    h1{
+      margin-right: 2rem;
+      @media (max-width: $mobile-breakpoint) {
+        margin-right: 0;
+      }
     }
   }
   

@@ -7,8 +7,10 @@ const ContentCard = ({ isOpen, onClose, data, title }) => {
         <div className={styles.modalOverlay}>
             <div className={styles.modal}>
                 <div className={styles.modalHeader}>
-                    <h1>{title}</h1>
-                    <i className="fa fa-times-circle-o cursor-pointer" aria-hidden="true" onClick={onClose}></i>
+                    <h1 >{title}</h1>
+                    <div className='position-relative'>
+                    <i className={`fa fa-times-circle-o cursor-pointer ${styles.closeBtn}`} aria-hidden="true" onClick={onClose}></i>
+                    </div>
                 </div>
                 <div className={styles.modalContent}>
                     {

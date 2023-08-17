@@ -91,3 +91,66 @@ $mobile-breakpoint: 940px;
     text-align: start !important;
   }
 }
+
+.wheelCardContentWrapper{
+  h1{
+    font-weight: 700;
+  }
+  .cardListItem{
+    div{
+      background-color: #5cb85c;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      color: #fff;
+      z-index: 2;
+      font-weight: 700;
+    }
+    p{
+      margin-bottom: 0;
+      color: #000;
+      font-weight: 700;
+      background-color: #D9D9D9;
+      padding: 2px 1rem 2px 1rem;
+      border-radius: 10px;
+      margin-left: -14px;
+      z-index: 1;
+      width: 14rem;
+
+    }
+  }
+  .imageArr{
+    img{
+      width: 2.5rem;
+      position: absolute;
+    }
+    .google{
+      margin-left: -15rem;
+      margin-top: -5rem;
+      @media (max-width: $mobile-breakpoint) {
+        margin-left: -10rem;
+        margin-top: -4rem;
+      }
+    }
+    .insta{
+      margin-left: -12rem;
+      @media (max-width: $mobile-breakpoint) {
+        margin-left: -7.5rem;
+      }
+    }
+    .fb{
+      margin-left: 12rem;
+      margin-top: -5rem;
+      @media (max-width: $mobile-breakpoint) {
+        margin-left: 7.5rem;
+        margin-top: -4rem;
+      }
+    }
+    .tiktok{
+      margin-left: 9rem;
+      @media (max-width: $mobile-breakpoint) {
+        margin-left: 5rem;
+      }
+    }
+  }
+}
