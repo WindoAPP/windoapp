@@ -33,10 +33,8 @@ const NotificationPanel = () => {
     const fetchNotifications = (id) => {
         getAllNotifications(id).then(res => {
             if (res) {
-                console.log(res.notifications);
                 setNotifiArr(res.notifications);
                 markAsReadAllNotifis(id);
-                setIsLoading(false);
             }
         }).catch(err => {
             console.log(err);
@@ -59,8 +57,10 @@ const NotificationPanel = () => {
     }
 
     const markAsReadAllNotifis = (id) => {
-        updateNotification(id).then(() => {
-
+        updateNotification(id).then((res) => {
+            if(res){
+                setIsLoading(false);
+            }
         }).catch(err => {
             console.log(err);
 
