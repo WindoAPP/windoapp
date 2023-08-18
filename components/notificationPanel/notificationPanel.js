@@ -72,7 +72,7 @@ const NotificationPanel = () => {
     return (
         <div className={`p-2 d-flex flex-column align-items-center  ${styles.mainContent}`}>
             <p className='align-self-start mb-3'>Avec icône</p>
-            {notifiArr.map((obj, index) => {
+            {!isLoading && notifiArr.map((obj, index) => {
                 return (
                     <div key={index} className={`d-flex flex-row align-items-center justify-content-between alert ${obj.backColor} m-1 ${styles.notificationItem}`}>
                         <div className='d-flex flex-row align-items-center'>
