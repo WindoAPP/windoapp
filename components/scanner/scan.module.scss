@@ -33,7 +33,7 @@ $mobile-breakpoint: 940px;
 
  @media (max-width: $mobile-breakpoint) {
   left: 21px;
-  bottom: -250px;
+  bottom: -210px;
   transform: translate(-50%,-50%);
 }
 
@@ -152,5 +152,21 @@ $mobile-breakpoint: 940px;
         margin-left: 5rem;
       }
     }
+  }
+}
+
+.footer{
+  background-color: rgb(167, 166, 166);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  a{
+    margin: 0;
+    color: #000;
+    font-weight: 600;
+    text-decoration: underline !important;
+  }
+  img{
+    height: 2rem;
   }
 }

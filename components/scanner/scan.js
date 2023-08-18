@@ -13,10 +13,10 @@ import BalnktCard from '../blankCard/blankCard';
 import ContentCard from '../contentCard/contentCard';
 
 const Scan = () => {
-    const modalData= [
+    const modalData = [
         {
-            heading:`Article 1 - Collecte et Utilisation des Données Personnelles `,
-            des:`1.1 Nous collectons les données personnelles suivantes lorsque vous utilisez
+            heading: `Article 1 - Collecte et Utilisation des Données Personnelles `,
+            des: `1.1 Nous collectons les données personnelles suivantes lorsque vous utilisez
             l'application "Windo" :
             • Votre nom complet
             • Votre adresse e-mail
@@ -29,8 +29,8 @@ const Scan = () => {
             de jeu personnalisée et améliorée.`
         },
         {
-            heading:`Article 2 - Utilisation des Données Personnelles`,
-            des:`2.1 Nous utilisons les données personnelles que nous collectons pour les
+            heading: `Article 2 - Utilisation des Données Personnelles`,
+            des: `2.1 Nous utilisons les données personnelles que nous collectons pour les
             finalités suivantes :
             • Gérer et administrer votre participation au jeu de roue
             • Vous contacter par e-mail, téléphone ou SMS pour vous informer des
@@ -43,39 +43,39 @@ const Scan = () => {
             notre société.`
         },
         {
-            heading:`Article 3 - Consentement`,
-            des:`3.1 En utilisant notre application, vous consentez à ce que nous collections,
+            heading: `Article 3 - Consentement`,
+            des: `3.1 En utilisant notre application, vous consentez à ce que nous collections,
             utilisions et stockions vos données personnelles conformément à cette
             politique de confidentialité. Vous consentez également à ce que votre avis sur
             la fiche Google de notre magasin soit collecté et utilisé comme condition
             préalable à votre participation au jeu.`
         },
         {
-            heading:`Article 4 - Responsabilité du Prestataire`,
-            des:`4.1 Le prestataire qui a créé l'application "Windo" n'est plus responsable et
+            heading: `Article 4 - Responsabilité du Prestataire`,
+            des: `4.1 Le prestataire qui a créé l'application "Windo" n'est plus responsable et
             se décharge de toutes accusations ou mal utilisations résultant de l'utilisation
             de l'application. Toute responsabilité liée à l'application, y compris la collecte
             et l'utilisation des données personnelles des utilisateurs, incombe à l'entité
             qui exploite l'application.`
         },
         {
-            heading:`Article 5 - Résiliation de l'Engagement de l'Utilisateur`,
-            des:`5.1 Si un utilisateur ne respecte pas les termes et conditions énoncés dans
+            heading: `Article 5 - Résiliation de l'Engagement de l'Utilisateur`,
+            des: `5.1 Si un utilisateur ne respecte pas les termes et conditions énoncés dans
             cette politique de confidentialité ou s'engage dans une utilisation abusive de
             l'application, nous nous réservons le droit d'interrompre son engagement et
             de mettre fin à son utilisation de l'application "Windo" à tout moment et sans
             préavis.`
         },
         {
-            heading:`Article 6 - Sécurité des Données`,
-            des:`6.1 Nous prenons des mesures techniques et organisationnelles pour garantir
+            heading: `Article 6 - Sécurité des Données`,
+            des: `6.1 Nous prenons des mesures techniques et organisationnelles pour garantir
             la sécurité de vos données personnelles et protéger vos informations contre
             tout accès non autorisé, perte, altération ou divulgation. Notre hébergeur
             LWS France assure un serveur sécurisé pour le stockage de vos données.`
         },
         {
-            heading:`Article 7 - Partage des Données Personnelles`,
-            des:`7.1 Nous ne partageons pas vos données personnelles avec des tiers sans
+            heading: `Article 7 - Partage des Données Personnelles`,
+            des: `7.1 Nous ne partageons pas vos données personnelles avec des tiers sans
             votre consentement explicite, sauf dans les cas suivants :
             • Lorsque cela est nécessaire pour remplir nos obligations envers vous (par
             exemple, pour vous envoyer des offres de la société)
@@ -83,8 +83,8 @@ const Scan = () => {
             `
         },
         {
-            heading:`Article 8 - Vos Droits`,
-            des:`8.1 Conformément aux lois applicables, vous avez le droit d'accéder à vos
+            heading: `Article 8 - Vos Droits`,
+            des: `8.1 Conformément aux lois applicables, vous avez le droit d'accéder à vos
             données personnelles, de les rectifier, de les effacer ou de limiter leur
             traitement. Vous pouvez également vous opposer au traitement de vos
             données à des fins de marketing direct. Pour exercer ces droits ou pour toute
@@ -92,8 +92,8 @@ const Scan = () => {
             contact@veryeasyagency.com.`
         },
         {
-            heading:`Article 9 - Modifications de la Politique de Confidentialité`,
-            des:`Nous pouvons mettre à jour cette politique de confidentialité périodiquement
+            heading: `Article 9 - Modifications de la Politique de Confidentialité`,
+            des: `Nous pouvons mettre à jour cette politique de confidentialité périodiquement
             pour refléter les changements dans nos pratiques de collecte et de traitement
             des données. Nous vous encourageons à consulter cette page régulièrement
             pour être informé des modifications éventuelles.
@@ -111,6 +111,7 @@ const Scan = () => {
     const [segmentColors, setSegmentColors] = useState([]);
     const [formData, setFormData] = useState({ email: '', phoneNumber: '', name: '', user: '', facebook: '', instagram: '', termsCheck: false, spins: [] });
     const [step, setStep] = useState(0);
+    const [cardToggle, setCardToggle] = useState(true);
     const [price, setPrice] = useState();
     const [screenHeight, setScreenHeight] = useState();
     const [spinCount, setSpinCount] = useState(0);
@@ -118,6 +119,7 @@ const Scan = () => {
     const [isWin, setIsWin] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [isModalOpen1, setIsModalOpen1] = useState(false);
+
 
     const { id } = router.query;
 
@@ -166,7 +168,7 @@ const Scan = () => {
             createCustomer(formData).then(res => {
                 if (res) {
                     setLoading(false);
-                    setStep(2);
+                    setIsModalOpen(false);
                     setCustomer(res.gust);
                 }
             }).catch(err => {
@@ -209,8 +211,7 @@ const Scan = () => {
     };
 
     // Open a new window when the button is clicked
-    const openNewWindow = (e) => {
-        e.preventDefault();
+    const openNewWindow = () => {
         var url;
         if (spinCount == 0) {
             url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
@@ -322,13 +323,17 @@ const Scan = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        openNewWindow();
+        setCardToggle(false);
+        setIsModalOpen(true);
+
     };
 
     const closeModal1 = () => {
         setIsModalOpen1(false);
     };
 
-    const openModal1 = () =>{
+    const openModal1 = () => {
         setIsModalOpen1(true)
     }
 
@@ -347,7 +352,7 @@ const Scan = () => {
                 <div className={`d-flex flex-row align-items-center justify-content-center ${styles.cardListItem}`}>
                     <div className='d-flex flex-row align-items-center justify-content-center m-1'>3</div>
                     <p>Revenez tourner la roue!</p>
-                </div>      
+                </div>
             </div>
             <button className='commonBtnWindo w-50' onClick={closeModal}>Let's go !</button>
             <div className={`d-flex ${styles.imageArr}`}>
@@ -359,98 +364,80 @@ const Scan = () => {
         </div>
     )
 
+    const collectUserDataCardContent = () => (
+        <div>
+            <h3 className='text-dark mb-4'>Please fill this form</h3>
+            <form>
+                <div className="form-group my-2">
+                    <input type="text" className="form-control" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange}></input>
+                </div>
+                <div className="form-group my-2">
+                    <input type="email" className="form-control" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange}></input>
+                </div>
+                <div className="form-group my-2">
+                    <input type="tel" className="form-control" name="phoneNumber" placeholder="Enter your mobile number" value={formData.phoneNumber} onChange={handleChange}></input>
+                </div>
+                <div className="form-check my-3">
+                    <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
+                    <label className="form-check-label text-start" for="termsCheck">I agree to the terms and conditions <span className='text-primary cursor-pointer' onClick={openModal1}>Click here</span></label>
+                </div>
+                <button onClick={registerFromSubmit} className="commonBtnWindo w-75">Submit & Spin</button>
+            </form>
+            <ContentCard isOpen={isModalOpen1} onClose={closeModal1} title={`Politique de Confidentialité de l'Application Web Windo`} data={modalData} />
+        </div>
+    )
+
 
 
 
 
     return (
 
-        <div className={` d-flex ${styles.backgroundContainer} ${step !== 2 && "align-items-center justify-content-center"}`} >
+        <div className={` d-flex ${styles.backgroundContainer} ${step !== 2 && "justify-content-center"}`} >
             {!loading ?
-                <div>{step !== 2 &&
-                    <div className={`card shadow  p-4 ${styles.card} ${step == 2 ? styles.addMarginBottom : ''}`}>
-                        {
-                            step === 0 &&
-
-                            <div>
-                                <img src='/trophy.png' className={styles.cardImage}></img>
-                                <h1>Congratulations !! </h1>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a</p>
-                                <button onClick={openNewWindow} className='btn btn-warning'>Review product</button>
-                            </div>
-                        }
-                        {
-                            step === 1 &&
-
-                            <div>
-                                <h3 className='text-dark mb-4'>Please fill this form</h3>
-                                <form>
-                                    <div className="form-group my-2">
-                                        <input type="text" className="form-control" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange}></input>
-                                    </div>
-                                    <div className="form-group my-2">
-                                        <input type="email" className="form-control" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange}></input>
-                                    </div>
-                                    <div className="form-group my-2">
-                                        <input type="tel" className="form-control" name="phoneNumber" placeholder="Enter your mobile number" value={formData.phoneNumber} onChange={handleChange}></input>
-                                    </div>
-                                    <div className="form-check my-3">
-                                        <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
-                                        <label className="form-check-label text-start" for="termsCheck">I agree to the terms and conditions <span className='text-primary cursor-pointer' onClick={openModal1}>Click here</span></label>
-                                    </div>
-                                    <button onClick={registerFromSubmit} className="commonBtnWindo w-75">Submit & Spin</button>
-                                </form>
-                                <ContentCard isOpen={isModalOpen1} onClose={closeModal1} title={`Politique de Confidentialité de l'Application Web Windo`} data={modalData}/>
-                            </div>
-
-                        }
-                        {
-                            step === 3 &&
-                            <div>
-                                {isWin ? <img className={styles.fireImage} src="fire.gif"></img> : <img className={styles.fireImage} src="sadimage.gif"></img>}
-                                <h2 className='text-warning'>{isWin ? "Congratulations !!" : "Sorry !!"}</h2>
-                                <h1 className='text-success'>{isWin ? `You won ${price}` : "Try Again with next time"}</h1>
-                                <p className='text-info'>Lorem Ipsum is simply dummy text of the printing</p>
-                            </div>
-                        }
-                    </div>
-                }
-                    {
-                        step === 2 &&
-                        <div className={`d-flex ${styles.wheelWrapperc}`} >
-                            <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
-                                <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
-                                <p className='align-self-center text-center '>{user.shopSlogan && user.shopSlogan} </p>
-                                <button onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
-                            </div>
-
-                            <div className={styles.wheelWrapper}>
-                                <WheelComponent
-                                    segments={segments}
-                                    segColors={segmentColors}
-                                    winningSegment="red"
-                                    onFinished={(winner) => onFinished(winner)}
-                                    primaryColor="black"
-                                    primaryColoraround="#0E4502"
-                                    contrastColor="white"
-                                    buttonText=""
-                                    isOnlyOnce={false}
-                                    size={screenHeight > 782 ? 250 : 200}
-                                    width={200}
-                                    height={2000}
-                                    upDuration={50}
-                                    downDuration={2000}
-
-                                    ref={childRef}
-                                />
-                            </div>
-                            <BalnktCard isOpen={isModalOpen} onClose={closeModal} data={wheelCardContent} />
-                            
+                <div>
+                    <div className={`d-flex ${styles.wheelWrapperc}`} >
+                        <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
+                            <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
+                            <p className='align-self-center text-center '>{user.shopSlogan && user.shopSlogan} </p>
+                            <button onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
                         </div>
-                    }
+
+                        <div className={styles.wheelWrapper}>
+                            <WheelComponent
+                                segments={segments}
+                                segColors={segmentColors}
+                                winningSegment="red"
+                                onFinished={(winner) => onFinished(winner)}
+                                primaryColor="black"
+                                primaryColoraround="#0E4502"
+                                contrastColor="white"
+                                buttonText=""
+                                isOnlyOnce={false}
+                                size={screenHeight > 782 ? 250 : 200}
+                                width={200}
+                                height={2000}
+                                upDuration={50}
+                                downDuration={2000}
+
+                                ref={childRef}
+                            />
+                        </div>
+                        <BalnktCard isOpen={isModalOpen} onClose={closeModal} data={cardToggle ? wheelCardContent : collectUserDataCardContent} />
+                    </div>
                 </div> :
                 <Loader />
             }
+            <footer className={`text-light d-flex flex-row w-100 align-items-center justify-content-between px-3 py-1 ${styles.footer}`}>
+                <div className='d-flex flex-row'>
+                    <a href='/'>Découvrir</a>
+                    <img className='mx-2' src='logo.png'></img>
+                </div>
+                <div className='d-flex flex-column'>
+                    <a href=''>Politique</a>
+                    <a href=''>Contact</a>
+                </div>
+            </footer>
         </div>
     );
 };
