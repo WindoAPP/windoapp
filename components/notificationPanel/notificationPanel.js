@@ -14,7 +14,10 @@ const NotificationPanel = () => {
 
     useEffect(() => {
         if (session) {
-            fetchUser(session.user.uid);
+            if(session.user){
+                fetchUser(session.user.uid);
+            }
+            
         }
     }, [session]);
 
@@ -77,7 +80,7 @@ const NotificationPanel = () => {
                     <div key={index} className={`d-flex flex-row align-items-center justify-content-between alert ${obj.backColor} m-1 ${styles.notificationItem}`}>
                         <div className='d-flex flex-row align-items-center'>
                             <i className={`fa ${obj.icon} ${styles.notifiIcon}`} aria-hidden="true"></i>
-                            <p className='m-0'>{`${obj.customer.name} ${obj.body}`}</p>
+                            {obj.customer && <p className='m-0'>{`${obj.customer.name} ${obj.body}`}</p>}
                         </div>
                         <i className="fa fa-times cursor-pointer" aria-hidden="true" onClick={() => onRemoveNotifi(obj._id)}></i>
                     </div>
