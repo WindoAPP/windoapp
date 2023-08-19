@@ -146,6 +146,7 @@ const Home = () => {
             <div>
               <h3 className="text-dark">Vos clients scannent le QR Code</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Utilisez des supports physiques tels que des stickers, des chevalets de table, ou même en ajoutant le QR Code sur vos cartes.</p>
+              <img src="/step4.png" className={`shadow-sm ${styles.stepImgMobile}`}></img>
             </div>
           </div>
           <div className="d-flex mb-1">
@@ -156,6 +157,7 @@ const Home = () => {
             <div>
               <h3 className="text-dark">Vos clients vous laissent un avis google</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Chaque interaction offre une opportunité différente : encouragez vos clients à laisser un avis sur Google ou à s'abonner à vos réseaux sociaux comme Instagram ou Facebook.</p>
+              <img src="/step1.png" className={styles.stepImgMobile}></img>
             </div>
           </div>
           <div className="d-flex mb-1">
@@ -166,6 +168,7 @@ const Home = () => {
             <div>
               <h3 className="text-dark">L'aventure commence, la roue est en mouvement !</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Un avis sur Google devient ainsi une double opportunité : renforce la fidélité de vos clients tout en les récompensant avec des cadeaux attractifs.</p>
+              <img src="/step3.png" className={`${styles.stepImgMobile}`}></img>
             </div>
           </div>
           <div className="d-flex mb-1">
@@ -176,6 +179,7 @@ const Home = () => {
             <div>
               <h3 className="text-dark">Personnalisation Totale : Votre Jeu, Votre Style !</h3>
               <p className={`${styles.lead} text-muted pb-3`}>Vous pouvez personnaliser la roue à votre image, choisir les cadeaux et les couleurs, télécharger le QR code en 1 clic et suivez vos performances en toute simplicité.</p>
+              <img src="/step2.png" className={`${styles.stepImgMobile}`}></img>
             </div>
           </div>
         </div>

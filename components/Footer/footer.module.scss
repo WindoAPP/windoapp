@@ -1,0 +1,22 @@
+$mobile-breakpoint: 940px;
+
+
+.socialLogoWeb{
+    display: flex;
+    @media (max-width: $mobile-breakpoint) {
+        display: none;
+    }
+}
+
+.socialLogoMobile{
+    display: none;
+    @media (max-width: $mobile-breakpoint) {
+        display: flex;
+    }
+}
+
+.linksWrapper{
+    @media (max-width: $mobile-breakpoint) {
+        margin-top: 1rem;
+    }
+}

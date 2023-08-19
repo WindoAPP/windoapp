@@ -1,12 +1,13 @@
 import { useState } from "react";
 import ContentCard from "../contentCard/contentCard";
+import styles from './footer.module.scss';
 
 const Footer = () => {
 
-  const pp=[
+  const pp = [
     {
-        heading:"1. Conditions générales d’utilisation du site et des services proposés.",
-        des:`Le Site constitue une œuvre de l’esprit protégée par les dispositions du
+      heading: "1. Conditions générales d’utilisation du site et des services proposés.",
+      des: `Le Site constitue une œuvre de l’esprit protégée par les dispositions du
         Code de la Propriété Intellectuelle et des Réglementations Internationales
         applicables.
         Le Client ne peut en aucune manière réutiliser, céder ou exploiter pour son
@@ -28,8 +29,8 @@ const Footer = () => {
         prendre connaissance.`
     },
     {
-        heading:"2. Description des services fournis" ,
-        des:`Le site internet www.veryeasyagency.com a pour objet de fournir une
+      heading: "2. Description des services fournis",
+      des: `Le site internet www.veryeasyagency.com a pour objet de fournir une
         information concernant l’ensemble des activités de la société à la demande
         du visiteur à l’adresse mail suivante: contact@veryeasyagency.com
         Toutefois, il ne pourra être tenu responsable des oublis, des inexactitudes et
@@ -42,8 +43,8 @@ const Footer = () => {
         apportées depuis leur mise en ligne.`
     },
     {
-        heading:"3. Limitations contractuelles sur les données techniques.",
-        des:`Le site Internet ne pourra être tenu responsable de dommages matériels
+      heading: "3. Limitations contractuelles sur les données techniques.",
+      des: `Le site Internet ne pourra être tenu responsable de dommages matériels
         liés à l’utilisation du site. De plus, l’utilisateur du site s’engage à accéder au
         site en utilisant un matériel récent, ne contenant pas de virus et avec un
         navigateur de dernière génération mis-à-jour
@@ -63,8 +64,8 @@ const Footer = () => {
         à l’encombrement du réseau empêchant l’accès au serveur.`
     },
     {
-        heading:"4. Propriété intellectuelle et contrefaçons.",
-        des:`www.veryeasyagency.com est propriétaire des droits de propriété
+      heading: "4. Propriété intellectuelle et contrefaçons.",
+      des: `www.veryeasyagency.com est propriétaire des droits de propriété
         intellectuelle et détient les droits d’usage sur tous les éléments accessibles
         sur le site internet, notamment les textes, images, graphismes, logos, vidéos,
         icônes et sons.
@@ -78,8 +79,8 @@ const Footer = () => {
         L.335-2 et suivants du Code de Propriété Intellectuelle.`
     },
     {
-        heading:"5. Limitations de responsabilité.",
-        des:`www.windo-app.com agit en tant qu’éditeur du site. www.windoapp.com est responsable de la qualité et de la véracité du Contenu qu’il
+      heading: "5. Limitations de responsabilité.",
+      des: `www.windo-app.com agit en tant qu’éditeur du site. www.windoapp.com est responsable de la qualité et de la véracité du Contenu qu’il
         publie.
         www.veryeasyagency.com ne pourra être tenu responsable des dommages
         directs et indirects causés au matériel de l’utilisateur, lors de l’accès au site
@@ -98,15 +99,15 @@ const Footer = () => {
         possibilité de mettre en cause la responsabilité civile et/ou pénale de
         l’utilisateur, notamment en cas de message à caractère raciste, injurieux,
         diffamant, ou pornograp`
-    },{
-        heading:"6. Gestion des données personnelles.",
-        des:`Le Client est informé des réglementations concernant la communication
+    }, {
+      heading: "6. Gestion des données personnelles.",
+      des: `Le Client est informé des réglementations concernant la communication
         marketing, la loi du 21 Juin 2014 pour la confiance dans l’Economie
         Numérique, la Loi Informatique et Liberté du 06 Août 2004 ainsi que du
         Règlement Général sur la Protection des Données (RGPD : n° 2016-679).`
-    },{
-        heading:"6.1 Responsables de la collecte des données personnelles",
-        des:`Pour les Données Personnelles collectées dans le cadre de la création du
+    }, {
+      heading: "6.1 Responsables de la collecte des données personnelles",
+      des: `Pour les Données Personnelles collectées dans le cadre de la création du
         compte personnel de l’Utilisateur et de sa navigation sur le Site, le
         responsable du traitement des Données Personnelles est : WINDO
         www.windo-app.com est représenté par Rodrigue Planté, son représentant
@@ -121,9 +122,9 @@ const Footer = () => {
         www.veryeasyagency.com prend toutes les mesures raisonnables pour
         s’assurer de l’exactitude et de la pertinence des Données Personnelles au
         regard des finalités pour lesquelles www.windo-app.com les traite.`
-    },{
-        heading:"6.2 Finalité des données collectées",
-        des:`www.windo-app.com est susceptible de traiter tout ou partie des données :
+    }, {
+      heading: "6.2 Finalité des données collectées",
+      des: `www.windo-app.com est susceptible de traiter tout ou partie des données :
         • Pour permettre la navigation sur le Site et la gestion et la traçabilité des
         prestations et services commandés par l’utilisateur : données de
         connexion et d’utilisation du Site, facturation, historique des
@@ -139,9 +140,9 @@ const Footer = () => {
         www.windo-app.com ne commercialise pas vos données personnelles qui
         sont donc uniquement utilisées par nécessité ou à des fins statistiques et
         d’analyses.`
-    },{
-        heading:"6.3 Droit d’accès, de rectification et d’opposition",
-        des:`Conformément à la réglementation européenne en vigueur, les Utilisateurs
+    }, {
+      heading: "6.3 Droit d’accès, de rectification et d’opposition",
+      des: `Conformément à la réglementation européenne en vigueur, les Utilisateurs
         de www.veryeasyagency.com disposent des droits suivants : • Droit d’accès (article 15 RGPD) et de rectification (article 16 RGPD), de
         mise à jour, de complétude des données des Utilisateurs droit de
         verrouillage ou d’effacement des données des Utilisateurs à caractère
@@ -181,8 +182,8 @@ const Footer = () => {
     }
     ,
     {
-      heading:`6.4 Non-communication des données personnelles`,
-      des:`www.veryeasyagency.com s’interdit de traiter, héberger ou transférer les
+      heading: `6.4 Non-communication des données personnelles`,
+      des: `www.veryeasyagency.com s’interdit de traiter, héberger ou transférer les
       Informations collectées sur ses Clients vers un pays situé en dehors de
       l’Union européenne ou reconnu comme « non adéquat » par la Commission
       européenne sans en informer préalablement le client. Pour autant,
@@ -207,8 +208,8 @@ const Footer = () => {
       notre service client.`
     },
     {
-      heading:`6.5 Types de données collectées`,
-      des:`Concernant les utilisateurs d’un Site www. www.windo-app.com nous
+      heading: `6.5 Types de données collectées`,
+      des: `Concernant les utilisateurs d’un Site www. www.windo-app.com nous
       collectons les données suivantes qui sont indispensables au
       fonctionnement du service , et qui seront conservées pendant une période
       maximale de 60 mois mois après la fin de la relation contractuelle:
@@ -224,8 +225,8 @@ const Footer = () => {
       après la fin de la relation contractuelle`
     },
     {
-      heading:`7. Notification d’incident`,
-      des:`Quels que soient les efforts fournis, aucune méthode de transmission sur
+      heading: `7. Notification d’incident`,
+      des: `Quels que soient les efforts fournis, aucune méthode de transmission sur
       Internet et aucune méthode de stockage électronique n’est complètement
       sûre. Nous ne pouvons en conséquence pas garantir une sécurité absolue.
       Si nous prenions connaissance d’une brèche de la sécurité, nous avertirions
@@ -245,8 +246,8 @@ const Footer = () => {
       modification des données vis à vis de l’utilisateur du site www.windoapp.com.`
     },
     {
-      heading:`7.1Sécurité`,
-      des:`Pour assurer la sécurité et la confidentialité des Données Personnelles et
+      heading: `7.1Sécurité`,
+      des: `Pour assurer la sécurité et la confidentialité des Données Personnelles et
       des Données Personnelles de Santé, www.windo-app.com utilise des
       réseaux protégés par des dispositifs standards tels que par pare-feu, la
       pseudonymisation, l’encryption et mot de passe.
@@ -255,8 +256,8 @@ const Footer = () => {
       altération ou destruction.`
     },
     {
-      heading:`8. Liens hypertextes « cookies » et balises (“tags”) internet`,
-      des:`Le site www.veryeasyagency.com contient un certain nombre de liens
+      heading: `8. Liens hypertextes « cookies » et balises (“tags”) internet`,
+      des: `Le site www.veryeasyagency.com contient un certain nombre de liens
       hypertextes vers d’autres sites, mis en place avec l’autorisation de
       www.windo-app.com. Cependant, www.windo-app.com n’a pas la
       possibilité de vérifier le contenu des sites ainsi visités, et n’assumera en
@@ -269,8 +270,8 @@ const Footer = () => {
       `
     },
     {
-      heading:`9. « COOKIES »`,
-      des:`Un « cookie » est un petit fichier d’information envoyé sur le navigateur de
+      heading: `9. « COOKIES »`,
+      des: `Un « cookie » est un petit fichier d’information envoyé sur le navigateur de
       l’Utilisateur et enregistré au sein du terminal de l’Utilisateur (ex : ordinateur,
       smartphone), (ci-après « Cookies »). Ce fichier comprend des informations
       telles que le nom de domaine de l’Utilisateur, le fournisseur d’accès Internet
@@ -325,8 +326,8 @@ const Footer = () => {
       peut néanmoins revenir sur son consentement à ce que www.windoapp.com dépose ce type de cookies.`
     },
     {
-      heading:`Article 9.1 BALISES (“TAGS”) INTERNET`,
-      des:`www.windo-app.com peut employer occasionnellement des balises Internet
+      heading: `Article 9.1 BALISES (“TAGS”) INTERNET`,
+      des: `www.windo-app.com peut employer occasionnellement des balises Internet
       (également appelées « tags », ou balises d’action, GIF à un pixel, GIF
       transparents, GIF invisibles et GIF un à un) et les déployer par l’intermédiaire
       d’un partenaire spécialiste d’analyses Web susceptible de se trouver (et
@@ -344,74 +345,74 @@ const Footer = () => {
       fournir d’autres services relatifs à l’utilisation de celui-ci et d’Internet.`
     },
     {
-      heading:`10. Droit applicable et attribution de juridiction.`,
-      des:`Tout litige en relation avec l’utilisation du site www.windo-app.com est
+      heading: `10. Droit applicable et attribution de juridiction.`,
+      des: `Tout litige en relation avec l’utilisation du site www.windo-app.com est
       soumis au droit Européen.
       En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive
       de juridiction aux tribunaux compétents d’Europe.`
     },
-]
+  ]
 
-const des=[
-  {
-    heading:``,
-    des:`Conformément aux dispositions de la loi pour la Confiance dans l'Économie
+  const des = [
+    {
+      heading: ``,
+      des: `Conformément aux dispositions de la loi pour la Confiance dans l'Économie
     Numérique (LCEN) et de la loi Informatique et Libertés, nous vous présentons
     les mentions légales de l'application web "Windo". L'utilisation de cette
     application implique l'acceptation pleine et entière des présentes mentions
     légales.`
-  },{
-    heading:`Éditeur de l'Application :`,
-    des:`Nom : Very Easy Agency
+    }, {
+      heading: `Éditeur de l'Application :`,
+      des: `Nom : Very Easy Agency
     Siège social : 159 rue Fernand Collardeau, 97410 Saint-Pierre Réunion
     Représentant légal : Monsieur PLANTÉ Rodrigue
     SIRET : 85220995600030
     Directeur : Monsieur PLANTÉ Rodrigue
     Adresse e-mail : contact@veryeasyagency.com`
-  },{
-    heading:`Hébergeur de l'Application : `,
-    des:`Nom : LWS France
+    }, {
+      heading: `Hébergeur de l'Application : `,
+      des: `Nom : LWS France
     Ligne direct : 01 77 62 3003
     Site web : https://www.lws.fr/`
-  },{
-    heading:`Protection des Données Personnelles :`,
-    des:`L'Entreprise s'engage à protéger vos données personnelles conformément à
+    }, {
+      heading: `Protection des Données Personnelles :`,
+      des: `L'Entreprise s'engage à protéger vos données personnelles conformément à
     sa politique de confidentialité. Pour en savoir plus sur la collecte, l'utilisation
     et la protection de vos données personnelles, veuillez consulter notre
     politique de confidentialité.`
-  },{
-    heading:`Propriété Intellectuelle :`,
-    des:`L'ensemble des éléments de l'application web "Windo", notamment les
+    }, {
+      heading: `Propriété Intellectuelle :`,
+      des: `L'ensemble des éléments de l'application web "Windo", notamment les
     textes, les images, les graphismes, les logos, les icônes, ainsi que leur mise
     en forme, sont la propriété exclusive de l'Entreprise à l'exception des
     marques, logos ou contenus appartenant à des partenaires ou auteurs tiers.
     `
-  },{
-    heading:`Responsabilité :`,
-    des:`L'Entreprise décline toute responsabilité quant aux éventuels
+    }, {
+      heading: `Responsabilité :`,
+      des: `L'Entreprise décline toute responsabilité quant aux éventuels
     dysfonctionnements ou dommages liés à l'utilisation de l'application, qu'ils
     soient directs ou indirects. L'application peut contenir des liens vers d'autres
     sites web, pour lesquels l'Entreprise n'assume aucune responsabilité.
     `
-  },{
-    heading:`Modification des Mentions Légales :`,
-    des:`L'Entreprise se réserve le droit de modifier, à tout moment et sans préavis, les
+    }, {
+      heading: `Modification des Mentions Légales :`,
+      des: `L'Entreprise se réserve le droit de modifier, à tout moment et sans préavis, les
     présentes mentions légales afin de les adapter aux évolutions de l'application
     et/ou de la législation.`
-  },{
-    heading:`Date de Dernière Mise à Jour :`,
-    des:` 07/08/2023
+    }, {
+      heading: `Date de Dernière Mise à Jour :`,
+      des: ` 07/08/2023
     Merci d'utiliser l'application web "Windo".`
-  },{
-    heading:``,
-    des:``
-  },
-];
+    }, {
+      heading: ``,
+      des: ``
+    },
+  ];
 
-const ventes =[
-  {
-    heading:`ARTICLE 1 - APPLICATION ET OPPOSABILITÉ`,
-    des:`1.Les présentes Conditions Générales régissent les relations contractuelles entre la société VERY EASY
+  const ventes = [
+    {
+      heading: `ARTICLE 1 - APPLICATION ET OPPOSABILITÉ`,
+      des: `1.Les présentes Conditions Générales régissent les relations contractuelles entre la société VERY EASY
     AGENCY, statut auto-entrepreneur, enregistré au Registre du Commerce et des Sociétés de Paris sous le
     numéro 85220995600030, représenté par M. Planté Rodrigue, exerçant l' activité de vente à distance sur
     catalogue général, et ci-après désignée « WINDO », d'une part, et toute personne physique ou morale
@@ -421,9 +422,9 @@ const ventes =[
     ligne et en approuvant la case « j’accepte les conditions générales de ventes » ou en signant le Bon de
     commande. Le CLIENT reconnaît qu’il est tenu par l’ensemble des présentes conditions générales d’accès
     au service WINDO.`
-  },{
-    heading:`ARTICLE 2 - PRESTATIONS `,
-    des:`Pou rassurer la promotion du CLIENT , WINDO propose un ensemble de services de marketing digital que
+    }, {
+      heading: `ARTICLE 2 - PRESTATIONS `,
+      des: `Pou rassurer la promotion du CLIENT , WINDO propose un ensemble de services de marketing digital que
     le CLIENT sélectionne à la carte. Parmi ces services :
     -Une animation sous forme de jeu visant à collecter les coordonnées (email ou numéro de portable) des
     clients du CLIENT en vue de leur envoyer des communications régulières dans une optique de
@@ -439,15 +440,15 @@ const ventes =[
     données, des codes d’accès qui lui ont été fournis ou qu’il a pu créer.
     Les modalités de l’animation restent modifiables par le CLIENT à tout moment (cadeaux offerts, action
     demandée au client final etc.). `
-  },{
-    heading:`ARTICLE 3 - PRESTATIONS OPTIONNELLES `,
-    des:`En tant que client de Windo, l'application web de Very Easy Agency, nous sommes heureux de vous offrir
+    }, {
+      heading: `ARTICLE 3 - PRESTATIONS OPTIONNELLES `,
+      des: `En tant que client de Windo, l'application web de Very Easy Agency, nous sommes heureux de vous offrir
     la possibilité de commander un support physique pour présenter votre QR Code de manière élégante et
     professionnelle. Chez Very Easy Agency, nous croyons en l'importance de connecter le monde numérique
     avec le monde physique, offrant ainsi une expérience marketing plus riche et interactive.`
-  },{
-    heading:`ARTICLE 5 - RESPONSABILITÉ DU PRESTATAIRE `,
-    des:`Toot Sweet SAS fait ses meilleurs efforts pour assurer la disponibilité de ses services. Toutefois, le CLIENT
+    }, {
+      heading: `ARTICLE 5 - RESPONSABILITÉ DU PRESTATAIRE `,
+      des: `Toot Sweet SAS fait ses meilleurs efforts pour assurer la disponibilité de ses services. Toutefois, le CLIENT
     est informé que le service est soumis à une simple obligation de moyen.
     WINDO ne peut être tenue responsable de dommages directs ou indirects, pertes ou frais, résultant de
     l’utilisation des services, ou de l’impossibilité de les utiliser, ou d’un mauvais fonctionnement, d’une
@@ -462,17 +463,17 @@ const ventes =[
     perte d’image de marque ou autre trouble commercial. De convention expresse, la responsabilité de
     WINDO ne pourra en tout état de cause excéder le montant des sommes facturées au CLIENT par WINDO
     EI au titre des services fournis l’année civile encours. `
-  },{
-    heading:`ARTICLE 6 - RESPONSABILITÉ DU CLIENT`,
-    des:`Le CLIENT déclare être propriétaire des informations fournies à WINDO pour la création et l’actualisation
+    }, {
+      heading: `ARTICLE 6 - RESPONSABILITÉ DU CLIENT`,
+      des: `Le CLIENT déclare être propriétaire des informations fournies à WINDO pour la création et l’actualisation
     de ses campagnes de communication (supports graphiques, textes, photos etc.).
     L’exactitude de l’ensemble des informations fournies par le CLIENT relève de sa responsabilité et fait
     appel à sa bonne foi .Le CLIENT déclare que les informations communiquées sont exactes et complètes et
     en assume la responsabilité. WINDO n’a aucune responsabilité quant au contenu des informations
     fournies par le CLIENT. `
-  },{
-    heading:`ARTICLE 7 - MODALITÉS DE REGLEMENT ET DEFAUT DE PAIEMENT`,
-    des:`Les règlements correspondant à l’accès aux services de WINDO sont payables mensuellement par
+    }, {
+      heading: `ARTICLE 7 - MODALITÉS DE REGLEMENT ET DEFAUT DE PAIEMENT`,
+      des: `Les règlements correspondant à l’accès aux services de WINDO sont payables mensuellement par
     autorisation de prélèvement ou en une fois par chèque à la commande.
     Le CLIENT s’engage à ce que le compte bancaire utilisé pour le paiement soit suffisamment approvisionné
     pour permettre le paiement.
@@ -500,9 +501,9 @@ const ventes =[
     informer WINDO dans les plus brefs délais. Dans cette hypothèse, WINDO constatera la résiliation du
     Contrat avec le Client sur la base des justifications apportées par le Client et annulera toutes les sommes
     restantes dues au titre du Contrat par le Client pour la durée restante sur l’abonnement.`
-  },{
-    heading:`ARTICLE 8 - DURÉE DU CONTRAT - RESILIATION `,
-    des:`Conformément aux dispositions légales en vigueur, LE CLIENT bénéficie d'un droit de rétractation, lui
+    }, {
+      heading: `ARTICLE 8 - DURÉE DU CONTRAT - RESILIATION `,
+      des: `Conformément aux dispositions légales en vigueur, LE CLIENT bénéficie d'un droit de rétractation, lui
     permettant de se rétracter du présent contrat sans donner de motif, dans un délai de 30 (trente)
     jours à compter de la date de souscription au contrat.
     Le présent Contrat prend effet à compter de la date indiquée par le client et présente un caractère
@@ -515,9 +516,9 @@ const ventes =[
     pour quelque cause, fondement ou grief que ce soit. En toute hypothèse, le CLIENT ne peut interrompre l’exécution du Contrat, même ponctuellement, pour des motifs liés à la fermeture temporaire de son
     établissement (vacances du mois d’août, fermeture annuelle etc.), étant précisé que les périodes de
     fermeture sont déjà prises en compte par WINDO au moment de la souscription de la commande. `
-  },{
-    heading:`ARTICLE 9 - DONNÉES PERSONNELLES `,
-    des:`• Données relatives aux Utilisateurs finaux
+    }, {
+      heading: `ARTICLE 9 - DONNÉES PERSONNELLES `,
+      des: `• Données relatives aux Utilisateurs finaux
     WINDO agit en qualité de responsable de traitement dans le cadre des services fournis au CLIENT dans la
     mesure où WINDO détermine de manière autonome les finalités et les moyens des traitements de
     données personnelles
@@ -543,16 +544,16 @@ const ventes =[
     courrier électronique à l’adresse : contact@veryeasyagency.com.
     • Enfin, pour toute réclamation, le CLIENT dispose du droit de saisir la Commission Nationale de
     l’Informatique et des Libertés (CNIL). `
-  },{
-    heading:`ARTICLE 10 - LITIGES - JURIDICTION COMPÉTENTE `,
-    des:`Toutes contestations qui découlent du présent contrat ou qui s'y rapportent seront tranchées
+    }, {
+      heading: `ARTICLE 10 - LITIGES - JURIDICTION COMPÉTENTE `,
+      des: `Toutes contestations qui découlent du présent contrat ou qui s'y rapportent seront tranchées
     définitivement suivant le règlement de Conciliation et d'Arbitrage de la Chambre de Commerce
     Internationale sans aucun recours aux tribunaux ordinaires par un ou plusieurs arbitres nommés
     conformément à ce règlement et dont la sentence a un caractère obligatoire. Le tribunal arbitral sera juge
     de sa propre compétence et de la validité de la convention d'arbitrage.
     `
-  }
-]
+    }
+  ]
 
 
 
@@ -565,13 +566,13 @@ const ventes =[
   };
 
   const openModal = (type) => {
-    if(type=="p"){
+    if (type == "p") {
       setModalTitle('Politique de Confidentialité');
       setModalData(pp);
-    }else if(type=="des"){
+    } else if (type == "des") {
       setModalTitle(`Mentions Légales de l'Application Web "Windo"`);
       setModalData(des);
-    }else if(type=="ventes"){
+    } else if (type == "ventes") {
       setModalTitle(`CONDITIONS GÉNÉRALES`);
       setModalData(ventes);
     }
@@ -579,35 +580,45 @@ const ventes =[
     setIsModalOpen(true);
   };
 
-    return (
-      <footer className="bg-dark text-light py-4">
-        <div className="container">
-          <div className="d-flex felxMobile align-items-center justify-content-between">
-            <div className="">
-              <p className="mb-0">2023 © Windo. Tous droits réservés.</p>
-            </div>
-            
-            <div className="">
-                <div className="d-flex flex-row">
-                <a href="https://www.facebook.com/Veryeasyagency" className="text-white" target="_blank">
+  return (
+    <footer className="bg-dark text-light py-4">
+      <div className="container">
+        <div className="d-flex felxMobile align-items-center justify-content-between">
+          <div className="">
+            <p className="mb-0">2023 © Windo. Tous droits réservés.</p>
+          </div>
+
+          <div className={styles.socialLogoWeb}>
+            <div className="d-flex flex-row">
+              <a href="https://www.facebook.com/Veryeasyagency" className="text-white" target="_blank">
                 <div className=" mx-4 iconWrapper d-flex align-items-center justify-content-center"><i className="fa fa-facebook"></i></div>
-                </a>
-                <a href="https://www.instagram.com/very.easy_agency/?hl=fr"  className="text-white" target="_blank">
+              </a>
+              <a href="https://www.instagram.com/very.easy_agency/?hl=fr" className="text-white" target="_blank">
                 <div className=" mx-4 iconWrapper d-flex align-items-center justify-content-center"><i className="fa fa-instagram"></i></div>
-                </a>
-                </div>           
+              </a>
             </div>
-            <div className=" d-flex flex-column">
-              <a  href="https://veryeasyagency.com/contact" target="_blank" className="text-white footer-links">contact</a>
-              <a onClick={()=>openModal("p")} className="text-white footer-links">politique de confidentialité</a>
-              <a onClick={()=>openModal("des")}  className="text-white footer-links">mentions légales</a>
-              <a onClick={()=>openModal("ventes")}  className="text-white footer-links">conditions générales des ventes</a>
+          </div>
+          <div className={` d-flex flex-column ${styles.linksWrapper}`}>
+            <a href="https://veryeasyagency.com/contact" target="_blank" className="text-white footer-links">contact</a>
+            <a onClick={() => openModal("p")} className="text-white footer-links">politique de confidentialité</a>
+            <a onClick={() => openModal("des")} className="text-white footer-links">mentions légales</a>
+            <a onClick={() => openModal("ventes")} className="text-white footer-links">conditions générales des ventes</a>
+          </div>
+          <div className={styles.socialLogoMobile}>
+            <div className="d-flex flex-row">
+              <a href="https://www.facebook.com/Veryeasyagency" className="text-white" target="_blank">
+                <div className=" mx-4 iconWrapper d-flex align-items-center justify-content-center"><i className="fa fa-facebook"></i></div>
+              </a>
+              <a href="https://www.instagram.com/very.easy_agency/?hl=fr" className="text-white" target="_blank">
+                <div className=" mx-2 iconWrapper d-flex align-items-center justify-content-center"><i className="fa fa-instagram"></i></div>
+              </a>
             </div>
           </div>
         </div>
-        <ContentCard isOpen={isModalOpen} onClose={closeModal} title={modalTitle} data={modalData}/>
-      </footer>
-    );
-  };
-  
-  export default Footer;
+      </div>
+      <ContentCard isOpen={isModalOpen} onClose={closeModal} title={modalTitle} data={modalData} />
+    </footer>
+  );
+};
+
+export default Footer;
