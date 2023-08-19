@@ -151,7 +151,8 @@ $mobile-breakpoint: 940px;
 }
 
 .footer{
-  background-image: linear-gradient(rgb(206, 206, 206), #fff);
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   position: fixed;
   bottom: 0;
   width: 100%;
