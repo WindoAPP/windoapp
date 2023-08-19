@@ -156,7 +156,7 @@ $mobile-breakpoint: 940px;
 }
 
 .footer{
-  background-color: rgb(167, 166, 166);
+  background-image: linear-gradient(rgb(206, 206, 206), #fff);
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -168,5 +168,34 @@ $mobile-breakpoint: 940px;
   }
   img{
     height: 2rem;
+  }
+}
+
+.finalStepWrapper{
+  h1,h2{
+     font-size: 2.5rem;
+     font-weight: 800;
+  }
+  h2{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    color: orange;
+  }
+  p{
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+}
+.finalStepWrapperLost{
+  h1{
+    font-size: 2.5rem;
+     font-weight: 800;
+     margin-bottom: 30%;
+     margin-top: 30%;
+  }
+  p{
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 30%;
   }
 }

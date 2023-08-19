@@ -11,6 +11,7 @@ import showNotifications from '../showNotifications/showNotifications';
 import { useRef } from 'react';
 import BalnktCard from '../blankCard/blankCard';
 import ContentCard from '../contentCard/contentCard';
+import Confetti from 'react-confetti'
 
 const Scan = () => {
     const modalData = [
@@ -112,6 +113,7 @@ const Scan = () => {
     const [formData, setFormData] = useState({ email: '', phoneNumber: '', name: '', user: '', facebook: '', instagram: '', termsCheck: false, spins: [] });
     const [step, setStep] = useState(0);
     const [cardToggle, setCardToggle] = useState(true);
+    const [isFinalStep, setIsFinalStep] = useState(false);
     const [price, setPrice] = useState();
     const [screenHeight, setScreenHeight] = useState();
     const [spinCount, setSpinCount] = useState(0);
@@ -288,6 +290,7 @@ const Scan = () => {
 
             }
             createNotifi(notificationData);
+            setIsFinalStep(true)
         }, 3000)
 
 
@@ -388,8 +391,35 @@ const Scan = () => {
     )
 
 
-
-
+    const FinalStepPageContent = () => (
+        <>
+            {isWin ?
+                <div className={styles.finalStepWrapper}>
+                    <h1>Bravo!</h1>
+                    <h1> Vous avez gagné</h1>
+                    <h2>{price}</h2>
+                    <p>Présentez cette page à l'accueil pour recevoir votre cadeau.</p>
+                    <Confetti />
+                </div>
+                : <div className={styles.finalStepWrapperLost}>
+                    <h1>Désolé... 😢</h1>
+                    <p>Vous avez perdu scannez pour une nouvelle chance !</p>
+                    <Confetti  gravity={0.06}
+                        numberOfPieces={60} drawShape={ctx => {
+                        ctx.beginPath()
+                        const sadEmojiSize = 30; 
+                        const sadEmoji = "😢";
+                        ctx.font = `${sadEmojiSize}px Arial`;
+                        ctx.textBaseline = "middle";
+                        ctx.textAlign = "center";
+                        ctx.fillText(sadEmoji, 1, 1);
+                        ctx.stroke()
+                        ctx.closePath()
+                    }} />
+                </div>
+            }
+        </>
+    )
 
     return (
 
@@ -424,6 +454,7 @@ const Scan = () => {
                             />
                         </div>
                         <BalnktCard isOpen={isModalOpen} onClose={closeModal} data={cardToggle ? wheelCardContent : collectUserDataCardContent} />
+                        {isFinalStep && <BalnktCard isOpen={true} onClose={closeModal} data={FinalStepPageContent} />}
                     </div>
                 </div> :
                 <Loader />
