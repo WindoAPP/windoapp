@@ -160,11 +160,13 @@ $mobile-breakpoint: 940px;
   position: absolute;
   bottom: 0;
   width: 100%;
-  a{
+  z-index: 5;
+  a,p{
     margin: 0;
     color: #000;
     font-weight: 600;
     text-decoration: underline !important;
+    cursor: pointer;
   }
   img{
     height: 2rem;
