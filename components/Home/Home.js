@@ -16,7 +16,7 @@ const Home = () => {
     <div className='d-flex flex-column'>
       <div className={`d-flex mb-5 ${styles.felxMobile} ${styles.topsection1}`}>
         <div className='d-flex flex-column '>
-          <button className={`mb-2 ${styles.purplrBtn}`}>Et si on jouer un peu <img draggable="false" role="img" className="emoji" alt="🤭" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f92d.svg"></img></button>
+          <button className={`mb-2 ${styles.purplrBtn}`}>Et si on jouait un peu <img draggable="false" role="img" className="emoji" alt="🤭" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f92d.svg"></img></button>
           <h1 className='mb5'>Boostez Votre Visibilité avec des avis sur Google</h1>
           <p className='text-secondary'>Un QR code magique ouvre la porte à une expérience unique : faites jouer vos clients et obtenez des avis positifs tous les mois.</p>
           <div className={`d-flex flex-column justify-content-center mb-5`}>
@@ -200,7 +200,7 @@ const Home = () => {
       </div>
       <div className={`d-flex ${styles.felxMobile} align-items-center justify-content-center mb-5 mt-5 ${styles.secondSectionWrapper1}`}>
         <div className={`d-flex flex-column ${styles.secondSectionInnerWrapper}`}>
-          <h1>Commander vos supports en 1 clic !</h1>
+          <h1>Commandez vos supports en 1 clic !</h1>
           <h4 className='mt-3'>Une fois que vous avez obtenu votre QR Code, commandez votre support physique en quelques clics via l'imprimerie de Very Easy. Simplifiez le processus et concrétisez votre projet en un rien de temps !</h4>
           <button onClick={()=>reDirectToUrl("https://veryeasyagency.com/categorie-produit/imprimerie")} type="button" className={`btn btn-light  mt-4 ${styles.abonnezBtn}`}>Commander un support</button>
         </div>
