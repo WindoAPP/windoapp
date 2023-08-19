@@ -1,11 +1,6 @@
 $mobile-breakpoint: 940px;
 
 .backgroundContainer {
-  // background-image: url('/backimage.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  justify-content: center;
   height: 100vh;
   text-align: center;
 }
@@ -26,7 +21,7 @@ $mobile-breakpoint: 940px;
   }
 }
 .wheelWrapper{
- position: fixed;
+ position: absolute;
  left: 21px;
  bottom: -250px;
   transform: translate(-50%,-50%);

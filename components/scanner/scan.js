@@ -781,7 +781,7 @@ const Scan = () => {
 
     return (
 
-        <div className={` d-flex ${styles.backgroundContainer} ${step !== 2 && "justify-content-center"}`} >
+        <div className={` d-flex justify-content-center ${styles.backgroundContainer}`} >
             {!loading ?
                 <div>
                     <div className={`d-flex ${styles.wheelWrapperc}`} >
