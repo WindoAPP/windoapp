@@ -61,9 +61,6 @@ export async function createCustomer(userData) {
 export async function updateCustomer(customerData) {
     try {
         const response = await axios.put(`/api/customer`, customerData);
-        if (response) {
-            showNotification(false, "Update Successfull")
-        }
         return response.data;
     } catch (error) {
         showNotification(true, error.response.data.message)
