@@ -76,17 +76,19 @@ const SignUp = () => {
                 });
             }
         }
+        setPriceId("price_1Ni0vUBM9gJjuZS8EWROJ0aR")
+        // pricingTableGet().then(res => {
+        //     console.log(res);
+        //     if (res) {
+        //         setLoading(false);
+                
+        //         setPriceId(res[0].id)
+        //     }
+        // }).catch(err => {
+        //     console.log(err);
+        //     setLoading(false)
 
-        pricingTableGet().then(res => {
-            if (res) {
-                setLoading(false);
-                setPriceId(res[0].id)
-            }
-        }).catch(err => {
-            console.log(err);
-            setLoading(false)
-
-        });
+        // });
 
 
     }, [query]);
