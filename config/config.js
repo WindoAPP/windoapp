@@ -1,3 +1,3 @@
 export const env_data={
-    base_url:"https://wind-project.vercel.app/"
+    base_url:"https://www.windo-app.com/"
 }

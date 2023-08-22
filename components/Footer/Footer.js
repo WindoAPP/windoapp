@@ -584,7 +584,7 @@ const Footer = () => {
     <footer className="bg-dark text-light py-4">
       <div className="container">
         <div className="d-flex felxMobile align-items-center justify-content-between">
-          <div className="">
+          <div className={styles.socialLogoWeb}>
             <p className="mb-0">2023 © Windo. Tous droits réservés.</p>
           </div>
 
@@ -613,6 +613,9 @@ const Footer = () => {
                 <div className=" mx-2 iconWrapper d-flex align-items-center justify-content-center"><i className="fa fa-instagram"></i></div>
               </a>
             </div>
+          </div>
+          <div className={styles.socialLogoMobile}>
+            <p className="mb-0 mt-2">2023 © Windo. Tous droits réservés.</p>
           </div>
         </div>
       </div>
