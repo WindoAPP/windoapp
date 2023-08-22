@@ -5,7 +5,7 @@ const handler = async (req, res) => {
     // connectToMongoDB().catch(err => res.json(err))
     const {priceId,userId,total,currency} =req.body
     if (req.method === "GET") {
-        const stripe = new Stripe("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")
+        const stripe = new Stripe("sk_test_51NaD0rAtxilCsn6NpGree2BvoWPklwoqVlnuvZwqSnXcVoRgoeDi4EGqvEh2hXcYUOGt0hrEHJyQisUsA8svyGiX003680C7Bq")
         const prices = await stripe.prices.list({
             limit: 4,
         });
@@ -13,7 +13,7 @@ const handler = async (req, res) => {
     }
 
     if (req.method === "POST") {
-        const stripe = new Stripe("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");
+        const stripe = new Stripe("sk_test_51NaD0rAtxilCsn6NpGree2BvoWPklwoqVlnuvZwqSnXcVoRgoeDi4EGqvEh2hXcYUOGt0hrEHJyQisUsA8svyGiX003680C7Bq");
         const session = await stripe.checkout.sessions.create({
             line_items: [
                 {
