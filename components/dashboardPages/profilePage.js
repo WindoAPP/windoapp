@@ -88,21 +88,21 @@ const ProfilePage = () => {
     }
 
     const addItem = (isWin) => {
-        if(isWin){
+        if (isWin) {
             if (item == "") {
                 return showNotification(true, "Please add the gift name")
             }
-        }else{
+        } else {
             if (itemLost == "") {
                 return showNotification(true, "Please add the gift name")
             }
         }
-        
-        var w_item = { item: isWin?item:itemLost, color: colorPickNo == 1 ? color : color2 ,isWinningItem:isWin}
+
+        var w_item = { item: isWin ? item : itemLost, color: colorPickNo == 1 ? color : color2, isWinningItem: isWin }
         setWheelItems([...wheelItems, w_item]);
         setItem("");
         setItemLost("");
-        setSegments([...segments, isWin?item:itemLost]);
+        setSegments([...segments, isWin ? item : itemLost]);
         setSegmentColors([...segmentColors, colorPickNo == 1 ? color : color2]);
         setWheelUpdated(false);
         setWheelItemsTouched(true);
@@ -168,7 +168,7 @@ const ProfilePage = () => {
                 setSegmentColors(segmentsColorTemp);
                 setWheelUpdated(true);
                 setLoading(false);
-                if(res.user.winningProbability){
+                if (res.user.winningProbability) {
                     setWinningProbability(res.user.winningProbability)
                 }
                 if (res.user.shopSlogan) {
@@ -202,18 +202,22 @@ const ProfilePage = () => {
 
     const onChangeColor1 = (e) => {
         setColor(e);
-        setTimeout(() => {
-            setColorPallate01Opend(false);
-        }, 500)
-
     }
 
     const onChangeColor2 = (e) => {
         setColor2(e);
+    }
+
+    const setColor1 = (e) => {
+        setTimeout(() => {
+            setColorPallate01Opend(false);
+        }, 500);
+    }
+
+    const setColor02 = (e) => {
         setTimeout(() => {
             setColorPallate02Opend(false);
-        }, 500)
-
+        }, 500);
     }
 
     const handleInputChange = (index, value) => {
@@ -249,9 +253,9 @@ const ProfilePage = () => {
                                     <textarea type='textarea' className="form-control  mx-2" value={slogan} onChange={onSloganChange}  ></textarea>
                                 </div>
                                 <div className='d-flex flex-row align-items-center'>
-                                        <p className='my-2'>Winning probability :</p>
-                                        <input className="form-control  mx-2" value={winningProbability} onChange={onWinningProbabilityChange}  type='number'></input><p>%</p>
-                                    </div>
+                                    <p className='my-2'>Winning probability :</p>
+                                    <input className="form-control  mx-2" value={winningProbability} onChange={onWinningProbabilityChange} type='number'></input><p>%</p>
+                                </div>
                                 <div className='d-flex flex-column mb-4'>
                                     <p className='my-2'>Base color 01 :</p>
                                     <div className='d-flex flex-row align-items-center'>
@@ -267,7 +271,13 @@ const ProfilePage = () => {
                                         <div style={{ backgroundColor: color }} className={`m-1 cursor-pointer ${styles.colorPlateItem}`} onClick={() => { setColorPallate01Opend(true); setColorPallate02Opend(false) }}></div>
                                         <div className={styles.colorPicker}>
                                             {
-                                                colorPallate01Opend && <HexColorPicker color={color} onChange={onChangeColor1} />
+                                                colorPallate01Opend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <HexColorPicker color={color} onChange={onChangeColor1} />
+                                                    <div className='d-flex flex-row align-items-center'>
+                                                        <input className="form-control m-2 w-75" value={color} onChange={(e) => onChangeColor1(e.target.value)}></input>
+                                                        <i className='fa fa-eyedropper' onClick={setColor1}></i>
+                                                    </div>
+                                                </div>
                                             }
                                         </div>
                                     </div>
@@ -285,7 +295,14 @@ const ProfilePage = () => {
                                         <div style={{ backgroundColor: color2 }} className={`m-1 cursor-pointer  ${styles.colorPlateItem}`} onClick={() => { setColorPallate02Opend(true); setColorPallate01Opend(false) }}></div>
                                         <div className={styles.colorPicker}>
                                             {
-                                                colorPallate02Opend && <HexColorPicker color={color2} onChange={onChangeColor2} />
+                                                colorPallate02Opend &&
+                                                <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <HexColorPicker color={color2} onChange={onChangeColor2} />
+                                                    <div className='d-flex flex-row align-items-center'>
+                                                        <input className="form-control m-2 w-75" value={color2} onChange={(e) => onChangeColor2(e.target.value)}></input>
+                                                        <i className='fa fa-eyedropper' onClick={setColor02}></i>
+                                                    </div>
+                                                </div>
                                             }
                                         </div>
                                     </div>
@@ -293,11 +310,11 @@ const ProfilePage = () => {
                                 <div className={`d-flex flex-column mt-4`}>
                                     <div className='d-flex flex-row mb-4'>
                                         <input className="form-control bg-color-green" value={item} onChange={(e) => setItem(e.target.value)} placeholder='Add winning item' maxLength={15}></input>
-                                        <button className='btn btn-success mx-2 w-50 d-flex felx-row align-items-center justify-content-center' onClick={()=>addItem(true)}>Add <i className=" fa fa-plus mx-1"></i></button>
+                                        <button className='btn btn-success mx-2 w-50 d-flex felx-row align-items-center justify-content-center' onClick={() => addItem(true)}>Add <i className=" fa fa-plus mx-1"></i></button>
                                     </div>
                                     <div className='d-flex flex-row mb-4'>
                                         <input className="form-control bg-color-orange" value={itemLost} onChange={(e) => setItemLost(e.target.value)} placeholder='Add losing item' maxLength={15}></input>
-                                        <button className='btn btn-warning mx-2 w-50 d-flex felx-row align-items-center justify-content-center' onClick={()=>addItem(false)}>Add <i className=" fa fa-plus mx-1"></i></button>
+                                        <button className='btn btn-warning mx-2 w-50 d-flex felx-row align-items-center justify-content-center' onClick={() => addItem(false)}>Add <i className=" fa fa-plus mx-1"></i></button>
                                     </div>
                                     <table className="table">
                                         <thead className="thead-dark">
@@ -312,7 +329,7 @@ const ProfilePage = () => {
                                                 return (
                                                     <tr>
                                                         <td style={{ backgroundColor: item.color }}></td>
-                                                        <td><input className={`form-control ${item.isWinningItem?"bg-color-green":"bg-color-orange"}`} onChange={(e) => handleInputChange(index, e.target.value)} style={{ backgroundColor: "#fff" }} value={item.item}></input></td>
+                                                        <td><input className={`form-control ${item.isWinningItem ? "bg-color-green" : "bg-color-orange"}`} onChange={(e) => handleInputChange(index, e.target.value)} style={{ backgroundColor: "#fff" }} value={item.item}></input></td>
                                                         <td><button className='btn btn-danger' style={{ width: "3rem" }} onClick={() => removeItem(index)}><i className="fa fa-trash-o"></i></button></td>
                                                     </tr>
                                                 )

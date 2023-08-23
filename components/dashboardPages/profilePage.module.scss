@@ -108,6 +108,22 @@ $mobile-breakpoint: 940px;
     position: absolute;
     margin-left: 101px;
     margin-top: -239px;
+
+    .colorPickerWrapper{
+        background-color: #fff;
+        align-items: center;
+        border-radius: 10px;
+        i{
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 8px;
+            cursor: pointer;
+
+            &:hover{
+                color: #000;
+            }
+        }
+    }
 }
 
 .spinTopWrapper{

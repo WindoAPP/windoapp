@@ -128,7 +128,7 @@ const Home = () => {
           <div className="d-flex mb-1">
             <div className={`d-flex flex-column justify-content-center ${styles.stepperTextWrapper}`}>
               <h3 className="text-dark">Personnalisation Totale : Votre Jeu, Votre Style !</h3>
-              <p className={`${styles.lead} text-muted pb-3`}>Vous pouvez personnaliser la roue à votre image, choisir les cadeaux et les couleurs, télécharger le QR code en 1 clic et suivez vos performances en toute simplicité.</p>
+              <p className={`${styles.lead} text-muted pb-3`}>Vous pouvez personnaliser la roue à votre image, choisir les cadeaux et les couleurs, téléchargez le QR code en 1 clic et suivez vos performances en toute simplicité.</p>
             </div>
             <div className={`d-flex flex-column pr-4 align-items-center ${styles.lineWrapper}`}>
               <div className={`${styles.stepBtn} rounded-circle py-2 px-3 bg-white shadow text-dark mb-1`}>4</div>
@@ -178,7 +178,7 @@ const Home = () => {
             </div>
             <div>
               <h3 className="text-dark">Personnalisation Totale : Votre Jeu, Votre Style !</h3>
-              <p className={`${styles.lead} text-muted pb-3`}>Vous pouvez personnaliser la roue à votre image, choisir les cadeaux et les couleurs, télécharger le QR code en 1 clic et suivez vos performances en toute simplicité.</p>
+              <p className={`${styles.lead} text-muted pb-3`}>Vous pouvez personnaliser la roue à votre image, choisir les cadeaux et les couleurs, téléchargez le QR code en 1 clic et suivez vos performances en toute simplicité.</p>
               <img src="/step2.png" className={`${styles.stepImgMobile}`}></img>
             </div>
           </div>
@@ -188,7 +188,7 @@ const Home = () => {
         <h1>Un tarif unique pour tous.</h1>
         <h2>€39,90 / mois*</h2>
         <div className={`d-flex flex-column my-4 ${styles.priceSectionWrp}`}>
-          <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Création d'une page de jeu à votre image</span>
+          {/* <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Création d'une page de jeu à votre image</span> */}
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Choix de vos actions, cadeaux et conditions de retrait</span>
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Accès au tableau de bord pour suivre votre campagne</span>
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Suivi mensuel personnalisé tous les mois</span>

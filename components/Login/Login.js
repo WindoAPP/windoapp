@@ -62,8 +62,8 @@ const Login = () => {
             <form>
                 <div className={`d-flex flex-column p-4  ${styles.loginBox}`}>
                     <img className='w-50 align-self-center mb-5' src='logo.png'></img>
-                    <h2 className={styles.headingLogin}>Welcome Back !</h2>
-                    <span className='align-self-center mb-5'>Sign in to continue to Windo</span>
+                    <h2 className={styles.headingLogin}>Content de te revoir !</h2>
+                    <span className='align-self-center mb-5'>Connectez-vous pour continuer vers Windo</span>
                     <div className="d-flex flex-column mb-3">
                         <label><strong>Email</strong></label>
                         <div>
@@ -80,8 +80,8 @@ const Login = () => {
                     </div>
                     <a className='mb-3'  href="#">Forget Password</a>
                     <button className={`commonBtnWindo w-100 mb-3 ${styles.loginBTN}`} onClick={fromSubmit}>Sign in</button>
-                    <span className='align-self-center'>Don't have an account? <a href="/register">Sign up</a></span>
-                     <a className='align-self-center' href="/">Back to home</a>
+                    <span className='align-self-center'>Je n'ai pas de compte? <a href="/register">Sign up</a></span>
+                     <a className='align-self-center' href="/">De retour à la maison</a>
                 </div>
             </form>
             <div className={styles.RightImageWrapper}>
