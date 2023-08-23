@@ -192,10 +192,10 @@ const SignUp = () => {
             <form>
                 <div className={`d-flex flex-column p-4  ${styles.loginBox}`}>
                     <img className='w-50 align-self-center mb-3' src='logo.png'></img>
-                    <span className='align-self-center mb-3'>Sign up to continue to Windo</span>
+                    <span className='align-self-center mb-3'>Inscrivez-vous pour continuer Windo</span>
                     <div className="d-flex flex-column">
-                        <label><strong>User Name</strong></label>
-                        <input type="text" name="userName" placeholder="User Name" className="form-control regi-input" onChange={handleChange} value={formData.userName}></input>
+                        <label><strong>Nom d'utilisateur</strong></label>
+                        <input type="text" name="userName" placeholder="Nom d'utilisateur" className="form-control regi-input" onChange={handleChange} value={formData.userName}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <label><strong>Email</strong></label>
@@ -206,31 +206,31 @@ const SignUp = () => {
                         <input required type="password" name="password" placeholder="Password" className="form-control regi-input" onChange={handleChange} value={formData.password}></input>
                     </div>
                     <div className="d-flex flex-column">
-                        <label><strong>Confirm Password</strong></label>
-                        <input type="password" name="c_password" placeholder="Confirm Password" className="form-control regi-input" onChange={handleChange} value={formData.c_password}></input>
+                        <label><strong>Confirmez le mot de passe</strong></label>
+                        <input type="password" name="c_password" placeholder="Confirmez le mot de passe" className="form-control regi-input" onChange={handleChange} value={formData.c_password}></input>
                     </div>
                     <div className="d-flex flex-column">
-                        <label><strong>Shop Name</strong></label>
-                        <input type="text" name="shopName" placeholder="Shop Name" className="form-control regi-input" onChange={handleChange} value={formData.shopName}></input>
+                        <label><strong>Nom de la boutique</strong></label>
+                        <input type="text" name="shopName" placeholder="Nom de la boutique" className="form-control regi-input" onChange={handleChange} value={formData.shopName}></input>
                     </div>
                     <div className="d-flex flex-column">
-                        <label><strong>Mobile Number</strong></label>
-                        <input type="text" name="phoneNumber" placeholder="Mobile Number" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
+                        <label><strong>Numéro de portable</strong></label>
+                        <input type="text" name="phoneNumber" placeholder="Numéro de portable" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <div className='d-flex flex-row'>
-                            <label><strong>Shop ID</strong></label>
-                            <label className='mx-1'><a target="_blank" href='https://veryeasyagency.com/id-google/'>click here</a> to get your shop ID </label>
+                            <label><strong>Boutique ID</strong></label>
+                            <label className='mx-1'><a target="_blank" href='https://veryeasyagency.com/id-google/'>Cliquez ici</a> pour obtenir votre boutique ID </label>
                         </div>
 
-                        <input type="text" name="shopId" placeholder="shop ID" className="form-control regi-input " onChange={handleChange} value={formData.shopId}></input>
+                        <input type="text" name="shopId" placeholder="Boutique ID" className="form-control regi-input " onChange={handleChange} value={formData.shopId}></input>
                     </div>
                     <div className="form-check my-3">
                         <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
-                        <label className="form-check-label" >I agree to the terms and conditions <span className='text-primary cursor-pointer' onClick={openModal}>Click here</span></label>
+                        <label className="form-check-label" >J'accepte les termes et conditions <span className='text-primary cursor-pointer' onClick={openModal}>Cliquez ici</span></label>
                     </div>
-                    <button className={`commonBtnWindo mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>Register & Pay</button>
-                    <span className='align-self-center'>Already have an account? <a href="/login">Login</a></span>
+                    <button className={`commonBtnWindo mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>S'inscrire et payer</button>
+                    <span className='align-self-center'>Vous avez déjà un compte? <a href="/login">Se connecter</a></span>
                 </div>
                  <ContentCard isOpen={isModalOpen} onClose={closeModal} title={"CONDITIONS GÉNÉRALES"} data={t_c}/>
             </form>       
