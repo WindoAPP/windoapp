@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './signUp.module.scss'
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
-import { createPayment, createUser, pricingTableGet, subscribe } from '../../services/service';
+import { createPayment, createUser, pricingTableGet, sendContactForm, subscribe } from '../../services/service';
 import { useRouter } from 'next/router';
 import { env_data } from '../../config/config';
 import ContentCard from '../contentCard/contentCard';
@@ -105,6 +105,10 @@ const SignUp = () => {
             setLoading(true);
             createUser(formData).then(res => {
                 if (res) {
+                    var emailData={
+                        name: formData.userName, email: formData.email, subject: "success", message: "email message you can add message text for that"
+                    }
+                    sendEmail(emailData);
                     subscribe({ priceId: priceId, userId: res.user._id, total: "59.99", currency: "EUR" }).then(res => {
 
                         if (res) {
@@ -186,6 +190,16 @@ const SignUp = () => {
     const closeModal = () => {
       setIsModalOpen(false);
     };
+
+    const sendEmail = async (mailData) => {
+        try {
+          await sendContactForm(mailData);
+
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
 
     return (
         <div className={styles.loginWrapper}>

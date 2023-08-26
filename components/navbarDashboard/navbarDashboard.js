@@ -52,17 +52,6 @@ const NavbarDashboard = ({ onDataUpdate }) => {
     const router = useRouter();
 
 
-    const logout = (e) => {
-        e.preventDefault();
-        signOut().then(res => {
-            if (res) {
-                router.push("/login");
-
-            }
-        });
-
-    }
-
     const onClickSideBarBtn = ()=>{
         setSideBarOpen(!sideBarOpen);
         onDataUpdate(!sideBarOpen);
@@ -104,7 +93,7 @@ const NavbarDashboard = ({ onDataUpdate }) => {
                 </div>
             </div>
         </div>
-        <SideBar sideBarOpen={sideBarOpen}/>
+        <SideBar sideBarOpen={sideBarOpen} user={user}/>
         {notifiBarOpen && <NotificationPanel />}
         </>
     );

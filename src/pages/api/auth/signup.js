@@ -29,7 +29,8 @@ const handler = async (req, res) => {
                 shopId: shopId,
                 isAdmin: false,
                 uid: generateRandomString(6),
-                custermers: []
+                custermers: [],
+                cretaedAt: new Date()
             });
             user
                 .save()

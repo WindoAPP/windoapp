@@ -4,6 +4,7 @@ import { loginUser } from '../../services/service';
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 const Login = () => {
 
@@ -11,7 +12,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-
+    const { data: session } = useSession();
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -25,7 +26,11 @@ const Login = () => {
             setLoading(true);
             loginUser(formData).then(res => {
                 if (res.ok) {
-                    router.push("/dashboard");
+                    if(session.user.isAdmin){
+                        router.push("/dashboard/admindashboard");
+                    }else{
+                        router.push("/dashboard");
+                    }   
                     setLoading(false);
                 } else {
                     setLoading(false);
@@ -36,8 +41,6 @@ const Login = () => {
         } else {
             return
         }
-
-
     }
 
     const validateForm = () => {

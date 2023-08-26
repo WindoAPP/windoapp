@@ -224,3 +224,48 @@ export async function deleteANotification(id) {
     }
 
 }
+
+export async function getAllUsers() {
+    try {
+
+        const response = await axios.get(`/api/dashboard?type=user`);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
+export async function getAllCustomers() {
+    try {
+
+        const response = await axios.get(`/api/dashboard?type=customer`);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
+export async function deleteAUser(id) {
+    try {
+        const response = await axios.delete(`/api/dashboard?id=${id}`);
+        return response.data;
+    } catch (error) {
+        showNotification(true, error.response.data.message)
+        return error
+    }
+
+}
+
+export const sendContactForm = async (data) =>
+  fetch("/api/contact", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+  }).then((res) => {
+    if (!res.ok) throw new Error("Failed to send message");
+    return res.json();
+  });

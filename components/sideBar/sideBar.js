@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 
 
-const SideBar = ({sideBarOpen}) => {
+const SideBar = ({sideBarOpen,user}) => {
 
   const [sideBarOpened, setSideBarOpened] = useState(false);
   const router = useRouter();
@@ -35,15 +35,23 @@ const SideBar = ({sideBarOpen}) => {
         {!sideBarOpen && <p className="font-weight-bold  px-3 small pb-1 mb-0">MENU</p>}
 
         <ul className="nav flex-column  mb-0">
-          <li className="nav-item">
+          {!user.isAdmin &&<li className="nav-item">
             <a href="/dashboard">
             <span className={`nav-link  cursor-pointer ${getRoute("/dashboard")?styles.navLinkItem:""}`}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-th-large m-2  fa-fw`}></i>
               {!sideBarOpen && "Dashboard"}
             </span>
             </a>
-          </li>
-          <li className="nav-item ">
+          </li>}
+          {user.isAdmin &&<li className="nav-item">
+            <a href="/dashboard/admindashboard">
+            <span className={`nav-link  cursor-pointer ${getRoute("/dashboard")?styles.navLinkItem:""}`}>
+              <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-th-large m-2  fa-fw`}></i>
+              {!sideBarOpen && "Dashboard"}
+            </span>
+            </a>
+          </li>}
+          <li className="nav-item">
             <a href="/dashboard/formdata">
             <span className={`nav-link  cursor-pointer ${getRoute("/formdata")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-address-card-o m-2  fa-fw`}></i>
@@ -51,26 +59,34 @@ const SideBar = ({sideBarOpen}) => {
             </span>
             </a>
           </li>
-          <li className="nav-item">
+          {!user.isAdmin &&<li className="nav-item">
             <a href="/dashboard/winners">
             <span className={`nav-link  cursor-pointer ${getRoute("/winners")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-trophy m-2  fa-fw`}></i>
               {!sideBarOpen && "Winners"}
             </span>
             </a>
-          </li>
-          <li className="nav-item ">
+          </li>}
+          {user.isAdmin &&<li className="nav-item">
+            <a href="/dashboard/allusers">
+            <span className={`nav-link  cursor-pointer ${getRoute("/winners")?styles.navLinkItem:""}`} >
+              <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-users m-2  fa-fw`}></i>
+              {!sideBarOpen && "Users"}
+            </span>
+            </a>
+          </li>}
+          {!user.isAdmin &&<li className="nav-item">
             <a href="/dashboard/payments">
             <span className={`nav-link  cursor-pointer ${getRoute("/payments")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-credit-card m-2  fa-fw`}></i>
               {!sideBarOpen && "Factures"}
             </span>
             </a>
-          </li>
+          </li>}
 
           {!sideBarOpen &&<p className="font-weight-bold mt-2  px-3 small pb-1 mb-0">ACTIONS</p>}
 
-          <li className="nav-item">
+         <li className="nav-item">
             <a href="/dashboard/profile">
             <span className={`nav-link  cursor-pointer ${getRoute("/profile")?styles.navLinkItem:""}`}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-pie-chart m-2  fa-fw`}></i>
@@ -91,14 +107,14 @@ const SideBar = ({sideBarOpen}) => {
           </li>
           
           
-          <li className="nav-item ">
+          {!user.isAdmin &&<li className="nav-item ">
           <a href="/dashboard/optin">
             <span href="#" className={`nav-link  cursor-pointer ${getRoute("/optin")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-download m-2  fa-fw`}></i>
               {!sideBarOpen && "Opt-in"}
             </span>
             </a>
-          </li>
+          </li>}
           
           <li className="nav-item">
             <a href="/login">
