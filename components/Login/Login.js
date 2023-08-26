@@ -26,11 +26,13 @@ const Login = () => {
             setLoading(true);
             loginUser(formData).then(res => {
                 if (res.ok) {
-                    if(session.user.isAdmin){
-                        router.push("/dashboard/admindashboard");
-                    }else{
-                        router.push("/dashboard");
-                    }   
+                    if (session.user) {
+                        if (session.user.isAdmin) {
+                            router.push("/dashboard/admindashboard");
+                        } else {
+                            router.push("/dashboard");
+                        }
+                    }
                     setLoading(false);
                 } else {
                     setLoading(false);
