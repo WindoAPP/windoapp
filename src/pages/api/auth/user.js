@@ -47,6 +47,29 @@ const handler = async (req, res) => {
         }).catch(error => {
             res.status(400).json({ message: error.message })
         });
+    }else if(req.method === "POST"){
+
+        const {email,password}  =req.body;
+        User.find({email:email}).then(async (user)=>{
+            if(user.length==0){
+                res.status(401).json({ error: "User does not exit" })
+            }else{
+                const hashedPassword = await hash(password, 12);
+                User.updateOne({_id:user[0]._id},{$set: {password:hashedPassword}}).then(result=>{
+                    if(result){
+                        return res.status(201).json({
+                            success: true,
+                        })
+                    }           
+                }).catch(error => {
+                    res.status(400).json({ message: error.message })
+                });
+
+            }
+        }).catch(error => {
+            res.status(400).json({ message: error.message })
+        });
+
     }
     else {
         res.status(405).json({ error: "Method Not Allowed" })

@@ -97,7 +97,7 @@ export async function profileImageUpload(imageData) {
 
 export async function getCustomers(uid) {
     try {
-        
+
         const response = await axios.get(`/api/customer?id=${uid}`);
         return response.data;
     } catch (error) {
@@ -143,12 +143,12 @@ export async function pricingTableGet() {
 
 export async function subscribe(data) {
     try {
-        const response = await axios.post('/api/payment',data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        const response = await axios.post('/api/payment', data,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
         return response.data;
     } catch (error) {
         showNotification(true, error.response.data.message)
@@ -170,7 +170,7 @@ export async function createPayment(data) {
 
 export async function getPayments(uid) {
     try {
-        
+
         const response = await axios.get(`/api/paysum?id=${uid}`);
         return response.data;
     } catch (error) {
@@ -261,11 +261,26 @@ export async function deleteAUser(id) {
 }
 
 export const sendContactForm = async (data) =>
-  fetch("/api/contact", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-  }).then((res) => {
-    if (!res.ok) throw new Error("Failed to send message");
-    return res.json();
-  });
+    fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+    }).then((res) => {
+        if (!res.ok) throw new Error("Failed to send message");
+        return res.json();
+    });
+
+export async function updateUserPassword(userData) {
+    try {
+        const response = await axios.post(`/api/auth/user`, userData);
+        if (response) {
+            showNotification(false, "Password Update Successfull")
+        }
+        return response.data;
+    } catch (error) {
+        
+        showNotification(true, error.response.data.error)
+        return error
+    }
+
+}

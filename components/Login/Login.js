@@ -1,25 +1,35 @@
 import { useState } from 'react';
 import styles from './Login.module.scss'
-import { loginUser, sendContactForm } from '../../services/service';
+import { loginUser, sendContactForm, updateUserPassword } from '../../services/service';
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import BalnktCard from '../blankCard/blankCard';
+import { DotLoader } from 'react-spinners';
 
 const Login = () => {
 
     const [formData, setFormData] = useState({ email: '', password: '' });
+    const [passwordData, setPasswordData] = useState({ password_c: '', password: '' });
     const [recoverEmail, setRecoverEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [keycode, setKeycode] = useState("");
+    const [enteredKeycode, setEnteredKeycode] = useState("");
+    const [emailSending, setEmailSending] = useState(false);
+    const [emailSent, setEmailSent] = useState(false);
+    const [keyCodeVeried, setKeyCodeVeried] = useState(false);
     const router = useRouter();
 
     const { data: session } = useSession();
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
+    };
+
+    const handleChangePassword = (e) => {
+        setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
     };
 
     const fromSubmit = (e) => {
@@ -75,19 +85,20 @@ const Login = () => {
 
     const recoverPassword = () => {
         var key = generateRandomCode();
-        console.log(key);
         setKeycode(key);
         var emailData = {
-            name: "dear user", email: recoverEmail, subject: "Revover code", message: `code : ${keycode}`
+            name: "dear user", email: recoverEmail, subject: "Revover code", message: `code : ${key}`
         }
         sendEmail(emailData)
     }
 
     const sendEmail = async (mailData) => {
-        setLoading(true);
+        setEmailSending(true);
         try {
             await sendContactForm(mailData);
-            setLoading(false);
+            setEmailSent(true);
+            setEmailSending(false);
+            showNotifications(false, "Le code clé a été envoyé à votre adresse e-mail")
         } catch (error) {
             console.log(error);
         }
@@ -99,15 +110,75 @@ const Login = () => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    const verifyAndPasswordChange = () => {
+        if (keycode == enteredKeycode) {
+            setKeyCodeVeried(true);
+        } else {
+            showNotifications(true, "Erreur de code clé, réessayez")
+        }
+    }
+
+    const changePassword = () => {
+        if (passwordData.password == '' || passwordData.password_c == '') {
+            showNotifications(true, "Entrez un mot de passe valide")
+        } else if (passwordData.password != passwordData.password_c) {
+            showNotifications(true, "non concordance des mots de passe")
+        } else {
+            var data = {
+                email: recoverEmail,
+                password: passwordData.password
+            }
+            updateUserPassword(data).then(res => {
+                if (res) {
+                    setIsModalOpen(false);
+                    setEnteredKeycode("");
+                    setEmailSending(false);
+                    setEmailSent(false);
+                    setKeyCodeVeried(false);
+                }
+            }).catch(err => {
+                console.log(err);
+                setIsModalOpen(false);
+                setEnteredKeycode("");
+                setEmailSending(false);
+                setEmailSent(false);
+                setKeyCodeVeried(false);
+            })
+        }
+    }
+
     const forgetPasswordView = () => (
-        <div>
-            {<div>
-                <h3 className='text-dark mb-4'>Please type your emaill address</h3>
+        <div className={`d-flex align-items-center justify-content-center ${styles.forgetPasswordWrapper}`}>
+            {!emailSent && !emailSending && <div>
+                <h3 className='text-dark mb-4'>S'il vous plaît entrez votre adresse mail</h3>
                 <div>
                     <input type="email" name="email" placeholder="Email" className="form-control" value={recoverEmail} onChange={(e) => setRecoverEmail(e.target.value)}></input>
                     <div className='d-flex flex-row mt-4'>
-                        <button className='commonBtnWindo w-100' onClick={() => recoverPassword()}>Send code</button>
-                        <button className='btn btn-light mx-4' onClick={() => setIsModalOpen(false)}>Cancel</button>
+                        <button className='commonBtnWindo w-100' onClick={() => recoverPassword()}>Envoyer le code</button>
+                        <button className='btn btn-light mx-4' onClick={() => setIsModalOpen(false)}>Annuler</button>
+                    </div>
+                </div>
+
+            </div>}
+            {emailSending && <DotLoader color="#36d7b7" size={100} />}
+            {emailSent && !emailSending && !keyCodeVeried && <div>
+                <h3 className='text-dark mb-4'>Vérifiez votre courrier électronique et entrez le code clé</h3>
+                <div>
+                    <input type="number" name="keycode" placeholder="Key code" className="form-control" value={enteredKeycode} onChange={(e) => setEnteredKeycode(e.target.value)}></input>
+                    <div className='d-flex flex-row mt-4'>
+                        <button className='commonBtnWindo w-100' onClick={() => verifyAndPasswordChange()}>Vérifier le code</button>
+                        <button className='btn btn-light mx-4' onClick={() => setIsModalOpen(false)}>Annuler</button>
+                    </div>
+                </div>
+            </div>}
+            {emailSent && !emailSending && keyCodeVeried && <div>
+                <h3 className='text-dark mb-4'>Ajouter un nouveau mot de passe</h3>
+                <div>
+                    <input type="password" name="password" placeholder="Password" className="form-control" value={passwordData.password} onChange={handleChangePassword}></input>
+                    <input type="password" name="password_c" placeholder="Confirm password" className="form-control mt-2" value={passwordData.password_c} onChange={handleChangePassword}></input>
+                    <div className='d-flex flex-row mt-4'>
+                        <button className='commonBtnWindo w-100' onClick={() => changePassword()}>Changer le mot de passe</button>
+                        <button className='btn btn-light mx-4' onClick={() => setIsModalOpen(false)}>Annuler</button>
                     </div>
                 </div>
             </div>}
