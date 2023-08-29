@@ -7,6 +7,7 @@ import { getAllNotifications, getUser } from "../../services/service";
 import { useEffect } from "react";
 import SideBar from "../sideBar/sideBar";
 import NotificationPanel from "../notificationPanel/notificationPanel";
+import Loader from "../Loader/loader";
 
 
 
@@ -21,6 +22,7 @@ const NavbarDashboard = ({ onDataUpdate }) => {
     const [hasNewNotifi, setHasNewNotifi] = useState(false);
     const [notifiBarOpen, setNotifiBarOpen] = useState(false);
     const [notifiCount, setNotifiCount] = useState(0);
+    const [isLoading,setIsloading] =useState(true);
 
 
     useEffect(() => {
@@ -33,6 +35,7 @@ const NavbarDashboard = ({ onDataUpdate }) => {
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
+                setIsloading(false)
                 if(res.notificationCount==0){
                     setHasNewNotifi(false);
                 }else{
@@ -93,8 +96,9 @@ const NavbarDashboard = ({ onDataUpdate }) => {
                 </div>
             </div>
         </div>
-        <SideBar sideBarOpen={sideBarOpen} user={user}/>
+        {!isLoading && <SideBar sideBarOpen={sideBarOpen} user={user}/>}
         {notifiBarOpen && <NotificationPanel />}
+        {isLoading &&  <Loader/>}
         </>
     );
 };

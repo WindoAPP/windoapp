@@ -15,13 +15,6 @@ const SideBar = ({sideBarOpen,user}) => {
     return router.asPath.endsWith(page);
   }
 
-  const logout = (e) => {
-    e.preventDefault();
-    signOut().then(res => {   
-            router.push("/");        
-    });
-}
-
   return (
     <div>
       <div  className={styles.sidebarIcon} onClick={() => setSideBarOpened(!sideBarOpened)} >
