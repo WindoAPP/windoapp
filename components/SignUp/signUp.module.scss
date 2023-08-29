@@ -8,6 +8,7 @@ $mobile-breakpoint: 940px;
 	@media (max-width: $mobile-breakpoint) {
 		justify-content: center;
 		padding-bottom: 3rem;
+		height: 100% !important;
 	}
 }
 .RightImageWrapper{
