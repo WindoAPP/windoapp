@@ -103,17 +103,17 @@ const WinnersPage = () => {
             {!isLoading ?
                 <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
                      <div className={`d-flex flex-column ${styles.chartContent}`}>
-                            <h3 className={"mb-5"}>Winners List</h3>
+                            <h3 className={"mb-5"}>Liste des gagnants</h3>
                             <table className={`table  ${styles.table}`}>
                                 <thead className='table-dark'>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Mobile</th>
-                                        <th scope="col">Spin Count</th>
-                                        <th scope="col">Win Count</th>
-                                        <th scope="col">Prizes</th>
-                                        <th scope="col">Prizes Given</th>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Téléphone</th>
+                                        <th scope="col">Tours</th>
+                                        <th scope="col">Gagne</th>
+                                        <th scope="col">Prix</th>
+                                        <th scope="col">Prix décernés</th>
                                     </tr>
                                 </thead>
                                 <tbody>

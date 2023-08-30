@@ -157,7 +157,7 @@ const DashboardHomePage = () => {
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
-                                            <h6>Number of Customers</h6>
+                                            <h6>Nombre de clients</h6>
                                             <h1>{user.custermers.length}</h1>
                                         </div>
                                         <div>
@@ -169,7 +169,7 @@ const DashboardHomePage = () => {
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
                                             2.4 %
                                         </div>
-                                        <p className='text-muted'>From previous period</p>
+                                        <p className='text-muted'>De la période précédente</p>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@ const DashboardHomePage = () => {
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
-                                            <h6>Number of Winners</h6>
+                                            <h6>Nombre de gagnants</h6>
                                             <h1>{getNoOfWinners("win")}</h1>
                                         </div>
                                         <div>
@@ -191,7 +191,7 @@ const DashboardHomePage = () => {
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
                                             2.4 %
                                         </div>
-                                        <p className='text-muted'>From previous period</p>
+                                        <p className='text-muted'>De la période précédente</p>
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@ const DashboardHomePage = () => {
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
-                                            <h6>Number of Play</h6>
+                                            <h6>Nombre de jeux</h6>
                                             <h1>{getNoOfWinners("play")}</h1>
                                         </div>
                                         <div>
@@ -213,7 +213,7 @@ const DashboardHomePage = () => {
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
                                             2.4 %
                                         </div>
-                                        <p className='text-muted'>From previous period</p>
+                                        <p className='text-muted'>De la période précédente</p>
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@ const DashboardHomePage = () => {
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
-                                            <h6>Repeaters</h6>
+                                            <h6>Répéteurs</h6>
                                             <h1>{getNoOfWinners("reap")}</h1>
                                         </div>
                                         <div>
@@ -235,7 +235,7 @@ const DashboardHomePage = () => {
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
                                             2.4 %
                                         </div>
-                                        <p className='text-muted'>From previous period</p>
+                                        <p className='text-muted'>De la période précédente</p>
                                     </div>
                                 </div>
                             </div>
@@ -245,7 +245,7 @@ const DashboardHomePage = () => {
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
-                                            <h6>Gift Given</h6>
+                                            <h6>Cadeau offert</h6>
                                             <h1>{getNoOfWinners("gift")}</h1>
                                         </div>
                                         <div>
@@ -257,7 +257,7 @@ const DashboardHomePage = () => {
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
                                             2.4 %
                                         </div>
-                                        <p className='text-muted'>From previous period</p>
+                                        <p className='text-muted'>De la période précédente</p>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +267,7 @@ const DashboardHomePage = () => {
                                 <div className='d-flex flex-column'>
                                     <div className='d-flex flex-row justify-content-between'>
                                         <div className='d-flex flex-column'>
-                                            <h6>Checked for personal info</h6>
+                                            <h6>Vérifié pour les informations personnelles</h6>
                                             <h1>{user.custermers.length}</h1>
                                         </div>
                                         <div>
@@ -279,7 +279,7 @@ const DashboardHomePage = () => {
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
                                             2.4 %
                                         </div>
-                                        <p className='text-muted'>From previous period</p>
+                                        <p className='text-muted'>De la période précédente</p>
                                     </div>
                                 </div>
                             </div>
@@ -294,7 +294,7 @@ const DashboardHomePage = () => {
                                     <button type="button" className='btn btn-secondary'>Monthly</button>
                                 </div>
                             </div> */}
-                            <h4 className="card-title mb-4">Usage Analytics</h4>
+                            <h4 className="card-title mb-4">Analyse d'utilisation</h4>
                             <div>
                                 <div id="line-column-chart" className="apex-charts" dir="ltr">
                                     <ReactApexChart options={options} series={series} type="line" height="280" />

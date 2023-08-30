@@ -232,9 +232,9 @@ const SignUp = () => {
                         <input type="text" name="phoneNumber" placeholder="Numéro de portable" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
                     </div>
                     <div className="d-flex flex-column">
-                        <div className='d-flex flex-row'>
+                        <div className='d-flex flex-column mb-1'>
                             <label><strong>Boutique ID</strong></label>
-                            <label className='mx-1'><a target="_blank" href='https://veryeasyagency.com/id-google/'>Cliquez ici</a> pour obtenir votre boutique ID </label>
+                            <label ><a target="_blank" href='https://veryeasyagency.com/id-google/'>Cliquez ici</a> pour obtenir votre boutique ID </label>
                         </div>
 
                         <input type="text" name="shopId" placeholder="Boutique ID" className="form-control regi-input " onChange={handleChange} value={formData.shopId}></input>

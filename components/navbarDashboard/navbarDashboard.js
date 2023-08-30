@@ -75,12 +75,12 @@ const NavbarDashboard = ({ onDataUpdate }) => {
                 <i className="fa fa-bell-o text-secondary mx-4 cursor-pointer" aria-hidden="true" onClick={onClickNotifiBtn}></i>
                 {hasNewNotifi && <div className={styles.notificationDot}>{notifiCount}</div>}
                 <img className={`shadow-sm ${styles.navImage} mx-2`} src={userImage}></img>
-                <p onClick={()=>setMenu(!menu)} className={`d-flex flex-row align-items-center m-0 mx-2 text-secondary ${styles.adminText}`}>Admin <i className="fa fa-chevron-down mx-2" aria-hidden="true"></i></p>
+                <p onClick={()=>setMenu(!menu)} className={`d-flex flex-row align-items-center m-0 mx-2 text-secondary ${styles.adminText}`}>Administratrice <i className="fa fa-chevron-down mx-2" aria-hidden="true"></i></p>
             </div>
             <div className={`d-flex flex-column bg-light shadow-sm align-items-start p-2 ${styles.dropdownMenu} ${menu?styles.dropdownMenuShow:""}`}>
                 <div onClick={()=>router.push("/dashboard/formdata")} className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>
                     <i className="fa fa-user-o text-secondary mx-2 " aria-hidden="true"></i>
-                    <span className="text-secondary">Profile</span>
+                    <span className="text-secondary">Profil</span>
                 </div>
                 <div className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>
                     <i className="fa fa-credit-card text-secondary mx-2 " aria-hidden="true"></i>
@@ -88,11 +88,11 @@ const NavbarDashboard = ({ onDataUpdate }) => {
                 </div>
                 <div onClick={()=>router.push("/dashboard/formdata")} className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>
                     <i className="fa fa-cogs text-secondary mx-2 " aria-hidden="true"></i>
-                    <span className="text-secondary">Settings</span>
+                    <span className="text-secondary">Paramètres</span>
                 </div>
                 <div onClick={signOut} className={`d-flex flex-row align-items-center my-2 ${styles.dropdownMenuItem}`}>
                     <i className="fa fa-power-off text-danger mx-2 " aria-hidden="true"></i>
-                    <span className="text-danger">Logout</span>
+                    <span className="text-danger">Se déconnecter</span>
                 </div>
             </div>
         </div>

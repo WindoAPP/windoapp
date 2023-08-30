@@ -241,15 +241,15 @@ const PaymentsPage = () => {
                                                 <div className="card-body">
                                                     <div className="d-flex align-items-center">
                                                         <div>
-                                                            <p className="mb-0 text-secondary">Payment Success</p>
+                                                            <p className="mb-0 text-secondary">Succès du paiement</p>
                                                             <h4 className="my-1 text-success">{obj.amount_total}<h4>{obj.currency}</h4></h4>
-                                                            <p className="mb-0 font-13">Payment Created : <p>{dateFormater(obj.cretedAt)}</p></p>
+                                                            <p className="mb-0 font-13">Paiement créé : <p>{dateFormater(obj.cretedAt)}</p></p>
                                                             { user.address && user.address !=="" &&
                                                                 <PDFDownloadLink document={<MyDocument currency={obj.currency} price={obj.amount_total} />} fileName={"invoice"}>
-                                                                    <button className={styles.invoiceDownBtn}> Download Invoice </button>
+                                                                    <button className={styles.invoiceDownBtn}> Télécharger la facture </button>
                                                                 </PDFDownloadLink>}
                                                             { (!user.address || user.address =="") &&
-                                                                <button className={styles.invoiceDownBtn} onClick={downloadPdf}> Download Invoice </button>
+                                                                <button className={styles.invoiceDownBtn} onClick={downloadPdf}> Télécharger la facture </button>
                                                             }
                                                         </div>
                                                         <div className="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i className="fa fa-check-square-o"></i>
@@ -261,9 +261,9 @@ const PaymentsPage = () => {
                                                 <div className="card-body">
                                                     <div className="d-flex align-items-center">
                                                         <div>
-                                                            <p className="mb-0 text-secondary">Payment Failed</p>
+                                                            <p className="mb-0 text-secondary">Paiement échoué</p>
                                                             <h4 className="my-1 text-danger">{obj.amount_total}<h4>{obj.currency}</h4></h4>
-                                                            <p className="mb-0 font-13">Payment Created : <p>{dateFormater(obj.cretedAt)}</p></p>
+                                                            <p className="mb-0 font-13">Paiement créé : <p>{dateFormater(obj.cretedAt)}</p></p>
                                                         </div>
                                                         <div className="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i className="fa fa-times"></i>
                                                         </div>
@@ -275,7 +275,7 @@ const PaymentsPage = () => {
                                 )
                             })
                             }
-                            {paymentsArr.length === 0 && <h3 className='text-muted' >No any Subscribes</h3>}
+                            {paymentsArr.length === 0 && <h3 className='text-muted' >Aucun abonnement</h3>}
                         </div>
                     </div>
                 </> : <Loader />

@@ -32,7 +32,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/dashboard">
             <span className={`nav-link  cursor-pointer ${getRoute("/dashboard")?styles.navLinkItem:""}`}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-th-large m-2  fa-fw`}></i>
-              {!sideBarOpen && "Dashboard"}
+              {!sideBarOpen && "Tableau de bord"}
             </span>
             </a>
           </li>}
@@ -40,7 +40,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/dashboard/admindashboard">
             <span className={`nav-link  cursor-pointer ${getRoute("/dashboard")?styles.navLinkItem:""}`}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-th-large m-2  fa-fw`}></i>
-              {!sideBarOpen && "Dashboard"}
+              {!sideBarOpen && "Tableau de bord"}
             </span>
             </a>
           </li>}
@@ -48,7 +48,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/dashboard/formdata">
             <span className={`nav-link  cursor-pointer ${getRoute("/formdata")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-address-card-o m-2  fa-fw`}></i>
-              {!sideBarOpen && "Profile"}
+              {!sideBarOpen && "Profil"}
             </span>
             </a>
           </li>
@@ -56,7 +56,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/dashboard/winners">
             <span className={`nav-link  cursor-pointer ${getRoute("/winners")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-trophy m-2  fa-fw`}></i>
-              {!sideBarOpen && "Winners"}
+              {!sideBarOpen && "Gagnantes"}
             </span>
             </a>
           </li>}
@@ -64,7 +64,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/dashboard/allusers">
             <span className={`nav-link  cursor-pointer ${getRoute("/winners")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-users m-2  fa-fw`}></i>
-              {!sideBarOpen && "Users"}
+              {!sideBarOpen && "Utilisateurs"}
             </span>
             </a>
           </li>}
@@ -83,7 +83,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/dashboard/profile">
             <span className={`nav-link  cursor-pointer ${getRoute("/profile")?styles.navLinkItem:""}`}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-pie-chart m-2  fa-fw`}></i>
-              {!sideBarOpen && "Wheel"}
+              {!sideBarOpen && "Roue"}
             </span>
             </a>
           </li>
@@ -94,7 +94,7 @@ const SideBar = ({sideBarOpen,user}) => {
           <a href="/dashboard/qrcode">
             <span href="#" className={`nav-link  cursor-pointer ${getRoute("/qrcode")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-qrcode m-2  fa-fw`}></i>
-              {!sideBarOpen && "My QR code"}
+              {!sideBarOpen && "Mon code QR"}
             </span>
             </a>
           </li>
@@ -113,7 +113,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/login">
             <span className={`nav-link  cursor-pointer `} onClick={signOut}>
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-sign-out m-2  fa-fw`}></i>
-              {!sideBarOpen && "Log Out"}
+              {!sideBarOpen && "Se déconnecter"}
             </span>
             </a>
           </li>

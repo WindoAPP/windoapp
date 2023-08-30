@@ -42,9 +42,9 @@ const WheelComponent = forwardRef(({
 
   useEffect(() => {
     wheelInit();
-    setTimeout(() => {
-      window.scrollTo(0, 1);
-    }, 0);
+    // setTimeout(() => {
+    //   window.scrollTo(0, 1);
+    // }, 0);
   }, []);
 
   const audioRef = useRef(null);

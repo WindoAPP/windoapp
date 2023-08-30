@@ -89,8 +89,8 @@ const FormDataPage = () => {
                         {/* <p className='text-muted'>By including this you can increase your number of followers </p>  */}
                         <form className='d-flex flex-column'>
                             <div className="d-flex flex-column">
-                                <label><strong>User name</strong></label>
-                                <input type="text" name="userName" placeholder="User Name" className="form-control regi-input" onChange={handleChange} value={formData.userName}></input>
+                                <label><strong>Nom d'utilisateur</strong></label>
+                                <input type="text" name="userName" placeholder="Nom d'utilisateur" className="form-control regi-input" onChange={handleChange} value={formData.userName}></input>
                             </div>
                             <div className="d-flex flex-column">
                                 <label><strong>Email</strong></label>
@@ -98,55 +98,55 @@ const FormDataPage = () => {
                             </div>
                             <div className='d-flex flex-row w-100'>
                                 <div className="d-flex flex-column w-100 mr-2" >
-                                    <label><strong>Password</strong></label>
+                                    <label><strong>Mot de passe</strong></label>
                                     <input required type="password" name="password" placeholder="••••••••••" className="form-control regi-input" onChange={handleChange} value={formData.password}></input>
                                 </div>
                                 <div className="d-flex flex-column w-100">
-                                    <label><strong>Confirm Password</strong></label>
+                                    <label><strong>Confirmez le mot de passe</strong></label>
                                     <input type="password" name="c_password" placeholder="••••••••••" className="form-control regi-input" onChange={handleChange} value={formData.c_password}></input>
                                 </div>
                             </div>
                             <div className='d-flex flex-row w-100'>
                                 <div className="d-flex flex-column w-100 mr-2">
-                                    <label><strong>Shop Name</strong></label>
-                                    <input type="text" name="shopName" placeholder="Shop Name" className="form-control regi-input" onChange={handleChange} value={formData.shopName}></input>
+                                    <label><strong>Nom de la boutique</strong></label>
+                                    <input type="text" name="shopName" placeholder="Nom de la boutique" className="form-control regi-input" onChange={handleChange} value={formData.shopName}></input>
                                 </div>
                                 <div className="d-flex flex-column w-100">
-                                    <label><strong>Mobile Number</strong></label>
-                                    <input type="text" name="phoneNumber" placeholder="Mobile Number" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
+                                    <label><strong>Numéro de portable</strong></label>
+                                    <input type="text" name="phoneNumber" placeholder="Numéro de portable" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
                                 </div>
                             </div>
                             <div className="d-flex flex-column w-100">
-                                    <label><strong>Billing address</strong></label>
-                                    <input type="text" name="address" placeholder="Billing address" className="form-control regi-input" onChange={handleChange} value={formData.address}></input>
+                                    <label><strong>Adresse de facturation</strong></label>
+                                    <input type="text" name="address" placeholder="Adresse de facturation" className="form-control regi-input" onChange={handleChange} value={formData.address}></input>
                                 </div>
 
                             <div className='card p-3 mt-5'>
                                 <h5 className={styles.socialLinkTitle}>Mes liens sociaux</h5>
                                 <hr className={`${styles.hr} mb-3`}></hr>
                                 <div className="d-flex flex-column mt-3">
-                                    <div className='d-flex flex-row'>
-                                        <label><strong>Shop ID</strong></label>
-                                        <label className='mx-2'><a target="_blank" href='https://veryeasyagency.com/id-google/'>click here</a> to get your shop ID </label>
+                                    <div className='d-flex flex-column mb-1'>
+                                        <label><strong>Identifiant de la boutique</strong></label>
+                                        <label className=''><a target="_blank" href='https://veryeasyagency.com/id-google/'>click here</a> to get your shop ID </label>
                                     </div>
 
                                     <input type="text" name="shopId" placeholder="shop ID" className="form-control regi-input " onChange={handleChange} value={formData.shopId}></input>
                                 </div>
                                 <div className="form-group my-2">
-                                    <label><strong>Facebook link</strong></label>
-                                    <input type="text" className="form-control" name="facebook" placeholder="Enter your facebook link" value={formData.facebook} onChange={handleChange}></input>
+                                    <label><strong>Facebook lien</strong></label>
+                                    <input type="text" className="form-control" name="facebook" placeholder="Entrez votre lien Facebook" value={formData.facebook} onChange={handleChange}></input>
                                 </div>
                                 <div className="form-group my-2">
-                                    <label><strong>Instagram link</strong></label>
-                                    <input type="text" className="form-control" name="instagram" placeholder="Enter your instagram link" value={formData.instagram} onChange={handleChange}></input>
+                                    <label><strong>Instagram lien</strong></label>
+                                    <input type="text" className="form-control" name="instagram" placeholder="Entrez votre lien Instagram" value={formData.instagram} onChange={handleChange}></input>
                                 </div>
                                 <div className="form-group my-2">
-                                    <label><strong>Tiktok link</strong></label>
-                                    <input type="text" className="form-control" name="tiktok" placeholder="Enter your tiktok link" value={formData.tiktok} onChange={handleChange}></input>
+                                    <label><strong>Tiktok lien</strong></label>
+                                    <input type="text" className="form-control" name="tiktok" placeholder="Entrez votre lien tiktok" value={formData.tiktok} onChange={handleChange}></input>
                                 </div>
                             </div>
 
-                            <button onClick={registerFromSubmit} className="commonBtnWindo mt-2 align-self-center w-100">Save</button>
+                            <button onClick={registerFromSubmit} className="commonBtnWindo mt-2 align-self-center w-100">Sauvegarder</button>
                         </form>
 
                     </div>
