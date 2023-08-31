@@ -786,9 +786,9 @@ const Scan = () => {
                 <div>
                     <div className={`d-flex ${styles.wheelWrapperc}`} >
                         <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
-                            <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
-                            <p className='align-self-center text-center '>{user.shopSlogan && user.shopSlogan} </p>
-                            <button onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">Spin Now! </button>
+                            <img style={{borderColor:user.dashboardConfig.primaryColor}} src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
+                            <p style={{color:user.dashboardConfig.sloganColor}} className='align-self-center text-center '>{user.shopSlogan && user.shopSlogan} </p>
+                            <button style={{backgroundColor:user.dashboardConfig.spinBtnColor}} onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">{user.dashboardConfig.spinBtnText}</button>
                         </div>
 
                         <div className={styles.wheelWrapper}>
@@ -797,9 +797,9 @@ const Scan = () => {
                                 segColors={segmentColors}
                                 winningSegment="red"
                                 onFinished={(winner) => onFinished(winner)}
-                                primaryColor="black"
+                                primaryColor={user.dashboardConfig.primaryColor}
                                 primaryColoraround="#0E4502"
-                                contrastColor="white"
+                                contrastColor={user.dashboardConfig.secondaryColor}
                                 buttonText=""
                                 isOnlyOnce={false}
                                 size={screenHeight > 782 ? 250 : 200}
@@ -807,8 +807,8 @@ const Scan = () => {
                                 height={2000}
                                 upDuration={50}
                                 downDuration={2000}
-
                                 ref={childRef}
+                                fontSize={user.dashboardConfig.wheelItemTextSize}
                             />
                         </div>
                         <BalnktCard isOpen={isModalOpen} onClose={closeModal} data={cardToggle ? wheelCardContent : collectUserDataCardContent} />

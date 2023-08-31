@@ -30,6 +30,10 @@ const ProfilePage = () => {
     const [loading, setLoading] = useState(true);
     const [color, setColor] = useState("#00df20");
     const [color2, setColor2] = useState("#000");
+    const [sloganColor, setSloganColor] = useState("#000");
+    const [spinBtnColor, setSpinBtnColor] = useState("#2ebb77");
+    const [primaryColor, setPrimaryColor] = useState("#000");
+    const [secondaryColor, setSecondaryColor] = useState("#fff");
     const [item, setItem] = useState("");
     const [itemLost, setItemLost] = useState("");
     const [user, setUser] = useState({});
@@ -41,9 +45,15 @@ const ProfilePage = () => {
     const [wheelUpdated, setWheelUpdated] = useState(false);
     const [colorPallate01Opend, setColorPallate01Opend] = useState(false);
     const [colorPallate02Opend, setColorPallate02Opend] = useState(false);
+    const [sloganColorPallateOpend, setSloganColorPallateOpend] = useState(false);
+    const [spinBtnColorPallateOpend, setSpinBtnColorPallateOpend] = useState(false);
+    const [primaryColorPallateOpend, setPrimaryColorPallateOpend] = useState(false);
+    const [secondaryColorPallateOpend, setSecondaryColorPallateOpend] = useState(false);
     const [wheelItemsTouched, setWheelItemsTouched] = useState(false);
     const [slogan, setSlogan] = useState("Ajoutez votre texte");
     const [winningProbability, setWinningProbability] = useState(0);
+    const [spinBtnText, setSpinBtnText] = useState('Rotation !');
+    const [wheelItemontSize, setWheelItemontSize] = useState(25);
 
 
     useEffect(() => {
@@ -139,6 +149,14 @@ const ProfilePage = () => {
         userData['wheelItems'] = wheelItems;
         userData['shopSlogan'] = slogan;
         userData['winningProbability'] = winningProbability;
+        userData['dashboardConfig'] = {
+            primaryColor: primaryColor,
+            secondaryColor: secondaryColor,
+            sloganColor: sloganColor,
+            wheelItemTextSize: wheelItemontSize,
+            spinBtnColor: spinBtnColor,
+            spinBtnText: spinBtnText
+        }
         setLoading(true);
         updateUser(userData).then(res => {
             if (res) {
@@ -154,6 +172,7 @@ const ProfilePage = () => {
     }
 
     const fetchUser = (id) => {
+        console.log(id);
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
@@ -161,6 +180,15 @@ const ProfilePage = () => {
                     setSelectedImage(res.user.profileImage);
                 }
                 setWheelItems(res.user.wheelItems);
+
+                if (res.user.dashboardConfig) {
+                    res.user.dashboardConfig.primaryColor && setPrimaryColor(res.user.dashboardConfig.primaryColor);
+                    res.user.dashboardConfig.secondaryColor && setSecondaryColor(res.user.dashboardConfig.secondaryColor);
+                    res.user.dashboardConfig.sloganColor && setSloganColor(res.user.dashboardConfig.sloganColor);
+                    res.user.dashboardConfig.wheelItemTextSize && setWheelItemontSize(res.user.dashboardConfig.wheelItemTextSize);
+                    res.user.dashboardConfig.spinBtnColor && setSpinBtnColor(res.user.dashboardConfig.spinBtnColor);
+                    res.user.dashboardConfig.spinBtnText && setSpinBtnText(res.user.dashboardConfig.spinBtnText);
+                }
 
                 var segmentsTemp = res.user.wheelItems.map(obj => { return obj.item });
                 var segmentsColorTemp = res.user.wheelItems.map(obj => { return obj.color });
@@ -208,15 +236,30 @@ const ProfilePage = () => {
         setColor2(e);
     }
 
+    const onChangeSloanColor = (e) => {
+        setSloganColor(e);
+    }
+
+    const onChangeSpinBtnColor = (e) => {
+        setSpinBtnColor(e);
+    }
+
+    const onChangePrimaryColor = (e) => {
+        setPrimaryColor(e);
+    }
+
+    const onChangeSecondaryColor = (e) => {
+        setSecondaryColor(e);
+    }
+
     const setColor1 = (e) => {
         setTimeout(() => {
             setColorPallate01Opend(false);
-        }, 500);
-    }
-
-    const setColor02 = (e) => {
-        setTimeout(() => {
             setColorPallate02Opend(false);
+            setSloganColorPallateOpend(false);
+            setSpinBtnColorPallateOpend(false);
+            setPrimaryColorPallateOpend(false);
+            setSecondaryColorPallateOpend(false)
         }, 500);
     }
 
@@ -248,14 +291,102 @@ const ProfilePage = () => {
                         <div className={`d-flex justify-content-between  ${styles.flexResponsive}`}>
 
                             <div className='d-flex flex-column'>
+                                <h5 className='mb-2'>section de texte du slogan</h5>
                                 <div className='d-flex flex-row align-items-center'>
                                     <p className='my-2'>Texte du slogan :</p>
                                     <textarea type='textarea' className="form-control  mx-2" value={slogan} onChange={onSloganChange}  ></textarea>
                                 </div>
                                 <div className='d-flex flex-row align-items-center'>
+                                    <div onClick={() => setSloganColor("#00df20")} style={{ backgroundColor: "#00df20" }} className={`m-1 cursor-pointer ${sloganColor === "#00df20" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                    <div onClick={() => setSloganColor("#F2BE22")} style={{ backgroundColor: "#F2BE22" }} className={`m-1 cursor-pointer ${sloganColor === "#F2BE22" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                    <div onClick={() => setSloganColor("#9575DE")} style={{ backgroundColor: "#9575DE" }} className={`m-1 cursor-pointer ${sloganColor === "#9575DE" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                    <div onClick={() => setSloganColor("#FF8551")} style={{ backgroundColor: "#FF8551" }} className={`m-1 cursor-pointer ${sloganColor === "#FF8551" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                    <div onClick={() => setSloganColor("#F8DE22")} style={{ backgroundColor: "#F8DE22" }} className={`m-1 cursor-pointer ${sloganColor === "#F8DE22" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                    <div onClick={() => setSloganColor("#9288F8")} style={{ backgroundColor: "#9288F8" }} className={`m-1 cursor-pointer ${sloganColor === "#9288F8" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                    <div onClick={() => setSloganColor("#000")} style={{ backgroundColor: "#000" }} className={`m-1 cursor-pointer ${sloganColor === "#000" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                    <span className='m-1'>|</span>
+                                    <span className='m-1'>Couleur personnalisée : </span>
+                                    <div style={{ backgroundColor: sloganColor }} className={`m-1 cursor-pointer ${styles.colorPlateItem}`} onClick={() => { setSloganColorPallateOpend(true); setColorPallate02Opend(false); }}></div>
+                                    <div className={styles.colorPicker}>
+                                        {
+                                            sloganColorPallateOpend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                <HexColorPicker color={sloganColor} onChange={onChangeSloanColor} />
+                                                <div className='d-flex flex-row align-items-center'>
+                                                    <input className="form-control m-2 w-75" value={sloganColor} onChange={(e) => onChangeSloanColor(e.target.value)}></input>
+                                                    <i className='fa fa-eyedropper' onClick={setColor1}></i>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <hr className='hr'></hr>
+                                <h5 className='my-2'> section pourcentage de victoire</h5>
+                                <div className='d-flex flex-row align-items-center'>
                                     <p className='my-2'>Probabilité de gagner :</p>
                                     <input className="form-control  mx-2" value={winningProbability} onChange={onWinningProbabilityChange} type='number'></input><p>%</p>
                                 </div>
+                                <hr className='hr'></hr>
+                                <h5 className='my-2'>Section primaire</h5>
+                                <div className='d-flex flex-column'>
+                                    <p className='my-2'>Changer la couleur primaire :</p>
+                                    <div className='d-flex flex-row align-items-center'>
+                                        <div onClick={() => setPrimaryColor("#00df20")} style={{ backgroundColor: "#00df20" }} className={`m-1 cursor-pointer ${primaryColor === "#00df20" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setPrimaryColor("#F2BE22")} style={{ backgroundColor: "#F2BE22" }} className={`m-1 cursor-pointer ${primaryColor === "#F2BE22" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setPrimaryColor("#9575DE")} style={{ backgroundColor: "#9575DE" }} className={`m-1 cursor-pointer ${primaryColor === "#9575DE" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setPrimaryColor("#FF8551")} style={{ backgroundColor: "#FF8551" }} className={`m-1 cursor-pointer ${primaryColor === "#FF8551" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setPrimaryColor("#F8DE22")} style={{ backgroundColor: "#F8DE22" }} className={`m-1 cursor-pointer ${primaryColor === "#F8DE22" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setPrimaryColor("#9288F8")} style={{ backgroundColor: "#9288F8" }} className={`m-1 cursor-pointer ${primaryColor === "#9288F8" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setPrimaryColor("#000")} style={{ backgroundColor: "#000" }} className={`m-1 cursor-pointer ${primaryColor === "#000" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <span className='m-1'>|</span>
+                                        <span className='m-1'>Couleur personnalisée : </span>
+                                        <div style={{ backgroundColor: primaryColor }} className={`m-1 cursor-pointer ${styles.colorPlateItem}`} onClick={() => { setPrimaryColorPallateOpend(true); }}></div>
+                                        <div className={styles.colorPicker}>
+                                            {
+                                                primaryColorPallateOpend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <HexColorPicker color={primaryColor} onChange={onChangePrimaryColor} />
+                                                    <div className='d-flex flex-row align-items-center'>
+                                                        <input className="form-control m-2 w-75" value={primaryColor} onChange={(e) => onChangePrimaryColor(e.target.value)}></input>
+                                                        <i className='fa fa-eyedropper' onClick={setColor1}></i>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr className='hr'></hr>
+                                <h5 className='my-2'>Section du bouton de rotation</h5>
+                                <div className='d-flex flex-column'>
+                                    <p className='my-2'>Changer la couleur du bouton :</p>
+                                    <div className='d-flex flex-row align-items-center'>
+                                        <div onClick={() => setSpinBtnColor("#00df20")} style={{ backgroundColor: "#00df20" }} className={`m-1 cursor-pointer ${spinBtnColor === "#00df20" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSpinBtnColor("#F2BE22")} style={{ backgroundColor: "#F2BE22" }} className={`m-1 cursor-pointer ${spinBtnColor === "#F2BE22" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSpinBtnColor("#9575DE")} style={{ backgroundColor: "#9575DE" }} className={`m-1 cursor-pointer ${spinBtnColor === "#9575DE" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSpinBtnColor("#FF8551")} style={{ backgroundColor: "#FF8551" }} className={`m-1 cursor-pointer ${spinBtnColor === "#FF8551" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSpinBtnColor("#F8DE22")} style={{ backgroundColor: "#F8DE22" }} className={`m-1 cursor-pointer ${spinBtnColor === "#F8DE22" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSpinBtnColor("#9288F8")} style={{ backgroundColor: "#9288F8" }} className={`m-1 cursor-pointer ${spinBtnColor === "#9288F8" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSpinBtnColor("#000")} style={{ backgroundColor: "#000" }} className={`m-1 cursor-pointer ${spinBtnColor === "#000" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <span className='m-1'>|</span>
+                                        <span className='m-1'>Couleur personnalisée : </span>
+                                        <div style={{ backgroundColor: spinBtnColor }} className={`m-1 cursor-pointer ${styles.colorPlateItem}`} onClick={() => { setSpinBtnColorPallateOpend(true); }}></div>
+                                        <div className={styles.colorPicker}>
+                                            {
+                                                spinBtnColorPallateOpend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <HexColorPicker color={spinBtnColor} onChange={onChangeSpinBtnColor} />
+                                                    <div className='d-flex flex-row align-items-center'>
+                                                        <input className="form-control m-2 w-75" value={spinBtnColor} onChange={(e) => onChangeSpinBtnColor(e.target.value)}></input>
+                                                        <i className='fa fa-eyedropper' onClick={setColor1}></i>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className='d-flex flex-row align-items-center mt-3'>
+                                        <p className='my-2'>Texte du bouton :</p>
+                                        <input type='textarea' className="form-control w-50 mx-2" value={spinBtnText} onChange={(e) => setSpinBtnText(e.target.value)}  ></input>
+                                    </div>
+                                </div>
+                                <hr className='hr'></hr>
+                                <h5 className='my-2'>section des articles de roue</h5>
                                 <div className='d-flex flex-column mb-4'>
                                     <p className='my-2'>Couleur de base 01 :</p>
                                     <div className='d-flex flex-row align-items-center'>
@@ -300,7 +431,35 @@ const ProfilePage = () => {
                                                     <HexColorPicker color={color2} onChange={onChangeColor2} />
                                                     <div className='d-flex flex-row align-items-center'>
                                                         <input className="form-control m-2 w-75" value={color2} onChange={(e) => onChangeColor2(e.target.value)}></input>
-                                                        <i className='fa fa-eyedropper' onClick={setColor02}></i>
+                                                        <i className='fa fa-eyedropper' onClick={setColor1}></i>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className='d-flex flex-row align-items-center'>
+                                        <p className='my-2'>Taille de la police de l'élément de roue :</p>
+                                        <input className="form-control  mx-2 w-25" value={wheelItemontSize} onChange={(e) => setWheelItemontSize(e.target.value)} type='number'></input><p>px</p>
+                                    </div>
+                                    <p className='my-2'>Changer la couleur du texte de la roue :</p>
+                                    <div className='d-flex flex-row align-items-center'>
+                                        <div onClick={() => setSecondaryColor("#00df20")} style={{ backgroundColor: "#00df20" }} className={`m-1 cursor-pointer ${secondaryColor === "#00df20" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSecondaryColor("#F2BE22")} style={{ backgroundColor: "#F2BE22" }} className={`m-1 cursor-pointer ${secondaryColor === "#F2BE22" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSecondaryColor("#9575DE")} style={{ backgroundColor: "#9575DE" }} className={`m-1 cursor-pointer ${secondaryColor === "#9575DE" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSecondaryColor("#FF8551")} style={{ backgroundColor: "#FF8551" }} className={`m-1 cursor-pointer ${secondaryColor === "#FF8551" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSecondaryColor("#F8DE22")} style={{ backgroundColor: "#F8DE22" }} className={`m-1 cursor-pointer ${secondaryColor === "#F8DE22" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSecondaryColor("#9288F8")} style={{ backgroundColor: "#9288F8" }} className={`m-1 cursor-pointer ${secondaryColor === "#9288F8" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <div onClick={() => setSecondaryColor("#000")} style={{ backgroundColor: "#000" }} className={`m-1 cursor-pointer ${secondaryColor === "#000" && styles.colorPlateItemSeleted} ${styles.colorPlateItem}`}></div>
+                                        <span className='m-1'>|</span>
+                                        <span className='m-1'>Couleur personnalisée : </span>
+                                        <div style={{ backgroundColor: secondaryColor }} className={`m-1 cursor-pointer ${styles.colorPlateItem}`} onClick={() => { setSpinBtnColorPallateOpend(true); }}></div>
+                                        <div className={styles.colorPicker}>
+                                            {
+                                                secondaryColorPallateOpend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <HexColorPicker color={secondaryColor} onChange={onChangeSecondaryColor} />
+                                                    <div className='d-flex flex-row align-items-center'>
+                                                        <input className="form-control m-2 w-75" value={secondaryColor} onChange={(e) => onChangeSecondaryColor(e.target.value)}></input>
+                                                        <i className='fa fa-eyedropper' onClick={setColor1}></i>
                                                     </div>
                                                 </div>
                                             }
@@ -338,14 +497,14 @@ const ProfilePage = () => {
 
                                         </tbody>
                                     </table>
-                                    <button disabled={!wheelItemsTouched} className={`btn mx-1 mb-5 btn-success`} onClick={saveWheelItems}>Sauvegarder  <i className="fa fa-save mx-2"></i></button>
+                                    <button  className={`btn mx-1 mb-5 btn-success`} onClick={saveWheelItems}>Sauver tous <i className="fa fa-save mx-2"></i></button>
                                 </div>
                             </div>
                             <div className={styles.wheelwrp}>
                                 <div className={`d-flex flex-column p-3 ${styles.spinTopWrapper}`}>
-                                    <img src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
-                                    <p className='align-self-center text-center '>{slogan}</p>
-                                    <button onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">Rotation ! </button>
+                                    <img style={{ borderColor: primaryColor }} src={user.profileImage ? user.profileImage : "/shop.png"} className={`my-4 ${styles.spinLogo}`}></img>
+                                    <p style={{ color: sloganColor }} className='align-self-center text-center '>{slogan}</p>
+                                    <button style={{ backgroundColor: spinBtnColor }} onClick={handleCallChildFunction} type="button" className="btn btn-success btn-lg align-self-end shadow">{spinBtnText}</button>
                                 </div>
                                 <div className={styles.wheelWrapper}>
                                     {wheelUpdated &&
@@ -354,9 +513,9 @@ const ProfilePage = () => {
                                             segColors={segmentColors}
                                             winningSegment="red"
                                             onFinished={(winner) => { }}
-                                            primaryColor="black"
+                                            primaryColor={primaryColor}
+                                            contrastColor={secondaryColor}
                                             primaryColoraround="#0E4502"
-                                            contrastColor="white"
                                             buttonText=""
                                             isOnlyOnce={false}
                                             size={screenHeight > 782 ? 250 : 200}
@@ -364,7 +523,7 @@ const ProfilePage = () => {
                                             height={2000}
                                             upDuration={50}
                                             downDuration={2000}
-
+                                            fontSize={wheelItemontSize}
                                             ref={childRef}
                                         />
                                     }

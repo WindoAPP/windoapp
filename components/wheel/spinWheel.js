@@ -21,6 +21,7 @@ const WheelComponent = forwardRef(({
   fontFamily = "proxima-nova",
   width = 100,
   height = 100,
+  fontSize
 }, ref) => {
   let currentSegment = "";
   let isStarted = false;
@@ -42,10 +43,12 @@ const WheelComponent = forwardRef(({
 
   useEffect(() => {
     wheelInit();
+  
+    console.log(fontSize);
     // setTimeout(() => {
     //   window.scrollTo(0, 1);
     // }, 0);
-  }, []);
+  }, [fontSize,primaryColor,contrastColor]);
 
   const audioRef = useRef(null);
 
@@ -161,8 +164,8 @@ const WheelComponent = forwardRef(({
     ctx.save();
     ctx.translate(centerX, centerY);
     ctx.rotate((lastAngle + angle) / 2);
-    ctx.fillStyle = contrastColor || "black";
-    ctx.font = "bold 1em " + fontFamily;
+    ctx.fillStyle = contrastColor || "red";
+    ctx.font = `bold ${fontSize}px ` + fontFamily;
     ctx.fillText(value.substr(0, 21), size / 2 + 20, 0);
     ctx.restore();
   };
@@ -202,7 +205,7 @@ const WheelComponent = forwardRef(({
     ctx.arc(centerX, centerY, size, 0, PI2, false);
     ctx.closePath();
     ctx.lineWidth = 15;
-    ctx.strokeStyle =  "black";
+    ctx.strokeStyle =  primaryColor || "black";
     ctx.stroke();
   };
 

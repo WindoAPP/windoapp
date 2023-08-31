@@ -302,6 +302,7 @@ a{
   line-height: 56px;
   font-size: 17px;
   font-weight: 600;
+
   border: none;
     &:hover{
         background-color: #28a368 ;
@@ -315,4 +316,7 @@ a{
     text-decoration: underline !important;
 
   }
+}
+.hr{
+  border: 1px solid gray;
 }

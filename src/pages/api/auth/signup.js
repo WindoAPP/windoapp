@@ -30,7 +30,15 @@ const handler = async (req, res) => {
                 isAdmin: false,
                 uid: generateRandomString(6),
                 custermers: [],
-                cretaedAt: new Date()
+                cretaedAt: new Date(),
+                dashboardConfig:{
+                    primaryColor:"#000",
+                    secondaryColor:"#fff",
+                    sloganColor:"#000",
+                    wheelItemTextSize:25,
+                    spinBtnColor:"#2ebb77",
+                    spinBtnText:"Rotation !"
+                },
             });
             user
                 .save()

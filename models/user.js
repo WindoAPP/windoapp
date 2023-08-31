@@ -87,7 +87,34 @@ const UserSchema = new Schema({
     winningProbability:{
         type: Number,
         required: false,
-    }
+    },
+    dashboardConfig:{
+        primaryColor:{
+            type: String,
+            required: false,
+        },
+        secondaryColor:{
+            type: String,
+            required: false,
+        },
+        sloganColor:{
+            type: String,
+            required: false,
+        },
+        wheelItemTextSize:{
+            type: String,
+            required: false,
+        },
+        spinBtnColor:{
+            type: String,
+            required: false,
+        },
+        spinBtnText:{
+            type: String,
+            required: false,
+        }
+    },
+
 })
 
 const User = models.User || model("User", UserSchema)
