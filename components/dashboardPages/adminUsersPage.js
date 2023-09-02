@@ -165,7 +165,7 @@ const AdminUsersPage = () => {
                     <div className='d-flex flex-row w-100'>
                         <div className="d-flex flex-column w-100 mr-2">
                             <label><strong>Période d'essai</strong></label>
-                            <input type="number" name="trialPeriod" placeholder="période d'essai (en mois)" className="form-control regi-input" onChange={handleChange} value={formData.trialPeriod}></input>
+                            <input disabled={accState!='trial'} type="number" name="trialPeriod" placeholder="période d'essai (en mois)" className="form-control regi-input" onChange={handleChange} value={formData.trialPeriod}></input>
                         </div>
                         <div className="d-flex flex-column w-100">
                             <label><strong>Statut du compte</strong></label>
