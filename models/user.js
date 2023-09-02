@@ -26,6 +26,12 @@ const UserSchema = new Schema({
             ref: 'Customer'
         }
     ],
+    payments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Payment'
+        }
+    ],
     shopId: {
         type: String,
         required: true,
@@ -42,7 +48,7 @@ const UserSchema = new Schema({
         type: Boolean,
         required: true,
     },
-    profileImage:{
+    profileImage: {
         type: String,
         required: false,
     },
@@ -55,12 +61,12 @@ const UserSchema = new Schema({
             type: String,
             required: false,
         },
-        isWinningItem:{
+        isWinningItem: {
             type: Boolean,
             required: false,
         }
     }],
-    shopSlogan:{
+    shopSlogan: {
         type: String,
         required: false,
     },
@@ -84,36 +90,45 @@ const UserSchema = new Schema({
         type: String,
         required: false,
     },
-    winningProbability:{
+    winningProbability: {
         type: Number,
         required: false,
     },
-    dashboardConfig:{
-        primaryColor:{
+    dashboardConfig: {
+        primaryColor: {
             type: String,
             required: false,
         },
-        secondaryColor:{
+        secondaryColor: {
             type: String,
             required: false,
         },
-        sloganColor:{
+        sloganColor: {
             type: String,
             required: false,
         },
-        wheelItemTextSize:{
+        wheelItemTextSize: {
             type: String,
             required: false,
         },
-        spinBtnColor:{
+        spinBtnColor: {
             type: String,
             required: false,
         },
-        spinBtnText:{
+        spinBtnText: {
             type: String,
             required: false,
         }
     },
+    accStatus: {
+        type: String,
+        required: false,
+    },
+    trialPeriod: {
+        type: Number,
+        required: false,
+    },
+
 
 })
 

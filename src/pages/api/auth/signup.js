@@ -39,6 +39,8 @@ const handler = async (req, res) => {
                     spinBtnColor:"#2ebb77",
                     spinBtnText:"Rotation !"
                 },
+                accStatus:'created',
+                trialPeriod:0
             });
             user
                 .save()

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './signUp.module.scss'
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
-import { createPayment, createUser, pricingTableGet, sendContactForm, subscribe } from '../../services/service';
+import { createPayment, createUser, getUser, pricingTableGet, sendContactForm, subscribe } from '../../services/service';
 import { useRouter } from 'next/router';
 import { env_data } from '../../config/config';
 import ContentCard from '../contentCard/contentCard';
@@ -47,7 +47,7 @@ const SignUp = () => {
     const [loading, setLoading] = useState(false);
     const [priceId, setPriceId] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showTermsModal, setShowTermsModal] = useState(true);
+    const [user, setUser] = useState({});
 
     const router = useRouter();
     const { query } = router;
@@ -59,43 +59,51 @@ const SignUp = () => {
 
                 showNotifications(false, "Payment Successfull !");
 
-                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency, success: true }
+                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency, success: true,accStatus:"trial" }
 
                 createPayment(paymentData).then(() => {
+                    var emailData={
+                        name: formData.userName, email: formData.email, subject: "paiement réussi", message: "nous avons reçu votre paiement. Merci de nous avoir rejoint"
+                    }
+                    sendEmail(emailData);
+
                     router.push("login");
+
                 }).catch(err => {
                     console.log(err);
                 });
             } else if (query.payment == "failed") {
-                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency, success: false }
+                const paymentData = { user: query.uid, amount_total: query.total, currency: query.currency, success: false,accStatus:"created" }
 
                 createPayment(paymentData).then(() => {
+                    var emailData={
+                        name: formData.userName, email: formData.email, subject: "échec du paiement", message: "nous n'avons pas reçu votre paiement. essayer à nouveau"
+                    }
+                    sendEmail(emailData);
                     router.push("login");
                 }).catch(err => {
                     console.log(err);
                 });
             }
         }
-        setPriceId("price_1Ni0vUBM9gJjuZS8EWROJ0aR")
-        // pricingTableGet().then(res => {
-        //     console.log(res);
-        //     if (res) {
-        //         setLoading(false);
-                
-        //         setPriceId(res[0].id)
-        //     }
-        // }).catch(err => {
-        //     console.log(err);
-        //     setLoading(false)
-
-        // });
-
-
+        setPriceId(env_data.trialProduct);
     }, [query]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
+    const fetchUser = (id) => {
+        getUser(id).then(res => {
+            if (res) {
+                setUser(res.user);
+                setLoading(false);
+            }
+        }).catch(err => {
+            console.log(err);
+
+        });
+    }
 
     const registerFromSubmit = (e) => {
         e.preventDefault();
@@ -105,11 +113,8 @@ const SignUp = () => {
             setLoading(true);
             createUser(formData).then(res => {
                 if (res) {
-                    var emailData={
-                        name: formData.userName, email: formData.email, subject: "success", message: "email message you can add message text for that"
-                    }
-                    sendEmail(emailData);
-                    subscribe({ priceId: priceId, userId: res.user._id, total: "59.99", currency: "EUR" }).then(res => {
+                    
+                    subscribe({ priceId: priceId, userId: res.user._id, total: "39.9", currency: "EUR" }).then(res => {
 
                         if (res) {
                             setLoading(false);

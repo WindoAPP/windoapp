@@ -11,7 +11,8 @@ const AdminUsersPage = () => {
     const [user, setUser] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState({ facebook: '', address: '', tiktok: '', instagram: '', email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '' });
+    const [accState,setAccState]=useState('created')
+    const [formData, setFormData] = useState({ trialPeriod: 3,accStatus:'', facebook: '', address: '', tiktok: '', instagram: '', email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '' });
 
     useEffect(() => {
         if (session) {
@@ -66,7 +67,9 @@ const AdminUsersPage = () => {
         userData.userName = formData.userName
         userData.phoneNumber = formData.phoneNumber
         userData.shopName = formData.shopName
-        userData.shopId = formData.shopId
+        userData.shopId = formData.shopId;
+        userData.accStatus = accState;
+        userData.trialPeriod = formData.trialPeriod
         userData['facebook'] = urlRemake(formData.facebook) ? formData.facebook : `https://${formData.facebook}`;
         userData['instagram'] = urlRemake(formData.instagram) ? formData.instagram : `https://${formData.instagram}`;
         userData['tiktok'] = urlRemake(formData.tiktok) ? formData.tiktok : `https://${formData.tiktok}`;
@@ -95,12 +98,30 @@ const AdminUsersPage = () => {
 
     const onUserEdit = (u) => {
         setFormData(u);
+        if(u.accStatus){
+            setAccState(u.accStatus);
+        }
+        setAccState()
         setIsModalOpen(true);
     }
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
+    const getAccStatus =(user)=>{
+        if(user.accStatus){
+            if(user.accStatus=="subscribed"){
+                return "Abonnée"
+            }else if(user.accStatus=="trial"){
+                return "Procès"
+            }else if(user.accStatus=="created"){
+                return "Créé"
+            }
+        }else{
+            return 'Créé'
+        }
+    }
 
     const userUpdateCardContent = () => (
         <div className={`d-flex flex-column align-items-center justify-content-center `}>
@@ -110,8 +131,8 @@ const AdminUsersPage = () => {
                 {/* <p className='text-muted'>By including this you can increase your number of followers </p>  */}
                 <form className='d-flex flex-column'>
                     <div className="d-flex flex-column">
-                        <label><strong>User name</strong></label>
-                        <input type="text" name="userName" placeholder="User Name" className="form-control regi-input" onChange={handleChange} value={formData.userName}></input>
+                        <label><strong>Nom d'utilisateur</strong></label>
+                        <input type="text" name="userName" placeholder="Nom d'utilisateur" className="form-control regi-input" onChange={handleChange} value={formData.userName}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <label><strong>Email</strong></label>
@@ -123,23 +144,37 @@ const AdminUsersPage = () => {
                             <input required type="password" name="password" placeholder="••••••••••" className="form-control regi-input" onChange={handleChange} value={formData.password}></input>
                         </div>
                         <div className="d-flex flex-column w-100">
-                            <label><strong>Confirm Password</strong></label>
+                            <label><strong>Confirmez le mot de passe</strong></label>
                             <input type="password" name="c_password" placeholder="••••••••••" className="form-control regi-input" onChange={handleChange} value={formData.c_password}></input>
                         </div>
                     </div>
                     <div className='d-flex flex-row w-100'>
                         <div className="d-flex flex-column w-100 mr-2">
-                            <label><strong>Shop Name</strong></label>
-                            <input type="text" name="shopName" placeholder="Shop Name" className="form-control regi-input" onChange={handleChange} value={formData.shopName}></input>
+                            <label><strong>Nom de la boutique</strong></label>
+                            <input type="text" name="shopName" placeholder="Nom de la boutique" className="form-control regi-input" onChange={handleChange} value={formData.shopName}></input>
                         </div>
                         <div className="d-flex flex-column w-100">
-                            <label><strong>Mobile Number</strong></label>
-                            <input type="text" name="phoneNumber" placeholder="Mobile Number" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
+                            <label><strong>Numéro de portable</strong></label>
+                            <input type="text" name="phoneNumber" placeholder="Numéro de portable" className="form-control regi-input" onChange={handleChange} value={formData.phoneNumber}></input>
                         </div>
                     </div>
                     <div className="d-flex flex-column w-100">
-                        <label><strong>Billing address</strong></label>
-                        <input type="text" name="address" placeholder="Billing address" className="form-control regi-input" onChange={handleChange} value={formData.address}></input>
+                        <label><strong>Adresse de facturation</strong></label>
+                        <input type="text" name="address" placeholder="Adresse de facturation" className="form-control regi-input" onChange={handleChange} value={formData.address}></input>
+                    </div>
+                    <div className='d-flex flex-row w-100'>
+                        <div className="d-flex flex-column w-100 mr-2">
+                            <label><strong>Période d'essai</strong></label>
+                            <input type="number" name="trialPeriod" placeholder="période d'essai (en mois)" className="form-control regi-input" onChange={handleChange} value={formData.trialPeriod}></input>
+                        </div>
+                        <div className="d-flex flex-column w-100">
+                            <label><strong>Statut du compte</strong></label>
+                            <select className="form-select form-control regi-input" onChange={(e)=>setAccState(e.target.value)} value={accState}>    
+                                <option selected value="trial">Procès</option>
+                                <option value="created">Créé</option>
+                                <option value="subscribed">Abonnée</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div className='card p-3 mt-5'>
@@ -180,15 +215,15 @@ const AdminUsersPage = () => {
             {!isLoading ?
                 <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
                     <div className={`d-flex flex-column ${styles.chartContent}`}>
-                        <h3 className={"mb-5"}>Winners List</h3>
+                        <h3 className={"mb-5"}>Liste de tous les utilisateurs</h3>
                         <table className={`table  ${styles.table}`}>
                             <thead className='table-dark'>
                                 <tr>
-                                    <th scope="col">Shop Image</th>
-                                    <th scope="col">Shop Name</th>
+                                    <th scope="col">Image de la boutique</th>
+                                    <th scope="col">Nom de la boutique</th>
                                     <th scope="col">Mobile</th>
-                                    <th scope="col">Customer Count</th>
-                                    <th scope="col">Win Count</th>
+                                    <th scope="col">Nombre de clients</th>
+                                    <th scope="col">Statut du compte</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -200,7 +235,7 @@ const AdminUsersPage = () => {
                                             <td>{obj.shopName}</td>
                                             <td>{obj.phoneNumber}</td>
                                             <td>{obj.custermers ? obj.custermers.length : '-'}</td>
-                                            <td>{ }</td>
+                                            <td>{getAccStatus(obj) }</td>
                                             <td><button className='btn btn-warnning' onClick={() => onRemoveUser(obj._id)}><i className="fa fa-trash" aria-hidden="true"></i></button><button className='btn ' onClick={() => onUserEdit(obj)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> </button></td>
                                         </tr>
                                     )
@@ -208,13 +243,13 @@ const AdminUsersPage = () => {
                             </tbody>
                         </table>
 
-                        {isModalOpen && 
-                        <div className={styles.modalOverlay1}> 
-                            <div className={styles.modal1}>
-                            <i onClick={()=>closeModal()} className={`fa fa-times-circle cursor-pointer ${styles.closeIcon}`} aria-hidden="true"></i>
-                                {userUpdateCardContent()}
-                            </div>
-                        </div>}
+                        {isModalOpen &&
+                            <div className={styles.modalOverlay1}>
+                                <div className={styles.modal1}>
+                                    <i onClick={() => closeModal()} className={`fa fa-times-circle cursor-pointer ${styles.closeIcon}`} aria-hidden="true"></i>
+                                    {userUpdateCardContent()}
+                                </div>
+                            </div>}
                         {/* <BalnktCard isOpen={isModalOpen} onClose={closeModal} data={userUpdateCardContent} /> */}
                     </div>
 

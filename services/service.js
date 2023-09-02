@@ -117,9 +117,10 @@ export async function loginUser(userData) {
 
         if (response.ok) {
             showNotification(false, "Login Successfull")
-        } else {
-            showNotification(true, "Login Unuccessfull")
-        }
+        } 
+        // else {
+        //     showNotification(true, "Login Unuccessfull")
+        // }
         return response
     }
     catch (error) {

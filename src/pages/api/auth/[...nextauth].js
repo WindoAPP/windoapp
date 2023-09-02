@@ -21,13 +21,27 @@ const options = {
                 }).select("+password")
 
                 if (!user) {
-                    throw new Error("Invalid credentials")
+                    throw new Error("Les informations d'identification invalides")
+                }
+
+                if(user.accStatus=="created"){
+                    throw new Error("need_trial")
+                }
+
+                if(user.accStatus=="trial"){
+                    const currentDate = new Date();
+                    const trialPeriodEndDate = new Date(user.cretaedAt);
+                    trialPeriodEndDate.setMonth(trialPeriodEndDate.getMonth() + user.trialPeriod);
+                    const trialPeriodHasEnded = currentDate > trialPeriodEndDate;
+                    if (trialPeriodHasEnded) {
+                        throw new Error(`need_payment|${user._id}`)
+                      }
                 }
 
                 const isPasswordCorrect = await compare(credentials.password, user.password)
 
                 if (!isPasswordCorrect) {
-                    throw new Error("Invalid credentials")
+                    throw new Error("les informations d'identification invalides")
                 }
 
                 return user

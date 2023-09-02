@@ -291,7 +291,7 @@ const ProfilePage = () => {
                         <div className={`d-flex justify-content-between  ${styles.flexResponsive}`}>
 
                             <div className='d-flex flex-column'>
-                                <h5 className='mb-2'>section de texte du slogan</h5>
+                                <h5 className='mb-2'>Texte du slogan</h5>
                                 <div className='d-flex flex-row align-items-center'>
                                     <p className='my-2'>Texte du slogan :</p>
                                     <textarea type='textarea' className="form-control  mx-2" value={slogan} onChange={onSloganChange}  ></textarea>
@@ -320,7 +320,7 @@ const ProfilePage = () => {
                                     </div>
                                 </div>
                                 <hr className='hr'></hr>
-                                <h5 className='my-2'> section pourcentage de victoire</h5>
+                                <h5 className='my-2'> Pourcentage de victoire</h5>
                                 <div className='d-flex flex-row align-items-center'>
                                     <p className='my-2'>Probabilité de gagner :</p>
                                     <input className="form-control  mx-2" value={winningProbability} onChange={onWinningProbabilityChange} type='number'></input><p>%</p>
@@ -354,7 +354,7 @@ const ProfilePage = () => {
                                     </div>
                                 </div>
                                 <hr className='hr'></hr>
-                                <h5 className='my-2'>Section du bouton de rotation</h5>
+                                <h5 className='my-2'>Bouton de roue</h5>
                                 <div className='d-flex flex-column'>
                                     <p className='my-2'>Changer la couleur du bouton :</p>
                                     <div className='d-flex flex-row align-items-center'>
@@ -386,7 +386,7 @@ const ProfilePage = () => {
                                     </div>
                                 </div>
                                 <hr className='hr'></hr>
-                                <h5 className='my-2'>section des articles de roue</h5>
+                                <h5 className='my-2'> De la roue</h5>
                                 <div className='d-flex flex-column mb-4'>
                                     <p className='my-2'>Couleur de base 01 :</p>
                                     <div className='d-flex flex-row align-items-center'>

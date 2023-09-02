@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import styles from './Login.module.scss'
-import { loginUser, sendContactForm, updateUserPassword } from '../../services/service';
+import { loginUser, sendContactForm, subscribe, updateUserPassword } from '../../services/service';
 import Loader from '../Loader/loader';
 import showNotifications from '../showNotifications/showNotifications';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import BalnktCard from '../blankCard/blankCard';
 import { DotLoader } from 'react-spinners';
+import { env_data } from '../../config/config';
 
 const Login = () => {
 
@@ -39,6 +40,32 @@ const Login = () => {
         if (isValid) {
             setLoading(true);
             loginUser(formData).then(res => {
+                if (res.error) {
+                    if (res.error.split('|')[0] == "need_payment") {
+                        showNotifications(true, "Votre période d'essai est terminée, veuillez effectuer un paiement");
+                        subscribe({ priceId: env_data.mainProduct, userId: res.error.split('|')[1], total: "39.9", currency: "EUR" }).then(res => {
+
+                            if (res) {
+                                setLoading(false);
+                                redirectToExternalURL(res.url);
+                            }
+                        }).catch(err => {
+                            console.log(err);
+                            setLoading(false);
+                        })
+                    } else if (res.error.split('|')[0] == "need_trial") {
+                        showNotifications(true, "Veuillez continuer avec le compte d'essai");
+                        subscribe({ priceId: env_data.trialProduct, userId: res.error.split('|')[1], total: "39.9", currency: "EUR" }).then(res => {
+                            if (res) {
+                                setLoading(false);
+                                redirectToExternalURL(res.url);
+                            }
+                        }).catch(err => {
+                            console.log(err);
+                            setLoading(false);
+                        })
+                    }
+                }
                 if (res.ok) {
                     if (session.user) {
                         if (session.user.isAdmin) {
@@ -58,6 +85,10 @@ const Login = () => {
             return
         }
     }
+
+    const redirectToExternalURL = (url) => {
+        window.location.href = url;
+    };
 
     const validateForm = () => {
 

@@ -1,12 +1,13 @@
 import { connectToMongoDB } from "../../../lib/mongodb"
 import Payment from "../../../models/payment"
+import User from "../../../models/user";
 
 const handler = async (req, res) => {
     connectToMongoDB().catch(err => res.json(err))
 
     if (req.method === "POST") {
 
-        const { user, amount_total, currency, success } = req.body;
+        const { user, amount_total, currency, success,accStatus } = req.body;
 
         if (!req.body) return res.status(400).json({ error: "Data is missing" })
 
@@ -14,16 +15,20 @@ const handler = async (req, res) => {
             user: user,
             currency: currency,
             amount_total: amount_total,
-            success:success,
+            success: success,
             cretedAt: new Date()
         });
         payment
             .save()
             .then(result => {
                 if (result) {
-                    return res.status(201).json({
-                        success: true
-                    })
+                    User.updateOne({ _id: user }, { $push: { payments: payment._id },$set:{accStatus:accStatus} }).then(() => {
+                        return res.status(201).json({
+                            success: true
+                        })
+                    }).catch(error => {
+                        return res.status(409).json({ message: error.message })
+                    });
                 }
             }).catch(error => {
                 return res.status(409).json({ message: error.message })
