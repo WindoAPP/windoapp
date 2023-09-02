@@ -114,12 +114,12 @@ const AdminUsersPage = () => {
             if(user.accStatus=="subscribed"){
                 return "Abonnée"
             }else if(user.accStatus=="trial"){
-                return "Procès"
+                return "période d'essai"
             }else if(user.accStatus=="created"){
-                return "Créé"
+                return "Désabonner"
             }
         }else{
-            return 'Créé'
+            return 'Désabonner'
         }
     }
 
@@ -164,14 +164,14 @@ const AdminUsersPage = () => {
                     </div>
                     <div className='d-flex flex-row w-100'>
                         <div className="d-flex flex-column w-100 mr-2">
-                            <label><strong>Période d'essai</strong></label>
+                            <label><strong>période d'essai</strong></label>
                             <input disabled={accState!='trial'} type="number" name="trialPeriod" placeholder="période d'essai (en mois)" className="form-control regi-input" onChange={handleChange} value={formData.trialPeriod}></input>
                         </div>
                         <div className="d-flex flex-column w-100">
                             <label><strong>Statut du compte</strong></label>
                             <select className="form-select form-control regi-input" onChange={(e)=>setAccState(e.target.value)} value={accState}>    
-                                <option selected value="trial">Procès</option>
-                                <option value="created">Créé</option>
+                                <option selected value="trial">période d'essai</option>
+                                <option value="created">Désabonner</option>
                                 <option value="subscribed">Abonnée</option>
                             </select>
                         </div>
