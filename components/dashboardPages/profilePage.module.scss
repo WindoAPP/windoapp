@@ -1,10 +1,11 @@
 $mobile-breakpoint: 940px;
 
-.mainContent{
+.mainContent {
     background-color: #f1f5f7;
     margin-bottom: 2rem;
 }
-.mainContentForQR{
+
+.mainContentForQR {
     background-color: #f1f5f7;
     height: 100vh;
 }
@@ -39,124 +40,148 @@ $mobile-breakpoint: 940px;
     flex-direction: row;
     align-items: center;
     height: 3rem;
-    
-    .dot{
+
+    .dot {
         width: 10px;
         margin-right: 5px;
         height: 10px;
         border-radius: 50%;
     }
 }
-.imageUploadWrapper{
+
+.imageUploadWrapper {
     width: 40%;
+
     @media (max-width: $mobile-breakpoint) {
         width: 95%;
     }
 
 }
-.qrCodeWrapper{
+
+.qrCodeWrapper {
     padding: 2rem;
-    border-radius: 20px; 
+    border-radius: 20px;
+
     .qrCode {
-        border-radius: 20px;    
+        border-radius: 20px;
     }
 }
 
-.qrpageBtn{
-    background-color: #11b196 !important; 
+.qrpageBtn {
+    background-color: #11b196 !important;
 }
 
-.flexResponsive{
+.flexResponsive {
     flex-direction: row;
+
     @media (max-width: $mobile-breakpoint) {
         flex-direction: column;
     }
 }
-.wheelwrp{
+
+.wheelwrp {
     position: relative;
+
     @media (max-width: $mobile-breakpoint) {
         margin-top: 30rem
     }
-   
+
 }
-.wheelWrapper{
+
+.wheelWrapper {
     position: relative;
     width: 550px;
     height: 400px;
     margin-left: 120px;
-   
+
     @media (max-width: $mobile-breakpoint) {
-    position: absolute;
-     left: -128px;
-     bottom: -250px;
-     transform: translate(-50%,-50%);
-   }
+        position: absolute;
+        left: -128px;
+        bottom: -250px;
+        transform: translate(-50%, -50%);
+    }
 }
-.colorPlateItem{
+
+.colorPlateItem {
     width: 15px;
     height: 15px;
     background-color: #11b196;
 }
 
-.colorPlateItemSeleted{
+.colorPlateItemSeleted {
     border: 2px solid gray;
     width: 20px;
     height: 20px;
 }
 
-.colorPicker{
+.colorPicker {
     position: absolute;
     margin-left: 101px;
     margin-top: -239px;
 
-    .colorPickerWrapper{
+    .colorPickerWrapper {
         background-color: #fff;
         align-items: center;
         border-radius: 10px;
-        i{
+
+        i {
             border: 1px solid gray;
             border-radius: 5px;
             padding: 8px;
             cursor: pointer;
 
-            &:hover{
+            &:hover {
                 color: #000;
             }
+        }
+
+        .closeIcon {
+            border: none;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-right: 7px;
+            margin-top: 3px;
+            font-size: 1.5rem;
         }
     }
 }
 
-.spinTopWrapper{
+.spinTopWrapper {
     margin-left: 5rem;
-    .spinLogo{
-      width: 8rem;
-      height: 8rem;
-      border-radius: 50%;
-      border: 8px solid #5cb85c;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    .spinLogo {
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        border: 8px solid #5cb85c;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-    p{
-      font-size: 20px;
-      margin-bottom: 2rem;
-      font-weight: 900;
-      color: #000;
-      @media (max-width: $mobile-breakpoint) {
+
+    p {
+        font-size: 20px;
         margin-bottom: 2rem;
-        margin-left: 2rem;
-        width: 200px;
-      }
+        font-weight: 900;
+        color: #000;
+
+        @media (max-width: $mobile-breakpoint) {
+            margin-bottom: 2rem;
+            margin-left: 2rem;
+            width: 200px;
+        }
     }
-    
-    button{
-      border-radius: 20px;
-      font-weight: 600;
+
+    button {
+        border-radius: 20px;
+        font-weight: 600;
     }
-  
+
     @media (max-width: $mobile-breakpoint) {
         margin-left: 0 !important;
-      position: absolute;
-      top: -525px;
-      text-align: start !important;
-      width: 24rem;
+        position: absolute;
+        top: -525px;
+        text-align: start !important;
+        width: 24rem;
     }
-  }
+}

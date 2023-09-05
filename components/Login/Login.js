@@ -67,13 +67,16 @@ const Login = () => {
                     }
                 }
                 if (res.ok) {
-                    if (session.user) {
-                        if (session.user.isAdmin) {
-                            router.push("/dashboard/admindashboard");
-                        } else {
-                            router.push("/dashboard");
+                    setTimeout(()=>{
+                        if (session.user) {
+                            if (session.user.isAdmin) {
+                                router.push("/dashboard/admindashboard");
+                            } else {
+                                router.push("/dashboard");
+                            }
                         }
-                    }
+                    },500)
+                    
                     setLoading(false);
                 } else {
                     setLoading(false);
@@ -230,15 +233,15 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="d-flex flex-column mb-3">
-                        <label><strong>Password</strong></label>
+                        <label><strong>Mot de passe</strong></label>
                         <div>
                             <i className={`fa fa-key ${styles.inputIcon}`} aria-hidden="true"></i>
-                            <input type="password" name="password" placeholder="Password" className="form-control" value={formData.password} onChange={handleChange}></input>
+                            <input type="password" name="password" placeholder="Mot de passe" className="form-control" value={formData.password} onChange={handleChange}></input>
                         </div>
                     </div>
                     <a className='mb-3 cursor-pointer' onClick={() => forgotPassword()}>Mot de passe oublié</a>
-                    <button className={`commonBtnWindo w-100 mb-3 ${styles.loginBTN}`} onClick={fromSubmit}>Sign in</button>
-                    <span className='align-self-center'>Je n'ai pas de compte? <a href="/register">Sign up</a></span>
+                    <button className={`commonBtnWindo w-100 mb-3 ${styles.loginBTN}`} onClick={fromSubmit}>Se connecter</button>
+                    <span className='align-self-center'>Je n'ai pas de compte? <a href="/register">S'inscrire</a></span>
                     <a className='align-self-center' href="/">De retour à la maison</a>
                 </div>
             </form>

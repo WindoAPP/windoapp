@@ -221,8 +221,8 @@ const SignUp = () => {
                         <input required type="email" name="email" placeholder="Email" className="form-control regi-input" onChange={handleChange} value={formData.email}></input>
                     </div>
                     <div className="d-flex flex-column">
-                        <label><strong>Password</strong></label>
-                        <input required type="password" name="password" placeholder="Password" className="form-control regi-input" onChange={handleChange} value={formData.password}></input>
+                        <label><strong>Mot de passe</strong></label>
+                        <input required type="password" name="password" placeholder="Mot de passe" className="form-control regi-input" onChange={handleChange} value={formData.password}></input>
                     </div>
                     <div className="d-flex flex-column">
                         <label><strong>Confirmez le mot de passe</strong></label>

@@ -48,7 +48,7 @@ export async function createCustomer(userData) {
     try {
         const response = await axios.post(`/api/customer`, userData);
         if (response) {
-            showNotification(false, "Registered Successfull")
+            showNotification(false, "enregistré avec succès")
         }
         return response.data;
     } catch (error) {
@@ -116,7 +116,7 @@ export async function loginUser(userData) {
         });
 
         if (response.ok) {
-            showNotification(false, "Login Successfull")
+            showNotification(false, "Connexion réussie")
         } 
         // else {
         //     showNotification(true, "Login Unuccessfull")
@@ -275,7 +275,7 @@ export async function updateUserPassword(userData) {
     try {
         const response = await axios.post(`/api/auth/user`, userData);
         if (response) {
-            showNotification(false, "Password Update Successfull")
+            showNotification(false, "Mot de passe mis à jour avec succès")
         }
         return response.data;
     } catch (error) {

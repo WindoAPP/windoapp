@@ -172,7 +172,6 @@ const ProfilePage = () => {
     }
 
     const fetchUser = (id) => {
-        console.log(id);
         getUser(id).then(res => {
             if (res) {
                 setUser(res.user);
@@ -270,6 +269,15 @@ const ProfilePage = () => {
         setWheelItemsTouched(true);
     };
 
+    const closeColorPlate=()=>{
+        setColorPallate01Opend(false);
+        setColorPallate02Opend(false);
+        setSloganColorPallateOpend(false);
+        setSpinBtnColorPallateOpend(false);
+        setPrimaryColorPallateOpend(false);
+        setSecondaryColorPallateOpend(false)
+    }
+
     return (
         <>
             {!loading ?
@@ -310,6 +318,7 @@ const ProfilePage = () => {
                                     <div className={styles.colorPicker}>
                                         {
                                             sloganColorPallateOpend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                <i className={`fa fa-times-circle ${styles.closeIcon}`} onClick={closeColorPlate}></i>
                                                 <HexColorPicker color={sloganColor} onChange={onChangeSloanColor} />
                                                 <div className='d-flex flex-row align-items-center'>
                                                     <input className="form-control m-2 w-75" value={sloganColor} onChange={(e) => onChangeSloanColor(e.target.value)}></input>
@@ -343,6 +352,7 @@ const ProfilePage = () => {
                                         <div className={styles.colorPicker}>
                                             {
                                                 primaryColorPallateOpend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <i className={`fa fa-times-circle ${styles.closeIcon}`} onClick={closeColorPlate}></i>
                                                     <HexColorPicker color={primaryColor} onChange={onChangePrimaryColor} />
                                                     <div className='d-flex flex-row align-items-center'>
                                                         <input className="form-control m-2 w-75" value={primaryColor} onChange={(e) => onChangePrimaryColor(e.target.value)}></input>
@@ -371,6 +381,7 @@ const ProfilePage = () => {
                                         <div className={styles.colorPicker}>
                                             {
                                                 spinBtnColorPallateOpend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <i className={`fa fa-times-circle ${styles.closeIcon}`} onClick={closeColorPlate}></i>
                                                     <HexColorPicker color={spinBtnColor} onChange={onChangeSpinBtnColor} />
                                                     <div className='d-flex flex-row align-items-center'>
                                                         <input className="form-control m-2 w-75" value={spinBtnColor} onChange={(e) => onChangeSpinBtnColor(e.target.value)}></input>
@@ -403,6 +414,7 @@ const ProfilePage = () => {
                                         <div className={styles.colorPicker}>
                                             {
                                                 colorPallate01Opend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <i className={`fa fa-times-circle ${styles.closeIcon}`} onClick={closeColorPlate}></i>
                                                     <HexColorPicker color={color} onChange={onChangeColor1} />
                                                     <div className='d-flex flex-row align-items-center'>
                                                         <input className="form-control m-2 w-75" value={color} onChange={(e) => onChangeColor1(e.target.value)}></input>
@@ -428,6 +440,7 @@ const ProfilePage = () => {
                                             {
                                                 colorPallate02Opend &&
                                                 <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <i className={`fa fa-times-circle ${styles.closeIcon}`} onClick={closeColorPlate}></i>
                                                     <HexColorPicker color={color2} onChange={onChangeColor2} />
                                                     <div className='d-flex flex-row align-items-center'>
                                                         <input className="form-control m-2 w-75" value={color2} onChange={(e) => onChangeColor2(e.target.value)}></input>
@@ -456,6 +469,7 @@ const ProfilePage = () => {
                                         <div className={styles.colorPicker}>
                                             {
                                                 secondaryColorPallateOpend && <div className={`d-flex flex-column p-3 ${styles.colorPickerWrapper}`}>
+                                                    <i className={`fa fa-times-circle ${styles.closeIcon}`} onClick={closeColorPlate}></i>
                                                     <HexColorPicker color={secondaryColor} onChange={onChangeSecondaryColor} />
                                                     <div className='d-flex flex-row align-items-center'>
                                                         <input className="form-control m-2 w-75" value={secondaryColor} onChange={(e) => onChangeSecondaryColor(e.target.value)}></input>
