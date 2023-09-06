@@ -167,10 +167,7 @@ const SignUp = () => {
             showNotifications(true, "Shop Name required")
             return false;
         }
-        if (formData.shopId == "") {
-            showNotifications(true, "Shop ID required")
-            return false;
-        }
+
         if (formData.phoneNumber == "") {
             showNotifications(true, "Mobile Number")
             return false;
@@ -238,7 +235,7 @@ const SignUp = () => {
                     </div>
                     <div className="d-flex flex-column">
                         <div className='d-flex flex-column mb-1'>
-                            <label><strong>Boutique ID</strong></label>
+                            <label><strong>Boutique ID {`(facultative)`}</strong></label>
                             <label ><a target="_blank" href='https://veryeasyagency.com/id-google/'>Cliquez ici</a> pour obtenir votre boutique ID </label>
                         </div>
 

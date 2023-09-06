@@ -566,8 +566,13 @@ const Scan = () => {
     // Open a new window when the button is clicked
     const openNewWindow = () => {
         var url;
-        if (spinCount == 0) {
-            url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
+        if (spinCount == 0 ) {
+            if((!user.shopId || user.shopId=="")){
+                url =user.facebook;
+            }else{
+                url = `https://search.google.com/local/writereview?placeid=${user.shopId}`; // Replace with your desired URL
+            }
+            
         } else if (spinCount == 1) {
             url = user.facebook
         } else if (spinCount == 2) {
@@ -728,22 +733,22 @@ const Scan = () => {
 
     const collectUserDataCardContent = () => (
         <div>
-            <h3 className='text-dark mb-4'>Please fill this form</h3>
+            <h3 className='text-dark mb-4'>Veuillez remplir ce formulaire</h3>
             <form>
                 <div className="form-group my-2">
-                    <input type="text" className="form-control" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange}></input>
+                    <input type="text" className="form-control" name="name" placeholder="Entrez votre nom" value={formData.name} onChange={handleChange}></input>
                 </div>
                 <div className="form-group my-2">
-                    <input type="email" className="form-control" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange}></input>
+                    <input type="email" className="form-control" name="email" placeholder="Entrer votre Email" value={formData.email} onChange={handleChange}></input>
                 </div>
                 <div className="form-group my-2">
-                    <input type="tel" className="form-control" name="phoneNumber" placeholder="Enter your mobile number" value={formData.phoneNumber} onChange={handleChange}></input>
+                    <input type="tel" className="form-control" name="phoneNumber" placeholder="Entrez votre numéro de mobile" value={formData.phoneNumber} onChange={handleChange}></input>
                 </div>
                 <div className="form-check my-3">
                     <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
-                    <label className="form-check-label text-start" for="termsCheck">I agree to the terms and conditions <span className='text-primary cursor-pointer' onClick={openModal1}>Click here</span></label>
+                    <label className="form-check-label text-start" for="termsCheck">J'accepte les termes et conditions <span className='text-primary cursor-pointer' onClick={openModal1}>Cliquez ici</span></label>
                 </div>
-                <button onClick={registerFromSubmit} className="commonBtnWindo w-75">Submit & Spin</button>
+                <button onClick={registerFromSubmit} className="commonBtnWindo w-75">Soumettre</button>
             </form>
         </div>
     )

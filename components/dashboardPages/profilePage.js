@@ -511,7 +511,7 @@ const ProfilePage = () => {
 
                                         </tbody>
                                     </table>
-                                    <button  className={`btn mx-1 mb-5 btn-success`} onClick={saveWheelItems}>Sauver tous <i className="fa fa-save mx-2"></i></button>
+                                    <button  className={`btn mx-1 mb-5 btn-success`} onClick={saveWheelItems}>Sauvegarder<i className="fa fa-save mx-2"></i></button>
                                 </div>
                             </div>
                             <div className={styles.wheelwrp}>

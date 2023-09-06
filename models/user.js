@@ -34,7 +34,7 @@ const UserSchema = new Schema({
     ],
     shopId: {
         type: String,
-        required: true,
+        required: false,
     },
     shopName: {
         type: String,

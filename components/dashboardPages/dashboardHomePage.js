@@ -146,6 +146,33 @@ const DashboardHomePage = () => {
         return checker;
     }
 
+    const calculateWinnerPercentage = (winningClients, totalClients) => {
+        if (totalClients <= 0) {
+          return 0; 
+        }
+      
+        const percentage = (winningClients / totalClients) * 100;
+        return percentage;
+      }
+
+      const  calculateRegistrationGrowth = (users) => {
+        if (users.length <= 1) {
+          // If there's only one user or no users, there's no growth to calculate.
+          return 0;
+        }
+      
+        const sortedUsers = users.sort((a, b) => new Date(a.cretedAt) - new Date(b.cretedAt));
+      
+        const startDate = new Date(sortedUsers[0].cretedAt);
+        const endDate = new Date(sortedUsers[sortedUsers.length - 1].cretedAt);
+        console.log(">>",endDate);
+        const daysDifference = (endDate - startDate) / (1000 * 60 * 60 * 24);
+        const growthPercentage = ((users.length - 1) / daysDifference) * 100;
+        const growthPercentage1 = Math.min(growthPercentage, 100);
+      
+        return growthPercentage1;
+      }
+
     return (
         <>
             {!isLoading ?
@@ -167,9 +194,9 @@ const DashboardHomePage = () => {
                                     <hr className={styles.hr}></hr>
                                     <div className={`d-flex flex-row align-items-center mt-2 ${styles.cardTopWrapper}`}>
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                                            2.4 %
+                                            {calculateRegistrationGrowth(user.custermers)} %
                                         </div>
-                                        <p className='text-muted'>De la période précédente</p>
+                                        <p className='text-muted'>Croissance des inscriptions</p>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +216,7 @@ const DashboardHomePage = () => {
                                     <hr className={styles.hr}></hr>
                                     <div className={`d-flex flex-row align-items-center mt-2 ${styles.cardTopWrapper}`}>
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                                            2.4 %
+                                            {calculateWinnerPercentage(getNoOfWinners("win"),user.custermers.length)} %
                                         </div>
                                         <p className='text-muted'>De la période précédente</p>
                                     </div>
@@ -211,7 +238,7 @@ const DashboardHomePage = () => {
                                     <hr className={styles.hr}></hr>
                                     <div className={`d-flex flex-row align-items-center mt-2 ${styles.cardTopWrapper}`}>
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                                            2.4 %
+                                        {calculateWinnerPercentage(getNoOfWinners("play"),user.custermers.length)} %
                                         </div>
                                         <p className='text-muted'>De la période précédente</p>
                                     </div>
@@ -233,7 +260,7 @@ const DashboardHomePage = () => {
                                     <hr className={styles.hr}></hr>
                                     <div className={`d-flex flex-row align-items-center mt-2 ${styles.cardTopWrapper}`}>
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                                            2.4 %
+                                        {calculateWinnerPercentage(getNoOfWinners("reap"),user.custermers.length)} %
                                         </div>
                                         <p className='text-muted'>De la période précédente</p>
                                     </div>
@@ -255,7 +282,7 @@ const DashboardHomePage = () => {
                                     <hr className={styles.hr}></hr>
                                     <div className={`d-flex flex-row align-items-center mt-2 ${styles.cardTopWrapper}`}>
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                                            2.4 %
+                                        {calculateWinnerPercentage(getNoOfWinners("gift"),user.custermers.length)} %
                                         </div>
                                         <p className='text-muted'>De la période précédente</p>
                                     </div>
@@ -277,7 +304,7 @@ const DashboardHomePage = () => {
                                     <hr className={styles.hr}></hr>
                                     <div className={`d-flex flex-row align-items-center mt-2 ${styles.cardTopWrapper}`}>
                                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                                            2.4 %
+                                        {calculateWinnerPercentage(user.custermers.length,user.custermers.length)} %
                                         </div>
                                         <p className='text-muted'>De la période précédente</p>
                                     </div>
