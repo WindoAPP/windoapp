@@ -481,14 +481,16 @@ const Scan = () => {
         setScreenHeight(window.innerHeight);
         const savedValue = localStorage.getItem('spin_count');
         if (savedValue) {
-            setSpinCount(savedValue);
+            const decimalNumber = parseInt(savedValue);
+            console.log(">>",decimalNumber);
+            setSpinCount(decimalNumber);
         }
         if (id) {
             getUser(id).then(res => {
                 if (res) {
                     setLoading(false)
                     setUser(res.user);
-
+                    console.log("lll:",getMaxSpinCount());
                     var segmentsTemp = res.user.wheelItems.map(obj => { return obj.item });
                     var segmentsColorTemp = res.user.wheelItems.map(obj => { return obj.color });
 
@@ -563,6 +565,27 @@ const Scan = () => {
         return true;
     };
 
+    const getMaxSpinCount = ()=>{
+        var count=0;
+        if(user.shopId && user.shopId!=""){
+            console.log(">>>>>>>>>>>>>>>>>>>");
+            count++
+        }
+        if(user.facebook && user.facebook!=""){
+            console.log(">>>>>>>>>>>>>>>>>>>");
+            count++
+        }
+        if(user.instagram && user.instagram!=""){
+            console.log(">>>>>>>>>>>>>>>>>>>");
+            count++
+        }
+        if(user.tiktok && user.tiktok!=""){
+            console.log(">>>>>>>>>>>>>>>>>>>");
+            count++
+        }
+        return count
+    }
+
     // Open a new window when the button is clicked
     const openNewWindow = () => {
         var url;
@@ -589,7 +612,7 @@ const Scan = () => {
 
         newWindow.addEventListener('beforeunload', handleWindowClose);
         setStep(1);
-        localStorage.setItem('spin_count', spinCount + 1);
+        localStorage.setItem('spin_count', `${spinCount + 1}`);
 
         // Retrieve the value from local storage
 
@@ -681,6 +704,9 @@ const Scan = () => {
     };
 
     const closeModal = () => {
+        if(spinCount>=getMaxSpinCount()){
+            return showNotifications(true,"C'est juste surjoué")
+        }
         setIsModalOpen(false);
         openNewWindow();
         setCardToggle(false);
