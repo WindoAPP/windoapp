@@ -235,7 +235,7 @@ const SignUp = () => {
                     </div>
                     <div className="d-flex flex-column">
                         <div className='d-flex flex-column mb-1'>
-                            <label><strong>Boutique ID {`(facultative)`}</strong></label>
+                            <label><strong>Boutique ID {`(Facultatif)`}</strong></label>
                             <label ><a target="_blank" href='https://veryeasyagency.com/id-google/'>Cliquez ici</a> pour obtenir votre boutique ID </label>
                         </div>
 
@@ -245,7 +245,7 @@ const SignUp = () => {
                         <input type="checkbox" className="form-check-input" name="termsCheck" value={formData.termsCheck} onChange={handleChange}></input>
                         <label className="form-check-label" >J'accepte les termes et conditions <span className='text-primary cursor-pointer' onClick={openModal}>Cliquez ici</span></label>
                     </div>
-                    <button className={`commonBtnWindo mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>S'inscrire et payer</button>
+                    <button className={`commonBtnWindo mt-4 ${styles.loginBTN}`} onClick={registerFromSubmit}>Commencer mon essai gratuit</button>
                     <span className='align-self-center'>Vous avez déjà un compte? <a href="/login">Se connecter</a></span>
                 </div>
                  <ContentCard isOpen={isModalOpen} onClose={closeModal} title={"CONDITIONS GÉNÉRALES"} data={t_c}/>

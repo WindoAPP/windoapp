@@ -100,14 +100,14 @@ const SideBar = ({sideBarOpen,user}) => {
           </li>
           
           
-          {!user.isAdmin &&<li className="nav-item ">
+          <li className="nav-item ">
           <a href="/dashboard/optin">
             <span href="#" className={`nav-link  cursor-pointer ${getRoute("/optin")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-download m-2  fa-fw`}></i>
               {!sideBarOpen && "Opt-in"}
             </span>
             </a>
-          </li>}
+          </li>
           
           <li className="nav-item">
             <a href="/login">

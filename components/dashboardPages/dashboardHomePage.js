@@ -152,7 +152,7 @@ const DashboardHomePage = () => {
         }
       
         const percentage = (winningClients / totalClients) * 100;
-        return percentage;
+        return percentage.toFixed(2);
       }
 
       const  calculateRegistrationGrowth = (users) => {
