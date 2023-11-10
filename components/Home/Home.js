@@ -184,6 +184,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div id="prix" className={`d-flex flex-column  align-items-center justify-content-center align-self-center p-4 my-3`}>
+        <img width={"100%"} src='/qrimage.jpg' alt='qrimae'></img>
+      </div>
       <div id="prix" className={`d-flex flex-column card align-items-center justify-content-center align-self-center p-5 my-5 ${styles.secondSectionWrapper}`}>
         <h1>Un tarif unique pour tous.</h1>
         <h2>€39,90 / mois*</h2>
