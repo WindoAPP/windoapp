@@ -184,8 +184,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div id="prix" className={`d-flex flex-column  align-items-center justify-content-center align-self-center p-4 my-3`}>
-        <img width={"100%"} src='/qrimage.jpg' alt='qrimae'></img>
+      <div id="prix" className={`d-flex flex-column  align-items-center justify-content-center align-self-center p-4 my-3 ${styles.qrCodeImageWrapper}`}>
+      <h1>Testez le jeu !</h1>
+        <img src='/qrimage.jpg' alt='qrimae'></img>
       </div>
       <div id="prix" className={`d-flex flex-column card align-items-center justify-content-center align-self-center p-5 my-5 ${styles.secondSectionWrapper}`}>
         <h1>Un tarif unique pour tous.</h1>
