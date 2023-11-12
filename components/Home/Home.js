@@ -1,15 +1,39 @@
 import { useRouter } from 'next/router';
 import styles from './Home.module.scss';
+import { useState } from 'react';
+import Loader from '../Loader/loader';
+import showNotification from '../showNotifications/showNotifications';
+import { sendContactUsForm } from '../../services/service';
 
 const Home = () => {
 
   const router = useRouter();
-
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phoneNumber: '',companyName: '', termsCheck: false});
+  const [loading,setLoading]=useState(false);
 
   const reDirectToUrl=(url)=>{
     window.open(url, '_blank');
+
   }
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+  const registerFromSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    sendContactUsForm(formData).then(res => {
+      if (res) {
+          setLoading(false);
+          showNotification(false,"Merci de nous avoir contactés")
+      }
+    }).catch(err => {
+      console.log(err);
+      setLoading(false);
+    })
+
+  }
 
 
   return (
@@ -210,52 +234,49 @@ const Home = () => {
         </div>
         <img className={styles.image} src='/homepageimage6.png'></img>
       </div>
-      {/* <div className={`d-flex flex-column align-items-center justify-content-center ${styles.forthSectionWrapper}`}>
-        <h1>No more asking for google reviews</h1>
-        <ul>
-          <li>1 month free for any new subscription</li>
-          <li> Short commitment period, no registration fees</li>
-        </ul>
-        <form>
+      <div className={`d-flex flex-column align-items-center justify-content-center ${styles.forthSectionWrapper}`}>
+        <h1> Besoin d'aide pour l'installation ?</h1>
+
+        <form onSubmit={registerFromSubmit} className='my-4'>
           <div className="row">
             <div className="col">
-              <label>First Name</label>
-              <input placeholder="First Name" type="text" className="form-control" name=""></input>
+
+              <input placeholder="Prénom" type="text" className="form-control rounded-pill" required name="firstName" onChange={handleChange} value={formData.firstName}></input>
             </div>
           </div>
 
           <div className="row">
             <div className="col">
-              <label>Last Name</label>
-              <input placeholder="First Name" type="text" className="form-control" name=""></input>
+
+              <input placeholder="Nom" type="text" className="form-control rounded-pill" required name="lastName" onChange={handleChange} value={formData.lastName}></input>
             </div>
           </div>
 
           <div className="row">
             <div className="col">
-              <label>Email</label>
-              <input placeholder="Email" type="email" className="form-control" name=""></input>
+
+              <input placeholder="Email" type="email" className="form-control rounded-pill" required name="email" onChange={handleChange} value={formData.email}></input>
             </div>
           </div>
 
           <div className="row">
             <div className="col">
-              <label>Phone</label>
-              <input placeholder="Phone" type="text" className="form-control" name=""></input>
+
+              <input placeholder="Téléphone" type="text" className="form-control rounded-pill" required name="phoneNumber" onChange={handleChange} value={formData.phoneNumber}></input>
             </div>
           </div>
 
           <div className="row">
             <div className="col">
-              <label>Name of your establishment</label>
-              <input placeholder="Name of your establishment" type="text" className="form-control" name=""></input>
+
+              <input placeholder="Nom de votre établissement" type="text" className="form-control rounded-pill" required name="companyName" onChange={handleChange} value={formData.companyName}></input>
             </div>
           </div>
 
           <div className="row">
             <div className="d-flex flex-row ml-2">
-              <input type="checkbox" className="form-check-input"></input>
-              <span>I agree to receive information by email</span>
+              <input type="checkbox" className="form-check-input" required name="termsCheck" onChange={handleChange} value={formData.termsCheck}></input>
+              <span>J'accepte de recevoir des informations par email</span>
             </div>
           </div>
 
@@ -263,18 +284,13 @@ const Home = () => {
           <center>
             <div className="row">
               <div className="col">
-                <button className="btn btn-warning" >Send</button>
+                <button className="btn btn-warning font-weight-bold" >ENVOYER</button>
               </div>
             </div>
           </center>
-
-
-
-
         </form>
-
-
-      </div> */}
+      </div>
+      {loading && <Loader />}
     </div>
   );
 };
