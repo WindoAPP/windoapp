@@ -12,7 +12,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <FacebookPixel/>
+        {/* <FacebookPixel/> */}
       </body>
     </Html>
   )
