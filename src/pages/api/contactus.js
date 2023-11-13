@@ -40,35 +40,28 @@ const handler = async (req, res) => {
             companyName: data.companyName,
             cretedAt: new Date()
         });
-        contactUs
-            .save()
-            .then(async result => {
-                if (result) {
-                    try {
+        contactUs.save();
 
-                        var mailOptions = {
-                            from: "support@windo-web.com",
-                            to: data.email,
-                        };
-                        await transporter.sendMail({
-                            ...mailOptions,
-                            ...generateEmailContent(data),
-                            subject: `Hello ${data.firstName}`,
-                        });
+        if (contactUs) {
+            try {
 
-                        return res.status(200).json({ success: true });
-                    } catch (err) {
-                        console.log(err);
-                        return res.status(400).json({ message: err.message });
-                    }
+                var mailOptions = {
+                    from: "support@windo-web.com",
+                    to: data.email,
+                };
+                await transporter.sendMail({
+                    ...mailOptions,
+                    ...generateEmailContent(data),
+                    subject: `Hello ${data.firstName}`,
+                });
 
+                return res.status(200).json({ success: true });
+            } catch (err) {
+                console.log(err);
+                return res.status(400).json({ message: err.message });
+            }
 
-
-                }
-            }).catch(error => {
-                console.log(error);
-                return res.status(409).json({ message: error.message })
-            });
+        }
 
     }
 };
