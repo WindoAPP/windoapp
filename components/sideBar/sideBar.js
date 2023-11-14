@@ -56,7 +56,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/dashboard/winners">
             <span className={`nav-link  cursor-pointer ${getRoute("/winners")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-trophy m-2  fa-fw`}></i>
-              {!sideBarOpen && "Gagnantes"}
+              {!sideBarOpen && "Gagnants"}
             </span>
             </a>
           </li>
