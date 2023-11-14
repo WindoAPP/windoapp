@@ -52,17 +52,17 @@ const SideBar = ({sideBarOpen,user}) => {
             </span>
             </a>
           </li>
-          {!user.isAdmin &&<li className="nav-item">
+          <li className="nav-item">
             <a href="/dashboard/winners">
             <span className={`nav-link  cursor-pointer ${getRoute("/winners")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-trophy m-2  fa-fw`}></i>
               {!sideBarOpen && "Gagnantes"}
             </span>
             </a>
-          </li>}
+          </li>
           {user.isAdmin &&<li className="nav-item">
             <a href="/dashboard/allusers">
-            <span className={`nav-link  cursor-pointer ${getRoute("/winners")?styles.navLinkItem:""}`} >
+            <span className={`nav-link  cursor-pointer ${getRoute("/allusers")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-users m-2  fa-fw`}></i>
               {!sideBarOpen && "Utilisateurs"}
             </span>

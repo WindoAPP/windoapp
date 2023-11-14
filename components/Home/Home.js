@@ -212,7 +212,9 @@ const Home = () => {
         </div>
       </div>
       <div id="prix" className={`d-flex flex-column  align-items-center justify-content-center align-self-center p-4 my-3 ${styles.qrCodeImageWrapper}`}>
-      <h1>Testez le jeu !</h1>
+      <h1 >Testez le jeu !</h1>
+      <h2 className='my-4'>Tentez de gagner 1 mois gratuit en accès illimité à Windo et
+1 design à l'image de votre entreprise pour introduire votre jeu. <br></br> 10 Gagnants</h2>
         <img src='/qrimage.jpg' alt='qrimae'></img>
       </div>
       <div id="prix" className={`d-flex flex-column card align-items-center justify-content-center align-self-center p-5 my-5 ${styles.secondSectionWrapper}`}>

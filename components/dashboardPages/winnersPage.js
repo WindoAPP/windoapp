@@ -103,7 +103,7 @@ const WinnersPage = () => {
             {!isLoading ?
                 <div className={`p-4 d-flex flex-column align-items-center justify-content-center ${styles.mainContent}`}>
                      <div className={`d-flex flex-column ${styles.chartContent}`}>
-                            <h3 className={"mb-5"}>Liste des gagnants</h3>
+                            <h3 className={"mb-5"}>Liste des Gagnants</h3>
                             <table className={`table  ${styles.table}`}>
                                 <thead className='table-dark'>
                                     <tr>
