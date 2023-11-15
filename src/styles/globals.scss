@@ -309,6 +309,21 @@ a{
     }
 }
 
+.commonBtnWindo1{
+  border-radius: 12px;
+  color: #fff;
+  background-color: #2ebb77;
+  height: 40px;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 5px 15px 5px 15px;
+
+  border: none;
+    &:hover{
+        background-color: #28a368 ;
+    }
+}
+
 .footer-links{
   cursor: pointer;
   &:hover{

@@ -288,7 +288,7 @@ const Home = () => {
           <center>
             <div className="row">
               <div className="col">
-                <button className="btn btn-success font-weight-bold" >ENVOYER</button>
+                <button className="commonBtnWindo1 font-weight-bold" >ENVOYER</button>
               </div>
             </div>
           </center>
