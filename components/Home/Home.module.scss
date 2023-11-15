@@ -400,8 +400,21 @@ $mobile-breakpoint: 940px;
         line-height: 1.3;
         margin-top: 15px;
         font-weight: 700;
+        text-align: center;
         @media (max-width: $mobile-breakpoint) {
             font-size: 20px;
         }
+    }
+}
+
+.subscribeBtn{
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    margin: 0;
+    display: none;
+    text-transform: uppercase;
+    @media (max-width: $mobile-breakpoint) {
+        display: block;
     }
 }
