@@ -213,7 +213,7 @@ const Home = () => {
       </div>
       <div id="prix" className={`d-flex flex-column  align-items-center justify-content-center align-self-center p-4 my-3 ${styles.qrCodeImageWrapper}`}>
       <h1 >Testez le jeu !</h1>
-      <h2 className='my-4'>Tentez de gagner 1 mois gratuit en accès illimite !</h2>
+      <h2 className='my-4'>Tentez de gagner 1 mois gratuit en accès illimité !</h2>
         <img src='/qrimage.jpg' alt='qrimae'></img>
       </div>
       <div id="prix" className={`d-flex flex-column card align-items-center justify-content-center align-self-center p-5 my-5 ${styles.secondSectionWrapper}`}>
