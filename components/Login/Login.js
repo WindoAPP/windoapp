@@ -41,6 +41,8 @@ const Login = () => {
             setLoading(true);
             loginUser(formData).then(async res => {
                 if (res.error) {
+                    console.log(res.error);
+                    console.log(res.error.split('|'));
                     if (res.error.split('|')[0] == "need_payment") {
                         showNotifications(true, "Votre période d'essai est terminée, veuillez effectuer un paiement");
                         subscribe({ priceId: env_data.mainProduct, userId: res.error.split('|')[1], total: "39.9", currency: "EUR" }).then(res => {
@@ -55,7 +57,7 @@ const Login = () => {
                         })
                     } else if (res.error.split('|')[0] == "need_trial") {
                         showNotifications(true, "Veuillez continuer avec le compte d'essai");
-                        subscribe({ priceId: env_data.trialProduct, userId: res.error.split('|')[1], total: "39.9", currency: "EUR" }).then(res => {
+                        subscribe({ priceId: env_data.mainProduct, userId: res.error.split('|')[1], total: "39.9", currency: "EUR" }).then(res => {
                             if (res) {
                                 setLoading(false);
                                 redirectToExternalURL(res.url);
