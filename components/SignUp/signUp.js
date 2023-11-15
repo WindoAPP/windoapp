@@ -45,7 +45,7 @@ const t_c=[
 const SignUp = () => {
     const [formData, setFormData] = useState({ email: '', password: '', c_password: '', userName: '', phoneNumber: '', shopName: '', shopId: '', termsCheck: false });
     const [loading, setLoading] = useState(false);
-    const [priceId, setPriceId] = useState("");
+    const [priceId, setPriceId] = useState(env_data.trialProduct);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [user, setUser] = useState({});
 

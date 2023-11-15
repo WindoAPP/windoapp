@@ -39,7 +39,7 @@ const Login = () => {
 
         if (isValid) {
             setLoading(true);
-            loginUser(formData).then(res => {
+            loginUser(formData).then(async res => {
                 if (res.error) {
                     if (res.error.split('|')[0] == "need_payment") {
                         showNotifications(true, "Votre période d'essai est terminée, veuillez effectuer un paiement");
@@ -67,16 +67,16 @@ const Login = () => {
                     }
                 }
                 if (res.ok) {
-                    setTimeout(()=>{
-                        if (session.user) {
-                            if (session.user.isAdmin) {
-                                router.push("/dashboard/admindashboard");
-                            } else {
-                                router.push("/dashboard");
+                        let sessonss= await session
+                       
+                            if (sessonss.user) {
+                                if (sessonss.user.isAdmin) {
+                                    router.push("/dashboard/admindashboard");
+                                } else {
+                                    router.push("/dashboard");
+                                }
                             }
-                        }
-                    },500)
-                    
+                        
                     setLoading(false);
                 } else {
                     setLoading(false);
