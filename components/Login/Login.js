@@ -56,7 +56,7 @@ const Login = () => {
                             setLoading(false);
                         })
                     } else if (res.error.split('|')[0] == "need_trial") {
-                        showNotifications(true, "Veuillez continuer avec le compte d'essai");
+                        showNotifications(true, "Période d'essai expirée. Payez pour continuer a profiter de nos services");
                         subscribe({ priceId: env_data.mainProduct, userId: res.error.split('|')[1], total: "39.9", currency: "EUR" }).then(res => {
                             if (res) {
                                 setLoading(false);
