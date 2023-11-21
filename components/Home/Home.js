@@ -217,8 +217,10 @@ const Home = () => {
         <img src='/qrimage.jpg' alt='qrimae'></img>
       </div>
       <div id="prix" className={`d-flex flex-column card align-items-center justify-content-center align-self-center p-5 my-5 ${styles.secondSectionWrapper}`}>
-        <h1>Un tarif unique pour tous.</h1>
-        <h2>€39,90 / mois*</h2>
+        <img src="/6235092.png" alt='xmashat'></img>
+        <h1>Jusqu'au 31 Décembre</h1>
+        <h3> avec le code: <span>NOEL20</span></h3>
+        <h2>€19,90 / mois*</h2>
         <div className={`d-flex flex-column my-4 ${styles.priceSectionWrp}`}>
           {/* <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Création d'une page de jeu à votre image</span> */}
           <span><i className="fa fa-check mx-2" aria-hidden="true"></i>  Choix de vos actions, cadeaux et conditions de retrait</span>

@@ -209,6 +209,26 @@ $mobile-breakpoint: 940px;
         }
     }
 
+    h3{
+        font-weight: 800;
+        margin-bottom: 1rem;
+        span{
+            color: #f74f4c;
+        }
+    }
+    img{
+        position: absolute;
+        top: -20%;
+        left: -9%;
+        width: 30%;
+        @media (max-width: $mobile-breakpoint) {
+            font-size: 30px;
+            top: -6%;
+            left: -5%;
+        }
+       
+    }
+
     h2 {
         font-size: 40px;
         font-weight: 800;
