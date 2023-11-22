@@ -72,7 +72,7 @@ const SideBar = ({sideBarOpen,user}) => {
             <a href="/dashboard/payments">
             <span className={`nav-link  cursor-pointer ${getRoute("/payments")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-credit-card m-2  fa-fw`}></i>
-              {!sideBarOpen && "Factures"}
+              {!sideBarOpen && "Abonnement"}
             </span>
             </a>
           </li>}
