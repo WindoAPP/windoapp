@@ -1,0 +1,684 @@
+// import { useState, useEffect } from 'react';
+// import styles from './signUp.module.scss';
+// import Loader from '../Loader/loader';
+// import showNotifications from '../showNotifications/showNotifications';
+// import {
+//   createPayment,
+//   createUser,
+//   getUser,
+//   sendContactForm,
+//   subscribe,
+// } from '../../services/service';
+// import { useRouter } from 'next/router';
+// import { env_data } from '../../config/config';
+// import ContentCard from '../contentCard/contentCard';
+
+// import t_c from './content';
+// import { postData } from '../../src/utils/helpers';
+// import { getStripe } from '../../src/utils/stripe-client';
+
+// const SignUp = () => {
+//   const [formData, setFormData] = useState({
+//     email: '',
+//     password: '',
+//     c_password: '',
+//     userName: '',
+//     phoneNumber: '',
+//     shopName: '',
+//     shopId: '',
+//     termsCheck: false,
+//   });
+//   const [loading, setLoading] = useState(false);
+//   const [priceId, setPriceId] = useState(env_data.trialProduct);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [user, setUser] = useState({});
+
+//   const router = useRouter();
+//   const { query } = router;
+
+//   useEffect(() => {
+//     if (query) {
+//       if (query.payment == 'success') {
+//         showNotifications(false, 'Payment Successfull !');
+
+//         const paymentData = {
+//           user: query.uid,
+//           amount_total: query.total,
+//           currency: query.currency,
+//           success: true,
+//           accStatus: 'trial',
+//         };
+
+//         createPayment(paymentData)
+//           .then(() => {
+//             var emailData = {
+//               name: formData.userName,
+//               email: formData.email,
+//               subject: 'paiement réussi',
+//               message:
+//                 'nous avons reçu votre paiement. Merci de nous avoir rejoint',
+//             };
+//             sendEmail(emailData);
+
+//             router.push('login');
+//           })
+//           .catch((err) => {
+//             console.log(err);
+//           });
+//       } else if (query.payment == 'failed') {
+//         const paymentData = {
+//           user: query.uid,
+//           amount_total: query.total,
+//           currency: query.currency,
+//           success: false,
+//           accStatus: 'created',
+//         };
+
+//         createPayment(paymentData)
+//           .then(() => {
+//             var emailData = {
+//               name: formData.userName,
+//               email: formData.email,
+//               subject: 'échec du paiement',
+//               message:
+//                 "nous n'avons pas reçu votre paiement. essayer à nouveau",
+//             };
+//             sendEmail(emailData);
+//             router.push('login');
+//           })
+//           .catch((err) => {
+//             console.log(err);
+//           });
+//       }
+//     }
+//     setPriceId(env_data.trialProduct);
+//   }, [query]);
+
+//   const handleChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const registerFromSubmit = async (e) => {
+//     e.preventDefault();
+//     const isValid = validateForm();
+
+//     if (isValid) {
+//       setLoading(true);
+
+//       try {
+//         const user = await createUser(formData);
+//         if (user) {
+//           const { sessionId } = await postData({
+//             url: '/api/payment',
+//             data: { price: priceId, user: user?.user?._id },
+//           });
+//           console.log({ sessionId });
+//           const stripe = await getStripe();
+//           stripe?.redirectToCheckout({ sessionId });
+//           // const subscription = await subscribe({
+//           //   price: priceId,
+//           //   user: user?.user?._id,
+//           // });
+
+//           // if (subscription) {
+//           //   setLoading(false);
+//           //   // redirectToExternalURL(subscription.url);
+//           // }
+//         }
+//         // const { sessionId } = await postData({
+//         //   url: '/api/stripe/create-checkout-session',
+//         //   data: { price },
+//         // });
+//       } catch (err) {
+//         console.log(err);
+//         setLoading(false);
+//       } finally {
+//         setLoading(false);
+//       }
+//     }
+//   };
+
+//   // const redirectToExternalURL = (url) => {
+//   //   window.location.href = url;
+//   // };
+
+//   const validateForm = () => {
+//     if (formData.userName == '') {
+//       showNotifications(true, 'User Name required');
+//       return false;
+//     }
+//     if (formData.password == '') {
+//       showNotifications(true, 'Password required');
+//       return false;
+//     }
+//     if (formData.email == '') {
+//       showNotifications(true, 'email required');
+//       return false;
+//     }
+//     if (!/\S+@\S+\.\S+/.test(formData.email)) {
+//       showNotifications(true, 'Invalid email address');
+//       return false;
+//     }
+//     if (formData.c_password == '') {
+//       showNotifications(true, 'Confirm Password required');
+//       return false;
+//     }
+//     if (formData.shopName == '') {
+//       showNotifications(true, 'Shop Name required');
+//       return false;
+//     }
+
+//     if (formData.phoneNumber == '') {
+//       showNotifications(true, 'Mobile Number');
+//       return false;
+//     }
+//     if (formData.password !== formData.c_password) {
+//       showNotifications(true, 'Password mismathed');
+//       return false;
+//     }
+//     if (!formData.termsCheck) {
+//       showNotifications(true, 'You must agree to terms and conditions');
+//       return false;
+//     }
+
+//     return true;
+//   };
+
+//   const openModal = () => {
+//     setIsModalOpen(true);
+//   };
+
+//   const closeModal = () => {
+//     setIsModalOpen(false);
+//   };
+
+//   const sendEmail = async (mailData) => {
+//     try {
+//       await sendContactForm(mailData);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   return (
+//     <div className={styles.loginWrapper}>
+//       <form>
+//         <div className={`d-flex flex-column p-4  ${styles.loginBox}`}>
+//           <img className="w-50 align-self-center mb-3" src="logo.png"></img>
+//           <span className="align-self-center mb-3">
+//             Inscrivez-vous pour continuer Windo
+//           </span>
+//           <div className="d-flex flex-column">
+//             <label>
+//               <strong>Nom d'utilisateur</strong>
+//             </label>
+//             <input
+//               type="text"
+//               name="userName"
+//               placeholder="Nom d'utilisateur"
+//               className="form-control regi-input"
+//               onChange={handleChange}
+//               value={formData.userName}
+//             ></input>
+//           </div>
+//           <div className="d-flex flex-column">
+//             <label>
+//               <strong>Email</strong>
+//             </label>
+//             <input
+//               required
+//               type="email"
+//               name="email"
+//               placeholder="Email"
+//               className="form-control regi-input"
+//               onChange={handleChange}
+//               value={formData.email}
+//             ></input>
+//           </div>
+//           <div className="d-flex flex-column">
+//             <label>
+//               <strong>Mot de passe</strong>
+//             </label>
+//             <input
+//               required
+//               type="password"
+//               name="password"
+//               placeholder="Mot de passe"
+//               className="form-control regi-input"
+//               onChange={handleChange}
+//               value={formData.password}
+//             ></input>
+//           </div>
+//           <div className="d-flex flex-column">
+//             <label>
+//               <strong>Confirmez le mot de passe</strong>
+//             </label>
+//             <input
+//               type="password"
+//               name="c_password"
+//               placeholder="Confirmez le mot de passe"
+//               className="form-control regi-input"
+//               onChange={handleChange}
+//               value={formData.c_password}
+//             ></input>
+//           </div>
+//           <div className="d-flex flex-column">
+//             <label>
+//               <strong>Nom de la boutique</strong>
+//             </label>
+//             <input
+//               type="text"
+//               name="shopName"
+//               placeholder="Nom de la boutique"
+//               className="form-control regi-input"
+//               onChange={handleChange}
+//               value={formData.shopName}
+//             ></input>
+//           </div>
+//           <div className="d-flex flex-column">
+//             <label>
+//               <strong>Numéro de portable</strong>
+//             </label>
+//             <input
+//               type="text"
+//               name="phoneNumber"
+//               placeholder="Numéro de portable"
+//               className="form-control regi-input"
+//               onChange={handleChange}
+//               value={formData.phoneNumber}
+//             ></input>
+//           </div>
+//           <div className="d-flex flex-column">
+//             <div className="d-flex flex-column mb-1">
+//               <label>
+//                 <strong>Boutique ID {`(Facultatif)`}</strong>
+//               </label>
+//               <label>
+//                 <a target="_blank" href="https://veryeasyagency.com/id-google/">
+//                   Cliquez ici
+//                 </a>{' '}
+//                 pour obtenir votre boutique ID{' '}
+//               </label>
+//             </div>
+
+//             <input
+//               type="text"
+//               name="shopId"
+//               placeholder="Boutique ID"
+//               className="form-control regi-input "
+//               onChange={handleChange}
+//               value={formData.shopId}
+//             ></input>
+//           </div>
+//           <div className="form-check my-3">
+//             <input
+//               type="checkbox"
+//               className="form-check-input"
+//               name="termsCheck"
+//               value={formData.termsCheck}
+//               onChange={handleChange}
+//             ></input>
+//             <label className="form-check-label">
+//               J'accepte les termes et conditions{' '}
+//               <span className="text-primary cursor-pointer" onClick={openModal}>
+//                 Cliquez ici
+//               </span>
+//             </label>
+//           </div>
+//           <button
+//             className={`commonBtnWindo mt-4 ${styles.loginBTN}`}
+//             onClick={registerFromSubmit}
+//           >
+//             Commencer mon essai gratuit
+//           </button>
+//           <span className="align-self-center">
+//             Vous avez déjà un compte? <a href="/login">Se connecter</a>
+//           </span>
+//         </div>
+//         <ContentCard
+//           isOpen={isModalOpen}
+//           onClose={closeModal}
+//           title={'CONDITIONS GÉNÉRALES'}
+//           data={t_c}
+//         />
+//       </form>
+//       <div className={styles.RightImageWrapper}>
+//         <img src="loginImage.jpg" className={styles.RightImage}></img>
+//       </div>
+//       {loading && <Loader />}
+//     </div>
+//   );
+// };
+
+// export default SignUp;
+// // const fetchUser = (id) => {
+// //   getUser(id)
+// //     .then((res) => {
+// //       if (res) {
+// //         setUser(res.user);
+// //         setLoading(false);
+// //       }
+// //     })
+// //     .catch((err) => {
+// //       console.log(err);
+// //     });
+// // };
+
+// // const registerFromSubmit = (e) => {
+// //   e.preventDefault();
+// //   var isValid = validateForm();
+
+// //   if (isValid) {
+// //     setLoading(true);
+// //     createUser(formData)
+// //       .then((res) => {
+// //         if (res) {
+// //           subscribe({
+// //             price: priceId,
+// //             user: res.user._id,
+// //             // total: '39.9',
+// //             // currency: 'EUR',
+// //           })
+// //             .then((res) => {
+// //               if (res) {
+// //                 setLoading(false);
+// //                 redirectToExternalURL(res.url);
+// //               }
+// //             })
+// //             .catch((err) => {
+// //               console.log(err);
+// //               setLoading(false);
+// //             });
+// //         }
+// //       })
+// //       .catch((err) => {
+// //         console.log(err);
+// //         setLoading(false);
+// //       });
+// //   } else {
+// //     return;
+// //   }
+// // };
+
+import React from 'react';
+import { Formik, Field, ErrorMessage, FieldArray } from 'formik';
+import * as Yup from 'yup';
+import styles from './signUp.module.scss';
+import Loader from '../Loader/loader';
+import showNotifications from '../showNotifications/showNotifications';
+import {
+  createPayment,
+  createUser,
+  getUser,
+  sendContactForm,
+  subscribe,
+} from '../../services/service';
+import { useRouter } from 'next/router';
+import { env_data } from '../../config/config';
+import ContentCard from '../contentCard/contentCard';
+
+import t_c from './content';
+import { postData } from '../../src/utils/helpers';
+import { getStripe } from '../../src/utils/stripe-client';
+
+const SignUp = () => {
+  const router = useRouter();
+  const { query } = router;
+
+  const initialValues = {
+    email: '',
+    password: '',
+    c_password: '',
+    userName: '',
+    phoneNumber: '',
+    shopName: '',
+    shopId: '',
+    termsCheck: false,
+  };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Password is required'),
+    c_password: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Confirm Password is required'),
+    userName: Yup.string().required('User Name is required'),
+    phoneNumber: Yup.string().required('Mobile Number is required'),
+    shopName: Yup.string().required('Shop Name is required'),
+  });
+
+  const handleSubmit = async (values, { setSubmitting, setStatus }) => {
+    try {
+      const user = await createUser(values);
+      if (user) {
+        const { sessionId } = await postData({
+          url: '/api/payment',
+          data: { price: env_data.trialProduct, user: user?.user?._id },
+        });
+        const stripe = await getStripe();
+        stripe?.redirectToCheckout({ sessionId });
+      }
+    } catch (err) {
+      setStatus(err.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className={styles.loginWrapper}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          isSubmitting,
+          status,
+          handleChange,
+          handleBlur,
+        }) => (
+          <form>
+            <div className={`d-flex flex-column p-4  ${styles.loginBox}`}>
+              <img className="w-50 align-self-center mb-3" src="logo.png" />
+              <span className="align-self-center mb-3">
+                Inscrivez-vous pour continuer Windo
+              </span>
+              <div className="d-flex flex-column">
+                <label>
+                  <strong>Nom d'utilisateur</strong>
+                </label>
+                <Field
+                  type="text"
+                  name="userName"
+                  placeholder="Nom d'utilisateur"
+                  className={`form-control regi-input ${
+                    errors.userName && touched.userName ? 'is-invalid' : ''
+                  }`}
+                  value={values.userName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.userName && touched.userName ? (
+                  <ErrorMessage
+                    className="invalid-feedback"
+                    name="userName"
+                    component="div"
+                  />
+                ) : null}
+              </div>
+              <div className="d-flex flex-column">
+                <label>
+                  <strong>Email</strong>
+                </label>
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className={`form-control regi-input ${
+                    errors.email && touched.email ? 'is-invalid' : ''
+                  }`}
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.email && touched.email ? (
+                  <ErrorMessage
+                    className="invalid-feedback"
+                    name="email"
+                    component="div"
+                  />
+                ) : null}
+              </div>
+            </div>
+          </form>
+        )}
+      </Formik>
+    </div>
+  );
+};
+
+export default SignUp;
+  {/* <div className="d-flex flex-column">
+            <label>
+              <strong>Nom d'utilisateur</strong>
+            </label>
+            <input
+              type="text"
+              name="userName"
+              placeholder="Nom d'utilisateur"
+              className={`form-control regi-input ${
+                errors.userName && touched.userName ? 'is-invalid' : ''
+              }`}
+              value={values.userName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.userName && touched.userName ? (
+              <div className="invalid-feedback">{errors.userName}</div>
+            ) : null}
+          </div> */}
+          {/* <div className="d-flex flex-column">
+            <label>
+              <strong>Email</strong>
+            </label>
+            <input
+              required
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="form-control regi-input"
+              onChange={handleChange}
+              value={formData.email}
+            ></input>
+          </div> */}
+          {/* <div className="d-flex flex-column">
+            <label>
+              <strong>Mot de passe</strong>
+            </label>
+            <input
+              required
+              type="password"
+              name="password"
+              placeholder="Mot de passe"
+              className="form-control regi-input"
+              onChange={handleChange}
+              value={formData.password}
+            ></input>
+          </div> */}
+
+           {/* <div className="d-flex flex-column">
+            <label>
+              <strong>Confirmez le mot de passe</strong>
+            </label>
+            <input
+              type="password"
+              name="c_password"
+              placeholder="Confirmez le mot de passe"
+              className="form-control regi-input"
+              onChange={handleChange}
+              value={formData.c_password}
+            ></input>
+          </div> */}
+          {/* <div className="d-flex flex-column">
+            <label>
+              <strong>Nom de la boutique</strong>
+            </label>
+            <input
+              type="text"
+              name="shopName"
+              placeholder="Nom de la boutique"
+              className="form-control regi-input"
+              onChange={handleChange}
+              value={formData.shopName}
+            ></input>
+          </div> */}
+          {/* <div className="d-flex flex-column">
+            <label>
+              <strong>Numéro de portable</strong>
+            </label>
+            <input
+              type="text"
+              name="phoneNumber"
+              placeholder="Numéro de portable"
+              className="form-control regi-input"
+              onChange={handleChange}
+              value={formData.phoneNumber}
+            ></input>
+          </div> */}
+
+          
+// const validate = (values) => {
+//   switch (true) {
+//     case values.userName === '':
+//       showNotifications(true, 'User Name required');
+//       break;
+//     case values.password === '':
+//       showNotifications(true, 'Password required');
+//       break;
+//     case values.email === '':
+//       showNotifications(true, 'email required');
+//       break;
+//     case !/\S+@\S+\.\S+/.test(values.email):
+//       showNotifications(true, 'Invalid email address');
+//       break;
+//     case values.confirmPassword === '':
+//       showNotifications(true, 'Confirm Password required');
+//       break;
+//     case values.shopName === '':
+//       showNotifications(true, 'Shop Name required');
+//       break;
+//     case values.phoneNumber === '':
+//       showNotifications(true, 'Mobile Number');
+//       break;
+//     case values.password !== values.confirmPassword:
+//       showNotifications(true, 'Password mismathed');
+//       break;
+//     case !values.termsCheck:
+//       showNotifications(true, 'You must agree to terms and conditions');
+//       break;
+//     default:
+//       return;
+//   }
+// };
+
+ {/* <div className="d-flex flex-column">
+            <label>
+              <strong>Nom d'utilisateur</strong>
+            </label>
+            <input
+              type="text"
+              name="userName"
+              placeholder="Nom d'utilisateur"
+              className="form-control regi-input"
+              onChange={handleChange}
+              value={formData.userName}
+            ></input>
+          </div> */}

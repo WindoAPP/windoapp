@@ -1,0 +1,25 @@
+{
+  "The provided email address is invalid.": "Adresse e-mail invalide",
+  "Please enter a valid email address.": "Veuillez saisir une adresse e-mail valide",
+  "Please provide an email address to proceed.": "Veuillez fournir une adresse e-mail pour continuer",
+  "The password must be at least 6 characters long.": "Le mot de passe doit comporter au moins 6 caractères",
+  "Please enter a password to continue.": "Veuillez saisir un mot de passe pour continuer",
+  "The confirmation password must match the original password entered.": "La confirmation du mot de passe doit correspondre au mot de passe original saisi",
+  "Please confirm your password by entering it again.": "Veuillez confirmer votre mot de passe en le saisissant à nouveau",
+  "Please provide a user name to continue.": "Veuillez fournir un nom d'utilisateur pour continuer",
+  "Please enter your mobile number to proceed.": "Veuillez saisir votre numéro de téléphone portable pour continuer",
+  "Please provide a shop name to continue.": "Veuillez fournir un nom de boutique pour continuer",
+
+  "Username": "Nom d'utilisateur",
+  "Email Address": "Adresse électronique",
+  "Password": "Mot de passe",
+  "Confirm your password": "Confirmer le mot de passe",
+  "Shop Name": "Nom de la boutique",
+  "Phone Number": "Numéro de téléphone",
+  "Enter your username": "Entrez votre nom d'utilisateur",
+  "Enter your email address": "Entrez votre adresse e-mail",
+  "Create a password": "Créez un mot de passe",
+  "Enter your shop name": "Entrez le nom de votre boutique",
+  "Enter your phone number": "Entrez votre numéro de téléphone",
+  "Enter your Shop Id": "Entrez votre identifiant de boutique"
+}

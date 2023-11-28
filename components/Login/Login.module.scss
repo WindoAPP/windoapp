@@ -1,64 +1,62 @@
 $mobile-breakpoint: 940px;
 
-.loginWrapper{
-    display: flex;
-	flex-direction: row;
-    
-    height: 100vh;
-	@media (max-width: $mobile-breakpoint) {
-		justify-content: center;;
-	}
+.loginWrapper {
+  display: flex;
+  flex-direction: row;
+
+  // height: 100vh;
+  @media (max-width: $mobile-breakpoint) {
+    justify-content: center;
+  }
 }
-.RightImageWrapper{
-	background-color: black;
-	
-	.RightImage{
-		object-fit: cover;
-		height: 100%;
-		opacity: 0.5;
-		@media (max-width: $mobile-breakpoint) {
-			display: none;
-		}
-	}
+.RightImageWrapper {
+  background-color: black;
+  overflow: hidden;
+  max-height: 920px;
+  .RightImage {
+    object-fit: cover;
+    height: 100%;
+    opacity: 0.5;
+    @media (max-width: $mobile-breakpoint) {
+      display: none;
+    }
+  }
 }
 
-.loginBox{
-	//box-shadow: 0px 2px 5px lightgrey;
-	height: 400px;
-	width: 400px;
-	//border: 1px solid lightgrey;
-	//border-radius: 10px;
-	margin-top: 50px;
-	margin: 5rem;
+.loginBox {
+  //box-shadow: 0px 2px 5px lightgrey;
+  height: 400px;
+  width: 400px;
+  //border: 1px solid lightgrey;
+  //border-radius: 10px;
+  margin-top: 50px;
+  margin: 5rem;
 
-	@media (max-width: $mobile-breakpoint) {
-		margin: 0;
-		margin-top: 50px;
-	}
+  @media (max-width: $mobile-breakpoint) {
+    margin: 0;
+    margin-top: 50px;
+  }
 
-	.inputIcon{
-		position: absolute;
-		margin-top: 16px;
-		margin-left: 12px;
-		color: #5664D2;
-	}
-	
-		input{
-			height: 3rem;
-			padding-left: 2rem;
-		}
-	
-	
+  .inputIcon {
+    position: absolute;
+    margin-top: 16px;
+    margin-left: 12px;
+    color: #5664d2;
+  }
+
+  input {
+    height: 3rem;
+    padding-left: 2rem;
+  }
 }
-.headingLogin{
-	
-    align-self: center;
+.headingLogin {
+  align-self: center;
 }
-.loginBTN{
-	margin: auto;
-	width: 100%;
+.loginBTN {
+  margin: auto;
+  width: 100%;
 }
 
-.forgetPasswordWrapper{
-	height: 12rem;
+.forgetPasswordWrapper {
+  height: 12rem;
 }
