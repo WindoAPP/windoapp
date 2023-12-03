@@ -17,12 +17,15 @@ export const postData = async <T extends any>({
   url: string;
   data?: T;
 }) => {
-  const res: Response = await fetch(url, {
-    method: 'POST',
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    credentials: 'same-origin',
-    body: JSON.stringify(data),
-  });
+  const res: Response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}${url}`,
+    {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      credentials: 'same-origin',
+      body: JSON.stringify(data),
+    }
+  );
 
   if (!res.ok) {
     console.log('Error in postData', { url, data, res });
