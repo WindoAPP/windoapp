@@ -78,4 +78,5 @@ export type RequestBody = {
     email: string;
   };
   quantity: number;
+  callback: string;
 };

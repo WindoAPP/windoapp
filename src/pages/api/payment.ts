@@ -1,7 +1,30 @@
 import { NextApiHandler } from 'next';
-import { stripe } from '@/utils/stripe';
-import { getURL } from '@/utils/helpers';
 import { RequestBody } from '@/types';
+import { stripe } from '@/utils/stripe';
+import { generateQueryParams, getURL } from '@/utils/helpers';
+
+interface StripePrice {
+  id: string;
+  object: string;
+  active: boolean;
+  currency: string;
+  unit_amount: number;
+  product: string;
+  billing_scheme: string;
+  metadata?: Record<string, string>;
+  // Add other price properties as needed
+}
+
+const getPriceDetails = async (id: string) => {
+  try {
+    const price = await stripe.prices.retrieve(id);
+
+    return price as StripePrice;
+  } catch (error) {
+    console.error('Error retrieving price details:', error.message);
+    throw error;
+  }
+};
 
 const getCheckoutSession: NextApiHandler = async (req, res) => {
   try {
@@ -15,15 +38,38 @@ const getCheckoutSession: NextApiHandler = async (req, res) => {
   }
 };
 const createCheckoutSession: NextApiHandler = async (req, res) => {
-  const { price, user, quantity = 1 } = req.body as RequestBody;
-  console.log(user);
+  const { price, user, quantity = 1, callback } = req.body as RequestBody;
+
   try {
+    const priceData = await getPriceDetails(price);
+
+    if (!priceData) {
+      res
+        .status(500)
+        .json({ error: { statusCode: 500, message: 'Not Price data found' } });
+    }
     const customerData = {
       email: user.email,
     };
     const customer = await stripe.customers.create(customerData);
 
-    console.log({ customer });
+    const payload = {
+      uid: user.id,
+      total: priceData.unit_amount,
+      currency: priceData.currency,
+    };
+
+    const success_url = `${getURL()}${callback}?${generateQueryParams({
+      payment: 'success',
+      ...payload,
+    })}`;
+    const cancel_url = `${getURL()}${callback}?${generateQueryParams({
+      payment: 'failed',
+      ...payload,
+    })}`;
+
+    console.log('Success URL:', success_url);
+    console.log('Cancel URL:', cancel_url);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card', 'link'],
@@ -40,8 +86,8 @@ const createCheckoutSession: NextApiHandler = async (req, res) => {
       subscription_data: {
         trial_from_plan: true,
       },
-      success_url: `${getURL()}/register?payment=success&uid=${user.id}`,
-      cancel_url: `${getURL()}/register?payment=failed&uid=${user.id}`,
+      success_url,
+      cancel_url,
     });
 
     return res.status(200).json({ sessionId: session.id });

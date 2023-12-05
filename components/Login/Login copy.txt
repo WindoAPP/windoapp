@@ -99,7 +99,7 @@ const Login = () => {
 
             if (sessonss.user) {
               if (sessonss.user.isAdmin) {
-                router.push('/dashboard/admindashboard');
+                router.push('/dashboard/admin');
               } else {
                 router.push('/dashboard');
               }

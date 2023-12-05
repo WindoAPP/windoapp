@@ -3,7 +3,6 @@ import styles from './Login.module.scss';
 import {
   loginUser,
   sendContactForm,
-  subscribe,
   updateUserPassword,
 } from '../../services/service';
 import Loader from '../Loader/loader';
@@ -41,28 +40,33 @@ const Login = () => {
     setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
   };
 
-  const fromSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
 
-    if (isValid) {
-      setLoading(true);
+    if (!isValid) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
       const loginUserResponse = await loginUser(formData);
-      console.log({ loginUserResponse });
+
       if (loginUserResponse.error) {
         const errorMessage = loginUserResponse.error.split('|');
 
-        if (errorMessage[0] === 'need_payment') {
-          showNotifications(
-            true,
-            "Votre période d'essai est terminée, veuillez effectuer un paiement"
-          );
-          // const subscriptionResponse = await subscribe({
-          //   priceId: env_data.mainProduct,
-          //   userId: errorMessage[1],
-          //   total: '39.9',
-          //   currency: 'EUR',
-          // });
+        if (
+          errorMessage[0] === 'need_payment' ||
+          errorMessage[0] === 'need_trial'
+        ) {
+          const notificationMessage =
+            errorMessage[0] === 'need_payment'
+              ? "Votre période d'essai est terminée, veuillez effectuer un paiement"
+              : "Période d'essai expirée. Payez pour continuer à profiter de nos services";
+
+          showNotifications(true, notificationMessage);
+
           const { sessionId } = await postData({
             url: '/api/payment',
             data: {
@@ -71,159 +75,33 @@ const Login = () => {
                 id: loginUserResponse?.user?._id,
                 email: formData?.email,
               },
+              callback: '/login',
             },
           });
-          if (sessionId) {
-            setLoading(false);
-            // console.log({ sessionId });
-            const stripe = await getStripe();
-            stripe?.redirectToCheckout({ sessionId });
-            // redirectToExternalURL(sessionId.url);
-          } else {
-            console.error('Subscription creation failed:');
-            setLoading(false);
-          }
 
-          // if (subscriptionResponse) {
-          //   setLoading(false);
-          //   redirectToExternalURL(subscriptionResponse.url);
-          // } else {
-          //   console.error(
-          //     'Subscription creation failed:',
-          //     subscriptionResponse.error
-          //   );
-          //   setLoading(false);
-          // }
-        } else if (errorMessage[0] === 'need_trial') {
-          showNotifications(
-            true,
-            "Période d'essai expirée. Payez pour continuer à profiter de nos services"
-          );
-          // const subscriptionResponse = await subscribe({
-          //   priceId: env_data.mainProduct,
-          //   userId: errorMessage[1],
-          //   total: '39.9',
-          //   currency: 'EUR',
-          // });
-          const { sessionId } = await postData({
-            url: '/api/payment',
-            data: {
-              price: env_data.trialProduct,
-              user: {
-                id: loginUserResponse?.user?._id,
-                email: formData?.email,
-              },
-            },
-          });
           if (sessionId) {
             setLoading(false);
-            // console.log({ sessionId });
             const stripe = await getStripe();
             stripe?.redirectToCheckout({ sessionId });
-            // redirectToExternalURL(sessionId.url);
           } else {
             console.error('Subscription creation failed:');
             setLoading(false);
           }
         }
-      } else if (loginUserResponse.ok) {
-        if (session.user) {
-          // @ts-expect-error
-          if (session.user.isAdmin) {
-            router.push('/dashboard/admindashboard');
-          } else {
-            router.push('/dashboard');
-          }
-        }
-
+      } else if (loginUserResponse.ok && session.user) {
+        // @ts-expect-error
+        const targetDashboard = session.user.isAdmin
+          ? '/dashboard/admin'
+          : '/dashboard';
+        router.push(targetDashboard);
         setLoading(false);
       } else {
         setLoading(false);
       }
+    } catch (error) {
+      console.error('Error during form submission:', error);
+      setLoading(false);
     }
-  };
-
-  // const fromSubmit = (e) => {
-  //   e.preventDefault();
-  //   var isValid = validateForm();
-
-  //   if (isValid) {
-  //     setLoading(true);
-  //     loginUser(formData)
-  //       .then(async (res) => {
-  //         if (res.error) {
-  //           console.log(res.error);
-  //           console.log(res.error.split('|'));
-  //           if (res.error.split('|')[0] == 'need_payment') {
-  //             showNotifications(
-  //               true,
-  //               "Votre période d'essai est terminée, veuillez effectuer un paiement"
-  //             );
-  //             subscribe({
-  //               priceId: env_data.mainProduct,
-  //               userId: res.error.split('|')[1],
-  //               total: '39.9',
-  //               currency: 'EUR',
-  //             })
-  //               .then((res) => {
-  //                 if (res) {
-  //                   setLoading(false);
-  //                   redirectToExternalURL(res.url);
-  //                 }
-  //               })
-  //               .catch((err) => {
-  //                 console.log(err);
-  //                 setLoading(false);
-  //               });
-  //           } else if (res.error.split('|')[0] == 'need_trial') {
-  //             showNotifications(
-  //               true,
-  //               "Période d'essai expirée. Payez pour continuer a profiter de nos services"
-  //             );
-  //             subscribe({
-  //               priceId: env_data.mainProduct,
-  //               userId: res.error.split('|')[1],
-  //               total: '39.9',
-  //               currency: 'EUR',
-  //             })
-  //               .then((res) => {
-  //                 if (res) {
-  //                   setLoading(false);
-  //                   redirectToExternalURL(res.url);
-  //                 }
-  //               })
-  //               .catch((err) => {
-  //                 console.log(err);
-  //                 setLoading(false);
-  //               });
-  //           }
-  //         }
-  //         if (res.ok) {
-  //           let sessonss = await session;
-
-  //           if (sessonss.user) {
-  //             if (sessonss.user.isAdmin) {
-  //               router.push('/dashboard/admindashboard');
-  //             } else {
-  //               router.push('/dashboard');
-  //             }
-  //           }
-
-  //           setLoading(false);
-  //         } else {
-  //           setLoading(false);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         setLoading(false);
-  //       });
-  //   } else {
-  //     return;
-  //   }
-  // };
-
-  const redirectToExternalURL = (url) => {
-    window.location.href = url;
   };
 
   const validateForm = () => {
@@ -478,7 +356,7 @@ const Login = () => {
           </a>
           <button
             className={`commonBtnWindo w-100 mb-3 ${styles.loginBTN}`}
-            onClick={fromSubmit}
+            onClick={onSubmit}
           >
             Se connecter
           </button>

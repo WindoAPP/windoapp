@@ -6,6 +6,7 @@ const axios = require('axios');
 
 export async function createUser(userData) {
   try {
+    console.log(userData)
     const response = await axios.post(`/api/auth/signup`, userData);
     if (response) {
       showNotification(false, 'Register Successfull');
@@ -148,7 +149,7 @@ export async function subscribe(data) {
 
 export async function createPayment(data) {
   try {
-    const response = await axios.post(`/api/paysum`, data);
+    const response = await axios.post(`/api/payment-summary`, data);
     return response.data;
   } catch (error) {
     showNotification(true, error.response.data.message);
@@ -158,7 +159,7 @@ export async function createPayment(data) {
 
 export async function getPayments(uid) {
   try {
-    const response = await axios.get(`/api/paysum?id=${uid}`);
+    const response = await axios.get(`/api/payment-summary?id=${uid}`);
     return response.data;
   } catch (error) {
     showNotification(true, error.response.data.message);

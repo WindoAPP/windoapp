@@ -41,3 +41,16 @@ export const toDateTime = (secs: number) => {
   t.setSeconds(secs);
   return t;
 };
+
+export const generateQueryParams = (
+  params: Record<string, string | number>
+) => {
+  const queryParams = Object.entries(params)
+    .map(
+      ([key, value]) =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+    )
+    .join('&');
+
+  return queryParams;
+};

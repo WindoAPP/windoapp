@@ -14,12 +14,12 @@ import ContentCard from '../contentCard/contentCard';
 import contentData from './content';
 import { postData } from '../../src/utils/helpers';
 import { getStripe } from '../../src/utils/stripe-client';
-import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import InputField from '../input';
 import React from 'react';
 import lang from '@/lang/en-fr.json';
 import Link from 'next/link';
+import { validationSchema } from './schema';
 
 type InitialValues = {
   email: string;
@@ -47,32 +47,6 @@ const SignUp = () => {
     termsCheck: false,
   };
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email(lang['The provided email address is invalid.'])
-      .required(lang['Please provide an email address to proceed.']),
-    password: Yup.string()
-      .min(6, lang['The password must be at least 6 characters long.'])
-      .required(lang['Please enter a password to continue.']),
-    confirmPassword: Yup.string()
-      .oneOf(
-        [Yup.ref('password'), null],
-        lang[
-          'The confirmation password must match the original password entered.'
-        ]
-      )
-      .required(lang['Please confirm your password by entering it again.']),
-    userName: Yup.string().required(
-      lang['Please provide a user name to continue.']
-    ),
-    phoneNumber: Yup.string().required(
-      lang['Please enter your mobile number to proceed.']
-    ),
-    shopName: Yup.string().required(
-      lang['Please provide a shop name to continue.']
-    ),
-  });
-
   const [priceId, setPriceId] = useState(env_data.trialProduct);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
@@ -82,8 +56,7 @@ const SignUp = () => {
     // setLoading(true);
     try {
       const user = await createUser(values);
-      console.log({ user });
-      if (user) {
+      if (user?.success) {
         const { sessionId } = await postData({
           url: '/api/payment',
           data: {
@@ -92,9 +65,10 @@ const SignUp = () => {
               id: user?.user?._id,
               email: values.email,
             },
+            callback: '/register',
           },
         });
-        console.log({ sessionId });
+
         const stripe = await getStripe();
         stripe?.redirectToCheckout({ sessionId });
       }
@@ -129,68 +103,58 @@ const SignUp = () => {
     handleSubmit,
     isSubmitting,
   } = useFormik({
+    onSubmit,
     initialValues,
     validationSchema,
-    onSubmit,
-    // validate,
   });
 
-  /**
-   * Side effect
-   */
+  const handlePaymentSuccess = async (data) => {
+    showNotifications(false, 'Payment Successful !');
+
+    try {
+      await createPayment(data);
+      const emailData = {
+        name: values.userName,
+        email: values.email,
+        subject: 'Payment Successful',
+        message: 'We have received your payment. Thank you for joining us.',
+      };
+      sendEmail(emailData);
+      // router.push('/login');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handlePaymentFailed = async (data) => {
+    try {
+      await createPayment(data);
+      const emailData = {
+        name: values.userName,
+        email: values.email,
+        subject: 'Payment Failure',
+        message: 'We did not receive your payment. Please try again.',
+      };
+      sendEmail(emailData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   React.useEffect(() => {
     if (query) {
-      if (query.payment == 'success') {
-        showNotifications(false, 'Payment Successfull !');
-
-        const paymentData = {
-          user: query.uid,
-          amount_total: query.total,
-          currency: query.currency,
-          success: true,
-          accStatus: 'trial',
-        };
-
-        createPayment(paymentData)
-          .then(() => {
-            var emailData = {
-              name: values.userName,
-              email: values.email,
-              subject: 'paiement réussi',
-              message:
-                'nous avons reçu votre paiement. Merci de nous avoir rejoint',
-            };
-            sendEmail(emailData);
-
-            router.push('login');
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else if (query.payment == 'failed') {
-        const paymentData = {
-          user: query.uid,
-          amount_total: query.total,
-          currency: query.currency,
-          success: false,
-          accStatus: 'created',
-        };
-
-        createPayment(paymentData)
-          .then(() => {
-            var emailData = {
-              name: values.userName,
-              email: values.email,
-              subject: 'échec du paiement',
-              message:
-                "nous n'avons pas reçu votre paiement. essayer à nouveau",
-            };
-            sendEmail(emailData);
-            router.push('login');
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+      const paymentData = {
+        user: query.uid,
+        amount_total: query.total,
+        currency: query.currency,
+        accStatus: 'trial',
+      };
+      if (query.payment === 'success') {
+        handlePaymentSuccess({ ...paymentData, success: true });
+        router.replace('/login');
+      } else if (query.payment === 'failed') {
+        handlePaymentFailed({ ...paymentData, success: false });
+        router.replace('/login');
       }
     }
     setPriceId(env_data.trialProduct);
