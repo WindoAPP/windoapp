@@ -40,7 +40,7 @@ const handler = async (req, res) => {
                     spinBtnText:"Rotation !"
                 },
                 accStatus:'created',
-                trialPeriod:0
+                trialPeriod:15
             });
             user
                 .save()

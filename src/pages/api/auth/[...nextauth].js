@@ -31,9 +31,10 @@ const options = {
                 if(user.accStatus=="trial"){
                     const currentDate = new Date();
                     const trialPeriodEndDate = new Date(user.cretaedAt);
-                    trialPeriodEndDate.setMonth(trialPeriodEndDate.getMonth() + user.trialPeriod);
-                    const trialPeriodHasEnded = currentDate > trialPeriodEndDate;
-                    if (trialPeriodHasEnded) {
+                    const daysSinceCreated = Math.floor((currentDate - trialPeriodEndDate) / (1000 * 60 * 60 * 24));
+    
+                    if (daysSinceCreated > user.trialPeriod) {
+                        
                         throw new Error(`need_payment|${user._id}`)
                       }
                 }
