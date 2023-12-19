@@ -52,7 +52,7 @@ const handler = async (req, res) => {
         const {email,password}  =req.body;
         User.find({email:email}).then(async (user)=>{
             if(user.length==0){
-                res.status(401).json({ error: "User does not exit" })
+                res.status(401).json({ error: "L'utilisateur ne quitte pas" })
             }else{
                 const hashedPassword = await hash(password, 12);
                 User.updateOne({_id:user[0]._id},{$set: {password:hashedPassword}}).then(result=>{

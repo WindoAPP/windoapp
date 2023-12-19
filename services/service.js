@@ -8,7 +8,7 @@ export async function createUser(userData) {
   try {
     const response = await axios.post(`/api/auth/signup`, userData);
     if (response) {
-      showNotification(false, 'Register Successfull');
+      showNotification(false, 'Inscrivez-vous avec succès');
     }
     return response.data;
   } catch (error) {
@@ -21,7 +21,7 @@ export async function updateUser(userData) {
   try {
     const response = await axios.put(`/api/auth/user`, userData);
     if (response) {
-      showNotification(false, 'Update Successfull');
+      showNotification(false, 'Mise à jour réussie');
     }
     return response.data;
   } catch (error) {
@@ -244,7 +244,7 @@ export const sendContactForm = async (data) =>
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
   }).then((res) => {
-    if (!res.ok) throw new Error('Failed to send message');
+    if (!res.ok) throw new Error(`Échec de l'envoi du message`);
     return res.json();
   });
 
@@ -254,7 +254,7 @@ export const sendContactUsForm = async (data) =>
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
   }).then((res) => {
-    if (!res.ok) throw new Error('Failed to send message');
+    if (!res.ok) throw new Error(`Échec de l'envoi du message`);
     return res.json();
   });
 

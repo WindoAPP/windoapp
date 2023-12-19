@@ -77,7 +77,7 @@ const SignUp = () => {
   useEffect(() => {
     if (query) {
       if (query.payment == 'success') {
-        showNotifications(false, 'Payment Successfull !');
+        showNotifications(false, 'Paiement réussi !');
 
         const paymentData = {
           user: query.uid,
@@ -210,40 +210,40 @@ const SignUp = () => {
 
   const validateForm = () => {
     if (formData.userName == '') {
-      showNotifications(true, 'User Name required');
+      showNotifications(true, `Nom d'utilisateur est nécessaire`);
       return false;
     }
     if (formData.password == '') {
-      showNotifications(true, 'Password required');
+      showNotifications(true, 'Mot de passe requis');
       return false;
     }
     if (formData.email == '') {
-      showNotifications(true, 'email required');
+      showNotifications(true, 'email requis');
       return false;
     }
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      showNotifications(true, 'Invalid email address');
+      showNotifications(true, 'Email invalide');
       return false;
     }
     if (formData.c_password == '') {
-      showNotifications(true, 'Confirm Password required');
+      showNotifications(true, 'Confirmez le mot de passe requis');
       return false;
     }
     if (formData.shopName == '') {
-      showNotifications(true, 'Shop Name required');
+      showNotifications(true, 'Nom de la boutique requis');
       return false;
     }
 
     if (formData.phoneNumber == '') {
-      showNotifications(true, 'Mobile Number');
+      showNotifications(true, 'numéro de portable obligatoire');
       return false;
     }
     if (formData.password !== formData.c_password) {
-      showNotifications(true, 'Password mismathed');
+      showNotifications(true, 'Mot de passe erroné');
       return false;
     }
     if (!formData.termsCheck) {
-      showNotifications(true, 'You must agree to terms and conditions');
+      showNotifications(true, 'Vous devez accepter les termes et conditions');
       return false;
     }
 

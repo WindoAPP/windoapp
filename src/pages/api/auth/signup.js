@@ -7,14 +7,14 @@ const handler = async (req, res) => {
     connectToMongoDB().catch(err => res.json(err))
 
     if (req.method === "POST") {
-        if (!req.body) return res.status(400).json({ message: "Data is missing" })
+        if (!req.body) return res.status(400).json({ message: "Les données sont manquantes" })
 
         const { userName, email, password, phoneNumber, shopName, shopId } = req.body
 
         const userExists = await User.findOne({ email })
 
         if (userExists) {
-            return res.status(409).json({ message: "User Already exists" })
+            return res.status(409).json({ message: "L'utilisateur existe déjà" })
         }
 
         else {

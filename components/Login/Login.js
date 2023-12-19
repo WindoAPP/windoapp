@@ -164,15 +164,15 @@ const Login = () => {
 
   const validateForm = () => {
     if (formData.password == '') {
-      showNotifications(true, 'Password required');
+      showNotifications(true, 'Mot de passe requis');
       return false;
     }
     if (formData.email == '') {
-      showNotifications(true, 'email required');
+      showNotifications(true, 'Email requis');
       return false;
     }
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      showNotifications(true, 'Invalid email address');
+      showNotifications(true, 'Adresse e-mail invalide');
       return false;
     }
 
