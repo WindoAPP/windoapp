@@ -1,8 +1,9 @@
 import React from "react";
 import styles from './sidebar.module.scss'
 import { useState } from "react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { deleteAUser } from "../../services/service";
 
 
 
@@ -10,9 +11,20 @@ const SideBar = ({sideBarOpen,user}) => {
 
   const [sideBarOpened, setSideBarOpened] = useState(false);
   const router = useRouter();
-
+  const { data: session } = useSession();
   const getRoute = (page) =>{
     return router.asPath.endsWith(page);
+  }
+
+  const onClickAbonnement =()=>{
+    deleteAUser(session.user._id).then((res) => {
+      if (res) {
+          showNotification(false, "Utilisateur supprimé!");
+      }
+  }).catch(err => {
+      console.log(err);
+
+  });
   }
 
   return (
@@ -69,7 +81,7 @@ const SideBar = ({sideBarOpen,user}) => {
             </a>
           </li>}
           {!user.isAdmin &&<li className="nav-item">
-            <a href="https://billing.stripe.com/p/login/dR6aIc36N2bM8cocMM">
+            <a onClick={()=>onClickAbonnement()} href="https://billing.stripe.com/p/login/dR6aIc36N2bM8cocMM">
             <span className={`nav-link  cursor-pointer ${getRoute("/payments")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-credit-card m-2  fa-fw`}></i>
               {!sideBarOpen && "Abonnement"}
