@@ -221,7 +221,7 @@ const PaymentsPage = () => {
     );
 
     const downloadPdf = () =>{
-        showNotification(true,"You have to fill billing address for download invoice")
+        showNotification(true,"Vous devez renseigner l'adresse de facturation pour télécharger la facture")
         router.push('formdata');
     }
 

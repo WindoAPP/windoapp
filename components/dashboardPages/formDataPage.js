@@ -44,7 +44,7 @@ const FormDataPage = () => {
             if (formData.password === formData.c_password) {
                 userData.password = formData.password;
             } else {
-                return showNotification(true, "password not matched")
+                return showNotification(true, "le mot de passe ne correspond pas")
             }
         }
 

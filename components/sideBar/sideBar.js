@@ -69,7 +69,7 @@ const SideBar = ({sideBarOpen,user}) => {
             </a>
           </li>}
           {!user.isAdmin &&<li className="nav-item">
-            <a href="/dashboard/payments">
+            <a href="https://billing.stripe.com/p/login/dR6aIc36N2bM8cocMM">
             <span className={`nav-link  cursor-pointer ${getRoute("/payments")?styles.navLinkItem:""}`} >
               <i className={`${sideBarOpen?styles.sideBarOpen:""} fa fa-credit-card m-2  fa-fw`}></i>
               {!sideBarOpen && "Abonnement"}
